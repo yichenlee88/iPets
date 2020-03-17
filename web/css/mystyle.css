@@ -14,9 +14,53 @@
     }
 }
 */
-
+/*
 .container .row {
     margin-left: 0px;
     margin-right:0px; 
     background-color: #e4f2fd;
+}
+.top{
+    margin-right: 20px;
+    margin-left: 20px;
+    margin-top: 20px;
+    display: block;
+    border:0px;
+}
+
+
+.container {
+    margin-top: 20px;
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+.carousel-item {
+    margin-top: 20px;
+}
+
+.carousel-inner {
+    max-height: 500px;
+    margin: auto;
+
+}
+
+*/
+
+.carousel {
+    overflow: hidden;
+    max-height: 500px;
+    height: 1600px;
+    margin-top: 20px;
+}
+
+.marketing {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.column{
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
