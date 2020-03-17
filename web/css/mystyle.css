@@ -54,3 +54,13 @@
     margin-top: 20px;
 }
 
+.marketing {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.column{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
