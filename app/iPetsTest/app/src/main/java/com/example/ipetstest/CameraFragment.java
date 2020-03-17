@@ -12,7 +12,10 @@ import android.provider.MediaStore;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -23,6 +26,8 @@ import java.io.IOException;
  * A simple {@link Fragment} subclass.
  */
 public class CameraFragment extends Fragment {
+    TextView show_result;
+    Button analysis;
 
     public CameraFragment() {
         // Required empty public constructor
@@ -40,6 +45,16 @@ public class CameraFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
         Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);// 定義呼叫相機並取回圖片的Intent意圖
         startActivityForResult(intent, 1);
+        show_result = getView().findViewById(R.id.textView);
+        analysis = getView().findViewById(R.id.analysis);
+
+        analysis.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                show_result.setText("這是哈士奇的機率有90%");
+            }
+        });
+
     }
 
     @Override
@@ -76,6 +91,8 @@ public class CameraFragment extends Fragment {
         } else {
             finish(0);
         }
+
+
 
     }
     public void finish(int i) {
