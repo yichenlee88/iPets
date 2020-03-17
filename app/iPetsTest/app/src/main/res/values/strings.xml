@@ -6,4 +6,9 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="button">camera</string>
     <string name="textview">hello</string>
+    <string name="imageView" />
+    <string name="button_pick">ok</string>
+    <string name="button_remake">remake</string>
+    <string name="show_result" />
+    <string name="analysis">analysis</string>
 </resources>
