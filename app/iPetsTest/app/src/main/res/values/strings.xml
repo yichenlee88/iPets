@@ -10,4 +10,12 @@
     <string name="button_remake">remake</string>
     <string name="show_result" />
     <string name="analysis">analysis</string>
+    <string name="add">add</string>
+    <string name="editemaill">editemail</string>
+    <string name="phone">phone</string>
+    <string name="editname">editnsme</string>
+    <string name="email">email</string>
+    <string name="tel">tel</string>
+    <string name="name">name</string>
+    <string name="sqlite">sqlite</string>
 </resources>
