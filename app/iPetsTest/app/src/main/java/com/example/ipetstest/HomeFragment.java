@@ -33,7 +33,7 @@ public class HomeFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        Button button = getView().findViewById(R.id.button);
+        Button button = getView().findViewById(R.id.adddata);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -41,5 +41,14 @@ public class HomeFragment extends Fragment {
                 controller.navigate(R.id.action_homeFragment_to_cameraFragment);
             }
         });
+        Button button2 = getView().findViewById(R.id.button2);
+        button2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                NavController controller = Navigation.findNavController(v);
+                controller.navigate(R.id.action_homeFragment_to_sqlFragment);
+            }
+        });
+
     }
 }
