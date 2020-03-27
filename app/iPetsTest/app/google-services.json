@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "101607800493",
+    "firebase_url": "https://maps-2020-3d030.firebaseio.com",
+    "project_id": "maps-2020-3d030",
+    "storage_bucket": "maps-2020-3d030.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:101607800493:android:5a154ff1c88f4700f61024",
+        "android_client_info": {
+          "package_name": "com.example.ipetstest"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "101607800493-7vc7gpji432fftb14jt99r24gu3la0n4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCKr9vR7sRliQTnt8Jyjf0hAPKDyQbHAXw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "101607800493-7vc7gpji432fftb14jt99r24gu3la0n4.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
