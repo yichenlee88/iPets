@@ -4,6 +4,7 @@ import Home from '@/components/Home'
 import About from '@/components/About'
 import DogInfo from '@/components/DogInfo'
 import Contact from '@/components/Contact'
+import Login from '@/components/Login'
 
 Vue.use(Router)
 
@@ -28,6 +29,11 @@ export default new Router({
       path: '/contact',
       name: 'Contact',
       component: Contact
+    },
+    {
+      path: '/login',
+      name: 'Login',
+      component: Login
     }
   ]
 })
