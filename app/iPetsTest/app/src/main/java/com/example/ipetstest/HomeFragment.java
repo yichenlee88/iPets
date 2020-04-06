@@ -49,6 +49,14 @@ public class HomeFragment extends Fragment {
                 controller.navigate(R.id.action_homeFragment_to_sqlFragment);
             }
         });
+        Button button3 = getView().findViewById(R.id.button);
+        button3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                NavController controller = Navigation.findNavController(v);
+                controller.navigate(R.id.action_homeFragment_to_signInFragment);
+            }
+        });
 
     }
 }

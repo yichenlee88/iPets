@@ -10,4 +10,9 @@
     <string name="button_forgot">忘記密碼？</string>
     <string name="TextView_first">第一次使用？</string>
     <string name="button_signup">註冊。</string>
+    <string name="menu_home">home</string>
+    <string name="menu_calendar">calendar</string>
+    <string name="menu_analyze">analyze</string>
+    <string name="menu_locate">locate</string>
+    <string name="menu_setting">setting</string>
 </resources>
