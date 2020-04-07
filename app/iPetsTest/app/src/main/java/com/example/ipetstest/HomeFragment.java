@@ -57,6 +57,14 @@ public class HomeFragment extends Fragment {
                 controller.navigate(R.id.action_homeFragment_to_signInFragment);
             }
         });
+        Button mapbutton = getView().findViewById(R.id.mapbutton);
+        mapbutton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                NavController controller = Navigation.findNavController(v);
+                controller.navigate(R.id.action_homeFragment_to_mapsActivity);
+            }
+        });
 
     }
 }
