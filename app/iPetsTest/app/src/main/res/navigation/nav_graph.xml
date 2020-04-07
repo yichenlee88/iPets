@@ -28,6 +28,9 @@
         <action
             android:id="@+id/action_homeFragment_to_signInFragment"
             app:destination="@id/signInFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_mapsActivity"
+            app:destination="@id/mapsActivity2" />
     </fragment>
     <fragment
         android:id="@+id/sqlFragment"
@@ -39,4 +42,9 @@
         android:name="com.example.ipetstest.SignInFragment"
         android:label="fragment_sign_in"
         tools:layout="@layout/fragment_sign_in" />
+    <activity
+        android:id="@+id/mapsActivity2"
+        android:name="com.example.ipetstest.MapsActivity"
+        android:label="activity_maps"
+        tools:layout="@layout/activity_maps" />
 </navigation>
