@@ -21,4 +21,5 @@
     <string name="sqlite">sqlite</string>
     <string name="SingIn">SingIn</string>
     <string name="title_activity_maps">Map</string>
+    <string name="map">Map</string>
 </resources>
