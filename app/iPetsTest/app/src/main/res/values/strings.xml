@@ -20,4 +20,7 @@
     <string name="name">name</string>
     <string name="sqlite">sqlite</string>
     <string name="SingIn">SingIn</string>
+    <string name="SENT">SENT</string>
+    <string name="account">account</string>
+    <string name="password">password</string>
 </resources>
