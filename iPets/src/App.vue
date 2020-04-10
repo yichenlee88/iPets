@@ -19,8 +19,13 @@
         </ul>
         <ul class="navbar-nav mr-5 mt-2 mt-lg-0">
           <li class="nav-item">
+            <a class="nav-link" href="#/login">
+              <i class="fas fa-sign-in-alt" style="size:12px"></i>登入
+            </a>
+          </li>
+          <li class="nav-item">
             <a class="nav-link" href="#">
-              <i class="far fa-user" style="size:12px"></i>登入/註冊
+              <i class="far fa-user" style="size:12px"></i>註冊
             </a>
           </li>
         </ul>
@@ -52,12 +57,11 @@ export default {
 
 <style>
 #app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
+  font-family: "Avenir", Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   width: 100%;
-  margin-left: 15px;
   color: #2c3e50;
 }
 </style>
