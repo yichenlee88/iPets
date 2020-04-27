@@ -62,7 +62,7 @@ public class SignInFragment extends Fragment {
         String account = edaccount.getText().toString();
         String password = edpassword.getText().toString();
         textView.setText(account);
-        DocumentReference user = db.collection("userID").document(account);
+        DocumentReference user = db.collection("userInformation").document(account);
         user.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
             public void onComplete(@NonNull Task< DocumentSnapshot > task) {
