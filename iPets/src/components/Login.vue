@@ -6,7 +6,7 @@
       <div class="card-body">
         <input
           type="email"
-          style="margin-top: 15px;"
+          style="margin-top: 25px; width: 80%; margin: auto; margin-bottom: 25px;"
           class="form-control"
           name="txtEmail"
           id="txtEmail"
@@ -14,7 +14,7 @@
         />
         <input
           class="form-control"
-          style="margin-top: 15px;"
+          style="width: 80%; margin: auto;"
           name="txtPwd"
           id="txtPwd"
           placeholder="輸入密碼"
@@ -23,7 +23,7 @@
           class="btn"
           type="submit"
           value="送出"
-          style="margin-top: 15px; background-color: #e3f2fd; width: 100%"
+          style="margin-top: 20px; background-color: #e3f2fd; width: 80%"
         />
         <div class="hide-md-lg">
           <p>或者</p>
@@ -81,7 +81,7 @@ export default {
 }
 
 .btn {
-  width: 100%;
+  width: 80%;
   padding: 12px;
   border: none;
   border-radius: 4px;

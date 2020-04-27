@@ -11,6 +11,7 @@
     <string name="button_remake">remake</string>
     <string name="show_result" />
     <string name="analysis">analysis</string>
+    <string name="get_album">album</string>
     <string name="add">add</string>
     <string name="editemaill">editemail</string>
     <string name="phone">phone</string>
@@ -26,3 +27,4 @@
     <string name="password">password</string>
     <string name="SENT">sent</string>
 </resources>
+
