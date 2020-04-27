@@ -118,15 +118,16 @@ public class CameraFragment extends Fragment {
             }
         }
     }
-        public void finish(int i) {
-            finish(0);
-        }
-        private void openAlbum(){
-            Intent intent=new Intent("android.intent.action.GET_CONTENT");
-            intent.setType("image/*");
-            startActivityForResult(intent,CHOOSE_PHOTO);  //開啟相簿
-        }
+    public void finish(int i) {
+        finish(0);
+    }
+    private void openAlbum(){
+        Intent intent=new Intent("android.intent.action.GET_CONTENT");
+        intent.setType("image/*");
+        startActivityForResult(intent,CHOOSE_PHOTO);  //開啟相簿
+    }
 
 
 
 }
+
