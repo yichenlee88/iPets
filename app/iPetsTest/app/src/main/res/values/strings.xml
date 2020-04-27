@@ -26,5 +26,6 @@
     <string name="account">account</string>
     <string name="password">password</string>
     <string name="SENT">sent</string>
+    <string name="SignInSuccess">Sign In Success</string>
 </resources>
 
