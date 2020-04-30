@@ -23,5 +23,9 @@
     <string name="SingIn">SingIn</string>
     <string name="title_activity_maps">Map</string>
     <string name="map">Map</string>
+    <string name="account">account</string>
+    <string name="password">password</string>
+    <string name="SENT">sent</string>
+    <string name="SignInSuccess">Sign In Success</string>
 </resources>
 
