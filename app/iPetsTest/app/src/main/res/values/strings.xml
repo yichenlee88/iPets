@@ -27,11 +27,5 @@
     <string name="password">password</string>
     <string name="SENT">sent</string>
     <string name="SignInSuccess">Sign In Success</string>
-    <string name="addaccount">addaccount</string>
-    <string name="addpassword">addpassword</string>
-    <string name="addgender">addgender</string>
-    <string name="sent">sent</string>
-    <string name="gender">gender</string>
-    <string name="addData">addData</string>
 </resources>
 
