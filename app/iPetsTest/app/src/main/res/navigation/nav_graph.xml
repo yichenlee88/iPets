@@ -31,9 +31,6 @@
         <action
             android:id="@+id/action_homeFragment_to_mapsActivity"
             app:destination="@id/mapsActivity" />
-        <action
-            android:id="@+id/action_homeFragment_to_addDataFragment"
-            app:destination="@id/addDataFragment" />
     </fragment>
     <fragment
         android:id="@+id/sqlFragment"
@@ -59,9 +56,4 @@
         android:name="com.example.ipetstest.SingInSuccessFragment"
         android:label="fragment_sing_in_success"
         tools:layout="@layout/fragment_sing_in_success" />
-    <fragment
-        android:id="@+id/addDataFragment"
-        android:name="com.example.ipetstest.AddDataFragment"
-        android:label="fragment_add_data"
-        tools:layout="@layout/fragment_add_data" />
 </navigation>
