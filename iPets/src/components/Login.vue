@@ -29,21 +29,21 @@
           <p>或者</p>
         </div>
         <div class="row">
-            <div class="col-12">
-                <a href="#" class="fb btn">
-                    <i class="fa fa-facebook fa-fw"></i> Login with Facebook
-                </a>
-            </div>
-            <div class="col-12">
-                <a href="#" class="twitter btn">
-                    <i class="fa fa-twitter fa-fw"></i> Login with Twitter
-                </a>
-            </div>
-            <div class="col-12">
-                <a href="#" class="google btn">
-                    <i class="fa fa-google fa-fw"></i> Login with Google+
-                </a>
-            </div>
+          <div class="col-12">
+            <a href="#" class="fb btn">
+              <i class="fa fa-facebook fa-fw"></i> Login with Facebook
+            </a>
+          </div>
+          <div class="col-12">
+            <a href="#" class="twitter btn">
+              <i class="fa fa-twitter fa-fw"></i> Login with Twitter
+            </a>
+          </div>
+          <div class="col-12">
+            <a href="#" class="google btn">
+              <i class="fa fa-google fa-fw"></i> Login with Google+
+            </a>
+          </div>
         </div>
       </div>
     </div>
@@ -52,11 +52,11 @@
 
 <script>
 export default {
-  name: 'Login',
-  data () {
-    return {}
+  name: "Login",
+  data() {
+    return {};
   }
-}
+};
 </script>
 
 <style scoped>
@@ -106,12 +106,12 @@ input:hover,
 }
 
 .fb {
-  background-color: #3B5998;
+  background-color: #3b5998;
   color: white;
 }
 
 .twitter {
-  background-color: #55ACEE;
+  background-color: #55acee;
   color: white;
 }
 
