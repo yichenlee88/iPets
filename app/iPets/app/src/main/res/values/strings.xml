@@ -15,4 +15,6 @@
     <string name="menu_analyze">analyze</string>
     <string name="menu_locate">locate</string>
     <string name="menu_setting">setting</string>
+    <string name="title_activity_maps">Map</string>
+    <string name="google_map_api_key">AIzaSyBPZ19U9BkoJAi57JvNoMykN7GAgvbaa7o</string>
 </resources>
