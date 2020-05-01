@@ -44,8 +44,6 @@ import java.util.ArrayList;
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
 
     private GoogleMap mMap;
-    private static int LOCATION_PERMISSION_REQUEST_CODE = 1001;
-    private static boolean rLocationGranted = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,27 +64,35 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mMap.animateCamera(CameraUpdateFactory.newLatLng(latLng));
         mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, zoom));
         mMap.addMarker(markerOptions);
+        mMap.getUiSettings().setZoomControlsEnabled(true);
     }
 
     public void PetSuppliesStore(View view) {
         LatLng latLng2 = new LatLng(25.055901, 121.514937);
+        MarkerOptions markerOptions = new MarkerOptions().position(latLng2).title("寵物公園用品店");
         mMap.animateCamera(CameraUpdateFactory.newLatLng(latLng2));
+        mMap.addMarker(markerOptions);
     }
 
 
     public void PetGroomingShop(View view) {
-        LatLng latLng3 = new LatLng(25.056931, 121.516418);
+        LatLng latLng3 = new LatLng(25.057675, 121.523853);
+        MarkerOptions markerOptions = new MarkerOptions().position(latLng3).title("Wang's Beauty 旺城寵物精品美容");
         mMap.animateCamera(CameraUpdateFactory.newLatLng(latLng3));
+        mMap.addMarker(markerOptions);
     }
 
     public void PetHospital(View view) {
-        LatLng latLng4 = new LatLng(25.056173, 121.517341);
+        LatLng latLng4 = new LatLng(25.036141, 121.527525);
+        MarkerOptions markerOptions = new MarkerOptions().position(latLng4).title("恩孺動物診所");
         mMap.animateCamera(CameraUpdateFactory.newLatLng(latLng4));
+        mMap.addMarker(markerOptions);
     }
 
     public void PetHotel(View view) {
-        LatLng latLng5 = new LatLng(25.057602, 121.515120);
+        LatLng latLng5 = new LatLng(25.025679, 121.536246);
+        MarkerOptions markerOptions = new MarkerOptions().position(latLng5).title("北歐寵物旅館");
         mMap.animateCamera(CameraUpdateFactory.newLatLng(latLng5));
+        mMap.addMarker(markerOptions);
     }
 }
-
