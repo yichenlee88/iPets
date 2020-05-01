@@ -41,10 +41,19 @@
         android:id="@+id/signInFragment"
         android:name="com.example.ipetstest.SignInFragment"
         android:label="fragment_sign_in"
-        tools:layout="@layout/fragment_sign_in" />
+        tools:layout="@layout/fragment_sign_in" >
+        <action
+            android:id="@+id/action_signInFragment_to_singInSuccessFragment"
+            app:destination="@id/singInSuccessFragment" />
+    </fragment>
     <activity
         android:id="@+id/mapsActivity"
         android:name="com.example.ipetstest.MapsActivity"
         android:label="activity_maps"
         tools:layout="@layout/activity_maps" />
+    <fragment
+        android:id="@+id/singInSuccessFragment"
+        android:name="com.example.ipetstest.SingInSuccessFragment"
+        android:label="fragment_sing_in_success"
+        tools:layout="@layout/fragment_sing_in_success" />
 </navigation>
