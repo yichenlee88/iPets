@@ -3,13 +3,20 @@
 import Vue from "vue";
 import App from "./App";
 import router from "./router";
+import { db } from "./db";
 
 Vue.config.productionTip = false;
 
-/* eslint-disable no-new */
-new Vue({
-  el: "#app",
-  router,
-  components: { App },
-  template: "<App/>"
+const fAuth = db.auth();
+
+let app;
+fAuth.onAuthStateChanged(() => {
+  if (!app) {
+    app = new Vue({
+      el: "#app",
+      router,
+      components: { App },
+      template: "<App/>"
+    });
+  }
 });

@@ -108,7 +108,7 @@ export default {
               password: this.password
             })
             .then(() => {
-              alert("success");
+              this.$router.go({ path: this.$router.path });
             });
         })
         .catch(error => {
