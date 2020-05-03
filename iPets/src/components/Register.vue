@@ -82,6 +82,7 @@
 import { db } from "../db";
 
 const fAuth = db.auth();
+const fStore = db.firestore();
 
 export default {
   name: "Register",
@@ -98,14 +99,24 @@ export default {
         .createUserWithEmailAndPassword(this.email, this.password)
         .then(userCredential => {
           var user = userCredential.user;
-          console.log(user);
+          fStore
+            .collection("users")
+            .doc(user.uid)
+            .set({
+              name: this.username,
+              email: this.email,
+              password: this.password
+            })
+            .then(() => {
+              this.$router.go({ path: this.$router.path });
+            });
         })
         .catch(error => {
           alert(error.code);
           alert(error.message);
         })
         .finally(() => {
-          alert("恭喜註冊成功了!");
+          console.log("恭喜註冊成功了!");
         });
       e.preventDefault();
     }

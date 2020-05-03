@@ -20,7 +20,7 @@
             <a class="nav-link" href="#/contact">聯繫我們</a>
           </li>
         </ul>
-        <ul class="navbar-nav mr-5 mt-2 mt-lg-0">
+        <ul class="navbar-nav mr-5 mt-2 mt-lg-0" v-if="!isLogIn">
           <li class="nav-item">
             <a class="nav-link" href="#/login">
               <i class="fas fa-sign-in-alt" style="size:12px"></i>登入
@@ -32,6 +32,23 @@
             </a>
           </li>
         </ul>
+
+        <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+          <li class="nav-item">
+            <a class="nav-link" href="#/calendar" v-if="isLogIn">行事曆</a>
+          </li>
+        </ul>
+        <BUtton class="btn my-2 my-sm-0" v-if="isLogIn" @click="logout">
+          登出
+        </BUtton>
+        <!-- <ul class="navbar-nav mr-5 mt-2 mt-lg-0" v-if="isLogIn">
+          <li class="nav-item">
+            <a class="nav-link" @click="logout">
+              <i class="fas fa-sign-in-alt" style="size:12px"></i>登出
+            </a>
+          </li>
+        </ul> -->
+
         <form class="form-inline my-2 my-lg-0">
           <input
             class="form-control mr-sm-2"
@@ -55,8 +72,29 @@
 </template>
 
 <script>
+import { db } from "./db";
+
+const fAuth = db.auth();
+
 export default {
-  name: "App"
+  name: "App",
+  data() {
+    return {
+      isLogIn: false
+    };
+  },
+  created() {
+    if (fAuth.currentUser) {
+      this.isLogIn = true;
+    }
+  },
+  methods: {
+    logout: function(e) {
+      fAuth.signOut().then(() => {
+        this.$router.go({ path: this.$router.path });
+      });
+    }
+  }
 };
 </script>
 
