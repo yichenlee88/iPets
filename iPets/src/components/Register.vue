@@ -116,7 +116,7 @@ export default {
           alert(error.message);
         })
         .finally(() => {
-          alert("恭喜註冊成功了!");
+          console.log("恭喜註冊成功了!");
         });
       e.preventDefault();
     }
