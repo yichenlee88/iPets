@@ -82,6 +82,7 @@
 import { db } from "../db";
 
 const fAuth = db.auth();
+const fStore = db.firestore();
 
 export default {
   name: "Register",
@@ -98,7 +99,17 @@ export default {
         .createUserWithEmailAndPassword(this.email, this.password)
         .then(userCredential => {
           var user = userCredential.user;
-          console.log(user);
+          fStore
+            .collection("users")
+            .doc(user.uid)
+            .set({
+              name: this.username,
+              email: this.email,
+              password: this.password
+            })
+            .then(() => {
+              alert("success");
+            });
         })
         .catch(error => {
           alert(error.code);
