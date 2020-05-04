@@ -1,39 +1,99 @@
-import Vue from 'vue'
-import Router from 'vue-router'
-import Home from '@/components/Home'
-import About from '@/components/About'
-import DogInfo from '@/components/DogInfo'
-import Contact from '@/components/Contact'
-import Login from '@/components/Login'
+import Vue from "vue";
+import Router from "vue-router";
+import Home from "@/components/Home";
+import About from "@/components/About";
+import DogInfo from "@/components/DogInfo";
+import Contact from "@/components/Contact";
+import Login from "@/components/Login";
+import Register from "@/components/Register";
+import HomeLogin from "@/components/HomeLogin";
+import { db } from "../db";
 
-Vue.use(Router)
+const fAuth = db.auth();
 
-export default new Router({
+Vue.use(Router);
+
+let router = new Router({
   routes: [
     {
-      path: '/',
-      name: 'Home',
-      component: Home
+      path: "/",
+      name: "Home",
+      component: Home,
+      meta: {
+        requiresGuest: true
+      }
     },
     {
-      path: '/about',
-      name: 'About',
-      component: About
+      path: "/about",
+      name: "About",
+      component: About,
+      meta: {
+        requiresGuest: true
+      }
     },
     {
-      path: '/dogInfo',
-      name: 'DogInfo',
-      component: DogInfo
+      path: "/dogInfo",
+      name: "DogInfo",
+      component: DogInfo,
+      meta: {
+        requiresGuest: true
+      }
     },
     {
-      path: '/contact',
-      name: 'Contact',
-      component: Contact
+      path: "/contact",
+      name: "Contact",
+      component: Contact,
+      meta: {
+        requiresGuest: true
+      }
     },
     {
-      path: '/login',
-      name: 'Login',
-      component: Login
+      path: "/login",
+      name: "Login",
+      component: Login,
+      meta: {
+        requiresGuest: true
+      }
+    },
+    {
+      path: "/register",
+      name: "Register",
+      component: Register,
+      meta: {
+        requiresGuest: true
+      }
+    },
+    {
+      path: "/homeLogin",
+      name: "HomeLogin",
+      component: HomeLogin,
+      meta: {
+        requiresAuth: true
+      }
     }
   ]
-})
+});
+
+router.beforeEach((to, from, next) => {
+  if (to.matched.some(record => record.meta.requiresAuth)) {
+    // check if NOT logged in
+    if (!fAuth.currentUser) {
+      // Go to login
+      next("/");
+    } else {
+      next();
+    }
+  } else if (to.matched.some(record => record.meta.requiresGuest)) {
+    // check if logged in
+    if (fAuth.currentUser) {
+      // Go to login
+      next("/HomeLogin");
+    } else {
+      next();
+    }
+  } else {
+    next();
+  }
+});
+
+export default router;
