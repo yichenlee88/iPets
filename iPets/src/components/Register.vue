@@ -2,11 +2,25 @@
   <div class="container">
     <img src="../assets/logo_banner.png" class="banner_png" />
     <div class="card">
-      <div class="card-header" style="background-color: #e3f2fd;">登入</div>
+      <div class="card-header" style="background-color: #e3f2fd;">註冊</div>
       <div class="card-body">
         <form>
           <div class="form-group mx-auto my-3" style="width: 80%;">
+            <label for="input-username">使用者名稱</label>
+            <span class="text-danger ml-1">*</span>
+            <input
+              id="input-username"
+              class="form-control"
+              type="text"
+              required
+              placeholder="帳號長度為8~12，不可有空白"
+              v-model="username"
+            />
+          </div>
+
+          <div class="form-group mx-auto my-3" style="width: 80%;">
             <label for="input-email">電子郵件</label>
+            <span class="text-danger ml-1">*</span>
             <input
               id="input-email"
               class="form-control"
@@ -19,6 +33,7 @@
 
           <div class="form-group mx-auto my-3" style="width: 80%;">
             <label for="input-password">密碼</label>
+            <span class="text-danger ml-1">*</span>
             <input
               id="input-password"
               class="form-control"
@@ -28,31 +43,33 @@
               v-model="password"
             />
           </div>
+
           <button
             type="submit"
             class="w-25 btn btn-primary"
             @click="auth_email"
           >
-            登入
+            註冊
           </button>
         </form>
+
         <div class="hide-md-lg">
           <p>或者</p>
         </div>
         <div class="row">
           <div class="col-12">
             <a href="#" class="fb btn">
-              <i class="fa fa-facebook fa-fw"></i> Login with Facebook
+              <i class="fa fa-facebook fa-fw"></i> Register with Facebook
             </a>
           </div>
           <div class="col-12">
             <a href="#" class="twitter btn">
-              <i class="fa fa-twitter fa-fw"></i> Login with Twitter
+              <i class="fa fa-twitter fa-fw"></i> Register with Twitter
             </a>
           </div>
           <div class="col-12">
             <a href="#" class="google btn">
-              <i class="fa fa-google fa-fw"></i> Login with Google+
+              <i class="fa fa-google fa-fw"></i> Register with Google+
             </a>
           </div>
         </div>
@@ -65,11 +82,13 @@
 import { db } from "../db";
 
 const fAuth = db.auth();
+const fStore = db.firestore();
 
 export default {
-  name: "Login",
+  name: "Register",
   data() {
     return {
+      username: "",
       email: "",
       password: ""
     };
@@ -77,16 +96,27 @@ export default {
   methods: {
     auth_email: function(e) {
       fAuth
-        .signInWithEmailAndPassword(this.email, this.password)
+        .createUserWithEmailAndPassword(this.email, this.password)
         .then(userCredential => {
-          this.$router.go({ path: this.$router.path });
+          var user = userCredential.user;
+          fStore
+            .collection("users")
+            .doc(user.uid)
+            .set({
+              name: this.username,
+              email: this.email,
+              password: this.password
+            })
+            .then(() => {
+              this.$router.go({ path: this.$router.path });
+            });
         })
         .catch(error => {
           alert(error.code);
           alert(error.message);
         })
         .finally(() => {
-          console.log("登入成功");
+          console.log("恭喜註冊成功了!");
         });
       e.preventDefault();
     }
