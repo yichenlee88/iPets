@@ -65,5 +65,13 @@ public class HomeFragment extends Fragment {
                 controller.navigate(R.id.action_homeFragment_to_mapsActivity);
             }
         });
+        Button AddDatabutton = getView().findViewById(R.id.AddData);
+        AddDatabutton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                NavController controller = Navigation.findNavController(v);
+                controller.navigate(R.id.action_homeFragment_to_addDataFragment3);
+            }
+        });
     }
 }
