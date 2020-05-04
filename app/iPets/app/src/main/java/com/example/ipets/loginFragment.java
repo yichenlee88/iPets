@@ -43,6 +43,8 @@ public class loginFragment extends Fragment {
                 controller.navigate(R.id.action_loginFragment_to_homeFragment);
             }
         });
+
+        /*
         super.onActivityCreated(savedInstanceState);
         Button forgot = getView().findViewById(R.id.forgot);
         forgot.setOnClickListener(new View.OnClickListener() {
@@ -52,6 +54,8 @@ public class loginFragment extends Fragment {
                 controller.navigate(R.id.action_loginFragment_to_forgotFragment);
             }
         });
+        */
+
         super.onActivityCreated(savedInstanceState);
         Button signup = getView().findViewById(R.id.signup);
         signup.setOnClickListener(new View.OnClickListener() {
