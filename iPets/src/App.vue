@@ -1,9 +1,6 @@
 <template>
   <div id="app">
-    <nav
-      class="navbar navbar-expand-lg navbar-light"
-      style="background-color: #e3f2fd;"
-    >
+    <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #e3f2fd;">
       <a class="navbar-brand" href="#/">iPets</a>
       <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
         <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
@@ -11,7 +8,7 @@
             <a class="nav-link" href="#/about">關於我們</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#/">狗狗科普</a>
+            <a class="nav-link" href="#/dogScience">狗狗科普</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="#/dogInfo">人與狗的關係</a>
@@ -38,16 +35,14 @@
             <a class="nav-link" href="#/calendar" v-if="isLogIn">行事曆</a>
           </li>
         </ul>
-        <BUtton class="btn my-2 my-sm-0" v-if="isLogIn" @click="logout">
-          登出
-        </BUtton>
+        <BUtton class="btn my-2 my-sm-0" v-if="isLogIn" @click="logout">登出</BUtton>
         <!-- <ul class="navbar-nav mr-5 mt-2 mt-lg-0" v-if="isLogIn">
           <li class="nav-item">
             <a class="nav-link" @click="logout">
               <i class="fas fa-sign-in-alt" style="size:12px"></i>登出
             </a>
           </li>
-        </ul> -->
+        </ul>-->
 
         <form class="form-inline my-2 my-lg-0">
           <input
@@ -55,14 +50,12 @@
             type="search"
             placeholder="Search"
             aria-label="Search"
-          />
-          <button class="btn btn-outline-success my-2 my-sm-0" type="submit">
-            Search
-          </button>
+          >
+          <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
         </form>
       </div>
     </nav>
-    <router-view />
+    <router-view/>
     <div class="row" style="background-color: #e3f2fd;">
       <div class="col-12 text-center h-50">
         <p>© 台北商業大學 資訊管理系 版權所有</p>
