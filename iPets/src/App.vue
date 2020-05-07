@@ -23,7 +23,7 @@
             <a class="nav-link" href="#/about" v-if="!isLogIn">關於我們</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#/" v-if="!isLogIn">狗狗科普</a>
+            <a class="nav-link" href="#/dogScience" v-if="!isLogIn">狗狗科普</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="#/dogInfo" v-if="!isLogIn"
