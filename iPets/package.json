@@ -13,7 +13,9 @@
   "dependencies": {
     "firebase": "^7.14.2",
     "vue": "^2.5.2",
-    "vue-router": "^3.0.1"
+    "vue-bootstrap-datetimepicker": "^5.0.1",
+    "vue-router": "^3.0.1",
+    "vuejs-datepicker": "^1.6.2"
   },
   "devDependencies": {
     "autoprefixer": "^7.1.2",
