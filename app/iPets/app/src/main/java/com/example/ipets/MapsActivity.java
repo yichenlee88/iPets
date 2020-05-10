@@ -88,6 +88,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                             mMap.animateCamera(CameraUpdateFactory.newLatLng(latLng));
                             mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 17));
                             mMap.addMarker(markerOptions);
+                            mMap.getUiSettings().setZoomGesturesEnabled(true);
+                            mMap.getUiSettings().setZoomControlsEnabled(true);
+                            mMap.getUiSettings().setCompassEnabled(true);
                             //這個也可以，同上animateCamera功能 : mMap.moveCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
                             Log.i("location","("+mLocation.getLatitude()+", "+mLocation.getLongitude()+") ");
                         }
