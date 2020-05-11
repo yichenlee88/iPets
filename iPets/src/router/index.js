@@ -8,6 +8,7 @@ import Login from "@/components/Login";
 import Register from "@/components/Register";
 import HomeLogin from "@/components/HomeLogin";
 import { db } from "../db";
+import DogScience from "@/components/DogScience";
 
 const fAuth = db.auth();
 
@@ -69,6 +70,14 @@ let router = new Router({
       component: HomeLogin,
       meta: {
         requiresAuth: true
+      }
+    },
+    {
+      path: "/dogScience",
+      name: "DogScience",
+      component: DogScience,
+      meta: {
+        requiresGuest: true
       }
     }
   ]
