@@ -68,6 +68,15 @@ public class homeFragment extends Fragment {
                 controller.navigate(R.id.action_homeFragment_to_mapsActivity);
             }
         });
+        super.onActivityCreated(savedInstanceState);
+        Button petsinfobutton = getView().findViewById(R.id.petsinfo);
+        petsinfobutton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                NavController controller = Navigation.findNavController(v);
+                controller.navigate(R.id.action_homeFragment_to_petsinfoFragment);
+            }
+        });
     }
 
 
