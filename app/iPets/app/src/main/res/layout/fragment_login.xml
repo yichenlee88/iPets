@@ -66,29 +66,14 @@
             android:orientation="vertical"
             app:layout_constraintGuide_percent="0.92" />
 
-        <TextView
-            android:id="@+id/Title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/alex_brush"
-            android:text="@string/TextView_title"
-            android:textColor="#9C27B0"
-            android:textSize="36sp"
-            android:textStyle="bold"
-            android:typeface="normal"
-            app:layout_constraintBottom_toTopOf="@+id/guideline2"
-            app:layout_constraintEnd_toStartOf="@+id/guideline8"
-            app:layout_constraintStart_toStartOf="@+id/guideline7"
-            app:layout_constraintTop_toTopOf="@+id/guideline1" />
-
         <EditText
-            android:id="@+id/username"
+            android:id="@+id/account"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:autofillHints=""
             android:backgroundTint="#2196F3"
             android:ems="10"
-            android:hint="@string/username_hint"
+            android:hint="@string/account_hint"
             android:inputType="textPersonName"
             android:textSize="20sp"
             app:layout_constraintBottom_toTopOf="@+id/guideline3"
@@ -209,6 +194,17 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             app:layout_constraintGuide_percent="0.7" />
+
+        <ImageView
+            android:id="@+id/logo"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:contentDescription="@string/imageview_logo"
+            android:src="@drawable/app_logo_icon"
+            app:layout_constraintBottom_toTopOf="@+id/guideline2"
+            app:layout_constraintEnd_toStartOf="@+id/guideline8"
+            app:layout_constraintStart_toStartOf="@+id/guideline7"
+            app:layout_constraintTop_toTopOf="@+id/guideline1" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
