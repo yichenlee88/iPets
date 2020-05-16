@@ -88,7 +88,7 @@ public class loginFragment extends Fragment {
 
         private void ReadSingleContact(final View view) {
             final FirebaseFirestore db = FirebaseFirestore.getInstance();
-            final EditText edaccount = getView().findViewById(R.id.username);
+            final EditText edaccount = getView().findViewById(R.id.account);
             final EditText edpassword = getView().findViewById(R.id.password);
             String account = edaccount.getText().toString();
             final String password = edpassword.getText().toString();
