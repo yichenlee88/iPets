@@ -91,10 +91,10 @@
         <path d="M0 0 L166 0 L166 130 L0 130 L0 0 Z" />
       </clipPath>
       <clipPath clipPathUnits="userSpaceOnUse" id="clipPath29">
-        <path d="M0 0 L172 0 L172 155 L0 155 L0 0 Z" />
+        <path d="M0 0 L179 0 L179 149 L0 149 L0 0 Z" />
       </clipPath>
       <clipPath clipPathUnits="userSpaceOnUse" id="clipPath30">
-        <path d="M0 0 L175 0 L175 157 L0 157 L0 0 Z" />
+        <path d="M0 0 L179 0 L179 152 L0 152 L0 0 Z" />
       </clipPath>
       <clipPath clipPathUnits="userSpaceOnUse" id="clipPath31">
         <path d="M0 0 L196 0 L196 129 L0 129 L0 0 Z" />
@@ -110,6 +110,9 @@
       </clipPath>
       <clipPath clipPathUnits="userSpaceOnUse" id="clipPath35">
         <path d="M0 0 L90 0 L90 18 L0 18 L0 0 Z" />
+      </clipPath>
+      <clipPath clipPathUnits="userSpaceOnUse" id="clipPath36">
+        <path d="M0 0 L64 0 L64 18 L0 18 L0 0 Z" />
       </clipPath>
     </defs>
     <g style="fill:white; text-rendering:geometricPrecision; stroke:white;">
@@ -268,15 +271,17 @@
       <line x1="100" x2="88" y1="64" style="clip-path:url(#clipPath28); fill:none;" y2="58" />
       <line x1="100" x2="88" y1="64" style="clip-path:url(#clipPath28); fill:none;" y2="70" />
     </g>
-    <g transform="translate(235,183)" style="font-size:11; stroke-linecap:butt; text-rendering:geometricPrecision; font-family:sans-serif; stroke-linejoin:round;">
-      <line x1="63" x2="107" y1="62" style="clip-path:url(#clipPath29); fill:none;" y2="89" />
-      <line x1="107" x2="100" y1="89" style="clip-path:url(#clipPath29); fill:none;" y2="77" />
-      <line x1="107" x2="94" y1="89" style="clip-path:url(#clipPath29); fill:none;" y2="88" />
+    <g transform="translate(230,190)" style="font-size:11; stroke-linecap:butt; text-rendering:geometricPrecision; font-family:sans-serif; stroke-linejoin:round;">
+      <line x1="63" x2="63" y1="63" style="clip-path:url(#clipPath29); fill:none;" y2="83" />
+      <line x1="63" x2="113" y1="83" style="clip-path:url(#clipPath29); fill:none;" y2="83" />
+      <line x1="113" x2="101" y1="83" style="clip-path:url(#clipPath29); fill:none;" y2="77" />
+      <line x1="113" x2="101" y1="83" style="clip-path:url(#clipPath29); fill:none;" y2="89" />
     </g>
-    <g transform="translate(233,149)" style="font-size:11; stroke-linecap:butt; text-rendering:geometricPrecision; font-family:sans-serif; stroke-linejoin:round;">
-      <line x1="62" x2="109" y1="91" style="clip-path:url(#clipPath30); fill:none;" y2="63" />
-      <line x1="109" x2="96" y1="63" style="clip-path:url(#clipPath30); fill:none;" y2="63" />
-      <line x1="109" x2="102" y1="63" style="clip-path:url(#clipPath30); fill:none;" y2="74" />
+    <g transform="translate(230,150)" style="font-size:11; stroke-linecap:butt; text-rendering:geometricPrecision; font-family:sans-serif; stroke-linejoin:round;">
+      <line x1="63" x2="63" y1="85" style="clip-path:url(#clipPath30); fill:none;" y2="63" />
+      <line x1="63" x2="113" y1="63" style="clip-path:url(#clipPath30); fill:none;" y2="63" />
+      <line x1="113" x2="101" y1="63" style="clip-path:url(#clipPath30); fill:none;" y2="57" />
+      <line x1="113" x2="101" y1="63" style="clip-path:url(#clipPath30); fill:none;" y2="69" />
     </g>
     <g transform="translate(357,159)" style="font-size:11; stroke-linecap:butt; text-rendering:geometricPrecision; font-family:sans-serif; stroke-linejoin:round;">
       <line x1="62" x2="130" y1="63" style="clip-path:url(#clipPath31); fill:none;" y2="63" />
@@ -301,6 +306,12 @@
     </g>
     <g style="text-rendering:geometricPrecision; font-size:14; font-family:&apos;標楷體&apos;;" transform="translate(728,225)">
       <text x="10" y="16" style="clip-path:url(#clipPath35); stroke:none;" xml:space="preserve">[新增成功]</text>
+    </g>
+    <g style="text-rendering:geometricPrecision; font-size:11; font-family:sans-serif;" transform="translate(262,192)">
+      <text x="10" y="14" style="clip-path:url(#clipPath36); stroke:none;" xml:space="preserve">新增相簿</text>
+    </g>
+    <g style="text-rendering:geometricPrecision; font-size:11; font-family:sans-serif;" transform="translate(252,282)">
+      <text x="10" y="14" style="clip-path:url(#clipPath36); stroke:none;" xml:space="preserve">刪除相簿</text>
     </g>
     <g style="text-rendering:geometricPrecision; font-size:14; font-family:&apos;標楷體&apos;;" transform="translate(584,244)">
       <text x="10" y="16" style="clip-path:url(#clipPath35); stroke:none;" xml:space="preserve">[新增失敗]</text>
