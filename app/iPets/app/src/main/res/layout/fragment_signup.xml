@@ -106,14 +106,14 @@
             app:layout_constraintGuide_percent="0.36" />
 
         <EditText
-            android:id="@+id/E-mail"
+            android:id="@+id/email"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:autofillHints=""
             android:backgroundTint="#2196F3"
             android:ems="10"
             android:hint="@string/email_hint"
-            android:inputType="textPersonName"
+            android:inputType="textEmailAddress"
             android:textSize="20sp"
             app:layout_constraintBottom_toTopOf="@+id/guideline34"
             app:layout_constraintEnd_toStartOf="@+id/guideline28"
@@ -179,7 +179,7 @@
             app:layout_constraintGuide_percent="0.73" />
 
         <Button
-            android:id="@+id/next"
+            android:id="@+id/next1"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:backgroundTint="#2196F3"
