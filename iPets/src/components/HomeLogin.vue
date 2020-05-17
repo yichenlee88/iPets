@@ -1,161 +1,171 @@
 <template>
   <div class="container">
-    <div class="timerPicker">
-      <h3>倒數計時器</h3>
-      <div class="progress">
-        <div
-          class="progress-bar"
-          role="progressbar"
-          style="width: 25%"
-          aria-valuenow="25"
-          aria-valuemin="0"
-          aria-valuemax="100"
-        ></div>
-      </div>
-    </div>
-    <h3>編輯倒數計時器</h3>
-    <div
-      class="accordion md-accordion accordion-blocks"
-      id="accordionEx78"
-      role="tablist"
-      aria-multiselectable="true"
-    >
-      <div class="card">
-        <div class="card-header" role="tab" id="headingUnfiled">
-          <div class="dropdown float-left">
-            <button
-              class="btn btn-info btn-sm m-0 mr-3 p-2 dropdown-toggle"
-              type="button"
-              data-toggle="dropdown"
-              aria-haspopup="true"
-              aria-expanded="false"
-            >
-              <i class="fas fa-pencil-alt"></i>
-            </button>
-            <ul class="dropdown-menu dropdown-info" role="menu">
-              <li>
-                <a href="#add" data-toggle="tab">新增</a>
-              </li>
-              <li>
-                <a href="#delete" data-toggle="tab">刪除</a>
-              </li>
-              <li>
-                <a href="#update" data-toggle="tab">修改</a>
-              </li>
-            </ul>
-          </div>
-          <a
-            data-toggle="collapse"
-            data-parent="#accordionEx78"
-            href="#collapseUnfiled"
-            aria-expanded="true"
-            aria-controls="collapseUnfiled"
-          >
-            <h5 class="mt-1 mb-0">
-              <span>洗澡</span>
-              <i class="fas fa-angle-down rotate-icon"></i>
-            </h5>
-          </a>
-        </div>
-        <div
-          id="collapseUnfiled"
-          class="collapse"
-          role="tabpanel"
-          aria-labelledby="headingUnfiled"
-          data-parent="#accordionEx78"
-        >
-          <div class="card-body">
-            <div class="tab-content">
-              <div class="tab-pane active fade in" id="add">
-                <div class="form-group row" style="margin-top: 15px">
-                  <label for="staticEmail" class="col-sm-2 col-form-label"
-                    >活動名稱</label
-                  >
-                  <div class="col-sm-10">
-                    <input
-                      type="text"
-                      class="form-control"
-                      id="activityTitle"
-                    />
-                  </div>
+    <div class="row">
+      <div class="col-6">
+        <div class="list-group">
+          <h1>執行中</h1>
+          <div class="list-group-item">
+            <div class="row">
+              <div class="col-1" md-2>
+                <div class="round">
+                  <input type="checkbox" id="checkbox" />
+                  <label for="checkbox"></label>
                 </div>
-                <div class="form-group row" style="margin-top: 15px">
-                  <label for="staticEmail" class="col-sm-2 col-form-label"
-                    >活動類別</label
+              </div>
+              <div class="col-9">
+                <h3 class="mb-0" style=" text-align: left;">洗澡</h3>
+              </div>
+              <div class="col-2" md-2>
+                <button
+                  type="button"
+                  class="btn"
+                  data-toggle="modal"
+                  data-target="#close"
+                >
+                  <i class="arrow right"></i>
+                </button>
+                <div
+                  class="modal fade"
+                  id="close"
+                  tabindex="-1"
+                  role="dialog"
+                  aria-hidden="true"
+                >
+                  <div
+                    class="modal-dialog modal-dialog-centered"
+                    role="document"
                   >
-                  <div class="col-sm-10">
-                    <input
-                      type="text"
-                      class="form-control-plaintext"
-                      readonly
-                      id="activityClass"
-                      value="洗澡"
-                    />
-                  </div>
-                </div>
-                <div class="form-group row">
-                  <label for="startingTime" class="col-sm-2 col-form-label"
-                    >開始時間</label
-                  >
-                  <div class="col-sm-10">
-                    <date-picker
-                      v-model="date"
-                      @dp-hide="doSomethingOnHide"
-                      @dp-change="doSomethingOnChange"
-                    ></date-picker>
-                  </div>
-                </div>
-                <div class="form-group row">
-                  <label for="endingTime" class="col-sm-2 col-form-label"
-                    >結束時間</label
-                  >
-                  <div class="col-sm-10">
-                    <date-picker
-                      v-model="date"
-                      @dp-hide="doSomethingOnHide"
-                      @dp-change="doSomethingOnChange"
-                    ></date-picker>
-                  </div>
-                </div>
-                <div class="form-group row" style="margin-top: 15px">
-                  <label for="staticEmail" class="col-sm-2 col-form-label"
-                    >重複時間</label
-                  >
-                  <div class="col-sm-2">
-                    <input
-                      type="text"
-                      class="form-control"
-                      id="activityTitle"
-                    />
-                  </div>
-                  <form>
-                    <div class="form-group">
-                      <select id="diploma" name="diploma" class="form-control">
-                        <option value="day" disabled>天</option
-                        ><option value="week">週</option
-                        ><option value="month" selected>個月 </option
-                        ><option value="year">年</option></select
-                      >
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title">
+                          編輯頁面
+                        </h5>
+                        <button
+                          type="button"
+                          class="close"
+                          data-dismiss="modal"
+                          aria-label="Close"
+                        >
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+                      <div class="modal-body">
+                        <div class="form-group row" style="margin-top: 15px">
+                          <label
+                            for="staticEmail"
+                            class="col-sm-3 col-form-label"
+                            >活動名稱</label
+                          >
+                          <div class="col-sm-9">
+                            <input
+                              type="text"
+                              class="form-control"
+                              id="activityTitle"
+                            />
+                          </div>
+                        </div>
+                        <div class="form-group row">
+                          <label
+                            for="startingTime"
+                            class="col-sm-3 col-form-label"
+                            >開始時間</label
+                          >
+                          <div class="col-sm-9">
+                            <date-picker
+                              id="startingTime"
+                              v-model="date"
+                              @dp-hide="doSomethingOnHide"
+                              @dp-change="doSomethingOnChange"
+                            ></date-picker>
+                          </div>
+                        </div>
+                        <div class="form-group row">
+                          <label
+                            for="endingTime"
+                            class="col-sm-3 col-form-label"
+                            >結束時間</label
+                          >
+                          <div class="col-sm-9">
+                            <date-picker
+                              id="endingTime"
+                              v-model="date"
+                              @dp-hide="doSomethingOnHide"
+                              @dp-change="doSomethingOnChange"
+                            ></date-picker>
+                          </div>
+                        </div>
+                        <div class="form-group row" style="margin-top: 15px">
+                          <label
+                            for="staticEmail"
+                            class="col-sm-3 col-form-label"
+                            >重複時間</label
+                          >
+                          <div class="col-sm-3">
+                            <input
+                              type="text"
+                              class="form-control"
+                              id="activityTitle"
+                            />
+                          </div>
+                          <form>
+                            <div class="form-group">
+                              <select
+                                id="diploma"
+                                name="diploma"
+                                class="form-control"
+                              >
+                                <option value="day" disabled>天</option
+                                ><option value="week">週</option
+                                ><option value="month" selected>個月 </option
+                                ><option value="year">年</option></select
+                              >
+                            </div>
+                          </form>
+                        </div>
+                      </div>
+                      <div class="modal-footer">
+                        <button
+                          type="button"
+                          class="btn btn-secondary"
+                          data-dismiss="modal"
+                        >
+                          關閉
+                        </button>
+                        <button type="button" class="btn btn-primary">
+                          儲存
+                        </button>
+                      </div>
                     </div>
-                  </form>
-                  <div class="w-100"></div>
-                  <div>
-                    <button
-                      type="submit"
-                      class="btn btn-primary"
-                      style="width: 100%;"
-                      @click="save"
-                    >
-                      儲存
-                    </button>
                   </div>
                 </div>
               </div>
-              <div class="tab-pane fade" id="delete">
-                <h4>Cat Cage</h4>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-6">
+        <div class="list-group">
+          <h1>即將到來</h1>
+          <div class="list-group-item">
+            <div class="row">
+              <div class="col-1" md-2>
+                <div class="round">
+                  <input type="checkbox" id="checkbox" />
+                  <label for="checkbox"></label>
+                </div>
               </div>
-              <div class="tab-pane fade" id="update">
-                <h4>Cat Drunk</h4>
+              <div class="col-9">
+                <h3 class="mb-0" style=" text-align: left;">洗澡</h3>
+              </div>
+              <div class="col-2" md-2>
+                <button
+                  type="button"
+                  class="btn"
+                  data-toggle="modal"
+                  data-target="#close"
+                >
+                  <i class="arrow right"></i>
+                </button>
               </div>
             </div>
           </div>
@@ -198,47 +208,63 @@ export default {
   margin-bottom: 20px;
   min-height: 600px;
 }
-li a {
-  text-decoration: none;
-  color: black;
-}
-a {
-  text-decoration: none;
-  color: black;
-  size: 14px;
-  text-align: left;
-}
-a:hover {
-  text-decoration: underline;
-}
-progress {
-  margin-top: 5px;
-}
-h3 {
-  text-align: left;
-  font-family: "Avenir", Helvetica, Arial, sans-serif;
-}
-.timerPicker {
-  margin-bottom: 20px;
-}
-.timerPicker h3 {
-  text-align: left;
+
+.arrow {
+  border: solid black;
+  border-width: 0 3px 3px 0;
+  display: inline-block;
+  padding: 3px;
 }
 
-.dropdown .nav-link {
-  color: #fff;
-  text-decoration: none;
+.right {
+  transform: rotate(-45deg);
+  -webkit-transform: rotate(-45deg);
 }
-.dropdown .dropdown-menu a {
-  color: #000;
-  text-decoration: none;
+
+.round {
+  position: relative;
 }
-.dropdown .btn {
-  color: #fff;
+
+.round label {
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 50%;
+  cursor: pointer;
+  height: 28px;
+  left: 0;
+  position: absolute;
+  top: 5px;
+  width: 28px;
 }
-.dropdown-menu .dropdown-item {
-  display: inline-block;
-  width: 100%;
-  padding: 10px 5px;
+
+.round h3 {
+  margin-right: auto;
+}
+
+.round label:after {
+  border: 2px solid #fff;
+  border-top: none;
+  border-right: none;
+  content: "";
+  height: 6px;
+  left: 7px;
+  opacity: 0;
+  position: absolute;
+  top: 8px;
+  transform: rotate(-45deg);
+  width: 12px;
+}
+
+.round input[type="checkbox"] {
+  visibility: hidden;
+}
+
+.round input[type="checkbox"]:checked + label {
+  background-color: #66bb6a;
+  border-color: #66bb6a;
+}
+
+.round input[type="checkbox"]:checked + label:after {
+  opacity: 1;
 }
 </style>
