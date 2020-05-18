@@ -68,6 +68,7 @@ public class homeFragment extends Fragment {
                 controller.navigate(R.id.action_homeFragment_to_mapsActivity);
             }
         });
+
     }
 
 
