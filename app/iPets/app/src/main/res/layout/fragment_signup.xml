@@ -106,14 +106,14 @@
             app:layout_constraintGuide_percent="0.36" />
 
         <EditText
-            android:id="@+id/E-mail"
+            android:id="@+id/email"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:autofillHints=""
             android:backgroundTint="#2196F3"
             android:ems="10"
             android:hint="@string/email_hint"
-            android:inputType="textPersonName"
+            android:inputType="textEmailAddress"
             android:textSize="20sp"
             app:layout_constraintBottom_toTopOf="@+id/guideline34"
             app:layout_constraintEnd_toStartOf="@+id/guideline28"
@@ -179,10 +179,11 @@
             app:layout_constraintGuide_percent="0.73" />
 
         <Button
-            android:id="@+id/next"
+            android:id="@+id/next1"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:backgroundTint="#2196F3"
+            android:gravity="center_horizontal|center_vertical"
             android:text="@string/button_next"
             android:textColor="#FFFFFF"
             android:textSize="20sp"
@@ -210,7 +211,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.77" />
+            app:layout_constraintGuide_percent="0.78" />
 
         <View
             android:id="@+id/divider1"
@@ -249,34 +250,22 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.85" />
+            app:layout_constraintGuide_percent="0.86" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline43"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.95" />
-
-        <Button
-            android:id="@+id/btnGoogle"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:backgroundTint="#FFFFFF"
-            android:drawableStart="@drawable/googleg_standard_color_18"
-            android:text="@string/button_google"
-            android:textSize="18sp"
-            app:layout_constraintBottom_toTopOf="@+id/guideline43"
-            app:layout_constraintEnd_toStartOf="@+id/guideline28"
-            app:layout_constraintStart_toStartOf="@+id/guideline27"
-            app:layout_constraintTop_toTopOf="@+id/guideline44" />
+            app:layout_constraintGuide_percent="0.94" />
 
         <Button
             android:id="@+id/btnFacebook"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
             android:backgroundTint="#3f5a91"
             android:drawableStart="@drawable/logo_fb"
+            android:gravity="center_horizontal|center_vertical"
             android:text="@string/button_fb"
             android:textColor="#FFFFFF"
             android:textSize="18sp"
@@ -286,8 +275,22 @@
             app:layout_constraintStart_toStartOf="@+id/guideline27"
             app:layout_constraintTop_toTopOf="@+id/guideline40" />
 
+        <Button
+            android:id="@+id/btnGoogle"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:backgroundTint="#FFFFFF"
+            android:drawableStart="@drawable/googleg_standard_color_18"
+            android:gravity="center_horizontal|center_vertical"
+            android:text="@string/button_google"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toTopOf="@+id/guideline43"
+            app:layout_constraintEnd_toStartOf="@+id/guideline28"
+            app:layout_constraintStart_toStartOf="@+id/guideline27"
+            app:layout_constraintTop_toTopOf="@+id/guideline41" />
+
         <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guideline44"
+            android:id="@+id/guideline41"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
