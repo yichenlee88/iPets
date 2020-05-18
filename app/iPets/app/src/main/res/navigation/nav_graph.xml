@@ -37,9 +37,6 @@
         <action
             android:id="@+id/action_homeFragment_to_mapsActivity"
             app:destination="@id/mapsActivity" />
-        <action
-            android:id="@+id/action_homeFragment_to_petsinfoFragment"
-            app:destination="@id/petsinfoFragment" />
     </fragment>
     <fragment
         android:id="@+id/forgotFragment"
@@ -59,8 +56,8 @@
             android:id="@+id/action_signupFragment_to_loginFragment"
             app:destination="@id/loginFragment" />
         <action
-            android:id="@+id/action_signupFragment_to_petsinfoFragment"
-            app:destination="@id/petsinfoFragment" />
+            android:id="@+id/action_signupFragment_to_userinfoFragment"
+            app:destination="@id/userinfoFragment" />
     </fragment>
     <fragment
         android:id="@+id/analyzeFragment"
@@ -82,8 +79,12 @@
         android:label="fragment_maps"
         tools:layout="@layout/fragment_maps" />
     <fragment
-        android:id="@+id/petsinfoFragment"
-        android:name="com.example.ipets.petsinfoFragment"
-        android:label="fragment_petsinfo"
-        tools:layout="@layout/fragment_petsinfo" />
+        android:id="@+id/userinfoFragment"
+        android:name="com.example.ipets.userinfoFragment"
+        android:label="fragment_userinfo"
+        tools:layout="@layout/fragment_userinfo" >
+        <action
+            android:id="@+id/action_userinfoFragment_to_signupFragment"
+            app:destination="@id/signupFragment" />
+    </fragment>
 </navigation>
