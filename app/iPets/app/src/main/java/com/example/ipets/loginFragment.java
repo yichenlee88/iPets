@@ -17,26 +17,19 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 
 import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.DocumentSnapshot;
-import com.google.firebase.firestore.FirebaseFirestore;
 
 
 /**
  * A simple {@link Fragment} subclass.
  */
 public class loginFragment extends Fragment {
-    private String userUID;
     private FirebaseAuth auth;
-    private FirebaseAuth.AuthStateListener authListener;
 
     public loginFragment() {
         // Required empty public constructor
@@ -104,8 +97,8 @@ public class loginFragment extends Fragment {
                 if (!task.isSuccessful()){
                     Log.d("onComplete", "登入失敗");
                     AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-                    builder.setTitle("登入失敗");
-                    builder.setMessage("基帳號或密碼錯誤,大小血虛相符");
+                    builder.setTitle("auth/user-not-found iPets");
+                    builder.setMessage("帳號或密碼錯誤,大小寫需相符");
                     builder.setNegativeButton("重新輸入", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface arg0, int arg1) {
@@ -114,10 +107,8 @@ public class loginFragment extends Fragment {
                             edpassword.setText("");
                         }
                     });
-                    builder.setCancelable(true);   //设置按钮是否可以按返回键取消,false则不可以取消
-                    AlertDialog dialog = builder.create();  //创建对话框
-                    dialog.setCanceledOnTouchOutside(true);      //设置弹出框失去焦点是否隐藏,即点击屏蔽其它地方是否隐藏
-                    dialog.show();
+                    builder.setCancelable(true);   //設置按鈕是否可以按返回键取消,false則不可以取消
+                    builder.show();
                 }else{
                     NavController controller = Navigation.findNavController(v);
                     controller.navigate(R.id.action_loginFragment_to_homeFragment);
