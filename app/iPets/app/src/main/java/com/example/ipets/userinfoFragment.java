@@ -12,6 +12,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
+
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.FirebaseFirestore;
+
+import java.util.HashMap;
+import java.util.Map;
 
 
 /**
@@ -39,10 +47,31 @@ public class userinfoFragment extends Fragment {
         next2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                userInfo(v);
+            }
+
+            private void userInfo(View v) {
+                EditText edmyname = getView().findViewById(R.id.myname);
+                final EditText edmybirth = getView().findViewById(R.id.mybirth);
+                final EditText edmyaddress = getView().findViewById(R.id.myaddress);
+                String myname = edmyname.getText().toString();
+                Integer mybirth = Integer.parseInt(edmybirth.getText().toString());
+                String myaddress = edmyaddress.getText().toString();
+                FirebaseAuth auth = FirebaseAuth.getInstance();
+                FirebaseUser currentUser = auth.getCurrentUser();
+                String userUID = currentUser.getUid();
+                FirebaseFirestore db;
+                db = FirebaseFirestore.getInstance();
+                Map<String, Object> userInfo = new HashMap<>();
+                userInfo.put("Myname", myname);
+                userInfo.put("Mybirth", mybirth);
+                userInfo.put("Myaddress", myaddress);
+                db.collection("userInformation").document(userUID).update(userInfo);
                 NavController controller = Navigation.findNavController(v);
                 controller.navigate(R.id.action_userinfoFragment_to_petsinfoFragment);
             }
         });
     }
+
 
 }
