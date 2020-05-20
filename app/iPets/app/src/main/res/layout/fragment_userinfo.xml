@@ -52,7 +52,7 @@
             app:layout_constraintTop_toTopOf="@+id/guideline46" />
 
         <TextView
-            android:id="@+id/name"
+            android:id="@+id/name1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/TextView_name"
@@ -104,7 +104,7 @@
             app:layout_constraintGuide_percent="0.37" />
 
         <TextView
-            android:id="@+id/birth"
+            android:id="@+id/birth1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/TextView_birth"

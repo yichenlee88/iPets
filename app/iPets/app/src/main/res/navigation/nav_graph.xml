@@ -86,5 +86,17 @@
         <action
             android:id="@+id/action_userinfoFragment_to_signupFragment"
             app:destination="@id/signupFragment" />
+        <action
+            android:id="@+id/action_userinfoFragment_to_petsinfoFragment"
+            app:destination="@id/petsinfoFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/petsinfoFragment"
+        android:name="com.example.ipets.petsinfoFragment"
+        android:label="fragment_petsinfo"
+        tools:layout="@layout/fragment_petsinfo" >
+        <action
+            android:id="@+id/action_petsinfoFragment_to_userinfoFragment"
+            app:destination="@id/userinfoFragment" />
     </fragment>
 </navigation>
