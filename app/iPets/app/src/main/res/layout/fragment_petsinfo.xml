@@ -188,19 +188,36 @@
             android:layout_height="wrap_content"
             android:text="@string/TextView_petssex"
             android:textSize="18sp"
-            app:layout_constraintBottom_toTopOf="@+id/malepet"
             app:layout_constraintStart_toStartOf="@+id/guideline68"
-            app:layout_constraintTop_toTopOf="@+id/guideline73" />
+            app:layout_constraintTop_toTopOf="@+id/guideline73"
+            app:layout_constraintBottom_toTopOf="@+id/sexselect"/>
 
-        <RadioButton
-            android:id="@+id/malepet"
-            android:layout_width="wrap_content"
+
+        <RadioGroup
+            android:id="@+id/sexselect"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="@string/RadioButton_sex1"
-            android:textSize="20sp"
+            android:orientation="horizontal"
             app:layout_constraintBottom_toTopOf="@+id/guideline71"
-            app:layout_constraintEnd_toStartOf="@+id/guideline66"
-            app:layout_constraintStart_toStartOf="@+id/guideline65" />
+            app:layout_constraintEnd_toStartOf="@+id/guideline69"
+            app:layout_constraintStart_toStartOf="@+id/guideline68">
+
+            <RadioButton
+                android:id="@+id/malepet"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="66dp"
+                android:text="@string/RadioButton_sex1"
+                android:textSize="20sp" />
+
+            <RadioButton
+                android:id="@+id/femalepet"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="53dp"
+                android:text="@string/RadioButton_sex2"
+                android:textSize="20sp" />
+        </RadioGroup>
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline71"
@@ -208,16 +225,6 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             app:layout_constraintGuide_percent="0.54" />
-
-        <RadioButton
-            android:id="@+id/femalepet"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/RadioButton_sex2"
-            android:textSize="20sp"
-            app:layout_constraintBottom_toTopOf="@+id/guideline71"
-            app:layout_constraintEnd_toStartOf="@+id/guideline63"
-            app:layout_constraintStart_toStartOf="@+id/guideline64" />
 
         <TextView
             android:id="@+id/birth2"
