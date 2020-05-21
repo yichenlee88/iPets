@@ -13,6 +13,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -26,8 +28,6 @@ import java.util.Map;
  * A simple {@link Fragment} subclass.
  */
 public class userinfoFragment extends Fragment {
-
-
     public userinfoFragment() {
         // Required empty public constructor
     }
@@ -57,6 +57,19 @@ public class userinfoFragment extends Fragment {
                 String myname = edmyname.getText().toString();
                 Integer mybirth = Integer.parseInt(edmybirth.getText().toString());
                 String myaddress = edmyaddress.getText().toString();
+                String mygender = null;
+                RadioGroup genderselect = getView().findViewById(R.id.genderselect);
+                switch(genderselect.getCheckedRadioButtonId()){
+                    case R.id.male: //case mRadioButton0.getId():
+                        mygender = "男";
+                        break;
+                    case R.id.female: //case mRadioButton1.getId():
+                        mygender = "女";
+                        break;
+                    case R.id.unwilling: //case mRadioButton2.getId():
+                        mygender = "不願透漏";
+                        break;
+                }
                 FirebaseAuth auth = FirebaseAuth.getInstance();
                 FirebaseUser currentUser = auth.getCurrentUser();
                 String userUID = currentUser.getUid();
@@ -65,6 +78,7 @@ public class userinfoFragment extends Fragment {
                 Map<String, Object> userInfo = new HashMap<>();
                 userInfo.put("Myname", myname);
                 userInfo.put("Mybirth", mybirth);
+                userInfo.put("Mygender", mygender);
                 userInfo.put("Myaddress", myaddress);
                 db.collection("userInformation").document(userUID).update(userInfo);
                 NavController controller = Navigation.findNavController(v);
