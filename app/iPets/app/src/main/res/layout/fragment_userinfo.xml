@@ -134,15 +134,50 @@
             android:orientation="horizontal"
             app:layout_constraintGuide_percent="0.5" />
 
-        <RadioButton
-            android:id="@+id/male"
+        <TextView
+            android:id="@+id/gender"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center_horizontal|center_vertical"
-            android:text="@string/RadioButton_gender1"
-            android:textSize="20sp"
+            android:text="@string/TextView_gender"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toTopOf="@+id/genderselect"
+            app:layout_constraintStart_toStartOf="@+id/guideline47"
+            app:layout_constraintTop_toTopOf="@+id/guideline53" />
+
+        <RadioGroup
+            android:id="@+id/genderselect"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
             app:layout_constraintBottom_toTopOf="@+id/guideline55"
-            app:layout_constraintStart_toStartOf="@+id/guideline47" />
+            app:layout_constraintEnd_toStartOf="@+id/guideline48"
+            app:layout_constraintStart_toStartOf="@+id/guideline47" >
+
+            <RadioButton
+                android:id="@+id/male"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal|center_vertical"
+                android:text="@string/RadioButton_gender1"
+                android:textSize="20sp" />
+
+            <RadioButton
+                android:id="@+id/female"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="56dp"
+                android:gravity="center_horizontal|center_vertical"
+                android:text="@string/RadioButton_gender2"
+                android:textSize="20sp" />
+
+            <RadioButton
+                android:id="@+id/unwilling"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/RadioButton_gender3"
+                android:textSize="20sp" />
+        </RadioGroup>
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline54"
@@ -151,43 +186,12 @@
             android:orientation="vertical"
             app:layout_constraintGuide_percent="0.5" />
 
-        <TextView
-            android:id="@+id/gender"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="center_horizontal|center_vertical"
-            android:text="@string/TextView_gender"
-            android:textSize="18sp"
-            app:layout_constraintBottom_toTopOf="@+id/male"
-            app:layout_constraintStart_toStartOf="@+id/guideline47"
-            app:layout_constraintTop_toTopOf="@+id/guideline53" />
-
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline55"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             app:layout_constraintGuide_percent="0.6" />
-
-        <RadioButton
-            android:id="@+id/female"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="center_horizontal|center_vertical"
-            android:text="@string/RadioButton_gender2"
-            android:textSize="20sp"
-            app:layout_constraintBottom_toTopOf="@+id/guideline55"
-            app:layout_constraintEnd_toStartOf="@+id/unwilling"
-            app:layout_constraintStart_toEndOf="@+id/male" />
-
-        <RadioButton
-            android:id="@+id/unwilling"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/RadioButton_gender3"
-            android:textSize="20sp"
-            app:layout_constraintBottom_toTopOf="@+id/guideline55"
-            app:layout_constraintEnd_toStartOf="@+id/guideline48" />
 
         <TextView
             android:id="@+id/address"
@@ -241,6 +245,7 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             app:layout_constraintGuide_percent="0.83" />
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </FrameLayout>
