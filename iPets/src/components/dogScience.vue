@@ -1,6 +1,6 @@
 <template>
   <div class="container" style="margin-top: 20px;">
-    <img src="../assets/狗狗科普.png" width="80%"><br>
+    <img src="../assets/狗狗科普.png" width="70%"><br>
     <div class="container marketing" style="margin-top: 20px;">
       <div class="row">
         <div class="col-12 col-sm-4">
@@ -14,7 +14,7 @@
             <p>
               狗狗發抖一定是覺得冷嗎？小心！各種發抖的危險程度大不同！當狗狗興奮、緊張、氣溫過低、疾病疼痛、中毒時都會發抖～請飼主釐清發抖原因，萬一是疾病或中毒引起，一定要趕快就醫喔！
             </p>
-            <a href="https://maoup.com.tw/?p=13939" target="_blank">
+            <a href="#/dogScienceArticle" target="_blank">
               <button type="button" class="btn btn-info" style="position:absolute; bottom: 5px">了解更多</button>
             </a>
           </div>
@@ -124,7 +124,5 @@ export default {
   justify-content: center;
   align-items: center;
 }
-.button_more{
-  text-align:left;
-}
+
 </style>
