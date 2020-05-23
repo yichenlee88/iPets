@@ -184,7 +184,7 @@ export default {
   margin-bottom: 15px;
   text-align: left;
   font-family: "Microsoft JhengHei", "sans-serif";
-  line-height: 45px;
+  line-height: 40px;
   display: inline-block;
   align-items: center;
 }

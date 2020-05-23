@@ -4,6 +4,7 @@ import Vue from "vue";
 import App from "./App";
 import router from "./router";
 import { db } from "./db";
+import * as VueGoogleMaps from "vue2-google-maps";
 
 Vue.config.productionTip = false;
 
@@ -18,5 +19,12 @@ fAuth.onAuthStateChanged(() => {
       components: { App },
       template: "<App/>"
     });
+  }
+});
+
+Vue.use(VueGoogleMaps, {
+  load: {
+    key: "AIzaSyDsz5hunIGHxoHyb3F4WECU_8zgcOFFc8E",
+    libraries: "places" // necessary for places input
   }
 });
