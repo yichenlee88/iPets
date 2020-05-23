@@ -49,7 +49,7 @@
             />
             <H2>張媽媽流浪動物之家</H2>
             <p style="text-align:left">
-              取名「再生保護協會」的初衷就是希望將這些流浪在街頭上，無論是飢餓瘦到剩皮包骨的、或是因為誤踩到捕獸夾而斷了一條腿到兩條腿的。
+              不管你相信不相信，只要我們願意付出，哪怕只有一點點，牠們會無條件用牠們一輩子的愛回報給我們。就從這一點點開始，讓愛延續，讓生命成長茁壯。
             </p>
             <button
               type="button"
@@ -118,12 +118,31 @@
           </div>
           <div class="modal-body">
             <div class="card border-0">
+              <img class="card-img-top" src="../assets/mama.jpg" />
               <div class="card-body">
-                <p>張媽媽流浪動物之家張媽媽流浪動物之家張媽媽流浪動物之家</p>
-                <img class="img-fluid" src="../assets/4.jpg" />
-                <p>
-                  張媽媽流浪動物之家張媽媽流浪動物之家張媽媽流浪動物之家張媽媽流浪動物之家張媽媽流浪動物之家
+                <p class="card-text" style="text-align:left">
+                  <strong>地址</strong>： 226新北市平溪區51之7號
+                  <br />
+                  <strong>連絡電話</strong>： 0936108187 <br />
+                  <strong>簡介</strong>:<br />
+                  取名「再生保護協會」的初衷就是希望將這些流浪在街頭上，無論是飢餓瘦到剩皮包骨的、或是因為誤踩到捕獸夾而斷了一條腿到兩條腿的、車禍撞傷導致癱瘓，還有整窩母帶子的浪浪們，只要還在我們能力範圍內，每一隻都會受到我們完善的保護與志工細心的呵護，並且在結紮過後，為牠們找尋第二個家，讓新家人能夠代替我們牽著牠繼續幸福的走下去。
                 </p>
+                <br />
+                <GmapMap
+                  :center="{ lat: 25.0325917, lng: 121.5624999 }"
+                  :zoom="15"
+                  map-type-id="terrain"
+                  style="  width: 100%;  height: 200px;"
+                >
+                  <GmapMarker
+                    :key="index"
+                    v-for="(m, index) in markers"
+                    :position="m.position"
+                    :clickable="true"
+                    :draggable="true"
+                    @click="center = m.position"
+                  />
+                </GmapMap>
               </div>
             </div>
           </div>
@@ -208,7 +227,45 @@
 export default {
   name: "Home",
   data() {
-    return {};
+    return {
+      // default to Montreal to keep it simple
+      // change this to whatever makes sense
+      center: { lat: 25.0325917, lng: 121.5624999 },
+      markers: [],
+      places: [],
+      currentPlace: null
+    };
+  },
+
+  mounted() {
+    this.geolocate();
+  },
+
+  methods: {
+    // receives a place object via the autocomplete component
+    setPlace(place) {
+      this.currentPlace = place;
+    },
+    addMarker() {
+      if (this.currentPlace) {
+        const marker = {
+          lat: this.currentPlace.geometry.location.lat(),
+          lng: this.currentPlace.geometry.location.lng()
+        };
+        this.markers.push({ position: marker });
+        this.places.push(this.currentPlace);
+        this.center = marker;
+        this.currentPlace = null;
+      }
+    },
+    geolocate: function() {
+      navigator.geolocation.getCurrentPosition(position => {
+        this.center = {
+          lat: position.coords.latitude,
+          lng: position.coords.longitude
+        };
+      });
+    }
   }
 };
 </script>
@@ -240,5 +297,14 @@ a {
 .marketing {
   margin-top: 20px;
   margin-bottom: 20px;
+}
+
+.card-text {
+  font-family: "Microsoft JhengHei", Helvetica, Arial, sans-serif;
+}
+
+.google-map {
+  width: 100%;
+  height: 200px;
 }
 </style>
