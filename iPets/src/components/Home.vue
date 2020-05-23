@@ -39,16 +39,16 @@
     </div>
     <!--領養機構資訊-->
     <div class="container marketing">
-      <div class="row">
+      <div class="row" style="margin-left: 5px;">
         <div class="col-12 col-sm-4">
-          <div class="img-thumbnail" style="margin-left: 15px; height: 550px;">
+          <div class="img-thumbnail" style="height: 550px;">
             <img
               class="rounded"
-              src="../assets/4.jpg"
+              src="../assets/mama.jpg"
               style="max-width: 100%"
             />
             <H2>張媽媽流浪動物之家</H2>
-            <p>
+            <p style="text-align:left">
               取名「再生保護協會」的初衷就是希望將這些流浪在街頭上，無論是飢餓瘦到剩皮包骨的、或是因為誤踩到捕獸夾而斷了一條腿到兩條腿的。
             </p>
             <button
@@ -56,7 +56,7 @@
               class="btn btn-info"
               data-toggle="modal"
               data-target="#myModal01"
-              style="position:absolute; bottom: 5px"
+              style="position: absolute; right: 20px; bottom: 5px;"
             >
               了解更多
             </button>
@@ -66,11 +66,11 @@
           <div class="img-thumbnail" style="height: 550px;">
             <img
               class="rounded"
-              src="../assets/4.jpg"
-              style="max-width: 100%;"
+              src="../assets/dogpark.jpg"
+              style="max-width: 100%"
             />
             <H2>徐文良動物保護協會</H2>
-            <p>
+            <p style="text-align:left">
               關於園區長期不斷的搶救收容所的死刑犬和救援在外生病和受傷的狗狗,目前已經有三千多個孩子
             </p>
             <button
@@ -78,7 +78,7 @@
               class="btn btn-info"
               data-toggle="modal"
               data-target="#myModal02"
-              style="position:absolute; bottom: 5px"
+              style="position: absolute; right: 20px; bottom: 5px;"
             >
               了解更多
             </button>
@@ -88,19 +88,19 @@
           <div class="img-thumbnail" style="height: 550px;">
             <img
               class="rounded"
-              src="../assets/4.jpg"
+              src="../assets/taipeicity.png"
               style="max-width: 100%;ASDF"
             />
             <H2>臺北市動物之家</H2>
-            <p>
+            <p style="text-align:left">
               臺北市動物之家，隸屬於臺北市動物保護處，位於台北市內湖區，負責台北市流浪動物及野生動物之收容、認領、認養、絕育、救傷醫療、定期篩檢及管理，動物收容教育推廣等事項
             </p>
             <button
               type="button"
-              class="btn btn-info"
+              class="btn btn-info float-right"
               data-toggle="modal"
               data-target="#myModal03"
-              style="position:absolute; bottom: 5px"
+              style="position: absolute; right: 20px; bottom: 5px;"
             >
               了解更多
             </button>
