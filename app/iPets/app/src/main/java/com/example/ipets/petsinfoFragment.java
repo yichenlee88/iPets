@@ -10,10 +10,12 @@ import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
+import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
@@ -36,9 +38,14 @@ import android.widget.ImageView;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -58,6 +65,9 @@ public class petsinfoFragment extends Fragment {
     private final static int CAMERA = 1;
     private final static int PHOTO = 2;
     private static final String FILE_PATH = "/sdcard/ipets/jpeg";
+    FirebaseAuth auth = FirebaseAuth.getInstance();
+    FirebaseUser currentUser = auth.getCurrentUser();
+    String userUID = currentUser.getUid();
     public petsinfoFragment() {
         // Required empty public constructor
 
@@ -108,23 +118,42 @@ public class petsinfoFragment extends Fragment {
         finish.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                petsinfo();
+                uploadimage();
             }
         });
     }
 
-    private void petsinfo() {
+    private void uploadimage() {
+        EditText edpetsname = getView().findViewById(R.id.petsname);
+        final String petsname = edpetsname.getText().toString();
+        FirebaseStorage storage = FirebaseStorage.getInstance("gs://ipets-app.appspot.com");
+        StorageReference mStorageRef = storage.getReference();
+        StorageReference mountainsRef = mStorageRef.child(userUID +'/'+ petsname);
+
+        Bitmap bitmap = ((BitmapDrawable) img.getDrawable()).getBitmap();
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+        byte[] data = baos.toByteArray();
+        UploadTask uploadTask = mountainsRef.putBytes(data);
+        //取得照片網址
+        String petsimage = String.valueOf(mountainsRef.getDownloadUrl());
+        petsinfo(petsimage);
+
+    }
+
+    private void petsinfo(String petsimage) {
         EditText edpetsname = getView().findViewById(R.id.petsname);
         final EditText edpetsbirth = getView().findViewById(R.id.petsbirth);
         final EditText edvariety = getView().findViewById(R.id.variety);
         final EditText edlikes = getView().findViewById(R.id.likes);
         final EditText ednotes = getView().findViewById(R.id.notes);
-        String petsname = edpetsname.getText().toString();
         Integer petsbirth = Integer.parseInt(edpetsbirth.getText().toString());
+        final String petsname = edpetsname.getText().toString();
         String petsvariety = edvariety.getText().toString();
         String petslikes = edlikes.getText().toString();
         String petsnotes = ednotes.getText().toString();
         String petsgender = null;
+
         RadioGroup sexselect = getView().findViewById(R.id.sexselect);
         switch(sexselect.getCheckedRadioButtonId()){
             case R.id.malepet: //case mRadioButton0.getId():
@@ -134,12 +163,11 @@ public class petsinfoFragment extends Fragment {
                 petsgender = "母的";
                 break;
         }
-        FirebaseAuth auth = FirebaseAuth.getInstance();
-        FirebaseUser currentUser = auth.getCurrentUser();
-        String userUID = currentUser.getUid();
+
         FirebaseFirestore db;
         db = FirebaseFirestore.getInstance();
         Map<String, Object> userInfo = new HashMap<>();
+        userInfo.put("Petsimage", petsimage);
         userInfo.put("Petsname", petsname);
         userInfo.put("Petsbirth", petsbirth);
         userInfo.put("Petsgender", petsgender);
