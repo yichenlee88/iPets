@@ -100,6 +100,7 @@
 
 <script>
 import { db } from "./db";
+import { updateUserProfile } from "./firebase/user";
 
 const fAuth = db.auth();
 
@@ -112,6 +113,8 @@ export default {
   },
   created() {
     if (fAuth.currentUser) {
+      var uid = fAuth.currentUser.uid;
+      updateUserProfile(this.$store, uid);
       this.isLogIn = true;
     }
   },
@@ -131,7 +134,6 @@ export default {
   size: 28px;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
   width: 100%;
   color: #2c3e50;
 }
