@@ -24,7 +24,7 @@ fAuth.onAuthStateChanged(() => {
 
 Vue.use(VueGoogleMaps, {
   load: {
-    key: "AIzaSyDsz5hunIGHxoHyb3F4WECU_8zgcOFFc8E",
+    key: "AIzaSyAuxtzj2J-9DBHV9vBjCaQ9uhR_zc6hqyU",
     libraries: "places" // necessary for places input
   }
 });
