@@ -9,6 +9,7 @@ import Register from "@/components/Register";
 import HomeLogin from "@/components/HomeLogin";
 import { db } from "../db";
 import DogScience from "@/components/DogScience";
+import DogScienceArticle from "@/components/dogScienceArticle";
 
 const fAuth = db.auth();
 
@@ -76,6 +77,14 @@ let router = new Router({
       path: "/dogScience",
       name: "DogScience",
       component: DogScience,
+      meta: {
+        requiresGuest: true
+      }
+    },
+    {
+      path: "/dogScienceArticle",
+      name: "DogScienceArticle",
+      component: DogScienceArticle,
       meta: {
         requiresGuest: true
       }
