@@ -88,9 +88,11 @@
       </div>
     </nav>
     <router-view />
-    <div class="row" style="background-color: #e3f2fd;">
-      <div class="col-12 text-center h-50">
-        <p>© 台北商業大學 資訊管理系 版權所有</p>
+    <div id="footer">
+      <div class="row">
+        <div class="col-12 text-center h-50">
+          <p>© 台北商業大學 資訊管理系 版權所有</p>
+        </div>
       </div>
     </div>
   </div>
@@ -125,11 +127,21 @@ export default {
 
 <style>
 #app {
-  font-family: "Avenir", Helvetica, Arial, sans-serif;
+  font-family: "Microsoft JhengHei", Helvetica, Arial, sans-serif;
+  size: 28px;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   width: 100%;
   color: #2c3e50;
+}
+
+#footer {
+  height: 50px;
+  box-sizing: border-box;
+  bottom: auto;
+  width: 100%;
+  background-color: #e3f2fd;
+  flex: 0 0 auto;
 }
 </style>
