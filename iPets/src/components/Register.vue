@@ -105,7 +105,7 @@ export default {
             .set({
               name: this.username,
               email: this.email,
-              password: this.password
+              photoURL: ""
             })
             .then(() => {
               this.$router.go({ path: this.$router.path });

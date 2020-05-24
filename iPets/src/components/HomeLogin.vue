@@ -1,178 +1,56 @@
 <template>
-  <div class="container">
-    <div class="row">
-      <div class="col-6">
-        <div class="list-group">
-          <h1>執行中</h1>
-          <div class="list-group-item">
-            <div class="row">
-              <div class="col-1" md-2>
-                <div class="round">
-                  <input type="checkbox" id="checkbox" />
-                  <label for="checkbox"></label>
-                </div>
-              </div>
-              <div class="col-9">
-                <h3 class="mb-0" style=" text-align: left;">洗澡</h3>
-              </div>
-              <div class="col-2" md-2>
-                <button
-                  type="button"
-                  class="btn"
-                  data-toggle="modal"
-                  data-target="#close"
-                >
-                  <i class="arrow right"></i>
-                </button>
-                <div
-                  class="modal fade"
-                  id="close"
-                  tabindex="-1"
-                  role="dialog"
-                  aria-hidden="true"
-                >
-                  <div
-                    class="modal-dialog modal-dialog-centered"
-                    role="document"
-                  >
-                    <div class="modal-content">
-                      <div class="modal-header">
-                        <h5 class="modal-title">
-                          編輯頁面
-                        </h5>
-                        <button
-                          type="button"
-                          class="close"
-                          data-dismiss="modal"
-                          aria-label="Close"
-                        >
-                          <span aria-hidden="true">&times;</span>
-                        </button>
-                      </div>
-                      <div class="modal-body">
-                        <div class="form-group row" style="margin-top: 15px">
-                          <label
-                            for="staticEmail"
-                            class="col-sm-3 col-form-label"
-                            >活動名稱</label
-                          >
-                          <div class="col-sm-9">
-                            <input
-                              type="text"
-                              class="form-control"
-                              id="activityTitle"
-                            />
-                          </div>
-                        </div>
-                        <div class="form-group row">
-                          <label
-                            for="startingTime"
-                            class="col-sm-3 col-form-label"
-                            >開始時間</label
-                          >
-                          <div class="col-sm-9">
-                            <date-picker
-                              id="startingTime"
-                              v-model="date"
-                              @dp-hide="doSomethingOnHide"
-                              @dp-change="doSomethingOnChange"
-                            ></date-picker>
-                          </div>
-                        </div>
-                        <div class="form-group row">
-                          <label
-                            for="endingTime"
-                            class="col-sm-3 col-form-label"
-                            >結束時間</label
-                          >
-                          <div class="col-sm-9">
-                            <date-picker
-                              id="endingTime"
-                              v-model="date"
-                              @dp-hide="doSomethingOnHide"
-                              @dp-change="doSomethingOnChange"
-                            ></date-picker>
-                          </div>
-                        </div>
-                        <div class="form-group row" style="margin-top: 15px">
-                          <label
-                            for="staticEmail"
-                            class="col-sm-3 col-form-label"
-                            >重複時間</label
-                          >
-                          <div class="col-sm-3">
-                            <input
-                              type="text"
-                              class="form-control"
-                              id="activityTitle"
-                            />
-                          </div>
-                          <form>
-                            <div class="form-group">
-                              <select
-                                id="diploma"
-                                name="diploma"
-                                class="form-control"
-                              >
-                                <option value="day" disabled>天</option
-                                ><option value="week">週</option
-                                ><option value="month" selected>個月 </option
-                                ><option value="year">年</option></select
-                              >
-                            </div>
-                          </form>
-                        </div>
-                      </div>
-                      <div class="modal-footer">
-                        <button
-                          type="button"
-                          class="btn btn-secondary"
-                          data-dismiss="modal"
-                        >
-                          關閉
-                        </button>
-                        <button type="button" class="btn btn-primary">
-                          儲存
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+  <b-container>
+    <!-- Start -- 新增寵物 -->
+    <b-card id="card-create-pet">
+      <b-card-header header-bg-variant="dark" header-text-variant="white">
+        <div>
+          <i class="fas fa-plus fa-2x mr-1"></i>
+          <span style="font-size: 28px;">新增毛小孩</span>
         </div>
-      </div>
-      <div class="col-6">
-        <div class="list-group">
-          <h1>即將到來</h1>
-          <div class="list-group-item">
-            <div class="row">
-              <div class="col-1" md-2>
-                <div class="round">
-                  <input type="checkbox" id="checkbox" />
-                  <label for="checkbox"></label>
-                </div>
-              </div>
-              <div class="col-9">
-                <h3 class="mb-0" style=" text-align: left;">洗澡</h3>
-              </div>
-              <div class="col-2" md-2>
-                <button
-                  type="button"
-                  class="btn"
-                  data-toggle="modal"
-                  data-target="#close"
-                >
-                  <i class="arrow right"></i>
-                </button>
-              </div>
-            </div>
+      </b-card-header>
+      <b-card-body>
+        <b-form class="px-3" @submit="onSubmit">
+          <b-form-group
+            id="group-pet-name"
+            label="名子"
+            label-for="input-pet-name"
+          >
+            <b-form-input
+              id="input-pet-name"
+              type="text"
+              v-model="form.name"
+            ></b-form-input>
+          </b-form-group>
+          <b-form-group
+            id="group-pet-breed"
+            label="品種"
+            label-for="select-pet-breed"
+          >
+            <b-form-select
+              id="select-pet-breed"
+              v-model="form.breed"
+              :options="breed_options"
+            ></b-form-select>
+          </b-form-group>
+          <b-form-group
+            id="group-pet-gender"
+            label="性別"
+            label-for="select-pet-gender"
+          >
+            <b-form-select
+              id="select-pet-gender"
+              v-model="form.gender"
+              :options="gender_options"
+            ></b-form-select>
+          </b-form-group>
+          <div class="d-flex flex-row-reverse">
+            <b-button type="submit" variant="dark">建立</b-button>
           </div>
-        </div>
-      </div>
-    </div>
-  </div>
+        </b-form>
+      </b-card-body>
+    </b-card>
+    <!-- End -- 新增寵物 -->
+  </b-container>
 </template>
 
 <script>
@@ -184,6 +62,8 @@ import datePicker from "vue-bootstrap-datetimepicker";
 
 // Import date picker css
 import "pc-bootstrap4-datetimepicker/build/css/bootstrap-datetimepicker.css";
+import { db } from "../db";
+const fStore = db.firestore();
 
 export default {
   data() {
@@ -193,11 +73,64 @@ export default {
       options: {
         format: "DD/MM/YYYY",
         useCurrent: false
+      },
+      breed_options: [
+        { value: null, text: "選擇品種", disabled: true },
+        { value: "柴犬", text: "柴犬" },
+        { value: "黃金獵犬", text: "黃金獵犬" }
+      ],
+      gender_options: [
+        { value: null, text: "選擇性別", disabled: true },
+        { value: true, text: "男孩" },
+        { value: false, text: "女孩" }
+      ],
+      form: {
+        name: null,
+        breed: null,
+        gender: null
       }
     };
   },
   components: {
     datePicker
+  },
+  methods: {
+    onSubmit(e) {
+      e.preventDefault();
+      var docRef = fStore.collection("pets").doc();
+      docRef
+        .set({
+          name: this.form.name,
+          breed: this.form.breed,
+          gender: this.form.gender,
+          master_uid: this.uid,
+          timestamp: new Date()
+        })
+        .then(() => {
+          // var infoRef = docRef.collection("info");
+          console.log("asdsad");
+          // var infoList = [
+          //   new Info("洗澡", 0, "day"),
+          //   new Info("除蟲", 2, "week"),
+          //   new Info("指甲", 1, "month")
+          // ];
+
+          // infoList.forEach(function(item) {
+          //   infoRef.doc(item.eventName).set({
+          //     next_time: item.getNext(),
+          //     period: item.period,
+          //     periodUnit: item.periodUnit,
+          //     done: false
+          //   });
+          // });
+          this.$router.go({ path: this.$router.path });
+        });
+    }
+  },
+  computed: {
+    uid() {
+      return this.$store.state.uid;
+    }
   }
 };
 </script>
@@ -266,5 +199,9 @@ export default {
 
 .round input[type="checkbox"]:checked + label:after {
   opacity: 1;
+}
+
+#card-create-pet > .card-body {
+  padding: 0%;
 }
 </style>
