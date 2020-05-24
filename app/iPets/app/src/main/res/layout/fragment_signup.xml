@@ -42,7 +42,7 @@
             android:id="@+id/imageView"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:contentDescription="@string/imageview_logo"
+            android:contentDescription="@string/imgview_logo"
             android:src="@drawable/app_logo_icon"
             app:layout_constraintBottom_toTopOf="@+id/guideline29"
             app:layout_constraintEnd_toStartOf="@+id/guideline28"

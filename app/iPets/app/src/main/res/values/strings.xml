@@ -15,11 +15,11 @@
     <string name="menu_analyze">analyze</string>
     <string name="menu_locate">locate</string>
     <string name="menu_setting">setting</string>
-    <string name="imageview_photo">photo</string>
-    <string name="imagebutton_gallery">gallery</string>
-    <string name="imagebutton_camera">camera</string>
+    <string name="imgview_photo">photo</string>
+    <string name="imgbutton_gallery">gallery</string>
+    <string name="imgbutton_camera">camera</string>
     <string name="title_activity_maps">Map</string>
-    <string name="imageview_logo">logo</string>
+    <string name="imgview_logo">logo</string>
     <string name="TextView_signup">註冊帳號</string>
     <string name="username_hint">用戶名稱</string>
     <string name="email_hint">電子郵件</string>
@@ -39,4 +39,21 @@
     <string name="RadioButton_gender3">不願透露</string>
     <string name="TextView_address">地址</string>
     <string name="address_hint">住家地址</string>
+    <string name="TextView_petsinfo">寵物基本資料</string>
+    <string name="imgbutton_album">album</string>
+    <string name="imgbutton_camera1">camera1</string>
+    <string name="TextView_petsname">寵物名稱</string>
+    <string name="petsname_hint">名字</string>
+    <string name="TextView_petssex">寵物性別</string>
+    <string name="RadioButton_sex1">公的</string>
+    <string name="RadioButton_sex2">母的</string>
+    <string name="TextView_petsbirth">生日</string>
+    <string name="petsbirth_hint">出生年月日</string>
+    <string name="TextView_species">寵物品種：</string>
+    <string name="variety_hint" />
+    <string name="TextView_like">喜好：</string>
+    <string name="likes_hint" />
+    <string name="TextView_remark">備註：</string>
+    <string name="notes_hint" />
+    <string name="button_finish">完成</string>
 </resources>
