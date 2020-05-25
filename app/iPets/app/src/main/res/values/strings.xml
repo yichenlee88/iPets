@@ -56,4 +56,25 @@
     <string name="TextView_remark">備註：</string>
     <string name="notes_hint" />
     <string name="button_finish">完成</string>
+    <string name="button_signout">登出</string>
+    <string name="TextView_sex">性別：</string>
+    <string name="TextView_Birth">生日：</string>
+    <string-array name="Spinner_name">
+        <item>奶凍捲</item>
+        <item>金碳</item>
+        <item>＋新增</item>
+    </string-array>
+    <string name="TextView_petsSex">？</string>
+    <string name="TextView_petsBirth">YYYY/MM/DD</string>
+    <string name="TextView_age">年齡：</string>
+    <string name="TextView_petsAge">？歲</string>
+    <string name="TextView_schedule">本日行程：</string>
+    <string name="TxetView_route">無/洗澡...？？？？</string>
+    <string name="img_shower" />
+    <string name="img_haircut" />
+    <string name="img_fleaIn" />
+    <string name="img_fleaOut" />
+    <string name="img_injection" />
+    <string name="img_teeth" />
+    <string name="img_blood" />
 </resources>
