@@ -52,6 +52,7 @@
           </ul>
         </div>
         <BUtton class="btn my-2 my-sm-0" v-if="isLogIn" @click="logout">
+          <i class="fas fa-sign-out-alt"></i>
           登出
         </BUtton>
         <!-- <ul class="navbar-nav mr-5 mt-2 mt-lg-0" v-if="isLogIn">

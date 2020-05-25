@@ -55,7 +55,7 @@
             android:id="@+id/album"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:backgroundTint="#64B5F6"
+            android:backgroundTint="#0071BC"
             android:contentDescription="@string/imgbutton_album"
             android:scaleType="fitCenter"
             android:src="@android:drawable/ic_menu_gallery"
@@ -68,7 +68,7 @@
             android:id="@+id/camera1"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:backgroundTint="#64B5F6"
+            android:backgroundTint="#0071BC"
             android:contentDescription="@string/imgbutton_camera1"
             android:scaleType="fitCenter"
             android:src="@android:drawable/ic_menu_camera"
@@ -164,7 +164,8 @@
             android:id="@+id/petsname"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:backgroundTint="#2196F3"
+            android:autofillHints=""
+            android:backgroundTint="#0071BC"
             android:ems="10"
             android:hint="@string/petsname_hint"
             android:inputType="textPersonName"
@@ -172,8 +173,7 @@
             app:layout_constraintBottom_toTopOf="@+id/guideline73"
             app:layout_constraintEnd_toStartOf="@+id/guideline69"
             app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="@+id/guideline68"
-            android:autofillHints="" />
+            app:layout_constraintStart_toStartOf="@+id/guideline68" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline73"
@@ -240,15 +240,15 @@
             android:id="@+id/petsbirth"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:backgroundTint="#2196F3"
+            android:autofillHints=""
+            android:backgroundTint="#0071BC"
             android:ems="10"
             android:hint="@string/petsbirth_hint"
             android:inputType="date"
             android:textSize="20sp"
             app:layout_constraintBottom_toTopOf="@+id/guideline72"
             app:layout_constraintEnd_toStartOf="@+id/guideline69"
-            app:layout_constraintStart_toStartOf="@+id/guideline68"
-            android:autofillHints="" />
+            app:layout_constraintStart_toStartOf="@+id/guideline68" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline72"
@@ -271,7 +271,7 @@
             android:id="@+id/variety"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:backgroundTint="#2196F3"
+            android:backgroundTint="#0071BC"
             android:ems="10"
             android:hint="@string/variety_hint"
             android:importantForAutofill="no"
@@ -302,15 +302,15 @@
             android:id="@+id/likes"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:backgroundTint="#2196F3"
+            android:autofillHints=""
+            android:backgroundTint="#0071BC"
             android:ems="10"
             android:hint="@string/likes_hint"
             android:inputType="textPersonName"
             app:layout_constraintBottom_toTopOf="@+id/guideline75"
             app:layout_constraintEnd_toStartOf="@+id/guideline69"
             app:layout_constraintStart_toEndOf="@+id/like"
-            app:layout_constraintTop_toTopOf="@+id/guideline74"
-            android:autofillHints="" />
+            app:layout_constraintTop_toTopOf="@+id/guideline74" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline75"
@@ -333,15 +333,15 @@
             android:id="@+id/notes"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:backgroundTint="#2196F3"
+            android:autofillHints=""
+            android:backgroundTint="#0071BC"
             android:ems="10"
             android:hint="@string/notes_hint"
             android:inputType="textPersonName"
             app:layout_constraintBottom_toTopOf="@+id/guideline76"
             app:layout_constraintEnd_toStartOf="@+id/guideline69"
             app:layout_constraintStart_toEndOf="@+id/remark"
-            app:layout_constraintTop_toTopOf="@+id/guideline75"
-            android:autofillHints="" />
+            app:layout_constraintTop_toTopOf="@+id/guideline75" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline76"
@@ -354,7 +354,7 @@
             android:id="@+id/finish"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:backgroundTint="#2196F3"
+            android:backgroundTint="#0071BC"
             android:text="@string/button_finish"
             android:textColor="#FFFFFF"
             android:textSize="20sp"
