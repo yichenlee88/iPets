@@ -1,7 +1,7 @@
 <template>
   <b-container>
     <!-- Start -- 新增寵物 -->
-    <b-card id="card-create-pet">
+    <b-card id="card-create-pet" v-if="!show">
       <b-card-header header-bg-variant="dark" header-text-variant="white">
         <div>
           <i class="fas fa-plus fa-2x mr-1"></i>
@@ -50,6 +50,91 @@
       </b-card-body>
     </b-card>
     <!-- End -- 新增寵物 -->
+
+    <!-- Start -- 寵物簡介 -->
+    <b-card
+      v-if="show"
+      v-bind:img-src="pet.image"
+      class="mb-3"
+      img-left
+      img-width="250"
+    >
+      <b-card-body :title="pet.name">
+        <b-card-text v-if="pet.gender">
+          沒看過帥哥膩
+        </b-card-text>
+        <b-card-text v-else>
+          人家是女森
+        </b-card-text>
+        <b-card-text>
+          {{ pet.breed }}
+        </b-card-text>
+      </b-card-body>
+    </b-card>
+    <!-- End -- 寵物簡介 -->
+
+    <!-- Start -- 進行中 -->
+    <b-list-group v-if="show">
+      <h1>進行中</h1>
+      <b-list-group-item
+        v-for="info in pet_info"
+        :key="info.event_name"
+        class="d-flex align-items-center"
+      >
+        <input class="mr-3" type="checkbox" />
+        <div class="overview mr-auto">
+          <span class="title mb-0">{{ info.event_name }}</span>
+          <div>
+            <b-badge
+              v-if="badge_today(info.next_time)"
+              variant="primary"
+              class="mr-1"
+              >今日</b-badge
+            >
+            <b-badge
+              v-if="badge_overdue(info.next_time)"
+              variant="danger"
+              class="mr-1"
+              >逾期</b-badge
+            >
+            <i class="far fa-calendar-alt"></i>
+            <span class="date mb-0">{{
+              convert_timestamp(info.next_time)
+            }}</span>
+          </div>
+        </div>
+        <button
+          type="button"
+          class="close"
+          @click="$bvModal.show(`${info.event_name}`)"
+        >
+          <!-- <i class="arrow right"></i> -->
+          <i class="fas fa-cog"></i>
+        </button>
+        <b-modal
+          :id="`${info.event_name}`"
+          centered
+          title="編輯頁面"
+          ok-title="保存"
+          cancel-title="取消"
+          @ok="handleOk($event, info.event_name)"
+        >
+          <template v-slot:modal-chancel>取消</template>
+          <b-form>
+            <b-form-group id="group-frequence" label="重複頻率" label-cols="3">
+              <b-form-input v-model="info.period"></b-form-input>
+              <b-form-select
+                v-model="info.periodUnit"
+                :options="periodUnitOptions"
+                value-field="item"
+                text-field="name"
+              ></b-form-select>
+            </b-form-group>
+          </b-form>
+        </b-modal>
+      </b-list-group-item>
+    </b-list-group>
+    <!-- End -- 進行中 -->
   </b-container>
 </template>
 
@@ -62,6 +147,7 @@ import datePicker from "vue-bootstrap-datetimepicker";
 
 // Import date picker css
 import "pc-bootstrap4-datetimepicker/build/css/bootstrap-datetimepicker.css";
+import { Info } from "../firebase/pet";
 import { db } from "../db";
 const fStore = db.firestore();
 
@@ -135,8 +221,15 @@ export default {
       form: {
         name: null,
         breed: null,
-        gender: null
-      }
+        gender: null,
+        image:
+          "http://icons.iconarchive.com/icons/google/noto-emoji-animals-nature/1024/22214-dog-face-icon.png"
+      },
+      periodUnitOptions: [
+        { item: "day", name: "天" },
+        { item: "week", name: "週" },
+        { item: "month", name: "個月" }
+      ]
     };
   },
   components: {
@@ -152,32 +245,86 @@ export default {
           breed: this.form.breed,
           gender: this.form.gender,
           master_uid: this.uid,
+          image: this.form.image,
           timestamp: new Date()
         })
         .then(() => {
-          // var infoRef = docRef.collection("info");
-          console.log("asdsad");
-          // var infoList = [
-          //   new Info("洗澡", 0, "day"),
-          //   new Info("除蟲", 2, "week"),
-          //   new Info("指甲", 1, "month")
-          // ];
+          var infoRef = docRef.collection("info");
+          var infoList = [
+            new Info("洗澡", 0, "day"),
+            new Info("除蟲", 2, "week"),
+            new Info("指甲", 1, "month")
+          ];
 
-          // infoList.forEach(function(item) {
-          //   infoRef.doc(item.eventName).set({
-          //     next_time: item.getNext(),
-          //     period: item.period,
-          //     periodUnit: item.periodUnit,
-          //     done: false
-          //   });
-          // });
+          infoList.forEach(function(item) {
+            infoRef.doc(item.eventName).set({
+              next_time: item.getNext(),
+              period: item.period,
+              periodUnit: item.periodUnit,
+              done: false
+            });
+          });
           this.$router.go({ path: this.$router.path });
         });
+    },
+    convert_timestamp(unixTimestamp) {
+      var date = unixTimestamp.toDate();
+      var year = date.getFullYear();
+      var month = date.getMonth() + 1;
+      var day = date.getDate();
+      if (month < 10) month = "0" + month;
+      if (day < 10) day = "0" + day;
+      var formattedTime = [year, month, day].join("-");
+      return formattedTime;
+    },
+    badge_today(unixTimestamp) {
+      var date = unixTimestamp.toDate();
+      var today = new Date();
+      if (date.toDateString() === today.toDateString()) {
+        return true;
+      } else {
+        return false;
+      }
+    },
+    badge_overdue(unixTimestamp) {
+      var date = unixTimestamp.toDate();
+      var today = new Date();
+      date = new Date(date.toDateString());
+      today = new Date(today.toDateString());
+      if (today > date) {
+        return true;
+      } else {
+        return false;
+      }
+    },
+    handleOk(bvModalEvt, eventName) {
+      bvModalEvt.preventDefault();
+      // var bathInfo = new Info(
+      //   eventName,
+      //   this.period_form.period,
+      //   this.period_form.selected
+      // );
     }
   },
   computed: {
     uid() {
       return this.$store.state.uid;
+    },
+    pet() {
+      return this.$store.state.pet;
+    },
+    pet_doc_id() {
+      return this.$store.state.pet_doc_id;
+    },
+    pet_info() {
+      return this.$store.state.pet_info;
+    },
+    show() {
+      if (this.$store.state.pet === null) {
+        return false;
+      } else {
+        return true;
+      }
     }
   }
 };
@@ -190,63 +337,12 @@ export default {
   min-height: 600px;
 }
 
-.arrow {
-  border: solid black;
-  border-width: 0 3px 3px 0;
-  display: inline-block;
-  padding: 3px;
+.overview .title {
+  font-size: 24px;
 }
 
-.right {
-  transform: rotate(-45deg);
-  -webkit-transform: rotate(-45deg);
-}
-
-.round {
-  position: relative;
-}
-
-.round label {
-  background-color: #fff;
-  border: 1px solid #ccc;
-  border-radius: 50%;
-  cursor: pointer;
-  height: 28px;
-  left: 0;
-  position: absolute;
-  top: 5px;
-  width: 28px;
-}
-
-.round h3 {
-  margin-right: auto;
-}
-
-.round label:after {
-  border: 2px solid #fff;
-  border-top: none;
-  border-right: none;
-  content: "";
-  height: 6px;
-  left: 7px;
-  opacity: 0;
-  position: absolute;
-  top: 8px;
-  transform: rotate(-45deg);
-  width: 12px;
-}
-
-.round input[type="checkbox"] {
-  visibility: hidden;
-}
-
-.round input[type="checkbox"]:checked + label {
-  background-color: #66bb6a;
-  border-color: #66bb6a;
-}
-
-.round input[type="checkbox"]:checked + label:after {
-  opacity: 1;
+.overview .date {
+  color: gray;
 }
 
 #card-create-pet > .card-body {

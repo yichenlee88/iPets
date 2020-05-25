@@ -102,6 +102,7 @@
 <script>
 import { db } from "./db";
 import { updateUserProfile } from "./firebase/user";
+import { updatePetInfo } from "./firebase/pet";
 
 const fAuth = db.auth();
 
@@ -116,6 +117,7 @@ export default {
     if (fAuth.currentUser) {
       var uid = fAuth.currentUser.uid;
       updateUserProfile(this.$store, uid);
+      updatePetInfo(this.$store, uid);
       this.isLogIn = true;
     }
   },
