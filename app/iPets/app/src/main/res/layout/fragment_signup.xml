@@ -39,7 +39,7 @@
             app:layout_constraintGuide_percent="0.20" />
 
         <ImageView
-            android:id="@+id/imageView"
+            android:id="@+id/logo"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:contentDescription="@string/imgview_logo"
@@ -88,7 +88,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:autofillHints=""
-            android:backgroundTint="#2196F3"
+            android:backgroundTint="#0071BC"
             android:ems="10"
             android:hint="@string/username_hint"
             android:inputType="textPersonName"
@@ -110,7 +110,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:autofillHints=""
-            android:backgroundTint="#2196F3"
+            android:backgroundTint="#0071BC"
             android:ems="10"
             android:hint="@string/email_hint"
             android:inputType="textEmailAddress"
@@ -139,7 +139,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:autofillHints=""
-            android:backgroundTint="#2196F3"
+            android:backgroundTint="#0071BC"
             android:ems="10"
             android:hint="@string/password_hint"
             android:inputType="textPassword"
@@ -154,7 +154,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:autofillHints=""
-            android:backgroundTint="#2196F3"
+            android:backgroundTint="#0071BC"
             android:ems="10"
             android:hint="@string/confirmpassword_hint"
             android:inputType="textPassword"
@@ -182,7 +182,7 @@
             android:id="@+id/next1"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:backgroundTint="#2196F3"
+            android:backgroundTint="#0071BC"
             android:gravity="center_horizontal|center_vertical"
             android:text="@string/button_next"
             android:textColor="#FFFFFF"
@@ -234,7 +234,7 @@
             app:layout_constraintTop_toTopOf="@+id/guideline37" />
 
         <TextView
-            android:id="@+id/textView2"
+            android:id="@+id/textView_or"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/TextView_or"
