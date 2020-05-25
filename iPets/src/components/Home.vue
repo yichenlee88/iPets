@@ -1,7 +1,7 @@
 <template>
   <div class="container index">
     <!--輪播圖-->
-    <div id="myCarousel" class="carousel slide" data-ride="carousel">
+    <div id="myCarousel" class="carousel slide h-100" data-ride="carousel">
       <!--連結導引項目-->
       <ul class="carousel-indicators">
         <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
@@ -11,21 +11,21 @@
       <!--圖片顯示區域-->
       <div class="carousel-inner">
         <div class="carousel-item active">
-          <img
-            style="padding-left: 20px; width: 1500px; height: 900px;"
-            src="../assets/1.jpg"
+          <img class="d-block w-100 h-100"
+            style="padding-left: 20px;"
+            src="../assets/carousel-01.jpg"
           />
         </div>
         <div class="carousel-item">
-          <img
-            style="padding-left: 20px; width: 1500px; height: 900px;"
-            src="../assets/2.jpg"
+          <img class="d-block w-100 h-100"
+            style="padding-left: 20px;"
+            src="../assets/carousel-02.jpg"
           />
         </div>
         <div class="carousel-item">
-          <img
-            style="padding-left: 20px; width: 1500px; height: 900px;"
-            src="../assets/3.jpg"
+          <img class="d-block w-100 h-100"
+            style="padding-left: 20px;"
+            src="../assets/carousel-03.jpg"
           />
         </div>
       </div>
