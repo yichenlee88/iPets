@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <img src="../assets/logo_banner.png" class="banner_png" />
+    <img src="../assets/logo_banner.png" class="center" />
     <div class="card">
       <div class="card-header" style="background-color: #e3f2fd;">註冊</div>
       <div class="card-body">
@@ -46,7 +46,7 @@
 
           <button
             type="submit"
-            class="w-25 btn btn-primary"
+            class="w-25 btn btn-primary center"
             @click="auth_email"
           >
             註冊
@@ -183,5 +183,19 @@ input:hover,
 .google {
   background-color: #dd4b39;
   color: white;
+}
+
+.center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 80%;
+}
+
+.card-header {
+  background-color: #e3f2fd;
+  font-size: 24px;
+  font-family: "Microsoft JhengHei", Helvetica, Arial, sans-serif;
+  text-align: center;
 }
 </style>
