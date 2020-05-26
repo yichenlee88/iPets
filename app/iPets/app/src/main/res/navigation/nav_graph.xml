@@ -40,6 +40,9 @@
         <action
             android:id="@+id/action_homeFragment_to_mapsActivity"
             app:destination="@id/mapsActivity" />
+        <action
+            android:id="@+id/action_homeFragment_to_loginFragment2"
+            app:destination="@id/loginFragment" />
     </fragment>
     <fragment
         android:id="@+id/forgotFragment"
@@ -101,6 +104,9 @@
         <action
             android:id="@+id/action_petsinfoFragment_to_userinfoFragment"
             app:destination="@id/userinfoFragment" />
+        <action
+            android:id="@+id/action_petsinfoFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
     </fragment>
     <activity
         android:id="@+id/homeActivity"
