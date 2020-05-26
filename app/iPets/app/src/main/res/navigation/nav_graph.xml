@@ -37,6 +37,9 @@
         <action
             android:id="@+id/action_homeFragment_to_mapsActivity"
             app:destination="@id/mapsActivity" />
+        <action
+            android:id="@+id/action_homeFragment_to_loginFragment2"
+            app:destination="@id/loginFragment" />
     </fragment>
     <fragment
         android:id="@+id/forgotFragment"

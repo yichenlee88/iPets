@@ -1,6 +1,8 @@
 package com.example.ipets;
 
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -18,6 +20,7 @@ import android.widget.Button;
 
 import com.google.android.material.bottomnavigation.BottomNavigationMenu;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.firebase.auth.FirebaseAuth;
 
 
 /**
@@ -66,6 +69,24 @@ public class homeFragment extends Fragment {
             public void onClick(View v) {
                 NavController controller = Navigation.findNavController(v);
                 controller.navigate(R.id.action_homeFragment_to_mapsActivity);
+            }
+        });
+        Button signout = getView().findViewById(R.id.signout);
+        signout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FirebaseAuth.getInstance().signOut();
+                AlertDialog.Builder signoutcheck = new AlertDialog.Builder(getActivity());
+                signoutcheck.setMessage("確認登出?");
+                signoutcheck.setNegativeButton("登出", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface arg0, int arg1) {
+                        FirebaseAuth.getInstance().signOut();
+                        NavController controller = Navigation.findNavController(getView());
+                        controller.navigate(R.id.action_homeFragment_to_loginFragment2);
+                    }
+                });
+                signoutcheck.show();
             }
         });
 
