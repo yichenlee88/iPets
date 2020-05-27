@@ -52,6 +52,7 @@
           </ul>
         </div>
         <BUtton class="btn my-2 my-sm-0" v-if="isLogIn" @click="logout">
+          <i class="fas fa-sign-out-alt"></i>
           登出
         </BUtton>
         <!-- <ul class="navbar-nav mr-5 mt-2 mt-lg-0" v-if="isLogIn">
@@ -101,6 +102,7 @@
 <script>
 import { db } from "./db";
 import { updateUserProfile } from "./firebase/user";
+import { updatePetInfo } from "./firebase/pet";
 
 const fAuth = db.auth();
 
@@ -115,6 +117,7 @@ export default {
     if (fAuth.currentUser) {
       var uid = fAuth.currentUser.uid;
       updateUserProfile(this.$store, uid);
+      updatePetInfo(this.$store, uid);
       this.isLogIn = true;
     }
   },
