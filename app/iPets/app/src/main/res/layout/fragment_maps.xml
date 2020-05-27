@@ -16,7 +16,7 @@
             android:layout_height="785dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.0" />
@@ -24,79 +24,73 @@
         <Button
             android:id="@+id/PetSuppliesStore"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:backgroundTint="#225E79"
+            android:layout_height="40dp"
+            android:background="@drawable/button_oval"
+            android:backgroundTint="#0071BC"
             android:onClick="PetSuppliesStore"
-            android:text="寵物用品店"
+            android:text="@string/button_PetSuppliesStore"
             android:textColor="#FFFFFF"
             app:layout_constraintBottom_toTopOf="@+id/guideline6"
             app:layout_constraintEnd_toStartOf="@+id/guideline7"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.877" />
+            app:layout_constraintStart_toStartOf="@+id/guideline82"
+            app:layout_constraintTop_toTopOf="@+id/guideline5" />
 
         <Button
             android:id="@+id/PetGroomingShop"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:backgroundTint="#225E79"
+            android:layout_height="40dp"
+            android:background="@drawable/button_oval"
+            android:backgroundTint="#0071BC"
             android:onClick="PetGroomingShop"
-            android:text="寵物美容店"
+            android:text="@string/button_PetGroomingShop"
             android:textColor="#FFFFFF"
             app:layout_constraintBottom_toTopOf="@+id/guideline6"
             app:layout_constraintEnd_toStartOf="@+id/guideline11"
-            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="@+id/guideline7"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.877" />
-
-        <Button
-            android:id="@+id/PetHospital"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="16dp"
-            android:backgroundTint="#225E79"
-            android:onClick="PetHospital"
-            android:text="寵物醫院"
-            android:textColor="#FFFFFF"
-            app:layout_constraintBottom_toTopOf="@+id/guideline6"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="1.0"
-            app:layout_constraintStart_toStartOf="@+id/guideline15"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.871" />
+            app:layout_constraintTop_toTopOf="@+id/guideline5" />
 
         <Button
             android:id="@+id/PetHotel"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:backgroundTint="#225E79"
+            android:layout_height="40dp"
+            android:background="@drawable/button_oval"
+            android:backgroundTint="#0071BC"
             android:onClick="PetHotel"
-            android:text="寵物旅館"
+            android:text="@string/button_PetHotel"
             android:textColor="#FFFFFF"
             app:layout_constraintBottom_toTopOf="@+id/guideline6"
-            app:layout_constraintEnd_toStartOf="@+id/PetHospital"
-            app:layout_constraintHorizontal_bias="0.437"
-            app:layout_constraintStart_toEndOf="@+id/PetGroomingShop"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.871" />
+            app:layout_constraintEnd_toStartOf="@+id/guideline15"
+            app:layout_constraintStart_toStartOf="@+id/guideline11"
+            app:layout_constraintTop_toTopOf="@+id/guideline5" />
+
+        <Button
+            android:id="@+id/PetHospital"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:background="@drawable/button_oval"
+            android:backgroundTint="#0071BC"
+            android:onClick="PetHospital"
+            android:text="@string/button_PetHospital"
+            android:textColor="#FFFFFF"
+            app:layout_constraintBottom_toTopOf="@+id/guideline6"
+            app:layout_constraintEnd_toStartOf="@+id/guideline84"
+            app:layout_constraintStart_toStartOf="@+id/guideline15"
+            app:layout_constraintTop_toTopOf="@+id/guideline5" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline6"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.2" />
+            app:layout_constraintGuide_percent="0.17" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline7"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:orientation="vertical"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintGuide_begin="118dp"
+            app:layout_constraintGuide_percent="0.265"
             app:layout_constraintStart_toStartOf="parent" />
 
         <androidx.constraintlayout.widget.Guideline
@@ -105,7 +99,7 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintGuide_begin="230dp"
+            app:layout_constraintGuide_percent="0.5"
             app:layout_constraintStart_toStartOf="parent" />
 
         <androidx.constraintlayout.widget.Guideline
@@ -114,78 +108,71 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintGuide_begin="348dp"
+            app:layout_constraintGuide_percent="0.735"
             app:layout_constraintStart_toStartOf="parent" />
 
-        <RelativeLayout
-            android:id="@+id/relLayout1"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:background="@drawable/white_border"
-            android:elevation="10dp"
-            android:layout_marginRight="10dp"
-            android:layout_marginLeft="10dp"
+
+        <ImageView
+            android:id="@+id/ic_magnify"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:contentDescription="@string/button_magnify"
+            android:src="@drawable/ic_magnify"
             app:layout_constraintBottom_toTopOf="@+id/guideline5"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:ignore="MissingConstraints"
-            tools:layout_editor_absoluteX="10dp">
+            app:layout_constraintEnd_toStartOf="@+id/guideline92"
+            app:layout_constraintStart_toStartOf="@+id/guideline82"
+            app:layout_constraintTop_toTopOf="parent" />
 
-            <ImageView
-                android:id="@+id/ic_magnify"
-                android:layout_width="15dp"
-                android:layout_height="15dp"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="10dp"
-                android:layout_marginBottom="17dp"
-                android:src="@drawable/ic_magnify" />
-
-            <EditText
-                android:id="@+id/input_search"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginLeft="8dp"
-                android:layout_toRightOf="@id/ic_magnify"
-                android:hint="Enter Address,City or Zip Code"
-                android:imeOptions="actionSearch"
-                android:singleLine="true"
-                android:textColor="#000"
-                android:textSize="15sp" />
-
-            <Button
-                android:id="@+id/search_button"
-                android:layout_width="91dp"
-                android:layout_height="match_parent"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentTop="true"
-                android:layout_alignParentEnd="true"
-                android:layout_alignParentBottom="true"
-                android:layout_marginStart="301dp"
-                android:layout_marginTop="0dp"
-                android:layout_marginEnd="0dp"
-                android:layout_marginBottom="0dp"
-                android:text="搜尋" />
+        <EditText
+            android:id="@+id/input_search"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:autofillHints=""
+            android:hint="@string/hint_search"
+            android:imeOptions="actionSearch"
+            android:inputType="textPostalAddress"
+            android:singleLine="true"
+            android:textColor="#000"
+            android:textSize="15sp"
+            app:layout_constraintBottom_toTopOf="@+id/guideline5"
+            app:layout_constraintEnd_toStartOf="@+id/guideline93"
+            app:layout_constraintStart_toStartOf="@+id/guideline92"
+            app:layout_constraintTop_toTopOf="parent" />
 
 
-        </RelativeLayout>
+        <Button
+            android:id="@+id/search_button"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:backgroundTint="#FFFFFF"
+            android:text="@string/button_search"
+            app:layout_constraintBottom_toTopOf="@+id/guideline5"
+            app:layout_constraintEnd_toStartOf="@+id/guideline84"
+            app:layout_constraintStart_toStartOf="@+id/guideline93"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline5"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            app:layout_constraintGuide_begin="73dp" />
+            app:layout_constraintGuide_percent="0.08" />
 
         <ImageView
             android:id="@+id/ic_gps"
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:layout_below="@id/relLayout1"
-            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:contentDescription="@string/img_gps"
             android:scaleType="centerCrop"
             android:src="@drawable/ic_gps"
             app:layout_constraintBottom_toTopOf="@+id/guideline9"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="@+id/guideline15"
+            app:layout_constraintEnd_toStartOf="@+id/guideline84"
             app:layout_constraintTop_toTopOf="@+id/guideline6" />
 
         <androidx.constraintlayout.widget.Guideline
@@ -193,7 +180,35 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            app:layout_constraintGuide_begin="207dp" />
+            app:layout_constraintGuide_percent="0.25" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline82"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.03" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline84"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.97" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline92"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.1" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline93"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.8" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
