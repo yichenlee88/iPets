@@ -111,7 +111,7 @@ public class loginFragment extends Fragment {
                     builder.show();
                 }else{
                     NavController controller = Navigation.findNavController(v);
-                    controller.navigate(R.id.action_loginFragment_to_homeFragment);
+                    controller.navigate(R.id.action_loginFragment_to_homeActivity);
                 }
             }
         });
