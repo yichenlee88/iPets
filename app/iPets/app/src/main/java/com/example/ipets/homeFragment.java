@@ -61,36 +61,7 @@ public class homeFragment extends Fragment {
         return inflater.inflate(R.layout.fragment_home, container, false);
     }
 
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-        Button mapbutton = getView().findViewById(R.id.mapbutton);
-        mapbutton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                NavController controller = Navigation.findNavController(v);
-                controller.navigate(R.id.action_homeFragment_to_mapsActivity);
-            }
-        });
-        Button signout = getView().findViewById(R.id.signout);
-        signout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                FirebaseAuth.getInstance().signOut();
-                AlertDialog.Builder signoutcheck = new AlertDialog.Builder(getActivity());
-                signoutcheck.setMessage("確認登出?");
-                signoutcheck.setNegativeButton("登出", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface arg0, int arg1) {
-                        FirebaseAuth.getInstance().signOut();
-                        NavController controller = Navigation.findNavController(getView());
-                        controller.navigate(R.id.action_homeFragment_to_loginFragment2);
-                    }
-                });
-                signoutcheck.show();
-            }
-        });
 
-    }
 
 
 }
