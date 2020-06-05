@@ -50,11 +50,36 @@
               <a class="nav-link" href="#/" v-if="isLogIn">設定</a>
             </li>
           </ul>
+
+          <form class="form-inline my-2 my-lg-0">
+            <ul class="navbar-nav my-2 my-sm-0" v-if="!isLogIn">
+              <li class="nav-item">
+                <a class="nav-link" href="#/login">
+                  <i class="fas fa-sign-in-alt" style="size:12px"></i>登入
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#/register" v-if="!isLogIn">
+                  <i class="far fa-user" style="size:12px"></i>註冊
+                </a>
+              </li>
+            </ul>
+            <BUtton class="btn my-2 my-sm-0" v-if="isLogIn" @click="logout">
+              <i class="fas fa-sign-out-alt"></i>
+              登出
+            </BUtton>
+            <input
+              class="form-control mr-sm-2"
+              type="search"
+              placeholder="Search"
+              aria-label="Search"
+            />
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">
+              Search
+            </button>
+          </form>
         </div>
-        <BUtton class="btn my-2 my-sm-0" v-if="isLogIn" @click="logout">
-          <i class="fas fa-sign-out-alt"></i>
-          登出
-        </BUtton>
+
         <!-- <ul class="navbar-nav mr-5 mt-2 mt-lg-0" v-if="isLogIn">
           <li class="nav-item">
             <a class="nav-link" @click="logout">
@@ -62,30 +87,6 @@
             </a>
           </li>
         </ul> -->
-
-        <form class="form-inline my-2 my-lg-0">
-          <ul class="navbar-nav my-2 my-sm-0" v-if="!isLogIn">
-            <li class="nav-item">
-              <a class="nav-link" href="#/login">
-                <i class="fas fa-sign-in-alt" style="size:12px"></i>登入
-              </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#/register">
-                <i class="far fa-user" style="size:12px"></i>註冊
-              </a>
-            </li>
-          </ul>
-          <input
-            class="form-control mr-sm-2"
-            type="search"
-            placeholder="Search"
-            aria-label="Search"
-          />
-          <button class="btn btn-outline-success my-2 my-sm-0" type="submit">
-            Search
-          </button>
-        </form>
       </div>
     </nav>
     <router-view />
