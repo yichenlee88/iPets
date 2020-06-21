@@ -2,6 +2,7 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_host_fragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".homeFragment">
@@ -9,18 +10,6 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-
-        <com.google.android.material.bottomnavigation.BottomNavigationView
-            android:id="@+id/nav_bottom"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:itemIconSize="32dp"
-            app:itemIconTint="@color/nav_color"
-            app:itemTextColor="@color/nav_color"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:menu="@menu/nav_menu" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline11"
@@ -43,14 +32,6 @@
             android:orientation="vertical"
             app:layout_constraintGuide_percent="0.05" />
 
-        <Button
-            android:id="@+id/mapbutton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Map"
-            app:layout_constraintBottom_toTopOf="@+id/nav_bottom"
-            app:layout_constraintEnd_toStartOf="@+id/guideline80" />
-
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
             android:layout_width="0dp"
@@ -65,6 +46,7 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.0" />
 
+        <!--
         <Button
             android:id="@+id/signout"
             android:layout_width="wrap_content"
@@ -79,6 +61,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.0" />
+        -->
 
         <ImageView
             android:id="@+id/logo"
@@ -238,7 +221,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginVertical="2dp"
-            android:text="@string/TxetView_route"
+            android:text="@string/TextView_route"
             android:textSize="18sp"
             app:layout_constraintStart_toEndOf="@+id/text_schedule"
             app:layout_constraintTop_toBottomOf="@+id/text_petsAge" />
@@ -282,10 +265,10 @@
         <ProgressBar
             android:id="@+id/showerBar"
             style="?android:attr/progressBarStyleHorizontal"
-            android:progress="80"
-            android:progressDrawable="@drawable/circle"
             android:layout_width="96dp"
             android:layout_height="96dp"
+            android:progress="80"
+            android:progressDrawable="@drawable/circle"
             app:layout_constraintBottom_toTopOf="@+id/guideline11"
             app:layout_constraintEnd_toStartOf="@+id/guideline77"
             app:layout_constraintStart_toStartOf="@+id/guideline16"
@@ -456,7 +439,6 @@
             app:layout_constraintEnd_toStartOf="@+id/guideline87"
             app:layout_constraintStart_toStartOf="@+id/guideline77"
             app:layout_constraintTop_toTopOf="@+id/guideline90" />
-
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

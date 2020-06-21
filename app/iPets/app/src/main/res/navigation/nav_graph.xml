@@ -12,13 +12,16 @@
         tools:layout="@layout/fragment_login" >
         <action
             android:id="@+id/action_loginFragment_to_homeFragment"
-            app:destination="@id/homeFragment" />
+            app:destination="@+id/homeFragment" />
         <action
             android:id="@+id/action_loginFragment_to_signupFragment"
             app:destination="@id/signupFragment" />
         <action
             android:id="@+id/action_loginFragment_to_forgotFragment"
             app:destination="@id/forgotFragment" />
+        <action
+            android:id="@+id/action_loginFragment_to_homeActivity"
+            app:destination="@id/homeActivity" />
     </fragment>
     <fragment
         android:id="@+id/homeFragment"
@@ -32,11 +35,11 @@
             android:id="@+id/action_homeFragment_to_analyzeFragment"
             app:destination="@id/analyzeFragment" />
         <action
-            android:id="@+id/action_homeFragment_to_mapsFragment"
-            app:destination="@id/mapsFragment" />
-        <action
             android:id="@+id/action_homeFragment_to_mapsActivity"
             app:destination="@id/mapsActivity" />
+        <action
+            android:id="@+id/action_homeFragment_to_loginFragment2"
+            app:destination="@id/loginFragment" />
     </fragment>
     <fragment
         android:id="@+id/forgotFragment"
@@ -68,11 +71,6 @@
             android:id="@+id/action_analyzeFragment_to_homeFragment"
             app:destination="@id/homeFragment" />
     </fragment>
-    <fragment
-        android:id="@+id/mapsFragment"
-        android:name="com.example.ipets.MapsFragment"
-        android:label="fragment_maps"
-        tools:layout="@layout/fragment_maps" />
     <activity
         android:id="@+id/mapsActivity"
         android:name="com.example.ipets.MapsActivity"
@@ -98,5 +96,13 @@
         <action
             android:id="@+id/action_petsinfoFragment_to_userinfoFragment"
             app:destination="@id/userinfoFragment" />
+        <action
+            android:id="@+id/action_petsinfoFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
     </fragment>
+    <activity
+        android:id="@+id/homeActivity"
+        android:name="com.example.ipets.HomeActivity"
+        android:label="activity_home"
+        tools:layout="@layout/activity_home" />
 </navigation>
