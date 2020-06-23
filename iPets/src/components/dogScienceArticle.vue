@@ -11,10 +11,10 @@
             {{item.content[1]}}<br>
             {{item.content[2]}}
           </p>
-          <span class="content-title1">•興奮發抖</span>
+          <span class="content-title1">{{item.content1[0]}}</span>
           <p class="content">
-            狗狗非常開心興奮的時候，跟人類一樣會開心顫抖。
-            <br>這種發抖是安全的，飼主不需要太擔心喔！
+            {{item.content1[1]}}
+            <br>{{item.content1[2]}}
           </p>
           <img
             class="rounded"
