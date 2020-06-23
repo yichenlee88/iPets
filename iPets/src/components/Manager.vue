@@ -2,12 +2,12 @@
   <div id="manager">
     <div id="content">
       <b-row class="justify-content-md-center" style="margin:20px 0">
-        <b-col cols="8">
+        <b-col cols="8" style="margin:0 auto">
           <b-card bg-variant="light">
             <b-row class="my-1" v-for="(type,index) in types" :key="index">
               <b-col sm="3">
                 <label :for="`title-${type.title}`">
-                   <code>{{ type.title }}</code>:
+                  {{ type.title }}:
                 </label>
               </b-col>
               <b-col sm="9">
