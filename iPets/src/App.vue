@@ -31,19 +31,6 @@ export default {
       updatePetInfo(this.$store, uid);
       this.isLogIn = true;
     }
-  },
-  methods: {
-    logout: function(e) {
-      fAuth.signOut().then(() => {
-        this.$router.go({ path: this.$router.path });
-      });
-    }
-  },
-  mounted() {
-    this.Height = document.documentElement.clientHeight - 100;
-    window.onresize = () => {
-      this.Height = document.documentElement.clientHeight - 100;
-    };
   }
 };
 </script>

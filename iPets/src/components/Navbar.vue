@@ -19,6 +19,15 @@
       <b-nav-item href="#/dogScience" v-if="!isLogIn">狗狗科普</b-nav-item>
       <b-nav-item href="#/dogInfo" v-if="!isLogIn">人與狗的關係</b-nav-item>
       <b-nav-item href="#/contact" v-if="!isLogIn">聯繫我們</b-nav-item>
+      <b-nav-item href="#/homeLogin" v-if="isLogIn">行事曆</b-nav-item>
+      <b-nav-item href="#/" v-if="isLogIn">相簿</b-nav-item>
+      <b-nav-item href="#/" v-if="isLogIn">會員專區</b-nav-item>
+      <b-nav-item href="#/" v-if="isLogIn">設定</b-nav-item>
+      <b-nav-form>
+        <b-nav-item @click="logout" v-if="isLogIn"
+          ><i class="fas fa-sign-in-alt" style="size:12px"></i>登出</b-nav-item
+        >
+      </b-nav-form>
       <b-nav-form>
         <b-nav-item href="#/login" v-if="!isLogIn"
           ><i class="fas fa-sign-in-alt" style="size:12px"></i>登入</b-nav-item
@@ -138,10 +147,33 @@
 </template>
 
 <script>
+import firebase from "firebase/app";
 export default {
-  name: "Navbar",
+  name: "navbar",
   data() {
-    return {};
+    return {
+      isSignedIn: false
+    };
+  },
+  created() {
+    if (firebase.auth().currentUser) {
+      this.isSignedIn = true;
+    }
+  },
+  methods: {
+    logout: function(e) {
+      firebase
+        .auth()
+        .signOut()
+        .then(() => {
+          this.$router.go({ path: this.$router.path });
+        });
+    }
+  },
+  computed: {
+    name() {
+      return this.$store.state.name;
+    }
   }
 };
 </script>
