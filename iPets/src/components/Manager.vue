@@ -19,7 +19,7 @@
                       <label :for="`title-${index.title}`">{{ index.title }}:</label>
                     </b-col>
                     <b-col sm="10">
-                      <b-form-input :id="`type-${index.id}`" :type="index.type"></b-form-input>
+                      <b-form-input :id="`type-${index.id}`" :type="index.type" v-model.trim="input"></b-form-input>
                     </b-col>
                   </b-row>
                   <b-row class="my-1">
@@ -34,7 +34,7 @@
                       ></b-form-textarea>
                     </b-col>
                   </b-row>
-                  <b-button class="right">確認新增文章</b-button>
+                  <b-button class="right" v-on:click="createArticle">確認新增文章</b-button>
                 </b-card>
               </b-col>
             </b-row>
@@ -117,21 +117,45 @@
 </template>
 
 <script>
+import axios from "axios";
+
 export default {
   name: "Manager",
   data() {
     return {
       articles: [
-        { title: "標題", type: "text", id: "title" },
-        { title: "副標題", type: "text", id: "subtitle" },
-        { title: "新增日期", type: "date", id: "date" }
+        { title: "標題", type: "text", id: "article-title" },
+        { title: "副標題", type: "text", id: "article-subtitle" },
+        { title: "新增日期", type: "date", id: "article-date" }
       ],
       adoptions: [
-        { title: "名稱", type: "text", id: "title" },
-        { title: "地址", type: "text", id: "subtitle" },
-        { title: "聯絡電話", type: "tel", id: "date" }
+        { title: "名稱", type: "text", id: "adoption-title" },
+        { title: "地址", type: "text", id: "adoption-subtitle" },
+        { title: "聯絡電話", type: "tel", id: "adoption-date" }
       ]
     };
+  },
+  methods: {
+    createArticle() {
+      console.log("CLICK", this.input);
+      if (!this.input) return false;
+
+      axios.post("http://localhost:3000/comments", {
+        title: this.input,
+        subtitle: this.input
+      }).then((res) => {
+        console.log(res);
+      });
+    }
+  },
+  post: {
+    input: "",
+    comments: []
+  },
+  mounted() {
+    axios.get("http://localhost:3000/comments").then((res) => {
+      this.comments = res.post;
+    });
   }
 };
 </script>
