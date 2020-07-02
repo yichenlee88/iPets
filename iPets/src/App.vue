@@ -2,11 +2,13 @@
   <div id="app">
     <Navbar />
     <router-view />
+    <Footer />
   </div>
 </template>
 
 <script>
 import Navbar from "./components/Navbar";
+import Footer from "./components/Footer";
 import { db } from "./db";
 import { updateUserProfile } from "./firebase/user";
 import { updatePetInfo } from "./firebase/pet";
@@ -16,7 +18,8 @@ const fAuth = db.auth();
 export default {
   name: "App",
   components: {
-    Navbar
+    Navbar,
+    Footer
   },
   data() {
     return {
@@ -38,19 +41,10 @@ export default {
 <style>
 #app {
   font-family: "Microsoft JhengHei", Helvetica, Arial, sans-serif;
-  size: 28px;
+  size: 20px;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   width: 100%;
   color: #2c3e50;
-}
-
-#footer {
-  height: 50px;
-  box-sizing: border-box;
-  bottom: auto;
-  width: 100%;
-  background-color: #e3f2fd;
-  flex: 0 0 auto;
 }
 </style>
