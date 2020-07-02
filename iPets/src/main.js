@@ -5,6 +5,7 @@ import App from "./App";
 import router from "./router";
 import { db } from "./db";
 import * as VueGoogleMaps from "vue2-google-maps";
+import VueResource from "vue-resource";
 
 // Vuex
 import store from "./_store/index";
@@ -17,6 +18,7 @@ import "bootstrap-vue/dist/bootstrap-vue.css";
 // BootstrapVue
 Vue.use(BootstrapVue);
 Vue.use(IconsPlugin);
+Vue.use(VueResource);
 
 Vue.config.productionTip = false;
 

@@ -3,21 +3,18 @@
     <div class="container" style="margin-top: 20px;">
       <div class="col-10" style="margin:0 auto 20px auto;">
         <div class="post-inner">
-          <h1 class="title_name">【狗狗健康】狗狗發抖危險程度大不同！快來釐清發抖原因！</h1>
-          <img
-            class="rounded"
-            src="https://maoup.com.tw/wp-content/uploads/2018/02/180206_23-1024x768.png"
-            style="max-width: 80%"
-          >
+          <div v-for="(item, i) in post.P0001" :key="i">
+            <h1 class="title_name">{{item.title}}</h1>
+          <img class="rounded" :src="item.src" style="max-width: 80%">
           <p class="content">
-            狗狗發抖一定是覺得冷嗎？小心！各種發抖的危險程度大不同！
-            <br>當狗狗興奮、緊張、氣溫過低、疾病疼痛、中毒時都會發抖～
-            <br>請飼主釐清發抖原因，萬一是疾病或中毒引起，一定要趕快就醫喔！
+            {{item.content[0]}}<br>
+            {{item.content[1]}}<br>
+            {{item.content[2]}}
           </p>
-          <span class="content-title1">•興奮發抖</span>
+          <span class="content-title1">{{item.content1[0]}}</span>
           <p class="content">
-            狗狗非常開心興奮的時候，跟人類一樣會開心顫抖。
-            <br>這種發抖是安全的，飼主不需要太擔心喔！
+            {{item.content1[1]}}
+            <br>{{item.content1[2]}}
           </p>
           <img
             class="rounded"
@@ -78,6 +75,7 @@
             原來狗狗發抖的原因這麼多！
             <br>請飼主釐清發抖原因，萬一是疾病或中毒引起，一定要趕快就醫喔！
           </p>
+          </div>
         </div>
       </div>
     </div>
@@ -86,7 +84,18 @@
 
 <script>
 export default {
-  name: "dogScienceArticle"
+  name: "dogScienceArticle",
+  data() {
+    return {
+      post: ""
+    };
+  },
+  mounted() {
+    this.$http.get("/static/article.json").then(response => {
+      console.log(response.data);
+      this.post = response.data;
+    });
+  }
 };
 </script>
 

@@ -2,7 +2,7 @@
 <!--https://www.hk01.com/%E5%AF%B5%E7%89%A9/202205/%E4%BA%86%E8%A7%A35%E5%80%8B%E7%8B%97%E7%8B%97%E5%B8%B8%E8%A6%8B%E5%BF%83%E7%90%86%E7%8B%80%E6%85%8B-%E8%AE%93%E4%BA%BA%E5%AF%B5%E9%97%9C%E4%BF%82%E6%9B%B4%E5%92%8C%E7%9D%A6-->
   <div class="container col-8" style="margin-top: 20px;">
     <h1 class="title">人與狗的關係</h1>
-    <div id="section1" class="row my-3" style="margin-top: 20px;">
+    <div id="section1" class="row my-3" style="margin-top: 20px; background-color:#FFE4E1;">
       <div class="col-lg-4">
         <img src="../assets/人狗-01.jpg" width="300px" height="300px">
       </div>
@@ -19,7 +19,7 @@
         </div>
       </div>
     </div>
-    <div id="section2" class="row my-3" style="margin-top: 20px;">
+    <div id="section2" class="row my-3" style="margin-top: 20px; background-color:#E6E6FA;">
       <div class="col-lg-8 columnberight">
         <div class="media">
           <div class="media-body">
@@ -36,7 +36,7 @@
         <img src="../assets/人狗-02.jpg" width="300px" height="300px">
       </div>
     </div>
-    <div id="section3" class="row my-3" style="margin-top: 20px;">
+    <div id="section3" class="row my-3" style="margin-top: 20px; background-color:#F0FFD0;">
       <div class="col-lg-4">
         <img src="../assets/人狗-03.jpg" width="300px" height="300px">
       </div>
@@ -53,7 +53,7 @@
         </div>
       </div>
     </div>
-    <div id="section4" class="row my-3" style="margin-top: 20px;">
+    <div id="section4" class="row my-3" style="margin-top: 20px; background-color:#FFEFD5;">
       <div class="col-lg-8 columnberight">
         <div class="media">
           <div class="media-body">
@@ -70,7 +70,7 @@
         <img src="../assets/人狗-04.jpg" width="300px" height="300px">
       </div>
     </div>
-    <div id="section5" class="row my-3" style="margin-top: 20px;">
+    <div id="section5" class="row my-3" style="margin-top: 20px; background-color:#F0DFF0;">
       <div class="col-lg-4">
         <img src="../assets/人狗-05.jpg" width="300px" height="300px">
       </div>
