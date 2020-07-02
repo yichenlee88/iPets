@@ -7,6 +7,7 @@ import Contact from "@/components/Contact";
 import Login from "@/components/Login";
 import Register from "@/components/Register";
 import HomeLogin from "@/components/HomeLogin";
+import Manager from "@/components/Manager";
 import { db } from "../db";
 import DogScience from "@/components/DogScience";
 import DogScienceArticle from "@/components/dogScienceArticle";
@@ -85,6 +86,14 @@ let router = new Router({
       path: "/dogScienceArticle",
       name: "DogScienceArticle",
       component: DogScienceArticle,
+      meta: {
+        requiresGuest: true
+      }
+    },
+    {
+      path: "/Manager",
+      name: "Manager",
+      component: Manager,
       meta: {
         requiresGuest: true
       }
