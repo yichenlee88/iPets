@@ -12,7 +12,7 @@
         <b-form class="px-3" @submit="onSubmit">
           <b-form-group
             id="group-pet-name"
-            label="名子"
+            label="名字"
             label-for="input-pet-name"
           >
             <b-form-input
