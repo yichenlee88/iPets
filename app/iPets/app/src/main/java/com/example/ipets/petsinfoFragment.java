@@ -128,7 +128,7 @@ public class petsinfoFragment extends Fragment {
         final String petsname = edpetsname.getText().toString();
         FirebaseStorage storage = FirebaseStorage.getInstance("gs://ipets-app.appspot.com");
         StorageReference mStorageRef = storage.getReference();
-        StorageReference mountainsRef = mStorageRef.child(userUID +'/'+ petsname);
+        StorageReference mountainsRef = mStorageRef.child(userUID +'/'+ petsname+".jpg");
 
         Bitmap bitmap = ((BitmapDrawable) img.getDrawable()).getBitmap();
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
