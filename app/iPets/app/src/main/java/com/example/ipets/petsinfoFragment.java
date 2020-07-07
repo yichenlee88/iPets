@@ -128,7 +128,7 @@ public class petsinfoFragment extends Fragment {
         final String petsname = edpetsname.getText().toString();
         FirebaseStorage storage = FirebaseStorage.getInstance("gs://ipets-app.appspot.com");
         StorageReference mStorageRef = storage.getReference();
-        StorageReference mountainsRef = mStorageRef.child(userUID +'/'+ petsname);
+        StorageReference mountainsRef = mStorageRef.child(userUID +'/'+ petsname+".jpg");
 
         Bitmap bitmap = ((BitmapDrawable) img.getDrawable()).getBitmap();
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
@@ -163,7 +163,6 @@ public class petsinfoFragment extends Fragment {
                 petsgender = "母的";
                 break;
         }
-
         FirebaseFirestore db;
         db = FirebaseFirestore.getInstance();
         Map<String, Object> userInfo = new HashMap<>();
@@ -174,7 +173,7 @@ public class petsinfoFragment extends Fragment {
         userInfo.put("Petsvariety", petsvariety);
         userInfo.put("Petslikes", petslikes);
         userInfo.put("Petsnotes", petsnotes);
-        db.collection("userInformation").document(userUID).update(userInfo);
+        db.collection("userInformation").document(userUID).collection("pets").document(petsname).set(userInfo);
         AlertDialog.Builder finishsignup = new AlertDialog.Builder(getActivity());
         finishsignup.setMessage("註冊成功");
         finishsignup.setNegativeButton("前往登入", new DialogInterface.OnClickListener() {
