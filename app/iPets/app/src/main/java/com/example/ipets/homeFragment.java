@@ -167,7 +167,7 @@ public class homeFragment extends Fragment {
     public void downloadimage(String query){
         FirebaseStorage storage = FirebaseStorage.getInstance("gs://ipets-app.appspot.com");
         StorageReference mStorageRef = storage.getReference();
-        StorageReference islandRef = mStorageRef.child(userUID +'/'+ query);
+        StorageReference islandRef = mStorageRef.child(userUID +'/'+ query+".jpg");
         final ImageView head = getView().findViewById(R.id.head);
         final long ONE_MEGABYTE = 1024 * 1024;
 
