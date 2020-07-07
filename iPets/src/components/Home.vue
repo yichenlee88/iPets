@@ -1,15 +1,14 @@
 <template>
-  <div class="container index">
-    <div>
+  <div>
+    <div class="header">
       <!--輪播圖-->
       <b-carousel
         id="carousel-1"
+        class="carousel"
         v-model="slide"
         :interval="3000"
         controls
         indicators
-        img-width="1024"
-        img-height="480"
         background="#ababab"
       >
         <b-carousel-slide>
@@ -337,9 +336,16 @@ li {
 a {
   color: #42b983;
 }
+
 .carousel {
+  float: left;
+  list-style: none;
+  position: relative;
+  width: 1519px;
+  zoom: 1;
+  margin: 0;
+  padding: 0;
   overflow: hidden;
-  margin-top: 20px;
 }
 
 .marketing {
@@ -354,5 +360,11 @@ a {
 .google-map {
   width: 100%;
   height: 200px;
+}
+
+@media screen and (max-width: 768px) {
+  .carousel {
+    width: 400px;
+  }
 }
 </style>
