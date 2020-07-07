@@ -4,6 +4,7 @@ package com.example.ipets;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -20,11 +21,15 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomnavigation.BottomNavigationMenu;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -40,6 +45,7 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
 import java.lang.ref.Reference;
+import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -110,12 +116,14 @@ public class homeFragment extends Fragment {
                             petnamespinner.setSelection(0, true);
                             String query = petname.get(0);
                             querypet(query);
+                            downloadimage(query);
                             petnamespinner.setPrompt("請選擇");
                             petnamespinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                                 @Override
                                 public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                                     String query = petname.get(position);
                                     querypet(query);
+                                    downloadimage(query);
                                 }
 
                                 @Override
@@ -155,5 +163,26 @@ public class homeFragment extends Fragment {
                     public void onFailure(@NonNull Exception e) {
                     }
                 });
+    }
+    public void downloadimage(String query){
+        FirebaseStorage storage = FirebaseStorage.getInstance("gs://ipets-app.appspot.com");
+        StorageReference mStorageRef = storage.getReference();
+        StorageReference islandRef = mStorageRef.child(userUID +'/'+ query);
+        final ImageView head = getView().findViewById(R.id.head);
+        final long ONE_MEGABYTE = 1024 * 1024;
+
+        islandRef.getBytes(ONE_MEGABYTE).addOnSuccessListener(new OnSuccessListener<byte[]>() {
+            @Override
+            public void onSuccess(byte[] bytes) {
+                Glide.with(getContext())
+                        .load(bytes)
+                        .into(head);
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception exception) {
+                // Handle any errors
+            }
+        });
     }
 }
