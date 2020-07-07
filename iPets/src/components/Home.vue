@@ -1,42 +1,49 @@
 <template>
-  <div class="container index">
-    <!--輪播圖-->
-    <div id="myCarousel" class="carousel slide h-100" data-ride="carousel">
-      <!--連結導引項目-->
-      <ul class="carousel-indicators">
-        <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-        <li data-target="#myCarousel" data-slide-to="1" class="active"></li>
-        <li data-target="#myCarousel" data-slide-to="2" class="active"></li>
-      </ul>
-      <!--圖片顯示區域-->
-      <div class="carousel-inner">
-        <div class="carousel-item active">
-          <img class="d-block w-100 h-100"
-            style="padding-left: 20px;"
-            src="../assets/carousel-01.jpg"
-          />
-        </div>
-        <div class="carousel-item">
-          <img class="d-block w-100 h-100"
-            style="padding-left: 20px;"
-            src="../assets/carousel-02.jpg"
-          />
-        </div>
-        <div class="carousel-item">
-          <img class="d-block w-100 h-100"
-            style="padding-left: 20px;"
-            src="../assets/carousel-03.jpg"
-          />
-        </div>
-      </div>
-      <!--前後切換連結-->
-      <a class="carousel-control-prev" href="#myCarousel" data-slide="prev">
-        <span class="carousel-control-prev-icon"></span>
-      </a>
-      <a class="carousel-control-next" href="#myCarousel" data-slide="next">
-        <span class="carousel-control-next-icon"></span>
-      </a>
+  <div>
+    <div class="header">
+      <!--輪播圖-->
+      <b-carousel
+        id="carousel-1"
+        class="carousel"
+        v-model="slide"
+        :interval="3000"
+        controls
+        indicators
+        background="#ababab"
+      >
+        <b-carousel-slide>
+          <template v-slot:img>
+            <img
+              class="d-block img-fluid w-100"
+              width="1024"
+              src="../assets/carousel-01.jpg"
+              alt="image slot"
+            />
+          </template>
+        </b-carousel-slide>
+        <b-carousel-slide>
+          <template v-slot:img>
+            <img
+              class="d-block img-fluid w-100"
+              width="1024"
+              src="../assets/carousel-02.jpg"
+              alt="image slot"
+            />
+          </template>
+        </b-carousel-slide>
+        <b-carousel-slide>
+          <template v-slot:img>
+            <img
+              class="d-block img-fluid w-100"
+              width="1024"
+              src="../assets/carousel-03.jpg"
+              alt="image slot"
+            />
+          </template>
+        </b-carousel-slide>
+      </b-carousel>
     </div>
+
     <!--領養機構資訊-->
     <div class="container marketing">
       <div class="row" style="margin-left: 5px;">
@@ -329,11 +336,16 @@ li {
 a {
   color: #42b983;
 }
+
 .carousel {
+  float: left;
+  list-style: none;
+  position: relative;
+  width: 1519px;
+  zoom: 1;
+  margin: 0;
+  padding: 0;
   overflow: hidden;
-  max-height: 500px;
-  height: 1600px;
-  margin-top: 20px;
 }
 
 .marketing {
@@ -348,5 +360,11 @@ a {
 .google-map {
   width: 100%;
   height: 200px;
+}
+
+@media screen and (max-width: 768px) {
+  .carousel {
+    width: 400px;
+  }
 }
 </style>

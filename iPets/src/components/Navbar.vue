@@ -1,6 +1,6 @@
 <template>
   <b-navbar toggleable="lg" variant="faded" type="light">
-    <b-navbar-brand href="/">iPets</b-navbar-brand>
+    <b-navbar-brand href="/" style="  font-size: 24px;">iPets</b-navbar-brand>
     <!-- Right aligned nav items -->
     <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
     <b-navbar-nav class="ml-auto">
@@ -30,18 +30,16 @@
             ><i class="far fa-user" style="size:12px"></i>註冊</b-nav-item
           >
           <b-form-input
-            size="sm"
             class="mr-sm-2"
             placeholder="Search"
             v-if="!isSignedIn"
             style="margin-top:8px"
           ></b-form-input>
           <b-button
-            size="sm"
-            class="my-2 my-sm-0"
+            class="my-2"
             type="submit"
             v-if="!isSignedIn"
-            style="margin-top:8px"
+            style="margin-top:10px"
             >Search</b-button
           >
         </b-nav-form>
@@ -82,9 +80,22 @@ export default {
 };
 </script>
 <style>
+.navbar-brand,
+.form-input,
+.botton,
 .nav-item {
-  height: 30px;
+  height: 22px;
   width: 150px;
   font-size: 18px;
+  text-align: center;
+}
+
+@media screen and (max-width: 768px) {
+  .navbar-brand,
+  .form-input,
+  .botton,
+  .nav-item {
+    background-size: auto 350px !important;
+  }
 }
 </style>
