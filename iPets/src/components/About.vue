@@ -101,6 +101,7 @@
                 <a
                   class="nav-link con-link"
                   href="https://github.com/yichenlee88"
+                  target="_blank"
                 >
                   <i class="fas fa-link"></i>
                 </a>
@@ -115,6 +116,7 @@
                 <a
                   class="nav-link con-link"
                   href="https://github.com/watson050308"
+                  target="_blank"
                 >
                   <i class="fas fa-link"></i>
                 </a>
@@ -129,6 +131,7 @@
                 <a
                   class="nav-link con-link"
                   href="https://github.com/Linen3082"
+                  target="_blank"
                 >
                   <i class="fas fa-link"></i>
                 </a>
@@ -142,7 +145,11 @@
                 <h4>
                   <b>王偉霖</b>
                 </h4>
-                <a class="nav-link con-link" href="https://github.com/n1066414">
+                <a
+                  class="nav-link con-link"
+                  href="https://github.com/n1066414"
+                  target="_blank"
+                >
                   <i class="fas fa-link"></i>
                 </a>
               </div>
@@ -156,6 +163,7 @@
                 <a
                   class="nav-link con-link"
                   href="https://github.com/lululiu29783638"
+                  target="_blank"
                 >
                   <i class="fas fa-link"></i>
                 </a>
