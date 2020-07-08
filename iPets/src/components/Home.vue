@@ -66,11 +66,10 @@
           </b-col>
         </div>
       </b-row>
-
-      <!--"longitude":"", //經度
+    </b-container>
+    <!--"longitude":"", //經度
       "latitude":"" //緯度
       -->
-    </b-container>
 
     <!--    領養機構資訊
     <div class="container marketing">
@@ -299,11 +298,7 @@ export default {
 
 .adoptionAgenciesTitle {
   font-size: 30px;
-  line-height: 70px;
-}
-
-.adoptionAgencies {
-  margin-top: 30px;
+  line-height: 100px;
 }
 
 .card {

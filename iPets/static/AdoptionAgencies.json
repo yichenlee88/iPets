@@ -1,7 +1,6 @@
 {
   "AdoptionAgencies": {
     "ZhangMaMa": {
-      "number": "1",
       "src": "../static/img/mama.jpg",
       "Name": "張媽媽流浪動物之家",
       "Introduction": "不管你相信不相信，只要我們願意付出，哪怕只有一點點，牠們會無條件用牠們一輩子的愛回報給我們。就從這一點點開始，讓愛延續，讓生命成長茁壯。",
@@ -12,7 +11,6 @@
       "latitude": "25.011085"
     },
     "XuWenLiang": {
-      "number": "2",
       "src": "../static/img/dogpark.jpg",
       "Name": "徐文良動物保護協會",
       "Introduction": "關於園區長期不斷的搶救收容所的死刑犬和救援在外生病和受傷的狗狗,目前已經有三千多個孩子。",
@@ -23,7 +21,6 @@
       "latitude": "23.194341"
     },
     "TaipeiAnimalShelter": {
-      "number": "3",
       "src": "../static/img/taipeicity.png",
       "Name": "臺北市動物之家",
       "Introduction": "臺北市動物之家，隸屬於臺北市動物保護處，位於台北市內湖區，負責台北市流浪動物及野生動物之收容、認領、認養、絕育、救傷醫療、定期篩檢及管理，動物收容教育推廣等事項。",
