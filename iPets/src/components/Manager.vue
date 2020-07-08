@@ -14,12 +14,20 @@
             <b-row class="justify-content-md-center" style="margin:20px 0">
               <b-col cols="10" style="margin:0 auto">
                 <b-card bg-variant="light">
-                  <b-row class="my-1" v-for="(index) in articles" :key="index">
+                  <b-row class="my-1">
                     <b-col sm="2">
-                      <label :for="`title-${index.title}`">{{ index.title }}:</label>
+                      <label for="article">標題:</label>
                     </b-col>
                     <b-col sm="10">
-                      <b-form-input :id="`type-${index.id}`" :type="index.type" v-model.trim="input"></b-form-input>
+                      <b-form-input id="title" type="text"></b-form-input>
+                    </b-col>
+                  </b-row>
+                  <b-row class="my-1">
+                    <b-col sm="2">
+                      <label for="article">副標題:</label>
+                    </b-col>
+                    <b-col sm="10">
+                      <b-form-input id="subTitle" type="text"></b-form-input>
                     </b-col>
                   </b-row>
                   <b-row class="my-1">
@@ -31,6 +39,7 @@
                         id="textarea-auto-height"
                         placeholder="Enter content..."
                         rows="3"
+                        v-model.trim="input"
                       ></b-form-textarea>
                     </b-col>
                   </b-row>
@@ -53,7 +62,7 @@
                   </b-row>
                   <b-row class="my-1">
                     <b-col sm="2">
-                      <label for="title-textarea">簡介:</label>
+                      <label for="article">簡介:</label>
                     </b-col>
                     <b-col sm="10">
                       <b-form-textarea
@@ -125,7 +134,6 @@ export default {
     return {
       articles: [
         { title: "標題", type: "text", id: "article-title" },
-        { title: "副標題", type: "text", id: "article-subtitle" },
         { title: "新增日期", type: "date", id: "article-date" }
       ],
       adoptions: [
@@ -142,7 +150,8 @@ export default {
 
       axios.post("http://localhost:3000/comments", {
         title: this.input,
-        subtitle: this.input
+        subtitle: this.input,
+        content: this.input
       }).then((res) => {
         console.log(res);
       });
