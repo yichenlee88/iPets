@@ -1,0 +1,49 @@
+{
+  "posts": [
+    {
+      "id": 1,
+      "title": "json-server",
+      "author": "typicode"
+    }
+  ],
+  "comments": [
+    {
+      "id": 1,
+      "body": "some comment",
+      "postId": 1
+    },
+    {
+      "body": "11111111",
+      "id": 2
+    },
+    {
+      "body": "2222",
+      "id": 3
+    },
+    {
+      "title": "hiiiiii",
+      "subtitle": "hiiiiii",
+      "id": 4
+    },
+    {
+      "title": "22",
+      "subtitle": "22",
+      "id": 5
+    },
+    {
+      "title": "12345678",
+      "subtitle": "12345678",
+      "content": "12345678",
+      "id": 6
+    },
+    {
+      "title": "test",
+      "subtitle": "test",
+      "content": "test",
+      "id": 7
+    }
+  ],
+  "profile": {
+    "name": "typicode"
+  }
+}
