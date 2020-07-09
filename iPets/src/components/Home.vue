@@ -61,7 +61,15 @@
               <b-card-text>
                 {{ item.Introduction }}
               </b-card-text>
-              <b-button href="#" class="learnMore">了解更多</b-button>
+              <b-button
+                href="#"
+                class="learnMore"
+                @click="$bvModal.show(`${i}`)"
+                >了解更多</b-button
+              >
+              <b-modal :id="`${i}`" title="BootstrapVue">
+                <p class="my-4">hi</p>
+              </b-modal>
             </b-card>
           </b-col>
         </div>
