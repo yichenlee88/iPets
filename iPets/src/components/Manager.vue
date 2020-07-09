@@ -19,7 +19,7 @@
                       <label for="article">標題:</label>
                     </b-col>
                     <b-col sm="10">
-                      <b-form-input id="title" type="text"></b-form-input>
+                      <b-form-input id="title" type="text" v-model.trim="title"></b-form-input>
                     </b-col>
                   </b-row>
                   <b-row class="my-1">
@@ -27,7 +27,7 @@
                       <label for="article">副標題:</label>
                     </b-col>
                     <b-col sm="10">
-                      <b-form-input id="subTitle" type="text"></b-form-input>
+                      <b-form-input id="subTitle" type="text" v-model.trim="subtitle"></b-form-input>
                     </b-col>
                   </b-row>
                   <b-row class="my-1">
@@ -39,7 +39,7 @@
                         id="textarea-auto-height"
                         placeholder="Enter content..."
                         rows="3"
-                        v-model.trim="input"
+                        v-model.trim="content"
                       ></b-form-textarea>
                     </b-col>
                   </b-row>
@@ -52,7 +52,7 @@
             <b-row class="justify-content-md-center" style="margin:20px 0">
               <b-col cols="10" style="margin:0 auto">
                 <b-card bg-variant="light">
-                  <b-row class="my-1" v-for="(index) in adoptions" :key="index">
+                  <b-row class="my-1" v-for="index in adoptions" :key="index">
                     <b-col sm="2">
                       <label :for="`title-${index.title}`">{{ index.title }}:</label>
                     </b-col>
@@ -87,7 +87,7 @@
                       <label>使用者帳號:</label>
                     </b-col>
                     <b-col sm="9">
-                      <b-form-input :id="user_account" type="text"></b-form-input>
+                      <b-form-input id="user_account_get" type="text"></b-form-input>
                     </b-col>
                   </b-row>
                   <b-button class="right">查詢帳號密碼</b-button>
@@ -99,19 +99,19 @@
                       <label>使用者帳號:</label>
                     </b-col>
                     <b-col sm="9">
-                      <b-form-input :id="user_account" type="text"></b-form-input>
+                      <b-form-input id="user_account_update" type="text"></b-form-input>
                     </b-col>
                     <b-col sm="3">
                       <label>更改使用者密碼:</label>
                     </b-col>
                     <b-col sm="9">
-                      <b-form-input :id="user_account" type="text"></b-form-input>
+                      <b-form-input id="user_password_update" type="text"></b-form-input>
                     </b-col>
                     <b-col sm="3">
                       <label>再次確認使用者密碼:</label>
                     </b-col>
                     <b-col sm="9">
-                      <b-form-input :id="user_account" type="text"></b-form-input>
+                      <b-form-input id="user_password_check" type="text"></b-form-input>
                     </b-col>
                   </b-row>
                   <b-button class="right">確認編輯</b-button>
@@ -132,10 +132,10 @@ export default {
   name: "Manager",
   data() {
     return {
-      articles: [
-        { title: "標題", type: "text", id: "article-title" },
-        { title: "新增日期", type: "date", id: "article-date" }
-      ],
+      title: "",
+      subtitle: "",
+      content: "",
+      comments: [],
       adoptions: [
         { title: "名稱", type: "text", id: "adoption-title" },
         { title: "地址", type: "text", id: "adoption-subtitle" },
@@ -145,25 +145,30 @@ export default {
   },
   methods: {
     createArticle() {
-      console.log("CLICK", this.input);
-      if (!this.input) return false;
+      console.log("CLICK", this.title);
+      if (!this.title | !this.subtitle | !this.content) return false;
 
       axios.post("http://localhost:3000/comments", {
-        title: this.input,
-        subtitle: this.input,
-        content: this.input
+        title: this.title,
+        subtitle: this.subtitle,
+        content: this.content
       }).then((res) => {
         console.log(res);
+        this.title = "";
+        this.subtitle = "";
+        this.content = "";
+        this.comments.push(res.data);
       });
     }
   },
-  post: {
-    input: "",
-    comments: []
-  },
+  // post: {
+  //   input: "",
+  //   comments: []
+  // },
   mounted() {
     axios.get("http://localhost:3000/comments").then((res) => {
-      this.comments = res.post;
+      console.log(res);
+      this.comments = res.data;
     });
   }
 };
