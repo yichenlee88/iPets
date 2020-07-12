@@ -67,8 +67,36 @@
                 @click="$bvModal.show(`${i}`)"
                 >了解更多</b-button
               >
-              <b-modal :id="`${i}`" title="BootstrapVue">
-                <p class="my-4">hi</p>
+              <b-modal :id="`${i}`" v-bind:title="item.Name">
+                <b-container>
+                  <b-card v-bind:img-src="item.src" img-alt="Image" img-top>
+                    <b-card-text>
+                      <strong>地址</strong>： {{ item.Addres }}
+                      <br />
+                      <strong>連絡電話</strong>： {{ item.Phone }} <br />
+                      <strong>簡介</strong>:<br />
+                      {{ item.Content }}<br />
+                    </b-card-text>
+                    <GmapMap
+                      v-bind:center="{
+                        lat: item.latitude,
+                        lng: item.longitude
+                      }"
+                      :zoom="15"
+                      map-type-id="roadmap"
+                      style="  width: 100%;  height: 200px;"
+                    >
+                      <GmapMarker
+                        :key="index"
+                        v-for="(m, index) in markers"
+                        :position="m.position"
+                        :clickable="true"
+                        :draggable="true"
+                        @click="center = m.position"
+                      />
+                    </GmapMap>
+                  </b-card>
+                </b-container>
               </b-modal>
             </b-card>
           </b-col>
