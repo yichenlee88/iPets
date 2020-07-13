@@ -169,7 +169,7 @@ public class homeFragment extends Fragment {
         StorageReference mStorageRef = storage.getReference();
         StorageReference islandRef = mStorageRef.child(userUID +'/'+ query+".jpg");
         final ImageView head = getView().findViewById(R.id.head);
-        final long ONE_MEGABYTE = 1024 * 1024;
+        final long ONE_MEGABYTE = 3000 * 3000;
 
         islandRef.getBytes(ONE_MEGABYTE).addOnSuccessListener(new OnSuccessListener<byte[]>() {
             @Override
