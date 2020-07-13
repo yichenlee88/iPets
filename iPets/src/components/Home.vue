@@ -1,114 +1,81 @@
 <template>
-  <div class="container index">
-    <!--輪播圖-->
-    <div id="myCarousel" class="carousel slide h-100" data-ride="carousel">
-      <!--連結導引項目-->
-      <ul class="carousel-indicators">
-        <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-        <li data-target="#myCarousel" data-slide-to="1" class="active"></li>
-        <li data-target="#myCarousel" data-slide-to="2" class="active"></li>
-      </ul>
-      <!--圖片顯示區域-->
-      <div class="carousel-inner">
-        <div class="carousel-item active">
-          <img class="d-block w-100 h-100"
-            style="padding-left: 20px;"
-            src="../assets/carousel-01.jpg"
-          />
-        </div>
-        <div class="carousel-item">
-          <img class="d-block w-100 h-100"
-            style="padding-left: 20px;"
-            src="../assets/carousel-02.jpg"
-          />
-        </div>
-        <div class="carousel-item">
-          <img class="d-block w-100 h-100"
-            style="padding-left: 20px;"
-            src="../assets/carousel-03.jpg"
-          />
-        </div>
-      </div>
-      <!--前後切換連結-->
-      <a class="carousel-control-prev" href="#myCarousel" data-slide="prev">
-        <span class="carousel-control-prev-icon"></span>
-      </a>
-      <a class="carousel-control-next" href="#myCarousel" data-slide="next">
-        <span class="carousel-control-next-icon"></span>
-      </a>
+  <div>
+    <div class="header">
+      <!--輪播圖-->
+      <b-carousel
+        id="carousel-1"
+        class="carousel"
+        v-model="slide"
+        :interval="3000"
+        controls
+        indicators
+        background="#ababab"
+      >
+        <b-carousel-slide>
+          <template v-slot:img>
+            <img
+              class="d-block img-fluid w-100"
+              width="1024"
+              src="../assets/carousel-01.jpg"
+              alt="image slot"
+            />
+          </template>
+        </b-carousel-slide>
+        <b-carousel-slide>
+          <template v-slot:img>
+            <img
+              class="d-block img-fluid w-100"
+              width="1024"
+              src="../assets/carousel-02.jpg"
+              alt="image slot"
+            />
+          </template>
+        </b-carousel-slide>
+        <b-carousel-slide>
+          <template v-slot:img>
+            <img
+              class="d-block img-fluid w-100"
+              width="1024"
+              src="../assets/carousel-03.jpg"
+              alt="image slot"
+            />
+          </template>
+        </b-carousel-slide>
+      </b-carousel>
     </div>
-    <!--領養機構資訊-->
+
+    <b-container>
+      <b-row class="adoptionAgenciesTitle text-center"
+        ><b-col>領養機構資訊</b-col>
+      </b-row>
+      <b-row class="adoptionAgencies" cols-lg="3">
+        <div v-for="(item, i) in post.AdoptionAgencies" :key="i">
+          <b-col>
+            <b-card
+              v-bind:title="item.Name"
+              v-bind:img-src="item.src"
+              img-alt="Image"
+              img-top
+              tag="article"
+            >
+              <b-card-text>
+                {{ item.Introduction }}
+              </b-card-text>
+              <b-button href="#" class="learnMore">了解更多</b-button>
+            </b-card>
+          </b-col>
+        </div>
+      </b-row>
+
+      <!--"longitude":"", //經度
+      "latitude":"" //緯度
+      -->
+    </b-container>
+
+    <!--    領養機構資訊
     <div class="container marketing">
-      <div class="row" style="margin-left: 5px;">
-        <div class="col-12 col-sm-4">
-          <div class="img-thumbnail" style="height: 550px;">
-            <img
-              class="rounded"
-              src="../assets/mama.jpg"
-              style="max-width: 100%"
-            />
-            <H2>張媽媽流浪動物之家</H2>
-            <p style="text-align:left">
-              不管你相信不相信，只要我們願意付出，哪怕只有一點點，牠們會無條件用牠們一輩子的愛回報給我們。就從這一點點開始，讓愛延續，讓生命成長茁壯。
-            </p>
-            <button
-              type="button"
-              class="btn btn-info"
-              data-toggle="modal"
-              data-target="#myModal01"
-              style="position: absolute; right: 20px; bottom: 5px;"
-            >
-              了解更多
-            </button>
-          </div>
-        </div>
-        <div class="col-12 col-sm-4">
-          <div class="img-thumbnail" style="height: 550px;">
-            <img
-              class="rounded"
-              src="../assets/dogpark.jpg"
-              style="max-width: 100%"
-            />
-            <H2>徐文良動物保護協會</H2>
-            <p style="text-align:left">
-              關於園區長期不斷的搶救收容所的死刑犬和救援在外生病和受傷的狗狗,目前已經有三千多個孩子
-            </p>
-            <button
-              type="button"
-              class="btn btn-info"
-              data-toggle="modal"
-              data-target="#myModal02"
-              style="position: absolute; right: 20px; bottom: 5px;"
-            >
-              了解更多
-            </button>
-          </div>
-        </div>
-        <div class="col-12 col-sm-4">
-          <div class="img-thumbnail" style="height: 550px;">
-            <img
-              class="rounded"
-              src="../assets/taipeicity.png"
-              style="max-width: 100%;ASDF"
-            />
-            <H2>臺北市動物之家</H2>
-            <p style="text-align:left">
-              臺北市動物之家，隸屬於臺北市動物保護處，位於台北市內湖區，負責台北市流浪動物及野生動物之收容、認領、認養、絕育、救傷醫療、定期篩檢及管理，動物收容教育推廣等事項
-            </p>
-            <button
-              type="button"
-              class="btn btn-info float-right"
-              data-toggle="modal"
-              data-target="#myModal03"
-              style="position: absolute; right: 20px; bottom: 5px;"
-            >
-              了解更多
-            </button>
-          </div>
-        </div>
-      </div>
     </div>
-    <!--張媽媽內文-->
+    張媽媽內文
     <div class="modal fade" id="myModal01">
       <div class="modal-dialog">
         <div class="modal-content">
@@ -159,7 +126,7 @@
         </div>
       </div>
     </div>
-    <!--徐文良內文-->
+    徐文良內文
     <div class="modal fade" id="myModal02">
       <div class="modal-dialog">
         <div class="modal-content">
@@ -212,7 +179,7 @@
         </div>
       </div>
     </div>
-    <!--臺北市動物之家內文-->
+    臺北市動物之家內文
     <div class="modal fade" id="myModal03">
       <div class="modal-dialog">
         <div class="modal-content">
@@ -262,7 +229,7 @@
           </div>
         </div>
       </div>
-    </div>
+    </div>-->
   </div>
 </template>
 
@@ -275,12 +242,17 @@ export default {
       markers: [],
       places: [],
       infowindow: [],
-      currentPlace: null
+      currentPlace: null,
+      post: ""
     };
   },
 
   mounted() {
     this.geolocate();
+    this.$http.get("/static/AdoptionAgencies.json").then(response => {
+      console.log(response.data);
+      this.post = response.data;
+    });
   },
 
   methods: {
@@ -314,31 +286,41 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-h1,
-h2 {
-  font-weight: normal;
-}
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
-a {
-  color: #42b983;
-}
 .carousel {
+  float: left;
+  list-style: none;
+  position: static;
+  width: 1519px;
+  zoom: 1;
+  margin: 0;
+  padding: 0;
   overflow: hidden;
-  max-height: 500px;
-  height: 1600px;
-  margin-top: 20px;
+}
+
+.adoptionAgenciesTitle {
+  font-size: 30px;
+  line-height: 70px;
+}
+
+.adoptionAgencies {
+  margin-top: 30px;
+}
+
+.card {
+  min-height: 600px;
+  margin-bottom: 20px;
+}
+
+.learnMore {
+  position: absolute;
+  right: 15px;
+  bottom: 15px;
 }
 
 .marketing {
   margin-top: 20px;
   margin-bottom: 20px;
+  max-width: 20rem;
 }
 
 .card-text {
@@ -348,5 +330,14 @@ a {
 .google-map {
   width: 100%;
   height: 200px;
+}
+
+@media screen and (max-width: 768px) {
+  .carousel {
+    width: 400px;
+  }
+  .adoptionAgenciesTitle {
+    font-size: 18px;
+  }
 }
 </style>
