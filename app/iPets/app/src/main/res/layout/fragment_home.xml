@@ -116,7 +116,6 @@
             android:id="@+id/nameSpinner"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:entries="@array/Spinner_name"
             android:spinnerMode="dialog"
             app:layout_constraintBottom_toTopOf="@+id/guideline81"
             app:layout_constraintEnd_toStartOf="@+id/guideline83"
