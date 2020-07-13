@@ -19,28 +19,141 @@
                       <label for="article">標題:</label>
                     </b-col>
                     <b-col sm="10">
-                      <b-form-input id="title" type="text" v-model.trim="title"></b-form-input>
+                      <b-form-input id="title" type="text" placeholder="Title" v-model.trim="title"></b-form-input>
                     </b-col>
                   </b-row>
                   <b-row class="my-1">
                     <b-col sm="2">
-                      <label for="article">副標題:</label>
+                      <label for="article">圖片位址:</label>
                     </b-col>
                     <b-col sm="10">
-                      <b-form-input id="subTitle" type="text" v-model.trim="subtitle"></b-form-input>
+                      <b-form-input id="image" type="url" placeholder="Input image url" v-model.trim="image"></b-form-input>
                     </b-col>
                   </b-row>
                   <b-row class="my-1">
                     <b-col sm="2">
-                      <label for="title-textarea">文章內容:</label>
+                      <label for="article">簡介:</label>
                     </b-col>
                     <b-col sm="10">
-                      <b-form-textarea
-                        id="textarea-auto-height"
-                        placeholder="Enter content..."
-                        rows="3"
-                        v-model.trim="content"
-                      ></b-form-textarea>
+                      <b-form-input id="subTitle" type="text" placeholder="Introduction" v-model.trim="introduction"></b-form-input>
+                    </b-col>
+                  </b-row>
+                  <b-row class="my-1">
+                    <b-col sm="2">
+                      <label for="article">標題1:</label>
+                    </b-col>
+                    <b-col sm="10">
+                      <b-form-input id="title1" type="text" placeholder="Title 1" v-model.trim="title1"></b-form-input>
+                    </b-col>
+                  </b-row>
+                  <b-row class="my-1">
+                    <b-col sm="2">
+                      <label for="article">內容1:</label>
+                    </b-col>
+                    <b-col sm="10">
+                      <b-form-input
+                        id="content1"
+                        type="text"
+                        placeholder="Enter content 1"
+                        v-model.trim="content1"
+                      ></b-form-input>
+                    </b-col>
+                  </b-row>
+                  <b-row class="my-1">
+                    <b-col sm="2">
+                      <label for="article">標題2:</label>
+                    </b-col>
+                    <b-col sm="10">
+                      <b-form-input id="title2" type="text" placeholder="Title 2" v-model.trim="title2"></b-form-input>
+                    </b-col>
+                  </b-row>
+                  <b-row class="my-1">
+                    <b-col sm="2">
+                      <label for="article">內容2:</label>
+                    </b-col>
+                    <b-col sm="10">
+                      <b-form-input
+                        id="content2"
+                        type="text"
+                        placeholder="Enter content 2"
+                        v-model.trim="content2"
+                      ></b-form-input>
+                    </b-col>
+                  </b-row>
+                  <b-row class="my-1">
+                    <b-col sm="2">
+                      <label for="article">標題3:</label>
+                    </b-col>
+                    <b-col sm="10">
+                      <b-form-input id="title3" type="text" placeholder="Title 3" v-model.trim="title3"></b-form-input>
+                    </b-col>
+                  </b-row>
+                  <b-row class="my-1">
+                    <b-col sm="2">
+                      <label for="article">內容3:</label>
+                    </b-col>
+                    <b-col sm="10">
+                      <b-form-input
+                        id="content3"
+                        type="text"
+                        placeholder="Enter content 3"
+                        v-model.trim="content3"
+                      ></b-form-input>
+                    </b-col>
+                  </b-row>
+                  <b-row class="my-1">
+                    <b-col sm="2">
+                      <label for="article">標題4:</label>
+                    </b-col>
+                    <b-col sm="10">
+                      <b-form-input id="title4" type="text" placeholder="Title 4" v-model.trim="title4"></b-form-input>
+                    </b-col>
+                  </b-row>
+                  <b-row class="my-1">
+                    <b-col sm="2">
+                      <label for="article">內容4:</label>
+                    </b-col>
+                    <b-col sm="10">
+                      <b-form-input
+                        id="content4"
+                        type="text"
+                        placeholder="Enter content 4"
+                        v-model.trim="content4"
+                      ></b-form-input>
+                    </b-col>
+                  </b-row>
+                  <b-row class="my-1">
+                    <b-col sm="2">
+                      <label for="article">標題5:</label>
+                    </b-col>
+                    <b-col sm="10">
+                      <b-form-input id="title5" type="text" placeholder="Title 5" v-model.trim="title5"></b-form-input>
+                    </b-col>
+                  </b-row>
+                  <b-row class="my-1">
+                    <b-col sm="2">
+                      <label for="article">內容5:</label>
+                    </b-col>
+                    <b-col sm="10">
+                      <b-form-input
+                        id="content5"
+                        type="text"
+                        placeholder="Enter content 5"
+                        v-model.trim="content5"
+                      ></b-form-input>
+                    </b-col>
+                  </b-row>
+                  <b-row class="my-1">
+                    <b-col sm="2">
+                      <label for="article">結語:</label>
+                    </b-col>
+                    <b-col sm="10">
+                      <b-form-input
+                        id="ending"
+                        type="text"
+                        placeholder="Ending..."
+                        v-model.trim="ending"
+                      ></b-form-input>
                     </b-col>
                   </b-row>
                   <b-button class="right" v-on:click="createArticle">確認新增文章</b-button>
@@ -52,12 +165,12 @@
             <b-row class="justify-content-md-center" style="margin:20px 0">
               <b-col cols="10" style="margin:0 auto">
                 <b-card bg-variant="light">
-                  <b-row class="my-1" v-for="index in adoptions" :key="index">
+                  <b-row class="my-1" v-for="(i, index) in adoptions" :key="index">
                     <b-col sm="2">
-                      <label :for="`title-${index.title}`">{{ index.title }}:</label>
+                      <label :for="`title-${i.title}`">{{ i.title }}:</label>
                     </b-col>
                     <b-col sm="10">
-                      <b-form-input :id="`type-${index.id}`" :type="index.type"></b-form-input>
+                      <b-form-input :id="`type-${i.id}`" :type="i.type"></b-form-input>
                     </b-col>
                   </b-row>
                   <b-row class="my-1">
@@ -133,8 +246,19 @@ export default {
   data() {
     return {
       title: "",
-      subtitle: "",
-      content: "",
+      image: "",
+      introduction: "",
+      title1: "",
+      content1: "",
+      title2: "",
+      content2: "",
+      title3: "",
+      content3: "",
+      title4: "",
+      content4: "",
+      title5: "",
+      content5: "",
+      ending: "",
       comments: [],
       adoptions: [
         { title: "名稱", type: "text", id: "adoption-title" },
@@ -146,17 +270,39 @@ export default {
   methods: {
     createArticle() {
       console.log("CLICK", this.title);
-      if (!this.title | !this.subtitle | !this.content) return false;
+      if (!(this.title | this.image | this.introduction | this.content | this.title1 | this.content1 | this.title2 | this.content2 | this.title3 | this.content3 | this.title4 | this.content4 | this.title5 | this.content5 | this.ending)) return false;
 
       axios.post("http://localhost:3000/comments", {
         title: this.title,
-        subtitle: this.subtitle,
-        content: this.content
+        image: this.image,
+        introduction: this.introduction,
+        title1: this.title1,
+        content1: this.content1,
+        title2: this.title2,
+        content2: this.content2,
+        title3: this.title3,
+        content3: this.content3,
+        title4: this.title4,
+        content4: this.content4,
+        title5: this.title5,
+        content5: this.content5,
+        ending: this.ending
       }).then((res) => {
         console.log(res);
         this.title = "";
-        this.subtitle = "";
-        this.content = "";
+        this.image = "";
+        this.introduction = "";
+        this.title1 = "";
+        this.content1 = "";
+        this.title2 = "";
+        this.content2 = "";
+        this.title3 = "";
+        this.content3 = "";
+        this.title4 = "";
+        this.content4 = "";
+        this.title5 = "";
+        this.content5 = "";
+        this.ending = "";
         this.comments.push(res.data);
       });
     }
