@@ -71,16 +71,23 @@
                 <b-container>
                   <b-card v-bind:img-src="item.src" img-alt="Image" img-top>
                     <b-card-text>
-                      <strong>地址</strong>： {{ item.Addres }}
-                      <br />
-                      <strong>連絡電話</strong>： {{ item.Phone }} <br />
-                      <strong>簡介</strong>:<br />
-                      {{ item.Content }}<br />
+                      <b-row>
+                        <b-col cols="4"><strong>地址</strong>：</b-col>
+                        <b-col>{{ item.Addres }}</b-col>
+                      </b-row>
+                      <b-row>
+                        <b-col cols="4"><strong>連絡電話</strong>：</b-col>
+                        <b-col>{{ item.Phone }}</b-col>
+                      </b-row>
+                      <b-row>
+                        <b-col cols="4"><strong>簡介</strong>:</b-col>
+                        <b-col>{{ item.Content }}</b-col>
+                      </b-row>
                     </b-card-text>
                     <GmapMap
                       v-bind:center="{
-                        lat: item.latitude,
-                        lng: item.longitude
+                        lat: 121.752719,
+                        lng: 25.011085
                       }"
                       :zoom="15"
                       map-type-id="roadmap"
@@ -106,30 +113,7 @@
     <!--"longitude":"", //經度
       "latitude":"" //緯度
       -->
-
-    <!--    領養機構資訊
-    <div class="container marketing">
-    </div>
-    張媽媽內文
-    <div class="modal fade" id="myModal01">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h6 class="modal-title">張媽媽流浪動物之家</h6>
-            <button type="button" class="close" data-dismiss="modal">x</button>
-          </div>
-          <div class="modal-body">
-            <div class="card border-0">
-              <img class="card-img-top" src="../assets/mama.jpg" />
-              <div class="card-body">
-                <p class="card-text" style="text-align:left">
-                  <strong>地址</strong>： 226新北市平溪區51之7號
-                  <br />
-                  <strong>連絡電話</strong>： 0936108187 <br />
-                  <strong>簡介</strong>:<br />
-                  取名「再生保護協會」的初衷就是希望將這些流浪在街頭上，無論是飢餓瘦到剩皮包骨的、或是因為誤踩到捕獸夾而斷了一條腿到兩條腿的、車禍撞傷導致癱瘓，還有整窩母帶子的浪浪們，只要還在我們能力範圍內，每一隻都會受到我們完善的保護與志工細心的呵護，並且在結紮過後，為牠們找尋第二個家，讓新家人能夠代替我們牽著牠繼續幸福的走下去。
-                </p>
-                <br />
+    <!--領養機構資訊
                 <GmapMap
                   :center="{ lat: 25.011085, lng: 121.752719 }"
                   :zoom="15"
@@ -157,114 +141,7 @@
             >
               關閉視窗
             </button>
-          </div>
-        </div>
-      </div>
-    </div>
-    徐文良內文
-    <div class="modal fade" id="myModal02">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h6 class="modal-title">徐文良動物保護協會</h6>
-            <button type="button" class="close" data-dismiss="modal">x</button>
-          </div>
-          <div class="modal-body">
-            <div class="card border-0">
-              <img class="card-img-top" src="../assets/dogpark.jpg" />
-              <div class="card-body">
-                <p class="card-text" style="text-align:left">
-                  <strong>地址</strong>： 72543台南市將軍區西湖112號
-                  <br />
-                  <strong>連絡電話</strong>： <br />
-                  <strong>簡介</strong>:<br />
-                  園區長期不斷的搶救收容所的死刑犬和救援在外生病和受傷的狗狗,目前已經有三千多個孩子
-                  龐大的飼料罐頭和醫療支出 希望大家一起來幫忙
-                  做園區最堅強的後盾~感恩
-                </p>
-                <br />
-                <GmapMap
-                  :center="{ lat: 23.194341, lng: 120.140508 }"
-                  :zoom="15"
-                  map-type-id="roadmap"
-                  style="  width: 100%;  height: 200px;"
-                >
-                  <GmapMarker
-                    :key="index"
-                    v-for="(m, index) in markers"
-                    :position="m.position"
-                    :clickable="true"
-                    :draggable="true"
-                    @click="center = m.position"
-                  />
-                </GmapMap>
-                <div id="map"></div>
-              </div>
-            </div>
-          </div>
-          <div class="modal-footer">
-            <button
-              type="button"
-              class="btn btn-outline-light text-dark border-dark"
-              data-dismiss="modal"
-            >
-              關閉視窗
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>
-    臺北市動物之家內文
-    <div class="modal fade" id="myModal03">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h6 class="modal-title">臺北市動物之家</h6>
-            <button type="button" class="close" data-dismiss="modal">x</button>
-          </div>
-          <div class="modal-body">
-            <div class="card border-0">
-              <img class="card-img-top" src="../assets/taipeicity.png" />
-              <div class="card-body">
-                <p class="card-text" style="text-align:left">
-                  <strong>地址</strong>： 114台北市內湖區潭美街852號
-                  <br />
-                  <strong>連絡電話</strong>：02 8791 3254 <br />
-                  <strong>簡介</strong>:<br />
-                  臺北市自105年起透過推廣動物友善空間計畫宣傳友善動物環境及空間的觀念，希望有更多民間的餐飲、遊樂地點、公共場所、交通設施能夠讓寵物進入。並藉由此計畫輔導各業者開放空間「歡迎飼主與寵物一同進入」，及輔導店家於門口張貼「寵愛貓狗」的動物友善空間標識貼紙，讓飼主們明暸與寵物休憩好去處，構築寵物友善環境，讓寵物在食、衣、住、行各方面能真正融入飼主及人們的生活。
-                </p>
-                <br />
-                <GmapMap
-                  :center="{ lat: 25.063132, lng: 121.608937 }"
-                  :zoom="15"
-                  map-type-id="roadmap"
-                  style="  width: 100%;  height: 200px;"
-                >
-                  <GmapMarker
-                    :key="index"
-                    v-for="(m, index) in markers"
-                    :position="m.position"
-                    :clickable="true"
-                    :draggable="true"
-                    @click="center = m.position"
-                  />
-                </GmapMap>
-                <div id="map"></div>
-              </div>
-            </div>
-          </div>
-          <div class="modal-footer">
-            <button
-              type="button"
-              class="btn btn-outline-light text-dark border-dark"
-              data-dismiss="modal"
-            >
-              關閉視窗
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>-->
+          >-->
   </div>
 </template>
 
@@ -314,6 +191,12 @@ export default {
           lng: position.coords.longitude
         };
       });
+    },
+    convertLongitude(longitude) {
+      return parseFloat(longitude);
+    },
+    convertLatitude(latitude) {
+      return parseFloat(latitude);
     }
   }
 };
