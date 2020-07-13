@@ -1,5 +1,28 @@
 <template>
-  <div class="container mt-3">
+  <b-container class="AboutUs">
+    <b-row class="Motivation text-center"><b-col>專案動機</b-col> </b-row>
+    <b-row class="MotivationContent text-center"
+      ><b-col>
+        <h5><strong>一、寵物飼養背景與現況</strong></h5>
+        <p>
+          近年來，由於「臺灣的人口結構性變化」和「個人經濟壓力因素」，讓寵物陪伴變成主流，現代的年輕族群結婚後未必會生育孩子，反而會選擇飼養寵物，因為飼養寵物的花費及精力遠遠小於養育孩子，導致現在社會上部分家庭都會飼養寵物，將寵物當成孩子寵愛。
+          現在的社會給年輕族群帶來許多壓力及負擔，當人們感到身心俱疲的時候總會要有一個抒壓、療癒的管道，而寵物的存在便會是最佳首選，當人在極度疲憊的情況下，看到一個可愛的寵物跟你撒嬌，其實疲憊感瞬間可以降低許多，你的喜怒哀樂，都會有一個可愛的寵物與你一起面對。雖然無法和牠言語，但再多的話也無法表達出內心的情緒，陪伴才是最佳消化情緒的辦法。根據農委會調查統計，目前台灣家庭仍以飼養狗類居多，故此次寵物居家管理專題的對象主要針對狗設計。
+        </p>
+        <br />
+        <h5><strong>二、寵物居家管理相關系統背景與現況</strong></h5>
+        <p>
+          目前在手機商店的寵物居家管理程式只有少數幾個，經過本組的觀察後，發現功能幾乎大同小異，而且UI設計風格差不多，整體較無差異性。所以本專題目標是做出不同於市面上且更加舒適的UI，同時具備較便利的管理功能，以及品種辨識技術、商家定位等特殊功能，增加系統差異性及使用者的黏著度。
+          不同於其他寵物居家管理系統只能在手機上使用，本專題開發了手機版及網頁版的管理系統，兩邊系統能夠資料同步與功能相容。除此之外，兩邊系統也會有一些各自獨立的功能，手機版本有定位功能；網頁版本則會有寵物辨識以及寵物圖片風格轉換，結合現今主流趨勢人工智慧，讓本次專題的管理系統更加有趣且豐富。
+        </p></b-col
+      >
+    </b-row>
+    <h5><strong>一、寵物飼養背景與現況</strong></h5>
+
+    <b-row class="Question text-center"><b-col>問題與機會</b-col> </b-row>
+    <b-row class="Special text-center"><b-col>特別之處</b-col> </b-row>
+    <b-row class="Member text-center"><b-col>組員介紹</b-col> </b-row>
+  </b-container>
+  <!-- <div class="container mt-3">
     <ul class="nav nav-tabs nav-fill" style="margin-top: 20px; color: #e3f2fd;">
       <li class="nav-item">
         <a class="nav-link active" data-toggle="tab" href="#motivation"
@@ -175,7 +198,7 @@
         </div>
       </div>
     </div>
-  </div>
+  </div> -->
 </template>
 
 <script>
@@ -185,6 +208,18 @@ export default {
 </script>
 
 <style>
+.AboutUs {
+  font-size: 30px;
+  line-height: 100px;
+}
+
+.MotivationContent {
+  size: 12px;
+  text-align: center;
+  vertical-align: middle;
+  margin-top: 10px;
+}
+
 .con-heigh {
   text-shadow: 0 0 1px gray;
   width: 85%;
@@ -195,13 +230,6 @@ export default {
   line-height: 40px;
   display: inline-block;
   align-items: center;
-}
-
-.con-text {
-  size: 12px;
-  text-align: center;
-  vertical-align: middle;
-  margin-top: 10px;
 }
 
 .con-link {
@@ -236,9 +264,5 @@ img {
 
 .h5 .p {
   font-family: "Microsoft JhengHei", Helvetica, Arial, sans-serif;
-}
-
-.p {
-  size: 18px;
 }
 </style>
