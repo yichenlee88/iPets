@@ -1,6 +1,6 @@
 <template>
-  <div class="container marketing contactus">
-    <div class="row featurette">
+  <b-container>
+    <div class="row feature">
       <div class="col-md-7 order-md-2">
         <h2 class="title">聯絡我們</h2>
         <br />
@@ -32,7 +32,7 @@
           送出
         </button>
       </div>
-      <div class="col-md-5 order-md-1">
+      <div class="col-md-5 order-md-1 info">
         <h2 class="title1">聯絡方式</h2>
         <br />
         <ul>
@@ -51,7 +51,7 @@
         </ul>
       </div>
     </div>
-  </div>
+  </b-container>
 </template>
 
 <script>
@@ -61,8 +61,8 @@ export default {
 </script>
 
 <style>
-.contactus {
-  height: 500px;
-  margin-top: 110px;
+.feature {
+  margin-top: 130px;
+  margin-bottom: 130px;
 }
 </style>
