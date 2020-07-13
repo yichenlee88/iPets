@@ -3,6 +3,7 @@ package com.example.ipets;
 
 import android.Manifest;
 import android.app.AlertDialog;
+import android.app.DatePickerDialog;
 import android.content.ContentResolver;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -26,12 +27,14 @@ import androidx.navigation.Navigation;
 
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.text.InputType;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -51,6 +54,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -121,6 +125,46 @@ public class petsinfoFragment extends Fragment {
                 uploadimage();
             }
         });
+        final EditText edpetsbirth = getView().findViewById(R.id.petsbirth);
+        edpetsbirth.setInputType(InputType.TYPE_NULL); //不顯示系統輸入鍵盤
+        edpetsbirth.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                // TODO Auto-generated method stub
+                if(hasFocus){
+                    Calendar c = Calendar.getInstance();
+                    new DatePickerDialog(getContext(), new DatePickerDialog.OnDateSetListener() {
+
+                        @Override
+                        public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+                            // TODO Auto-generated method stub
+                            edpetsbirth.setText(year+"/"+(monthOfYear+1)+"/"+dayOfMonth);
+                        }
+                    }, c.get(Calendar.YEAR), c.get(Calendar.MONTH), c.get(Calendar.DAY_OF_MONTH)).show();
+
+                }
+            }
+        });
+
+        edpetsbirth.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                // TODO Auto-generated method stub
+                Calendar c = Calendar.getInstance();
+                new DatePickerDialog(getContext(), new DatePickerDialog.OnDateSetListener() {
+
+                    @Override
+                    public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+                        // TODO Auto-generated method stub
+                        edpetsbirth.setText(year+"/"+(monthOfYear+1)+"/"+dayOfMonth);
+                    }
+                }, c.get(Calendar.YEAR), c.get(Calendar.MONTH), c.get(Calendar.DAY_OF_MONTH)).show();
+
+            }
+        });
+
     }
 
     private void uploadimage() {
@@ -128,7 +172,7 @@ public class petsinfoFragment extends Fragment {
         final String petsname = edpetsname.getText().toString();
         FirebaseStorage storage = FirebaseStorage.getInstance("gs://ipets-app.appspot.com");
         StorageReference mStorageRef = storage.getReference();
-        StorageReference mountainsRef = mStorageRef.child(userUID +'/'+ petsname);
+        StorageReference mountainsRef = mStorageRef.child(userUID +'/'+ petsname+".jpg");
 
         Bitmap bitmap = ((BitmapDrawable) img.getDrawable()).getBitmap();
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
@@ -147,7 +191,7 @@ public class petsinfoFragment extends Fragment {
         final EditText edvariety = getView().findViewById(R.id.variety);
         final EditText edlikes = getView().findViewById(R.id.likes);
         final EditText ednotes = getView().findViewById(R.id.notes);
-        Integer petsbirth = Integer.parseInt(edpetsbirth.getText().toString());
+        String petsbirth = edpetsbirth.getText().toString();
         final String petsname = edpetsname.getText().toString();
         String petsvariety = edvariety.getText().toString();
         String petslikes = edlikes.getText().toString();
@@ -163,7 +207,6 @@ public class petsinfoFragment extends Fragment {
                 petsgender = "母的";
                 break;
         }
-
         FirebaseFirestore db;
         db = FirebaseFirestore.getInstance();
         Map<String, Object> userInfo = new HashMap<>();
@@ -174,7 +217,7 @@ public class petsinfoFragment extends Fragment {
         userInfo.put("Petsvariety", petsvariety);
         userInfo.put("Petslikes", petslikes);
         userInfo.put("Petsnotes", petsnotes);
-        db.collection("userInformation").document(userUID).update(userInfo);
+        db.collection("userInformation").document(userUID).collection("pets").document(petsname).set(userInfo);
         AlertDialog.Builder finishsignup = new AlertDialog.Builder(getActivity());
         finishsignup.setMessage("註冊成功");
         finishsignup.setNegativeButton("前往登入", new DialogInterface.OnClickListener() {

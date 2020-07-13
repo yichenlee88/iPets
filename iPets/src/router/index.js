@@ -91,7 +91,7 @@ let router = new Router({
       }
     },
     {
-      path: "/Manager",
+      path: "/manager",
       name: "Manager",
       component: Manager,
       meta: {
