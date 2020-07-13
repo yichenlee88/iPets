@@ -5,7 +5,6 @@
       <b-carousel
         id="carousel-1"
         class="carousel"
-        v-model="slide"
         :interval="3000"
         controls
         indicators
@@ -49,7 +48,7 @@
         ><b-col>領養機構資訊</b-col>
       </b-row>
       <b-row class="adoptionAgencies" cols-lg="3">
-        <div v-for="(item, i) in post.AdoptionAgencies" :key="i">
+        <div v-for="(item, i) in post" :key="i">
           <b-col>
             <b-card
               v-bind:title="item.Name"
@@ -85,22 +84,12 @@
                       </b-row>
                     </b-card-text>
                     <GmapMap
-                      v-bind:center="{
-                        lat: 121.752719,
-                        lng: 25.011085
-                      }"
+                      :id="`map_${i}`"
+                      :center="convertCenter(item.Center)"
                       :zoom="15"
                       map-type-id="roadmap"
                       style="  width: 100%;  height: 200px;"
                     >
-                      <GmapMarker
-                        :key="index"
-                        v-for="(m, index) in markers"
-                        :position="m.position"
-                        :clickable="true"
-                        :draggable="true"
-                        @click="center = m.position"
-                      />
                     </GmapMap>
                   </b-card>
                 </b-container>
@@ -155,35 +144,34 @@ export default {
       places: [],
       infowindow: [],
       currentPlace: null,
-      post: ""
+      post: []
     };
   },
 
   mounted() {
     this.geolocate();
     this.$http.get("/static/AdoptionAgencies.json").then(response => {
-      console.log(response.data);
       this.post = response.data;
     });
   },
 
   methods: {
     // receives a place object via the autocomplete component
-    setPlace(place) {
-      this.currentPlace = place;
-    },
-    addMarker() {
-      if (this.currentPlace) {
-        const marker = {
-          lat: this.currentPlace.geometry.location.lat(),
-          lng: this.currentPlace.geometry.location.lng()
-        };
-        this.markers.push({ position: marker });
-        this.places.push(this.currentPlace);
-        this.center = marker;
-        this.currentPlace = null;
-      }
-    },
+    // setPlace(place) {
+    //   this.currentPlace = place;
+    // },
+    // addMarker() {
+    //   if (this.currentPlace) {
+    //     const marker = {
+    //       lat: this.currentPlace.geometry.location.lat(),
+    //       lng: this.currentPlace.geometry.location.lng()
+    //     };
+    //     this.markers.push({ position: marker });
+    //     this.places.push(this.currentPlace);
+    //     this.center = marker;
+    //     this.currentPlace = null;
+    //   }
+    // },
     geolocate: function() {
       navigator.geolocation.getCurrentPosition(position => {
         this.center = {
@@ -192,11 +180,11 @@ export default {
         };
       });
     },
-    convertLongitude(longitude) {
-      return parseFloat(longitude);
-    },
-    convertLatitude(latitude) {
-      return parseFloat(latitude);
+    convertCenter(center) {
+      return {
+        lat: parseFloat(center.lat),
+        lng: parseFloat(center.lng)
+      };
     }
   }
 };
