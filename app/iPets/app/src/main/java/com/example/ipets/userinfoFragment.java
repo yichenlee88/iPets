@@ -1,6 +1,7 @@
 package com.example.ipets;
 
 
+import android.app.DatePickerDialog;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
@@ -8,10 +9,12 @@ import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
+import android.text.InputType;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -20,6 +23,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -55,7 +59,7 @@ public class userinfoFragment extends Fragment {
                 final EditText edmybirth = getView().findViewById(R.id.mybirth);
                 final EditText edmyaddress = getView().findViewById(R.id.myaddress);
                 String myname = edmyname.getText().toString();
-                Integer mybirth = Integer.parseInt(edmybirth.getText().toString());
+                String mybirth = edmybirth.getText().toString();
                 String myaddress = edmyaddress.getText().toString();
                 String mygender = null;
                 RadioGroup genderselect = getView().findViewById(R.id.genderselect);
@@ -83,6 +87,45 @@ public class userinfoFragment extends Fragment {
                 db.collection("userInformation").document(userUID).update(userInfo);
                 NavController controller = Navigation.findNavController(v);
                 controller.navigate(R.id.action_userinfoFragment_to_petsinfoFragment);
+            }
+        });
+        final EditText mybirth = getView().findViewById(R.id.mybirth);
+        mybirth.setInputType(InputType.TYPE_NULL); //不顯示系統輸入鍵盤
+        mybirth.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                // TODO Auto-generated method stub
+                if(hasFocus){
+                    Calendar c = Calendar.getInstance();
+                    new DatePickerDialog(getContext(), new DatePickerDialog.OnDateSetListener() {
+
+                        @Override
+                        public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+                            // TODO Auto-generated method stub
+                            mybirth.setText(year+"/"+(monthOfYear+1)+"/"+dayOfMonth);
+                        }
+                    }, c.get(Calendar.YEAR), c.get(Calendar.MONTH), c.get(Calendar.DAY_OF_MONTH)).show();
+
+                }
+            }
+        });
+
+        mybirth.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                // TODO Auto-generated method stub
+                Calendar c = Calendar.getInstance();
+                new DatePickerDialog(getContext(), new DatePickerDialog.OnDateSetListener() {
+
+                    @Override
+                    public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+                        // TODO Auto-generated method stub
+                        mybirth.setText(year+"/"+(monthOfYear+1)+"/"+dayOfMonth);
+                    }
+                }, c.get(Calendar.YEAR), c.get(Calendar.MONTH), c.get(Calendar.DAY_OF_MONTH)).show();
+
             }
         });
     }
