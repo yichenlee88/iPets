@@ -5,16 +5,16 @@
     <div class="container marketing">
       <div class="row">
         <div class="col-12 col-sm-4">
-          <div class="img-thumbnail" style="margin-left: 15px; height: 520px;">
+          <div class="img-thumbnail" style="margin-left: 15px; height: 520px;" v-for="(item, id) in comments" :key="id">
             <img
               class="rounded"
-              src="https://maoup.com.tw/wp-content/uploads/2018/02/180206_23-1024x768.png"
+              :src="item.image"
               style="max-width: 100%"
             >
             <H4>
-              <br>狗狗發抖危險程度大不同！快來釐清發抖原因！
+              <br>{{item.title}}
             </H4>
-            <p>狗狗發抖一定是覺得冷嗎？小心！各種發抖的危險程度大不同！當狗狗興奮、緊張、氣溫過低、疾病疼痛、中毒時都會發抖～請飼主釐清發抖原因，萬一是疾病或中毒引起，一定要趕快就醫喔！</p>
+            <p>{{ item.introduction }}</p>
             <a href="#/dogScienceArticle" target="_blank">
               <button
                 type="button"
@@ -136,10 +136,34 @@
 </template>
 
 <script>
+import axios from "axios";
+
 export default {
   name: "dogScience",
   data() {
-    return {};
+    return {
+      title: "",
+      image: "",
+      introduction: "",
+      title1: "",
+      content1: "",
+      title2: "",
+      content2: "",
+      title3: "",
+      content3: "",
+      title4: "",
+      content4: "",
+      title5: "",
+      content5: "",
+      ending: "",
+      comments: []
+    };
+  },
+  mounted() {
+    axios.get("http://localhost:3000/comments").then(res => {
+      console.log(res);
+      this.comments = res.data;
+    });
   }
 };
 </script>
