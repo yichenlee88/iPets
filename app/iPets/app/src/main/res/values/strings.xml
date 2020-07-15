@@ -86,9 +86,23 @@
     <string name="hint_search">輸入你想搜詢的地方</string>
     <string name="button_search">搜尋</string>
     <string name="img_gps" />
-    <string name="button_map" >map</string>
+    <string name="button_map">map</string>
     <string name="title_activity_home">HomeActivity</string>
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
+    <string name="button_myinfo">主人基本資料</string>
+    <string name="Email_hint">E-mail</string>
+    <string name="Name_hint">名稱</string>
+    <string name="TextView_notice">通知</string>
+    <string name="TextView_language">中/英</string>
+    <string name="TextView_CN">中文(TW)</string>
+    <string name="TextView_EN">English</string>
+    <string name="TextView_ON">開啟</string>
+    <string name="TextView_OFF">關閉</string>
+    <string name="button_editPet">編輯寵物資訊(需刪除請聯絡客服)</string>
+    <string name="TextView_sysVer">系統版本</string>
+    <string name="TextView_Version">9.10.13</string>
+    <string name="button_question">常見問題</string>
+    <string name="TextView_communicate">聯絡我們</string>
 </resources>

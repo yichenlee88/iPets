@@ -45,8 +45,12 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
 import java.lang.ref.Reference;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.Instant;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 
@@ -109,6 +113,9 @@ public class homeFragment extends Fragment {
                             for (QueryDocumentSnapshot document : task.getResult()) {
                                 petname.add(document.getId());
                             }
+                            if(petname.size()==0){
+                                petname.add("尚未擁有寵物");
+                            }
                             petname.add("新增寵物");
                             ArrayAdapter adapter = new ArrayAdapter<>(getContext(),android.R.layout.simple_spinner_item , petname);
                             adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -153,9 +160,34 @@ public class homeFragment extends Fragment {
                     DocumentSnapshot doc = task.getResult();
                     StringBuilder fields = new StringBuilder("");
                     StringBuilder fields2 = new StringBuilder("");
-                    text_petsSex.setText(fields.append(doc.get("Petsgender")).toString());
-                    text_petsBirth.setText(fields2.append(doc.get("Petsbirth")).toString());
-                }
+                    fields.append(doc.get("Petsgender")).toString();
+                    fields2.append(doc.get("Petsbirth")).toString();
+                        text_petsSex.setText(fields);
+                        text_petsBirth.setText(fields2);
+                        SimpleDateFormat df = new SimpleDateFormat("yyyy/MM/dd");
+                        String petsBirth = fields2.toString();
+                        try {
+                            Date Birth = df.parse(petsBirth);
+                            Date nowdate = new Date();
+                            Calendar ca1 = Calendar.getInstance();
+                            Calendar ca2 = Calendar.getInstance();
+                            ca1.setTime(Birth);
+                            ca2.setTime(nowdate);
+                            int year = ca2.get(Calendar.YEAR) - ca1.get(Calendar.YEAR);
+                            int month = ca2.get(Calendar.MONTH) - ca1.get(Calendar.MONTH);
+                            int day = ca2.get(Calendar.DATE) - ca1.get(Calendar.DATE);
+                            if (month < 0) {
+                                year--;
+                                month = month + 12;
+                            }
+                            if (day < 0) {
+                                month--;
+                            }
+                            text_petsAge.setText(year + "歲" + month + "月");
+                        } catch (ParseException e) {
+                            e.printStackTrace();
+                        }
+                    }
             }
         })
                 .addOnFailureListener(new OnFailureListener() {
