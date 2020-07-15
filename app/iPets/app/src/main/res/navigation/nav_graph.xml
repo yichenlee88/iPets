@@ -40,6 +40,9 @@
         <action
             android:id="@+id/action_homeFragment_to_loginFragment2"
             app:destination="@id/loginFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_settingActivity"
+            app:destination="@id/settingActivity" />
     </fragment>
     <fragment
         android:id="@+id/forgotFragment"
@@ -105,4 +108,9 @@
         android:name="com.example.ipets.HomeActivity"
         android:label="activity_home"
         tools:layout="@layout/activity_home" />
+    <activity
+        android:id="@+id/settingActivity"
+        android:name="com.example.ipets.SettingActivity"
+        android:label="activity_setting"
+        tools:layout="@layout/activity_setting" />
 </navigation>
