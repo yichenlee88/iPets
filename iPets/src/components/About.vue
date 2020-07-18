@@ -1,7 +1,7 @@
 <template>
-  <b-container class="AboutUs">
-    <b-row class="Motivation text-center"><b-col>專案動機</b-col> </b-row>
-    <b-row class="MotivationContent text-center"
+  <b-container>
+    <b-row class="MotivationTitle text-center"><b-col>專案動機</b-col> </b-row>
+    <b-row class="MotivationContent"
       ><b-col>
         <h5><strong>一、寵物飼養背景與現況</strong></h5>
         <p>
@@ -16,11 +16,86 @@
         </p></b-col
       >
     </b-row>
-    <h5><strong>一、寵物飼養背景與現況</strong></h5>
-
-    <b-row class="Question text-center"><b-col>問題與機會</b-col> </b-row>
-    <b-row class="Special text-center"><b-col>特別之處</b-col> </b-row>
-    <b-row class="Member text-center"><b-col>組員介紹</b-col> </b-row>
+    <b-row class="QuestionTitle text-center"><b-col>問題與機會</b-col> </b-row>
+    <b-row class="QuestionContent"
+      ><b-col>
+        <h6><mark>情況一</mark></h6>
+        <h5>
+          <strong>
+            隨著愈來愈多人以養寵物取代結婚生子，許多青壯年到了適婚年齡，都尚未步入婚姻，就算結婚也沒有計畫生育孩子，在這種情況下，這些家庭便會增加飼養貓或狗的想法。
+          </strong>
+        </h5>
+        <p>
+          「iPets」為這些頂客族、不婚主義者以及正在飼養寵物的飼主，打造了方便且實用的網站及APP，輔助飼主管理寵物的生活，輕鬆養寵物不用擔心忙碌而忘記打理自己的寵物；新手或有想養寵物的人們更是適合，iPets系統有多項功能幫助想養寵物的新手學會如何打理自己的寵物，不用擔心會手忙腳亂。有「iPets」在，讓使用者養寵物不費力、開心輕鬆養寵物。
+        </p>
+        <h6><mark>情況二</mark></h6>
+        <h5>
+          <strong>
+            在這網路發達、高科技的時代，愈來愈少人用手札的方式紀錄行程在行事曆，現代社會人手一機，習慣透過手機行事曆紀錄行程，任何與寵物有關的資訊也會上網查詢而並非閱讀書籍。另外，我們也發現許多飼主會忘記定期打理毛孩子，像是剃毛、驅蟲、打疫苗、洗澡等，這會產生一些影響導致寵物無法健康成長。
+          </strong>
+        </h5>
+        <p>
+          「iPets」有多項提醒功能，像是為寵物剃毛、驅蟲、打疫苗等定期性的事項，使用者可以設定一個週期性於行事曆並開啟提醒功能，讓使用者不必擔心會忘記行程。另外，還具備分析飼料成分的功能，來判斷該飼料是否健康、營養，同時還包括一些用戶專屬的功能，可以協助使用者快速找到寵物醫院、寵物旅館等。
+        </p></b-col
+      >
+    </b-row>
+    <b-row class="SpecialTitle text-center"><b-col>特別之處</b-col> </b-row>
+    <b-row class="QuestionContent"
+      ><b-col
+        ><h5><strong>一、簡潔的介面設定</strong></h5>
+        <p>
+          （一）人性化管理介面：操作介面簡潔有力，讓使用者可以一目了然。
+        </p>
+        <h5><strong>二、方便的寵物管理</strong></h5>
+        <p>
+          （一）多寵物管理：假如飼養多隻寵物，只需要註冊該寵物，便可以輕鬆的切換介面查看寵物的行程。<br />
+          （二）行事曆：讓用戶可以記錄寵物的相關行程（如：剃毛、美容等）。<br />
+          （三）倒數計時器：利用簡潔的介面，使用To-Do
+          List，方便管理寵物行程。<br />
+          （四）自動排程：用戶只需設定重複頻率及次數，系統便會自動排程。<br />
+          （五）顏色區別：將較重要的行程以不同顏色表示，讓用戶快速區分活動的先後順序。<br />
+          （六）提醒功能：給予用戶自行設定提醒時間，若未設定，則會在行程到來的前一天及當天通知用戶。
+        </p>
+        <h5><strong>三、豐富使用者體驗</strong></h5>
+        <p>
+          （一）個人化排程：讓使用者自行選擇將哪些倒數計時器顯示於首頁。（如：剃毛、洗澡等）。<br />
+          （二）品種辨識：運用人工智慧技術，將上傳的圖片進行寵物辨識，便可以得知該寵物品種，提升用戶體驗。<br />
+          （三）寵物風格轉換：運用人工智慧技術，將上傳的圖片轉換成五種不同風格的照片，讓用戶對於每次圖片轉換都充滿期待感。<br />
+          （四）好文推薦：過濾假知識，推薦寵物相關文章，給予使用者優質寵物資訊平台。<br />
+          （五）關鍵字搜尋功能：使用者能夠便利地查詢網站所有文章及資訊。<br />
+        </p>
+        <h5><strong>四、提高用戶黏著度</strong></h5>
+        <p>
+          （一）相簿空間：提供用戶存放寵物相片的空間，讓用戶可以將寵物每個瞬間記錄下來，提升用戶使用意願。<br />
+          （二）寵物飼料分析：從網路搜尋相關資訊並經由系統分析，建立可信的資料集，方便用戶作為飼料購買依據，減少選購時間。<br />
+          （三）提供店家資訊：讓用戶可以快速搜尋周遭與寵物有關的店家與醫院，並且可用關鍵字查詢，方便用戶快速找到需要的商家。<br /></p></b-col
+    ></b-row>
+    <b-row class="MemberTitle text-center"><b-col>組員介紹</b-col> </b-row>
+    <b-row class="MemberContent text-center" cols-lg="3">
+      <div v-for="(item, i) in post" :key="i">
+        <b-col>
+          <b-card
+            v-bind:title="item.Name"
+            v-bind:img-src="item.src"
+            img-alt="Image"
+            img-top
+            tag="article"
+            style="max-width: 20rem;"
+            class="mb-2"
+          >
+            <b-card-text>
+              <a
+                class="nav-link con-link"
+                :v-bind:href="item.link"
+                target="_blank"
+              >
+                <i class="fas fa-link"></i>
+              </a>
+            </b-card-text>
+          </b-card>
+        </b-col>
+      </div>
+    </b-row>
   </b-container>
   <!-- <div class="container mt-3">
     <ul class="nav nav-tabs nav-fill" style="margin-top: 20px; color: #e3f2fd;">
@@ -203,21 +278,42 @@
 
 <script>
 export default {
-  name: "about"
+  name: "about",
+  data() {
+    return {
+      post: ""
+    };
+  },
+  mounted() {
+    this.$http.get("/static/member.json").then(response => {
+      console.log(response.data);
+      this.post = response.data;
+    });
+  }
 };
 </script>
 
 <style>
-.AboutUs {
+.MotivationTitle,
+.QuestionTitle,
+.SpecialTitle,
+.MemberTitle {
   font-size: 30px;
   line-height: 100px;
 }
 
-.MotivationContent {
+.MotivationContent,
+.QuestionContent,
+.SpecialContent {
   size: 12px;
   text-align: center;
   vertical-align: middle;
-  margin-top: 10px;
+  margin: 0 auto;
+  margin-bottom: 15px;
+  text-align: left;
+  font-family: "Microsoft JhengHei", "sans-serif";
+  line-height: 40px;
+  width: 85%;
 }
 
 .con-heigh {
@@ -234,35 +330,20 @@ export default {
 
 .con-link {
   color: black;
-  margin-top: -10px;
 }
 
 .card {
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-  transition: 0.3s;
-  width: 30%;
-  border-radius: 5px;
-  margin-top: 20px;
+  min-height: 360px;
+  margin-bottom: 20px;
 }
 
 .card:hover {
   box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
 }
 
-.container {
-  padding: 2px 16px;
-}
-
-img {
+.MemberContent {
+  font-family: "Microsoft JhengHei", Helvetica, Arial, sans-serif;
   margin-top: 10px;
   border-radius: 5px 5px 5px 5px;
-}
-
-.nav-item {
-  font-family: "Microsoft JhengHei", Helvetica, Arial, sans-serif;
-}
-
-.h5 .p {
-  font-family: "Microsoft JhengHei", Helvetica, Arial, sans-serif;
 }
 </style>
