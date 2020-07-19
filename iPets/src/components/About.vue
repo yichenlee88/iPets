@@ -1,25 +1,8 @@
 <template>
-  <div class="container mt-3">
-    <ul class="nav nav-tabs nav-fill" style="margin-top: 20px; color: #e3f2fd;">
-      <li class="nav-item">
-        <a class="nav-link active" data-toggle="tab" href="#motivation"
-          >專案動機</a
-        >
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" data-toggle="tab" href="#question">問題與機會</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" data-toggle="tab" href="#special">特別</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" data-toggle="tab" href="#member">組員介紹</a>
-      </li>
-    </ul>
-    <br />
-    <div class="tab-content">
-      <div class="tab-pane fade show active con-heigh" id="motivation">
-        <br />
+  <b-container>
+    <b-row class="MotivationTitle text-center"><b-col>專案動機</b-col> </b-row>
+    <b-row class="MotivationContent"
+      ><b-col>
         <h5><strong>一、寵物飼養背景與現況</strong></h5>
         <p>
           近年來，由於「臺灣的人口結構性變化」和「個人經濟壓力因素」，讓寵物陪伴變成主流，現代的年輕族群結婚後未必會生育孩子，反而會選擇飼養寵物，因為飼養寵物的花費及精力遠遠小於養育孩子，導致現在社會上部分家庭都會飼養寵物，將寵物當成孩子寵愛。
@@ -30,11 +13,12 @@
         <p>
           目前在手機商店的寵物居家管理程式只有少數幾個，經過本組的觀察後，發現功能幾乎大同小異，而且UI設計風格差不多，整體較無差異性。所以本專題目標是做出不同於市面上且更加舒適的UI，同時具備較便利的管理功能，以及品種辨識技術、商家定位等特殊功能，增加系統差異性及使用者的黏著度。
           不同於其他寵物居家管理系統只能在手機上使用，本專題開發了手機版及網頁版的管理系統，兩邊系統能夠資料同步與功能相容。除此之外，兩邊系統也會有一些各自獨立的功能，手機版本有定位功能；網頁版本則會有寵物辨識以及寵物圖片風格轉換，結合現今主流趨勢人工智慧，讓本次專題的管理系統更加有趣且豐富。
-        </p>
-        <br />
-      </div>
-      <div class="tab-pane fade con-heigh" id="question">
-        <br />
+        </p></b-col
+      >
+    </b-row>
+    <b-row class="QuestionTitle text-center"><b-col>問題與機會</b-col> </b-row>
+    <b-row class="QuestionContent"
+      ><b-col>
         <h6><mark>情況一</mark></h6>
         <h5>
           <strong>
@@ -44,7 +28,6 @@
         <p>
           「iPets」為這些頂客族、不婚主義者以及正在飼養寵物的飼主，打造了方便且實用的網站及APP，輔助飼主管理寵物的生活，輕鬆養寵物不用擔心忙碌而忘記打理自己的寵物；新手或有想養寵物的人們更是適合，iPets系統有多項功能幫助想養寵物的新手學會如何打理自己的寵物，不用擔心會手忙腳亂。有「iPets」在，讓使用者養寵物不費力、開心輕鬆養寵物。
         </p>
-        <br />
         <h6><mark>情況二</mark></h6>
         <h5>
           <strong>
@@ -53,12 +36,13 @@
         </h5>
         <p>
           「iPets」有多項提醒功能，像是為寵物剃毛、驅蟲、打疫苗等定期性的事項，使用者可以設定一個週期性於行事曆並開啟提醒功能，讓使用者不必擔心會忘記行程。另外，還具備分析飼料成分的功能，來判斷該飼料是否健康、營養，同時還包括一些用戶專屬的功能，可以協助使用者快速找到寵物醫院、寵物旅館等。
-        </p>
-        <br />
-      </div>
-      <div class="tab-pane fade con-heigh" id="special">
-        <br />
-        <h5><strong>一、簡潔的介面設定</strong></h5>
+        </p></b-col
+      >
+    </b-row>
+    <b-row class="SpecialTitle text-center"><b-col>特別之處</b-col> </b-row>
+    <b-row class="QuestionContent"
+      ><b-col
+        ><h5><strong>一、簡潔的介面設定</strong></h5>
         <p>
           （一）人性化管理介面：操作介面簡潔有力，讓使用者可以一目了然。
         </p>
@@ -84,161 +68,92 @@
         <p>
           （一）相簿空間：提供用戶存放寵物相片的空間，讓用戶可以將寵物每個瞬間記錄下來，提升用戶使用意願。<br />
           （二）寵物飼料分析：從網路搜尋相關資訊並經由系統分析，建立可信的資料集，方便用戶作為飼料購買依據，減少選購時間。<br />
-          （三）提供店家資訊：讓用戶可以快速搜尋周遭與寵物有關的店家與醫院，並且可用關鍵字查詢，方便用戶快速找到需要的商家。<br />
-        </p>
-        <br />
+          （三）提供店家資訊：讓用戶可以快速搜尋周遭與寵物有關的店家與醫院，並且可用關鍵字查詢，方便用戶快速找到需要的商家。<br /></p></b-col
+    ></b-row>
+    <b-row class="MemberTitle text-center"><b-col>組員介紹</b-col> </b-row>
+    <b-row class="MemberContent" cols-lg="3">
+      <div v-for="(item, i) in post" :key="i">
+        <b-col class="MemberCard">
+          <b-card
+            v-bind:title="item.Name"
+            v-bind:img-src="item.src"
+            img-alt="Image"
+            img-top
+            tag="article"
+            align="center"
+            class="mb-2"
+          >
+            <b-card-text>
+              <b-link class="link" :href="item.link"
+                ><i class="fas fa-link"></i
+              ></b-link>
+            </b-card-text>
+          </b-card>
+        </b-col>
       </div>
-      <div class="tab-pane fade con-heigh" id="member">
-        <div class="card-deck">
-          <br />
-          <div class="row col-12">
-            <div class="card col-4">
-              <img src="../assets/04.jpg" alt="Avatar" style="width:100%" />
-              <div class="container con-text">
-                <h4>
-                  <b>李怡蓁</b>
-                </h4>
-                <a
-                  class="nav-link con-link"
-                  href="https://github.com/yichenlee88"
-                  target="_blank"
-                >
-                  <i class="fas fa-link"></i>
-                </a>
-              </div>
-            </div>
-            <div class="card col-4">
-              <img src="../assets/43.jpg" alt="Avatar" style="width:100%" />
-              <div class="container con-text">
-                <h4>
-                  <b>蔡欣恬</b>
-                </h4>
-                <a
-                  class="nav-link con-link"
-                  href="https://github.com/watson050308"
-                  target="_blank"
-                >
-                  <i class="fas fa-link"></i>
-                </a>
-              </div>
-            </div>
-            <div class="card col-4">
-              <img src="../assets/05.jpg" alt="Avatar" style="width:100%" />
-              <div class="container con-text">
-                <h4>
-                  <b>黃琳恩</b>
-                </h4>
-                <a
-                  class="nav-link con-link"
-                  href="https://github.com/Linen3082"
-                  target="_blank"
-                >
-                  <i class="fas fa-link"></i>
-                </a>
-              </div>
-            </div>
-          </div>
-          <div class="row col-12" style="margin-bottom: 20px">
-            <div class="card col-4">
-              <img src="../assets/14.jpg" alt="Avatar" style="width:100%" />
-              <div class="container con-text">
-                <h4>
-                  <b>王偉霖</b>
-                </h4>
-                <a
-                  class="nav-link con-link"
-                  href="https://github.com/n1066414"
-                  target="_blank"
-                >
-                  <i class="fas fa-link"></i>
-                </a>
-              </div>
-            </div>
-            <div class="card col-4">
-              <img src="../assets/23.jpg" alt="Avatar" style="width:100%" />
-              <div class="container con-text">
-                <h4>
-                  <b>劉芳汝</b>
-                </h4>
-                <a
-                  class="nav-link con-link"
-                  href="https://github.com/lululiu29783638"
-                  target="_blank"
-                >
-                  <i class="fas fa-link"></i>
-                </a>
-              </div>
-            </div>
-            <div class="col-4"></div>
-            <br />
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+    </b-row>
+  </b-container>
 </template>
 
 <script>
 export default {
-  name: "about"
+  name: "about",
+  data() {
+    return {
+      post: ""
+    };
+  },
+  mounted() {
+    this.$http.get("/static/member.json").then(response => {
+      console.log(response.data);
+      this.post = response.data;
+    });
+  }
 };
 </script>
 
 <style>
-.con-heigh {
-  text-shadow: 0 0 1px gray;
-  width: 85%;
+.MotivationTitle,
+.QuestionTitle,
+.SpecialTitle,
+.MemberTitle {
+  font-size: 32px;
+  line-height: 100px;
+}
+
+.MotivationContent,
+.QuestionContent,
+.SpecialContent {
+  font-size: 18px;
+  text-align: center;
+  vertical-align: middle;
   margin: 0 auto;
   margin-bottom: 15px;
   text-align: left;
   font-family: "Microsoft JhengHei", "sans-serif";
   line-height: 40px;
-  display: inline-block;
-  align-items: center;
-}
-
-.con-text {
-  size: 12px;
-  text-align: center;
-  vertical-align: middle;
-  margin-top: 10px;
-}
-
-.con-link {
-  color: black;
-  margin-top: -10px;
 }
 
 .card {
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-  transition: 0.3s;
-  width: 30%;
-  border-radius: 5px;
-  margin-top: 20px;
+  min-height: 360px;
 }
 
 .card:hover {
   box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
 }
 
-.container {
-  padding: 2px 16px;
-}
-
-img {
+.MemberContent {
+  font-family: "Microsoft JhengHei", Helvetica, Arial, sans-serif;
   margin-top: 10px;
   border-radius: 5px 5px 5px 5px;
+  font-size: 18px;
 }
 
-.nav-item {
-  font-family: "Microsoft JhengHei", Helvetica, Arial, sans-serif;
+.MemberCard {
+  margin-bottom: 20px;
 }
 
-.h5 .p {
-  font-family: "Microsoft JhengHei", Helvetica, Arial, sans-serif;
-}
-
-.p {
-  size: 18px;
+.link {
+  color: black;
 }
 </style>
