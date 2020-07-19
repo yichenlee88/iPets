@@ -1,0 +1,27 @@
+{
+  "Yi": {
+    "src": "../static/img/04.jpg",
+    "Name": "李怡蓁",
+    "link": "https://github.com/yichenlee88"
+  },
+  "Watson": {
+    "src": "../static/img/43.jpg",
+    "Name": "蔡欣恬",
+    "link": "https://github.com/watson050308"
+  },
+  "Linen": {
+    "src": "../static/img/05.jpg",
+    "Name": "黃琳恩",
+    "link": "https://github.com/Linen3082"
+  },
+  "Wei": {
+    "src": "../static/img/14.jpg",
+    "Name": "王偉霖",
+    "link": "https://github.com/n1066414"
+  },
+  "Lululiu": {
+    "src": "../static/img/23.jpg",
+    "Name": "劉芳汝",
+    "link": "https://github.com/lululiu29783638"
+  }
+}
