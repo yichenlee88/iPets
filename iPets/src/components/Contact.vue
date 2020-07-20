@@ -1,6 +1,39 @@
 <template>
   <b-container>
-    <div class="row feature">
+    <b-row class="ContactTitle text-center"
+      ><b-col><h1>歡迎提出您任何的問題</h1></b-col></b-row
+    >
+    <b-row>
+      <b-col col="4"
+        ><img class="center" src="../assets/4.jpg" width="320" alt="image slot"
+      /></b-col>
+      <b-col col="8">
+        <b-form-input
+          class="InputClass"
+          v-model="text"
+          placeholder="First Name"
+        ></b-form-input>
+        <b-form-input
+          class="InputClass"
+          v-model="text"
+          placeholder="Last Name"
+        ></b-form-input
+        ><b-form-input
+          class="InputClass"
+          v-model="email"
+          placeholder="Your Email"
+        ></b-form-input>
+        <b-form-textarea
+          class="TextareaClass"
+          id="textarea-default"
+          placeholder="Your Question..."
+          maxlength
+        ></b-form-textarea
+        ><b-button class="ButtonClass">Button</b-button></b-col
+      >
+    </b-row>
+
+    <!-- <div class="row feature">
       <div class="col-md-7 order-md-2">
         <h2 class="title">聯絡我們</h2>
         <br />
@@ -50,7 +83,7 @@
           </li>
         </ul>
       </div>
-    </div>
+    </div> -->
   </b-container>
 </template>
 
@@ -61,6 +94,44 @@ export default {
 </script>
 
 <style>
+.ContactTitle {
+  margin-top: 100px;
+  margin-bottom: 100px;
+}
+
+.center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
+}
+
+.InputClass {
+  height: 48px;
+  width: 400px;
+  border-radius: 40px;
+  margin-bottom: 20px;
+}
+
+.TextareaClass {
+  height: 120px;
+  width: 400px;
+  border-radius: 16px;
+  margin-bottom: 20px;
+}
+
+.ButtonClass {
+  height: 48px;
+  width: 400px;
+  border-radius: 40px;
+  margin-bottom: 20px;
+  background: -webkit-linear-gradient(
+    left,
+    rgb(148, 115, 221) 0%,
+    rgb(26, 201, 228) 100%
+  );
+}
+
 .feature {
   margin-top: 130px;
   margin-bottom: 130px;
