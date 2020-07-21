@@ -1,9 +1,32 @@
 <template>
   <div>
+    <router-link to="/order">Order</router-link>
     <div class="container" style="margin-top: 20px;">
       <div class="col-10" style="margin:0 auto 20px auto;">
         <div class="post-inner">
-          <div v-for="(item, i) in post.P0001" :key="i">
+          <div class="container marketing">
+      <div class="row">
+        <div class="col-12 col-sm-4" v-for="(item, index) in comments" :key="index">
+          <div class="img-thumbnail" style="margin-left: 15px; height: 520px;">
+            <img class="rounded" :src="item.image" style="max-width: 100%">
+            <H5>
+              <br>
+              {{item.title}}
+            </H5>
+            <p>{{ item.introduction }}</p>
+            <a href="#/dogScience/post/item.id" target="_blank">
+              <button
+                type="button"
+                class="btn btn-info"
+                style="position: absolute; right: 20px; bottom: 5px;"
+                @click="viewPost(index)"
+              >了解更多</button>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+          <div v-for="(item, index) in comments" :key="index">
             <h1 class="title_name">{{item.title}}</h1>
           <img class="rounded" :src="item.src" style="max-width: 80%">
           <p class="content">
@@ -83,17 +106,34 @@
 </template>
 
 <script>
+import axios from "axios";
+
 export default {
-  name: "dogScienceArticle",
+  name: "Post",
   data() {
     return {
-      post: ""
+      post: "",
+      title: "",
+      image: "",
+      introduction: "",
+      title1: "",
+      content1: "",
+      title2: "",
+      content2: "",
+      title3: "",
+      content3: "",
+      title4: "",
+      content4: "",
+      title5: "",
+      content5: "",
+      ending: "",
+      comments: []
     };
   },
   mounted() {
-    this.$http.get("/static/article.json").then(response => {
-      console.log(response.data);
-      this.post = response.data;
+    axios.get("http://localhost:3000/comments").then(res => {
+      console.log(res.data);
+      this.comments = res.data;
     });
   }
 };
