@@ -1,27 +1,29 @@
 <template>
   <div class="container" style="margin-top: 20px;">
-    <img src="../assets/狗狗科普.png" class="center">
+    <img src="../assets/狗狗科普.png" class="banner">
     <br>
     <div class="container marketing">
       <div class="row">
-        <div class="col-12 col-sm-4"  v-for="(item, id) in comments" :key="id">
+        <div class="col-12 col-sm-4" v-for="(item, index) in comments" :key="index">
           <div class="img-thumbnail" style="margin-left: 15px; height: 520px;">
-            <img
-              class="rounded"
-              :src="item.image"
-              style="max-width: 100%"
-            >
-            <H4>
-              <br>{{item.title}}
-            </H4>
+            <img class="rounded" :src="item.image" style="max-width: 100%">
+            <H5>
+              <br>
+              {{item.title}}
+            </H5>
             <p>{{ item.introduction }}</p>
-            <a href="#/dogScienceArticle" target="_blank">
+            <a href="#/dogScience/post" target="_blank">
               <button
                 type="button"
                 class="btn btn-info"
                 style="position: absolute; right: 20px; bottom: 5px;"
+                @click="viewPost(index)"
               >了解更多</button>
             </a>
+            <router-link :to="{
+              name:'dogScience',
+              params: { id: 'ID啥的'}
+              }">dogScience</router-link>
           </div>
         </div>
       </div>
@@ -97,6 +99,10 @@
 
 <script>
 import axios from "axios";
+// import Router from "vue-router";
+// import post from "@/components/Post";
+
+// Vue.use(Router)
 
 export default {
   name: "dogScience",
@@ -105,20 +111,16 @@ export default {
       title: "",
       image: "",
       introduction: "",
-      title1: "",
-      content1: "",
-      title2: "",
-      content2: "",
-      title3: "",
-      content3: "",
-      title4: "",
-      content4: "",
-      title5: "",
-      content5: "",
-      ending: "",
       comments: []
     };
   },
+  // route: [
+  //   {
+  //     path: "/dogScience/post/:id",
+  //     name: "post",
+  //     component: Post
+  //   }
+  // ],
   mounted() {
     axios.get("http://localhost:3000/comments").then(res => {
       console.log(res);
@@ -135,10 +137,10 @@ export default {
   align-items: center;
 }
 
-.center {
+.banner {
   display: block;
   margin-left: auto;
   margin-right: auto;
-  width: 80%;
+  width: 100%;
 }
 </style>
