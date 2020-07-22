@@ -29,10 +29,28 @@
           placeholder="Your Question..."
           maxlength
         ></b-form-textarea
-        ><b-button class="ButtonClass">Button</b-button></b-col
+        ><b-button class="ButtonClass">Send</b-button></b-col
       >
     </b-row>
 
+    <b-row class="ContactTitle text-center"
+      ><b-col><h1>加入我們</h1></b-col></b-row
+    >
+    <b-card
+      img-src="../static/img/carousel-01.jpg"
+      img-alt="Card image"
+      img-top
+    >
+      <b-card-text>
+        <b-row
+          ><b-col col="6">
+            <b-img class="qrcenter" src="../static/img/M.png"></b-img></b-col
+          ><b-col col="6"></b-col
+        ></b-row>
+      </b-card-text>
+
+      <b-button href="#" variant="primary">Go somewhere</b-button>
+    </b-card>
     <!-- <div class="row feature">
       <div class="col-md-7 order-md-2">
         <h2 class="title">聯絡我們</h2>
@@ -104,6 +122,13 @@ export default {
   margin-left: auto;
   margin-right: auto;
   width: 50%;
+}
+
+.qrcenter {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 25%;
 }
 
 .InputClass {
