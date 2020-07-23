@@ -43,13 +43,25 @@
     >
       <b-card-text>
         <b-row
-          ><b-col col="6">
-            <b-img class="qrcenter" src="../static/img/M.png"></b-img></b-col
-          ><b-col col="6"></b-col
+          ><b-col col="6"
+            ><h3 class="text-center">歡迎加入我們的大家庭</h3>
+            <p class="text-center">
+              加入我們的會員
+            </p>
+            <p class="text-center">可以更快速的收到最新消息</p>
+            <p class="text-center">掃描右側的QR Code或著點擊加入</p>
+            <p class="text-center">就可以成為我們的夥伴囉~</p></b-col
+          >
+          <b-col col="6"
+            ><b-img class="Qrcenter" src="../static/img/M.png"></b-img
+            ><a href="https://lin.ee/GZOoOSt"
+              ><img
+                class="LinkCenter"
+                src="https://scdn.line-apps.com/n/line_add_friends/btn/zh-Hant.png"
+                alt="加入好友"
+                height="36"/></a></b-col
         ></b-row>
       </b-card-text>
-
-      <b-button href="#" variant="primary">Go somewhere</b-button>
     </b-card>
     <!-- <div class="row feature">
       <div class="col-md-7 order-md-2">
@@ -124,11 +136,18 @@ export default {
   width: 50%;
 }
 
-.qrcenter {
+.Qrcenter {
   display: block;
   margin-left: auto;
   margin-right: auto;
   width: 25%;
+}
+
+.LinkCenter {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  border-radius: 5px;
 }
 
 .InputClass {
@@ -157,8 +176,7 @@ export default {
   );
 }
 
-.feature {
-  margin-top: 130px;
-  margin-bottom: 130px;
+.card {
+  margin-bottom: 100px;
 }
 </style>
