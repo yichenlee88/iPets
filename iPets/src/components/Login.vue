@@ -1,4 +1,40 @@
 <template>
+  <b-container
+    ><b-img
+      class="banner_png center"
+      src="../static/img/logo_banner.png"
+    ></b-img>
+    <b-card
+      title="登入"
+      tag="article"
+      class="text-center center"
+      style="width:512px;"
+    >
+      <b-card-text>
+        <b-row>
+          <b-col>
+            <b-form-input
+              class="InputClass center"
+              v-model="text"
+              placeholder="First Name"
+            ></b-form-input>
+            <b-form-input
+              class="InputClass center"
+              v-model="text"
+              placeholder="Last Name"
+            ></b-form-input
+            ><b-form-input
+              class="InputClass center"
+              v-model="email"
+              placeholder="Your Email"
+            ></b-form-input>
+            <b-button class="ButtonClass">Send</b-button></b-col
+          >
+        </b-row>
+      </b-card-text>
+    </b-card></b-container
+  >
+  <!--
   <div class="container">
     <img src="../assets/logo_banner.png" class="center" />
     <div class="card">
@@ -60,7 +96,7 @@
         </div>
       </div>
     </div>
-  </div>
+  </div> -->
 </template>
 
 <script>
@@ -97,13 +133,11 @@ export default {
 </script>
 
 <style scoped>
-.container {
-  margin-top: 20px;
+.InputClass {
+  height: 48px;
+  width: 400px;
+  border-radius: 40px;
   margin-bottom: 20px;
-  border: 0px;
-  font-family: "Microsoft JhengHei", "sans-serif";
-  width: 40%;
-  min-height: 600px;
 }
 
 .banner_png {
@@ -111,13 +145,13 @@ export default {
   margin: auto;
 }
 
-.row {
-  vertical-align: bottom;
-  line-height: 50px;
-  text-align: center;
+.center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
 }
 
-.btn {
+/* .btn {
   width: 80%;
   padding: 12px;
   border: none;
@@ -169,5 +203,5 @@ input:hover,
   font-size: 24px;
   font-family: "Microsoft JhengHei", Helvetica, Arial, sans-serif;
   text-align: center;
-}
+} */
 </style>
