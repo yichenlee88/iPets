@@ -99,38 +99,6 @@
         </div>
       </b-row>
     </b-container>
-    <!--"longitude":"", //經度
-      "latitude":"" //緯度
-      -->
-    <!--領養機構資訊
-                <GmapMap
-                  :center="{ lat: 25.011085, lng: 121.752719 }"
-                  :zoom="15"
-                  map-type-id="roadmap"
-                  style="  width: 100%;  height: 200px;"
-                >
-                  <GmapMarker
-                    :key="index"
-                    v-for="(m, index) in markers"
-                    :position="m.position"
-                    :clickable="true"
-                    :draggable="true"
-                    @click="center = m.position"
-                  />
-                </GmapMap>
-                <div id="map"></div>
-              </div>
-            </div>
-          </div>
-          <div class="modal-footer">
-            <button
-              type="button"
-              class="btn btn-outline-light text-dark border-dark"
-              data-dismiss="modal"
-            >
-              關閉視窗
-            </button>
-          >-->
   </div>
 </template>
 
@@ -156,22 +124,6 @@ export default {
   },
 
   methods: {
-    // receives a place object via the autocomplete component
-    // setPlace(place) {
-    //   this.currentPlace = place;
-    // },
-    // addMarker() {
-    //   if (this.currentPlace) {
-    //     const marker = {
-    //       lat: this.currentPlace.geometry.location.lat(),
-    //       lng: this.currentPlace.geometry.location.lng()
-    //     };
-    //     this.markers.push({ position: marker });
-    //     this.places.push(this.currentPlace);
-    //     this.center = marker;
-    //     this.currentPlace = null;
-    //   }
-    // },
     geolocate: function() {
       navigator.geolocation.getCurrentPosition(position => {
         this.center = {
