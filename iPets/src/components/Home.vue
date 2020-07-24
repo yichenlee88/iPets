@@ -162,7 +162,6 @@ export default {
 
 .card {
   min-height: 600px;
-  margin-bottom: 20px;
 }
 
 .learnMore {

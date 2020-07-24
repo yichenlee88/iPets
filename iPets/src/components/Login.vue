@@ -15,25 +15,52 @@
           <b-col>
             <b-form-input
               class="InputClass center"
-              v-model="text"
-              placeholder="First Name"
+              id="input-email"
+              v-model="email"
+              placeholder="Email"
+              required
             ></b-form-input>
-            <b-form-input
-              class="InputClass center"
-              v-model="text"
-              placeholder="Last Name"
-            ></b-form-input
+          </b-col>
+        </b-row>
+        <b-row>
+          <b-col
             ><b-form-input
               class="InputClass center"
-              v-model="email"
-              placeholder="Your Email"
-            ></b-form-input>
-            <b-button class="ButtonClass">Send</b-button></b-col
-          >
+              id="input-password"
+              type="password"
+              v-model="password"
+              placeholder="Password"
+              required
+            ></b-form-input
+          ></b-col>
         </b-row>
-      </b-card-text>
-    </b-card></b-container
-  >
+        <!-- <b-row>
+          <b-col col="10">
+            <b-form-input></b-form-input>
+            <span
+              class="display-eye fa fa-eye-slash center"
+              @click="hidePassword"
+            ></span
+          ></b-col>
+        </b-row> -->
+        <b-row>
+          <b-col>
+            <b-button class="ButtonClass" @click="auth_email">登入</b-button>
+          </b-col>
+        </b-row>
+        <b-row
+          ><b-col>
+            <a class="btn btn-social-icon btn-facebook">
+              <span class="fa fa-facebook fa-2x"></span>
+            </a>
+            <a class="btn btn-social-icon btn-instagram">
+              <span class="fa fa-instagram fa-2x"></span>
+            </a>
+            <a class="btn btn-social-icon btn-google">
+              <span class="fa fa-google fa-2x"></span> </a></b-col
+        ></b-row>
+      </b-card-text> </b-card
+  ></b-container>
   <!--
   <div class="container">
     <img src="../assets/logo_banner.png" class="center" />
@@ -149,6 +176,25 @@ export default {
   display: block;
   margin-left: auto;
   margin-right: auto;
+}
+
+.card {
+  -webkit-box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+  -moz-box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 0 15px 5px rgba(0, 0, 0, 0.2);
+  margin-bottom: 20px;
+}
+
+.ButtonClass {
+  height: 48px;
+  width: 400px;
+  border-radius: 40px;
+  margin-bottom: 20px;
+  background: -webkit-linear-gradient(
+    left,
+    rgb(148, 115, 221) 0%,
+    rgb(26, 201, 228) 100%
+  );
 }
 
 /* .btn {
