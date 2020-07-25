@@ -23,7 +23,9 @@ import android.widget.Toast;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
+import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -33,6 +35,7 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.nearby.Nearby;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 
@@ -49,10 +52,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private static boolean rLocationGranted = false;
     private FusedLocationProviderClient mFusedLocationProvider;
 
-    ArrayList<LatLng> arrayList=new ArrayList<LatLng>();
-    ArrayList<LatLng> arrayList2=new ArrayList<LatLng>();
-    ArrayList<LatLng> arrayList3=new ArrayList<LatLng>();
-    ArrayList<LatLng> arrayList4=new ArrayList<LatLng>();
 
     //widgets小部件
     private EditText mSearchText;
@@ -61,19 +60,21 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     //標記
     Marker marker;
-    Marker marker2;
-    Marker marker3;
-    Marker marker4;
-    Marker marker5;
+    Marker mCurrLocationMarker;
+
+    //附近位址
+    int PROXIMITY_RADIUS=1000;
+    double latitude,longitude;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.fragment_maps);
 
-        mSearchText = (EditText) findViewById(R.id.input_search);
-        mGps = (ImageView) findViewById(R.id.ic_gps);
-        mSearch_button = (Button) findViewById(R.id.search_button);
+        mSearchText = findViewById(R.id.input_search);
+        mGps = findViewById(R.id.ic_gps);
+        mSearch_button = findViewById(R.id.search_button);
 
         //如果true則初始化Map
         if(chkPlayService()==true) {
@@ -87,6 +88,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         }
         init();
     }
+
 
     //建立初始化Map的方法
     private void initialMap() {
@@ -137,6 +139,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 geoLocate();
             }
         });
+
     }
 
     private boolean chkPlayService(){
@@ -210,7 +213,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         Geocoder geocoder = new Geocoder(MapsActivity.this);
         List<Address> list = new ArrayList<>();
         try {
-            list = geocoder.getFromLocationName(searchString,1);
+            list = geocoder.getFromLocationName(searchString,10);
         }catch (IOException e){
             Log.e("geoLocate", "geoLocate : IOException: " + e.getMessage());
         }
@@ -233,115 +236,93 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
         getDeviceLocation();
+
+        Button btnPetStore = findViewById(R.id.PetStore);
+        btnPetStore.setOnClickListener(new View.OnClickListener() {
+            String PetStore = "PetStore";
+            @Override
+            public void onClick(View v) {
+                Log.d("onClick", "Button is Clicked");
+                mMap.clear();
+                String url = getUrl(latitude, longitude, PetStore);
+                Object[] DataTransfer = new Object[2];
+                DataTransfer[0] = mMap;
+                DataTransfer[1] = url;
+                Log.d("onClick", url);
+                GetNearbyPlacesData getNearbyPlacesData = new GetNearbyPlacesData();
+                getNearbyPlacesData.execute(DataTransfer);
+                Toast.makeText(MapsActivity.this,"Nearby PetStore", Toast.LENGTH_LONG).show();
+            }
+        });
+
+        Button btnPetSalon = findViewById(R.id.PetSalon);
+        btnPetSalon.setOnClickListener(new View.OnClickListener() {
+            String PetSalon = "PetSalon";
+            @Override
+            public void onClick(View v) {
+                Log.d("onClick", "Button is Clicked");
+                mMap.clear();
+                String url = getUrl(latitude, longitude, PetSalon);
+                Object[] DataTransfer = new Object[2];
+                DataTransfer[0] = mMap;
+                DataTransfer[1] = url;
+                Log.d("onClick", url);
+                GetNearbyPlacesData getNearbyPlacesData = new GetNearbyPlacesData();
+                getNearbyPlacesData.execute(DataTransfer);
+                Toast.makeText(MapsActivity.this,"Nearby PetSalon", Toast.LENGTH_LONG).show();
+            }
+        });
+
+        Button btnPetHospital = findViewById(R.id.PetHospital);
+        btnPetHospital.setOnClickListener(new View.OnClickListener() {
+            String PetHospital = "PetHospital";
+            @Override
+            public void onClick(View v) {
+                Log.d("onClick", "Button is Clicked");
+                mMap.clear();
+                String url = getUrl(latitude, longitude, PetHospital);
+                Object[] DataTransfer = new Object[2];
+                DataTransfer[0] = mMap;
+                DataTransfer[1] = url;
+                Log.d("onClick", url);
+                GetNearbyPlacesData getNearbyPlacesData = new GetNearbyPlacesData();
+                getNearbyPlacesData.execute(DataTransfer);
+                Toast.makeText(MapsActivity.this,"Nearby PetHospital", Toast.LENGTH_LONG).show();
+            }
+        });
+
+        Button btnPetHotel = findViewById(R.id.PetHotel);
+        btnPetHotel.setOnClickListener(new View.OnClickListener() {
+            String PetHotel = "PetHotel";
+            @Override
+            public void onClick(View v) {
+                Log.d("onClick", "Button is Clicked");
+                mMap.clear();
+                if (mCurrLocationMarker != null) {
+                    mCurrLocationMarker.remove();
+                }
+                String url = getUrl(latitude, longitude, PetHotel);
+                Object[] DataTransfer = new Object[2];
+                DataTransfer[0] = mMap;
+                DataTransfer[1] = url;
+                Log.d("onClick", url);
+                GetNearbyPlacesData getNearbyPlacesData = new GetNearbyPlacesData();
+                getNearbyPlacesData.execute(DataTransfer);
+                Toast.makeText(MapsActivity.this,"Nearby PetHotel", Toast.LENGTH_LONG).show();
+            }
+        });
     }
 
-    public void PetSuppliesStore(View view) {
+    private String getUrl(double latitude, double longitude, String nearbyPlace) {
 
-        if (marker2 != null) {
-            marker2.remove();
-        }
-        LatLng PetSuppliesStore1 = new LatLng(25.062097, 121.525432);
-        LatLng PetSuppliesStore2 = new LatLng(25.031245, 121.529331);
-        LatLng PetSuppliesStore3 = new LatLng(25.028951, 121.538968);
-        LatLng PetSuppliesStore4 = new LatLng(25.035700, 121.532458);
-
-        arrayList.add(PetSuppliesStore1);
-        arrayList.add(PetSuppliesStore2);
-        arrayList.add(PetSuppliesStore3);
-        arrayList.add(PetSuppliesStore4);
-
-        for (int i=0;i<arrayList.size();i++){
-            marker2 = mMap.addMarker(new MarkerOptions()
-                    .position(arrayList.get(i))
-                    .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE))
-                    .draggable(true));
-            //mMap.addMarker(new MarkerOptions().position(arrayList.get(i)).title("Marker").icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE)));
-            mMap.animateCamera(CameraUpdateFactory.zoomTo(15.0f));
-            mMap.moveCamera(CameraUpdateFactory.newLatLng(arrayList.get(i)));
-
-        }
+        StringBuilder googlePlacesUrl = new StringBuilder("https://maps.googleapis.com/maps/api/place/nearbysearch/json?key=AIzaSyBiU7Qs7b5GjLBZ8kxHrJU-2VOmRXR6XpY&radius=500&location=25.042036, 121.525350");
+        //googlePlacesUrl.append("location=" + latitude + "," + longitude);
+        //googlePlacesUrl.append("&radius=" + PROXIMITY_RADIUS);
+        //googlePlacesUrl.append("&type=" +  nearbyPlace);
+        //googlePlacesUrl.append("&sensor=true");
+        //googlePlacesUrl.append("&key=" + "AIzaSyBiU7Qs7b5GjLBZ8kxHrJU-2VOmRXR6XpY");
+        Log.d("getUrl", googlePlacesUrl.toString());
+        return (googlePlacesUrl.toString());
     }
 
-
-
-    public void PetGroomingShop(View view) {
-
-        if (marker3 != null) {
-            marker3.remove();
-        }
-
-        LatLng PetGroomingShop1 = new LatLng(25.057657, 121.523878);
-        LatLng PetGroomingShop2 = new LatLng(25.038043, 121.529479);
-        LatLng PetGroomingShop3 = new LatLng(25.049152, 121.525224);
-        LatLng PetGroomingShop4 = new LatLng(25.034107, 121.545246);
-
-        arrayList2.add(PetGroomingShop1);
-        arrayList2.add(PetGroomingShop2);
-        arrayList2.add(PetGroomingShop3);
-        arrayList2.add(PetGroomingShop4);
-
-        for (int i=0;i<arrayList2.size();i++){
-            marker3 = mMap.addMarker(new MarkerOptions()
-                    .position(arrayList2.get(i))
-                    .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ORANGE))
-                    .draggable(true));
-            //mMap.addMarker(new MarkerOptions().position(arrayList2.get(i)).title("Marker").icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ORANGE)));
-            mMap.animateCamera(CameraUpdateFactory.zoomTo(15.0f));
-            mMap.moveCamera(CameraUpdateFactory.newLatLng(arrayList2.get(i)));
-        }
-    }
-
-    public void PetHospital(View view) {
-
-        if (marker4 != null) {
-            marker4.remove();
-        }
-
-        LatLng PetHospital1 = new LatLng(25.043239, 121.525051);
-        LatLng PetHospital2 = new LatLng(25.043171, 121.528863);
-        LatLng PetHospital3 = new LatLng(25.047033, 121.531570);
-        LatLng PetHospital4 = new LatLng(25.036919, 121.532993);
-
-        arrayList3.add(PetHospital1);
-        arrayList3.add(PetHospital2);
-        arrayList3.add(PetHospital3);
-        arrayList3.add(PetHospital4);
-
-        for (int i=0;i<arrayList3.size();i++){
-            marker4 = mMap.addMarker(new MarkerOptions()
-                    .position(arrayList3.get(i))
-                    .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN))
-                    .draggable(true));
-            //mMap.addMarker(new MarkerOptions().position(arrayList3.get(i)).title("Marker").icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN)));
-            mMap.animateCamera(CameraUpdateFactory.zoomTo(15.0f));
-            mMap.moveCamera(CameraUpdateFactory.newLatLng(arrayList3.get(i)));
-        }
-    }
-
-    public void PetHotel(View view) {
-
-        if (marker5 != null) {
-            marker5.remove();
-        }
-
-        LatLng PetHotel1 = new LatLng(25.032257, 121.516281);
-        LatLng PetHotel2 = new LatLng(25.034057, 121.543851);
-        LatLng PetHotel3 = new LatLng(25.033744, 121.537176);
-        LatLng PetHotel4 = new LatLng(25.043526, 121.543569);
-
-        arrayList4.add(PetHotel1);
-        arrayList4.add(PetHotel2);
-        arrayList4.add(PetHotel3);
-        arrayList4.add(PetHotel4);
-
-        for (int i=0;i<arrayList4.size();i++){
-            marker5 = mMap.addMarker(new MarkerOptions()
-                    .position(arrayList4.get(i))
-                    .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_YELLOW))
-                    .draggable(true));
-            //mMap.addMarker(new MarkerOptions().position(arrayList4.get(i)).title("Marker").icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_YELLOW)));
-            mMap.animateCamera(CameraUpdateFactory.zoomTo(15.0f));
-            mMap.moveCamera(CameraUpdateFactory.newLatLng(arrayList4.get(i)));
-        }
-    }
 }
