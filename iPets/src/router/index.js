@@ -78,13 +78,6 @@ let router = new Router({
       path: "/dogScience",
       name: "DogScience",
       component: DogScience,
-      children: [
-        {
-          path: "post/:id",
-          name: "Post",
-          component: Post
-        }
-      ],
       meta: {
         requiresGuest: true
       }
@@ -93,6 +86,14 @@ let router = new Router({
       path: "/manager",
       name: "Manager",
       component: Manager,
+      meta: {
+        requiresGuest: true
+      }
+    },
+    {
+      path: "post",
+      name: "Post",
+      component: Post,
       meta: {
         requiresGuest: true
       }

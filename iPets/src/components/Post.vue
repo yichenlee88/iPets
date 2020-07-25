@@ -1,43 +1,22 @@
 <template>
   <div>
-    <router-link to="/order">Order</router-link>
     <div class="container" style="margin-top: 20px;">
       <div class="col-10" style="margin:0 auto 20px auto;">
-        <div class="post-inner">
-          <div class="container marketing">
-      <div class="row">
-        <div class="col-12 col-sm-4" v-for="(item, index) in comments" :key="index">
-          <div class="img-thumbnail" style="margin-left: 15px; height: 520px;">
-            <img class="rounded" :src="item.image" style="max-width: 100%">
-            <H5>
-              <br>
-              {{item.title}}
-            </H5>
-            <p>{{ item.introduction }}</p>
-            <a href="#/dogScience/post/item.id" target="_blank">
-              <button
-                type="button"
-                class="btn btn-info"
-                style="position: absolute; right: 20px; bottom: 5px;"
-                @click="viewPost(index)"
-              >了解更多</button>
-            </a>
-          </div>
-        </div>
-      </div>
-    </div>
-          <div v-for="(item, index) in comments" :key="index">
-            <h1 class="title_name">{{item.title}}</h1>
+        <div v-for="(item, index) in comments" :key="index">
+          <h1 class="title_name">{{item.title}}</h1>
           <img class="rounded" :src="item.src" style="max-width: 80%">
           <p class="content">
-            {{item.content[0]}}<br>
-            {{item.content[1]}}<br>
+            {{item.content[0]}}
+            <br>
+            {{item.content[1]}}
+            <br>
             {{item.content[2]}}
           </p>
           <span class="content-title1">{{item.content1[0]}}</span>
           <p class="content">
             {{item.content1[1]}}
-            <br>{{item.content1[2]}}
+            <br>
+            {{item.content1[2]}}
           </p>
           <img
             class="rounded"
@@ -98,7 +77,6 @@
             原來狗狗發抖的原因這麼多！
             <br>請飼主釐清發抖原因，萬一是疾病或中毒引起，一定要趕快就醫喔！
           </p>
-          </div>
         </div>
       </div>
     </div>
