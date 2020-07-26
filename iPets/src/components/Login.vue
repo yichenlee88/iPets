@@ -39,7 +39,7 @@
           <b-form-input
             class="InputClass center"
             id="input-password"
-            :type="passwordFieldType"
+            type="text"
             v-model="password"
             placeholder="Password"
             required
