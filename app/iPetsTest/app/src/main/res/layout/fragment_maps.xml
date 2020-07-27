@@ -22,12 +22,12 @@
             app:layout_constraintVertical_bias="0.0" />
 
         <Button
-            android:id="@+id/PetSuppliesStore"
+            android:id="@+id/PetStore"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:backgroundTint="#225E79"
-            android:onClick="PetSuppliesStore"
+            android:onClick="PetStore"
             android:text="寵物用品店"
             android:textColor="#FFFFFF"
             app:layout_constraintBottom_toTopOf="@+id/guideline6"
@@ -38,11 +38,11 @@
             app:layout_constraintVertical_bias="0.877" />
 
         <Button
-            android:id="@+id/PetGroomingShop"
+            android:id="@+id/PetSalon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:backgroundTint="#225E79"
-            android:onClick="PetGroomingShop"
+            android:onClick="PetSalon"
             android:text="寵物美容店"
             android:textColor="#FFFFFF"
             app:layout_constraintBottom_toTopOf="@+id/guideline6"
@@ -68,6 +68,7 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.871" />
 
+
         <Button
             android:id="@+id/PetHotel"
             android:layout_width="wrap_content"
@@ -83,118 +84,119 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.871" />
 
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guideline6"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.2" />
 
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guideline7"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintGuide_begin="118dp"
-            app:layout_constraintStart_toStartOf="parent" />
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/guideline6"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    app:layout_constraintGuide_percent="0.2" />
 
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guideline11"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintGuide_begin="230dp"
-            app:layout_constraintStart_toStartOf="parent" />
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/guideline7"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintGuide_begin="118dp"
+                    app:layout_constraintStart_toStartOf="parent" />
 
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guideline15"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintGuide_begin="348dp"
-            app:layout_constraintStart_toStartOf="parent" />
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/guideline11"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintGuide_begin="230dp"
+                    app:layout_constraintStart_toStartOf="parent" />
 
-        <RelativeLayout
-            android:id="@+id/relLayout1"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:background="@drawable/white_border"
-            android:elevation="10dp"
-            android:layout_marginRight="10dp"
-            android:layout_marginLeft="10dp"
-            app:layout_constraintBottom_toTopOf="@+id/guideline5"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:ignore="MissingConstraints"
-            tools:layout_editor_absoluteX="10dp">
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/guideline15"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintGuide_begin="348dp"
+                    app:layout_constraintStart_toStartOf="parent" />
 
-            <ImageView
-                android:id="@+id/ic_magnify"
-                android:layout_width="15dp"
-                android:layout_height="15dp"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="10dp"
-                android:layout_marginBottom="17dp"
-                android:src="@drawable/ic_magnify" />
+                <RelativeLayout
+                    android:id="@+id/relLayout1"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:background="@drawable/white_border"
+                    android:elevation="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginLeft="10dp"
+                    app:layout_constraintBottom_toTopOf="@+id/guideline5"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:ignore="MissingConstraints"
+                    tools:layout_editor_absoluteX="10dp">
 
-            <EditText
-                android:id="@+id/input_search"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginLeft="8dp"
-                android:layout_toRightOf="@id/ic_magnify"
-                android:hint="Enter Address,City or Zip Code"
-                android:imeOptions="actionSearch"
-                android:singleLine="true"
-                android:textColor="#000"
-                android:textSize="15sp" />
+                    <ImageView
+                        android:id="@+id/ic_magnify"
+                        android:layout_width="15dp"
+                        android:layout_height="15dp"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginBottom="17dp"
+                        android:src="@drawable/ic_magnify" />
 
-            <Button
-                android:id="@+id/search_button"
-                android:layout_width="91dp"
-                android:layout_height="match_parent"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentTop="true"
-                android:layout_alignParentEnd="true"
-                android:layout_alignParentBottom="true"
-                android:layout_marginStart="301dp"
-                android:layout_marginTop="0dp"
-                android:layout_marginEnd="0dp"
-                android:layout_marginBottom="0dp"
-                android:text="搜尋" />
+                    <EditText
+                        android:id="@+id/input_search"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="8dp"
+                        android:layout_toRightOf="@id/ic_magnify"
+                        android:hint="Enter Address,City or Zip Code"
+                        android:imeOptions="actionSearch"
+                        android:singleLine="true"
+                        android:textColor="#000"
+                        android:textSize="15sp" />
 
-
-        </RelativeLayout>
-
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guideline5"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            app:layout_constraintGuide_begin="73dp" />
-
-        <ImageView
-            android:id="@+id/ic_gps"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_below="@id/relLayout1"
-            android:layout_alignParentRight="true"
-            android:scaleType="centerCrop"
-            android:src="@drawable/ic_gps"
-            app:layout_constraintBottom_toTopOf="@+id/guideline9"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="@+id/guideline15"
-            app:layout_constraintTop_toTopOf="@+id/guideline6" />
-
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guideline9"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            app:layout_constraintGuide_begin="207dp" />
+                    <Button
+                        android:id="@+id/search_button"
+                        android:layout_width="91dp"
+                        android:layout_height="match_parent"
+                        android:layout_alignParentStart="true"
+                        android:layout_alignParentTop="true"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentBottom="true"
+                        android:layout_marginStart="301dp"
+                        android:layout_marginTop="0dp"
+                        android:layout_marginEnd="0dp"
+                        android:layout_marginBottom="0dp"
+                        android:text="搜尋" />
 
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
-</LinearLayout>
+                </RelativeLayout>
+
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/guideline5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    app:layout_constraintGuide_begin="73dp" />
+
+                <ImageView
+                    android:id="@+id/ic_gps"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_below="@id/relLayout1"
+                    android:layout_alignParentRight="true"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/ic_gps"
+                    app:layout_constraintBottom_toTopOf="@+id/guideline9"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="@+id/guideline15"
+                    app:layout_constraintTop_toTopOf="@+id/guideline6" />
+
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/guideline9"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    app:layout_constraintGuide_begin="207dp" />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </LinearLayout>
