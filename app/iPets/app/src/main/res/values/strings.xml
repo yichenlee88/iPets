@@ -105,6 +105,8 @@
     <string name="TextView_Version">9.10.13</string>
     <string name="button_question">常見問題</string>
     <string name="TextView_communicate">聯絡我們</string>
+    <string name="masterBirth_hint">生日</string>
+    <string name="phoneNum_hint">電話號碼</string>
     <string-array name="Spinner_sex">
         <item>男</item>
         <item>女</item>
