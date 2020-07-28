@@ -1,5 +1,124 @@
 <template>
-  <div class="container">
+  <b-container
+    ><b-img
+      class="banner_png center"
+      src="../static/img/logo_banner.png"
+    ></b-img>
+    <b-card
+      title="註冊"
+      tag="article"
+      class="text-center center"
+      style="width:512px;"
+    >
+      <b-card-text>
+        <p class="center">請輸入您的帳號</p>
+        <b-form-input
+          class="InputClass center"
+          id="input-text"
+          v-model="text"
+          placeholder="Username"
+          required
+        ></b-form-input>
+        <b-form-input
+          class="InputClass center"
+          id="input-email"
+          v-model="email"
+          placeholder="Email"
+          required
+        ></b-form-input>
+        <div v-if="passwordHidden">
+          <b-form-input
+            type="password"
+            class="InputClass center"
+            id="input-password"
+            v-model="password"
+            placeholder="Password"
+            required
+          ></b-form-input>
+          <b-input-group-prepend class="mr-n2">
+            <span
+              class="display-eye fa fa-eye-slash"
+              @click="hidePassword"
+            ></span>
+          </b-input-group-prepend>
+        </div>
+        <!-- 預設輸入 -->
+        <div v-if="!passwordHidden">
+          <b-form-input
+            class="InputClass center"
+            id="input-password"
+            type="text"
+            v-model="password"
+            placeholder="Password"
+            required
+          ></b-form-input>
+          <b-input-group-prepend class="mr-n2">
+            <span class="display-eye fa fa-eye" @click="showPassword"></span>
+          </b-input-group-prepend>
+        </div>
+        <div v-if="passwordHidden">
+          <b-form-input
+            type="password"
+            class="InputClass center"
+            id="Confirm Password"
+            v-model="password"
+            placeholder="Confirm Password"
+            required
+          ></b-form-input>
+          <b-input-group-prepend class="mr-n2">
+            <span
+              class="display-eye fa fa-eye-slash"
+              @click="hidePassword"
+            ></span>
+          </b-input-group-prepend>
+        </div>
+        <!-- 預設確認 -->
+        <div v-if="!passwordHidden">
+          <b-form-input
+            class="InputClass center"
+            id="Confirm Password"
+            type="text"
+            v-model="password"
+            placeholder="Confirm Password"
+            required
+          ></b-form-input>
+          <b-input-group-prepend class="mr-n2">
+            <span class="display-eye fa fa-eye" @click="showPassword"></span>
+          </b-input-group-prepend>
+        </div>
+        <b-form-select
+          class="InputClass center"
+          v-model="selected"
+          :options="options"
+        ></b-form-select>
+        <div>
+          <b-form-input
+            type="text"
+            class="InputClass center"
+            id="input-birth"
+            v-model="text"
+            placeholder="Birth"
+            required
+          ></b-form-input>
+          <b-input-group-prepend class="mr-n2">
+            <span class="date"></span>
+          </b-input-group-prepend>
+        </div>
+        <b-button class="ButtonClass" @click="auth_email">註冊</b-button>
+        <b-row
+          ><b-col>
+            <a class="btn btn-social-icon btn-facebook">
+              <span class="fa fa-facebook fa-2x"></span>
+            </a>
+            <a class="btn btn-social-icon btn-instagram">
+              <span class="fa fa-instagram fa-2x"></span>
+            </a>
+            <a class="btn btn-social-icon btn-google">
+              <span class="fa fa-google fa-2x"></span> </a></b-col
+        ></b-row>
+      </b-card-text> </b-card
+  ></b-container>
+  <!-- <div class="container">
     <img src="../assets/logo_banner.png" class="center" />
     <div class="card">
       <div class="card-header" style="background-color: #e3f2fd;">註冊</div>
@@ -75,7 +194,7 @@
         </div>
       </div>
     </div>
-  </div>
+  </div> -->
 </template>
 
 <script>
@@ -90,7 +209,15 @@ export default {
     return {
       username: "",
       email: "",
-      password: ""
+      password: "",
+      passwordFieldType: "password",
+      passwordHidden: true,
+      selected: "I prefer not to say",
+      options: [
+        { value: "I prefer not to say", text: "不透漏" },
+        { value: "male", text: "男" },
+        { value: "female", text: "女" }
+      ]
     };
   },
   methods: {
@@ -119,19 +246,44 @@ export default {
           console.log("恭喜註冊成功了!");
         });
       e.preventDefault();
+    },
+    hidePassword() {
+      this.passwordHidden = false;
+      this.passwordFieldType =
+        this.passwordFieldType === "password" ? "text" : "password";
+    },
+    showPassword() {
+      this.passwordHidden = true;
+      this.passwordFieldType = this.passwordFieldType;
     }
   }
 };
 </script>
 
 <style scoped>
-.container {
-  margin-top: 20px;
+.InputClass {
+  height: 48px;
+  width: 400px;
+  border-radius: 40px;
   margin-bottom: 20px;
-  border: 0px;
-  font-family: "Microsoft JhengHei", "sans-serif";
-  width: 40%;
-  min-height: 600px;
+}
+
+.InputGroup {
+  height: 48px;
+  width: 400px;
+  border-radius: 40px;
+  margin-bottom: 20px;
+}
+
+.display-eye {
+  position: absolute;
+  height: 24px;
+  width: 24px;
+  top: 46%;
+  margin-top: -6px;
+  right: 70px;
+  z-index: 1;
+  cursor: pointer;
 }
 
 .banner_png {
@@ -139,63 +291,32 @@ export default {
   margin: auto;
 }
 
-.row {
-  vertical-align: bottom;
-  line-height: 50px;
-  text-align: center;
-}
-
-.btn {
-  width: 80%;
-  padding: 12px;
-  border: none;
-  border-radius: 4px;
-  margin: 5px 0;
-  opacity: 0.85;
-  display: inline-block;
-  font-size: 17px;
-  line-height: 20px;
-  text-decoration: none;
-  opacity: inherit;
-}
-
-input:hover,
-.btn:hover {
-  opacity: 1;
-}
-
-.hide-md-lg {
-  font-family: "Microsoft JhengHei", "sans-serif";
-  text-align: center;
-  margin-top: 15px;
-}
-
-.fb {
-  background-color: #3b5998;
-  color: white;
-}
-
-.twitter {
-  background-color: #55acee;
-  color: white;
-}
-
-.google {
-  background-color: #dd4b39;
-  color: white;
-}
-
 .center {
   display: block;
   margin-left: auto;
   margin-right: auto;
-  width: 80%;
 }
 
-.card-header {
-  background-color: #e3f2fd;
-  font-size: 24px;
-  font-family: "Microsoft JhengHei", Helvetica, Arial, sans-serif;
-  text-align: center;
+.card {
+  -webkit-box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+  -moz-box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 0 15px 5px rgba(0, 0, 0, 0.2);
+  margin-bottom: 20px;
+}
+
+.ButtonClass {
+  height: 48px;
+  width: 400px;
+  border-radius: 40px;
+  margin-bottom: 20px;
+  background: -webkit-linear-gradient(
+    left,
+    rgb(148, 115, 221) 0%,
+    rgb(26, 201, 228) 100%
+  );
+}
+
+.option {
+  border-radius: 40px;
 }
 </style>
