@@ -242,7 +242,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 Log.d("onClick", url);
                 GetNearbyPlacesData getNearbyPlacesData = new GetNearbyPlacesData();
                 getNearbyPlacesData.execute(DataTransfer);
-                Toast.makeText(MapsActivity.this,"Nearby PetStore", Toast.LENGTH_LONG).show();
+                Toast.makeText(MapsActivity.this,"附近寵物用品店", Toast.LENGTH_LONG).show();
             }
         });
 
@@ -260,7 +260,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 Log.d("onClick", url);
                 GetNearbyPlacesData getNearbyPlacesData = new GetNearbyPlacesData();
                 getNearbyPlacesData.execute(DataTransfer);
-                Toast.makeText(MapsActivity.this,"Nearby PetSalon", Toast.LENGTH_LONG).show();
+                Toast.makeText(MapsActivity.this,"附近寵物美容店", Toast.LENGTH_LONG).show();
             }
         });
 
@@ -278,7 +278,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 Log.d("onClick", url);
                 GetNearbyPlacesData getNearbyPlacesData = new GetNearbyPlacesData();
                 getNearbyPlacesData.execute(DataTransfer);
-                Toast.makeText(MapsActivity.this,"Nearby PetHospital", Toast.LENGTH_LONG).show();
+                Toast.makeText(MapsActivity.this,"附近寵物醫院", Toast.LENGTH_LONG).show();
             }
         });
 
@@ -299,7 +299,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 Log.d("onClick", url);
                 GetNearbyPlacesData getNearbyPlacesData = new GetNearbyPlacesData();
                 getNearbyPlacesData.execute(DataTransfer);
-                Toast.makeText(MapsActivity.this,"Nearby PetHotel", Toast.LENGTH_LONG).show();
+                Toast.makeText(MapsActivity.this,"附近寵物旅館", Toast.LENGTH_LONG).show();
             }
         });
     }
