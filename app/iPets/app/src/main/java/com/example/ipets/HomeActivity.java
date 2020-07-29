@@ -53,8 +53,6 @@ public class HomeActivity extends AppCompatActivity {
                         Intent intentMap = new Intent(HomeActivity.this,MapsActivity.class);
                         intentMap.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                         startActivity(intentMap);
-                        return true;
-                        //HomeActivity.this.finish();*/
                         //toolbar.setTitle("Locate123");
                         /*
                         fragment = new MapsFragment();
@@ -66,8 +64,6 @@ public class HomeActivity extends AppCompatActivity {
                         Intent intentSet = new Intent(HomeActivity.this,SettingActivity.class);
                         intentSet.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                         startActivity(intentSet);
-                        return true;
-                        //HomeActivity.this.finish();*/
                 }
                 return false;
             }
