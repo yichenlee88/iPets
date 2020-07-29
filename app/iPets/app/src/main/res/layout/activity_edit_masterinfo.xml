@@ -19,7 +19,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:paddingHorizontal="15dp">
+        android:paddingHorizontal="17dp">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/masterName"
@@ -34,7 +34,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:paddingHorizontal="15dp">
+        android:paddingHorizontal="17dp">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/userName"
@@ -50,8 +50,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:layout_marginStart="15dp"
-        android:layout_marginEnd="5dp"
+        android:paddingHorizontal="15dp"
         android:spinnerMode="dialog"
         android:entries="@array/Spinner_sex"/>
 
@@ -60,8 +59,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:layout_marginStart="15dp"
-        android:layout_marginEnd="15dp"
+        android:layout_marginStart="17dp"
+        android:layout_marginEnd="17dp"
         android:autofillHints=""
         android:backgroundTint="#0071BC"
         android:ems="10"
@@ -73,7 +72,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:paddingHorizontal="15dp">
+        android:paddingHorizontal="17dp">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/phoneNum"
@@ -83,6 +82,62 @@
             android:hint="@string/phoneNum_hint"
             android:textSize="20sp" />
     </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:paddingHorizontal="17dp">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/masterAddress"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="#0071BC"
+            android:hint="@string/address_hint"
+            android:textSize="20sp" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <LinearLayout
+        android:id="@+id/btnAccount"
+        android:layout_width="match_parent"
+        android:layout_height="68dp"
+        android:layout_marginTop="5dp"
+        android:paddingHorizontal="17dp"
+        android:background="@drawable/btn_click"
+        android:clickable="true"
+        android:focusable="true"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/emailAcct"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="@string/TextView_email"
+            android:textColor="#000000"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/myAccount"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/TextView_Account"
+            android:textSize="18sp" />
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btnPWD"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/btn_click"
+        android:gravity="start|center_horizontal|center_vertical"
+        android:paddingHorizontal="17dp"
+        android:stateListAnimator="@null"
+        android:text="@string/button_PWD"
+        android:textColor="#000000"
+        android:textSize="20sp" />
 
 
 </LinearLayout>
