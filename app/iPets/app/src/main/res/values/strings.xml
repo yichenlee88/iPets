@@ -107,6 +107,10 @@
     <string name="TextView_communicate">聯絡我們</string>
     <string name="masterBirth_hint">生日</string>
     <string name="phoneNum_hint">電話號碼</string>
+    <string name="TextView_email">帳號 ( Email )</string>
+    <string name="TextView_Account">xxxxoooo@gmail.com</string>
+    <string name="button_PWD">密碼</string>
+    <string name="title_check">確認變更</string>
     <string-array name="Spinner_sex">
         <item>男</item>
         <item>女</item>
