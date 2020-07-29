@@ -113,4 +113,9 @@
         android:name="com.example.ipets.SettingActivity"
         android:label="activity_setting"
         tools:layout="@layout/activity_setting" />
+    <activity
+        android:id="@+id/editMasterinfoActivity"
+        android:name="com.example.ipets.EditMasterinfoActivity"
+        android:label="activity_edit_masterinfo"
+        tools:layout="@layout/activity_edit_masterinfo" />
 </navigation>
