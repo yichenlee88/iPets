@@ -98,34 +98,19 @@ public class userinfoFragment extends Fragment {
                 // TODO Auto-generated method stub
                 if(hasFocus){
                     Calendar c = Calendar.getInstance();
-                    new DatePickerDialog(getContext(), new DatePickerDialog.OnDateSetListener() {
+                    DatePickerDialog datePickerDialog = new DatePickerDialog(getContext(),R.style.MyDatePickerDialogTheme, new DatePickerDialog.OnDateSetListener() {
 
                         @Override
                         public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
                             // TODO Auto-generated method stub
                             mybirth.setText(year+"/"+(monthOfYear+1)+"/"+dayOfMonth);
                         }
-                    }, c.get(Calendar.YEAR), c.get(Calendar.MONTH), c.get(Calendar.DAY_OF_MONTH)).show();
+                    }, c.get(Calendar.YEAR), c.get(Calendar.MONTH), c.get(Calendar.DAY_OF_MONTH));
+                    DatePicker datePicker = datePickerDialog.getDatePicker();
+                    datePicker.setMaxDate(System.currentTimeMillis());
+                    datePickerDialog.show();
 
                 }
-            }
-        });
-
-        mybirth.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                // TODO Auto-generated method stub
-                Calendar c = Calendar.getInstance();
-                new DatePickerDialog(getContext(), new DatePickerDialog.OnDateSetListener() {
-
-                    @Override
-                    public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-                        // TODO Auto-generated method stub
-                        mybirth.setText(year+"/"+(monthOfYear+1)+"/"+dayOfMonth);
-                    }
-                }, c.get(Calendar.YEAR), c.get(Calendar.MONTH), c.get(Calendar.DAY_OF_MONTH)).show();
-
             }
         });
     }

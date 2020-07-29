@@ -10,7 +10,7 @@ import HomeLogin from "@/components/HomeLogin";
 import Manager from "@/components/Manager";
 import { db } from "../db";
 import DogScience from "@/components/DogScience";
-import DogScienceArticle from "@/components/dogScienceArticle";
+import Post from "@/components/Post";
 
 const fAuth = db.auth();
 
@@ -83,17 +83,17 @@ let router = new Router({
       }
     },
     {
-      path: "/dogScienceArticle",
-      name: "DogScienceArticle",
-      component: DogScienceArticle,
+      path: "/manager",
+      name: "Manager",
+      component: Manager,
       meta: {
         requiresGuest: true
       }
     },
     {
-      path: "/manager",
-      name: "Manager",
-      component: Manager,
+      path: "post",
+      name: "Post",
+      component: Post,
       meta: {
         requiresGuest: true
       }
