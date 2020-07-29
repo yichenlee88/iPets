@@ -22,7 +22,7 @@
         android:layout_marginTop="10dp"
         android:background="@drawable/btn_click"
         android:gravity="start|center_horizontal|center_vertical"
-        android:paddingHorizontal="15dp"
+        android:paddingHorizontal="17dp"
         android:stateListAnimator="@null"
         android:text="@string/button_myinfo"
         android:textColor="#000000"
@@ -34,9 +34,10 @@
         android:layout_height="wrap_content"
         android:background="@drawable/btn_click"
         android:gravity="start|center_horizontal|center_vertical"
-        android:paddingHorizontal="15dp"
+        android:paddingHorizontal="17dp"
         android:stateListAnimator="@null"
         android:text="@string/button_editPet"
+        android:textColor="#000000"
         android:textSize="20sp" />
 
     <Switch
@@ -44,11 +45,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:paddingHorizontal="15dp"
+        android:paddingHorizontal="17dp"
         android:text="@string/TextView_notice"
         android:textOff="@string/TextView_OFF"
         android:textOn="@string/TextView_ON"
         android:textSize="20sp"
+        android:textColor="#000000"
         android:theme="@style/SwitchTheme" />
 
     <Switch
@@ -56,11 +58,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:paddingHorizontal="15dp"
+        android:paddingHorizontal="17dp"
         android:text="@string/TextView_language"
         android:textOff="@string/TextView_CN"
         android:textOn="@string/TextView_EN"
         android:textSize="20sp"
+        android:textColor="#000000"
         android:theme="@style/SwitchTheme" />
 
     <Button
@@ -70,8 +73,9 @@
         android:layout_marginTop="10dp"
         android:background="@drawable/btn_click"
         android:gravity="start|center_horizontal|center_vertical"
-        android:paddingHorizontal="15dp"
+        android:paddingHorizontal="17dp"
         android:stateListAnimator="@null"
+        android:textColor="#000000"
         android:textSize="20sp"
         android:text="@string/button_question" />
 
@@ -81,25 +85,27 @@
         android:layout_height="wrap_content"
         android:background="@drawable/btn_click"
         android:gravity="start|center_horizontal|center_vertical"
-        android:paddingHorizontal="15dp"
+        android:paddingHorizontal="17dp"
         android:stateListAnimator="@null"
+        android:textColor="#000000"
         android:textSize="20sp"
         android:text="@string/TextView_communicate" />
 
     <LinearLayout
+        android:id="@+id/btnVersion"
         android:layout_width="match_parent"
         android:layout_height="68dp"
+        android:paddingHorizontal="17dp"
         android:background="@drawable/btn_click"
         android:clickable="true"
         android:focusable="true"
         android:orientation="vertical">
 
         <TextView
-            android:id="@+id/sysVer."
+            android:id="@+id/sysVer"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:paddingHorizontal="15dp"
             android:text="@string/TextView_sysVer"
             android:textColor="#000000"
             android:textSize="20sp" />
@@ -108,7 +114,7 @@
             android:id="@+id/version"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingHorizontal="17dp"
+            android:paddingHorizontal="3dp"
             android:text="@string/TextView_Version"
             android:textSize="18sp" />
 
@@ -120,7 +126,7 @@
         android:layout_height="wrap_content"
         android:background="@drawable/btn_click"
         android:gravity="start|center_horizontal|center_vertical"
-        android:paddingHorizontal="15dp"
+        android:paddingHorizontal="17dp"
         android:stateListAnimator="@null"
         android:text="@string/button_signout"
         android:textColor="#0071BC"
