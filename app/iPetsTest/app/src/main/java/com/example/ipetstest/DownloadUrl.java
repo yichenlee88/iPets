@@ -26,9 +26,7 @@ public class DownloadUrl {
 
             // Reading data from url
             iStream = urlConnection.getInputStream();
-
             BufferedReader br = new BufferedReader(new InputStreamReader(iStream));
-
             StringBuffer sb = new StringBuffer();
 
             String line = "";
@@ -37,7 +35,7 @@ public class DownloadUrl {
             }
 
             data = sb.toString();
-            Log.d("downloadUrl", data.toString());
+            Log.d("downloadUrl", data);
             br.close();
 
         } catch (Exception e) {
