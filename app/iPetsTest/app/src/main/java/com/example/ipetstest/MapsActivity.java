@@ -250,6 +250,12 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 getNearbyPlacesData.execute(DataTransfer);
                 Toast.makeText(MapsActivity.this,"附近寵物用品店", Toast.LENGTH_LONG).show();
             }
+
+            private String getUrl(double latitude, double longitude, String nearbyPlace) {
+                StringBuilder googlePlacesUrl = new StringBuilder("https://maps.googleapis.com/maps/api/place/nearbysearch/json?key=AIzaSyBiU7Qs7b5GjLBZ8kxHrJU-2VOmRXR6XpY&radius=1000&location=25.042036,121.525350&radius=500&type=pet_store&sensor=true");
+                Log.d("getUrl", googlePlacesUrl.toString());
+                return (googlePlacesUrl.toString());
+            }
         });
 
         Button btnPetSalon = findViewById(R.id.PetSalon);
@@ -267,6 +273,12 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 GetNearbyPlacesData getNearbyPlacesData = new GetNearbyPlacesData();
                 getNearbyPlacesData.execute(DataTransfer);
                 Toast.makeText(MapsActivity.this,"附近寵物美容店", Toast.LENGTH_LONG).show();
+            }
+
+            private String getUrl(double latitude, double longitude, String nearbyPlace) {
+                StringBuilder googlePlacesUrl = new StringBuilder("https://maps.googleapis.com/maps/api/place/nearbysearch/json?key=AIzaSyBiU7Qs7b5GjLBZ8kxHrJU-2VOmRXR6XpY&radius=1000&location=25.042036,121.525350&radius=500&type=pet_store&sensor=true");
+                Log.d("getUrl", googlePlacesUrl.toString());
+                return (googlePlacesUrl.toString());
             }
         });
 
@@ -286,11 +298,17 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 getNearbyPlacesData.execute(DataTransfer);
                 Toast.makeText(MapsActivity.this,"附近寵物醫院", Toast.LENGTH_LONG).show();
             }
+
+            private String getUrl(double latitude, double longitude, String nearbyPlace) {
+                StringBuilder googlePlacesUrl = new StringBuilder("https://maps.googleapis.com/maps/api/place/nearbysearch/json?key=AIzaSyBiU7Qs7b5GjLBZ8kxHrJU-2VOmRXR6XpY&radius=1000&location=25.042036,121.525350&radius=500&type=veterinary_care&sensor=true");
+                Log.d("getUrl", googlePlacesUrl.toString());
+                return (googlePlacesUrl.toString());
+            }
         });
-/*
-        Button btnPetHotel = findViewById(R.id.PetHotel);
+
+        Button btnPetHotel = findViewById(R.id.Park);
         btnPetHotel.setOnClickListener(new View.OnClickListener() {
-            String PetHotel = "PetHotel";
+            String Park = "Park";
             @Override
             public void onClick(View v) {
                 Log.d("onClick", "Button is Clicked");
@@ -298,30 +316,22 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 if (mCurrLocationMarker != null) {
                     mCurrLocationMarker.remove();
                 }
-                String url = getUrl(latitude, longitude, PetHotel);
+                String url = getUrl(latitude, longitude, Park);
                 Object[] DataTransfer = new Object[2];
                 DataTransfer[0] = mMap;
                 DataTransfer[1] = url;
                 Log.d("onClick", url);
                 GetNearbyPlacesData getNearbyPlacesData = new GetNearbyPlacesData();
                 getNearbyPlacesData.execute(DataTransfer);
-                Toast.makeText(MapsActivity.this,"附近寵物旅館", Toast.LENGTH_LONG).show();
+                Toast.makeText(MapsActivity.this,"附近公園", Toast.LENGTH_LONG).show();
+            }
+
+            private String getUrl(double latitude, double longitude, String nearbyPlace) {
+                StringBuilder googlePlacesUrl = new StringBuilder("https://maps.googleapis.com/maps/api/place/nearbysearch/json?key=AIzaSyBiU7Qs7b5GjLBZ8kxHrJU-2VOmRXR6XpY&radius=1000&location=25.042036,121.525350&radius=500&type=park&sensor=true");
+                Log.d("getUrl", googlePlacesUrl.toString());
+                return (googlePlacesUrl.toString());
             }
         });
-
- */
-
-    }
-
-    private String getUrl(double latitude, double longitude, String nearbyPlace) {
-        StringBuilder googlePlacesUrl = new StringBuilder("https://maps.googleapis.com/maps/api/place/nearbysearch/json?");
-        googlePlacesUrl.append("location=" + latitude + "," + longitude);
-        googlePlacesUrl.append("&radius=" + PROXIMITY_RADIUS);
-        googlePlacesUrl.append("&type=" +  nearbyPlace);
-        googlePlacesUrl.append("&sensor=true");
-        googlePlacesUrl.append("&key=" + "AIzaSyBiU7Qs7b5GjLBZ8kxHrJU-2VOmRXR6XpY");
-        Log.d("getUrl", googlePlacesUrl.toString());
-        return (googlePlacesUrl.toString());
     }
 
 }

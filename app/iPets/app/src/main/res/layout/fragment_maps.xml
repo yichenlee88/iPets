@@ -50,13 +50,13 @@
             app:layout_constraintTop_toTopOf="@+id/guideline5" />
 
         <Button
-            android:id="@+id/PetHotel"
+            android:id="@+id/Park"
             android:layout_width="wrap_content"
             android:layout_height="40dp"
             android:background="@drawable/button_oval"
             android:backgroundTint="#0071BC"
-            android:onClick="PetHotel"
-            android:text="@string/button_PetHotel"
+            android:onClick="Park"
+            android:text="@string/button_Park"
             android:textColor="#FFFFFF"
             app:layout_constraintBottom_toTopOf="@+id/guideline6"
             app:layout_constraintEnd_toStartOf="@+id/guideline15"
