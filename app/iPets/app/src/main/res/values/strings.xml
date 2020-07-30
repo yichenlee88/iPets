@@ -93,7 +93,7 @@
     <string name="title_notifications">Notifications</string>
     <string name="button_myinfo">主人基本資料</string>
     <string name="Email_hint">E-mail</string>
-    <string name="Name_hint">名稱</string>
+    <string name="Name_hint">名字</string>
     <string name="TextView_notice">通知</string>
     <string name="TextView_language">中/英</string>
     <string name="TextView_CN">中文(TW)</string>
@@ -105,4 +105,15 @@
     <string name="TextView_Version">9.10.13</string>
     <string name="button_question">常見問題</string>
     <string name="TextView_communicate">聯絡我們</string>
+    <string name="masterBirth_hint">生日</string>
+    <string name="phoneNum_hint">電話號碼</string>
+    <string name="TextView_email">帳號 ( Email )</string>
+    <string name="TextView_Account">xxxxoooo@gmail.com</string>
+    <string name="button_PWD">密碼</string>
+    <string name="title_check">確認變更</string>
+    <string-array name="Spinner_sex">
+        <item>男</item>
+        <item>女</item>
+        <item>不願透露</item>
+    </string-array>
 </resources>
