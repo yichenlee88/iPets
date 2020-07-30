@@ -229,7 +229,7 @@
             android:id="@+id/diviser3"
             android:layout_width="0dp"
             android:layout_height="2dp"
-            android:background="#000000"
+            android:background="#DDDDDD"
             app:layout_constraintBottom_toTopOf="@+id/guideline86"
             app:layout_constraintEnd_toStartOf="@+id/guideline80"
             app:layout_constraintStart_toStartOf="@+id/guideline16"

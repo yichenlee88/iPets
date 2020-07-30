@@ -91,7 +91,7 @@ let router = new Router({
       }
     },
     {
-      path: "post",
+      path: "/post/:id",
       name: "Post",
       component: Post,
       meta: {
