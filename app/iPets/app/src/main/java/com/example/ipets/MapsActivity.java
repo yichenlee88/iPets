@@ -41,7 +41,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class MapsActivity extends FragmentActivity implements OnMapReadyCallback{
+public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
 
     private GoogleMap mMap;
     Location mLocation;
@@ -58,7 +58,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     Marker marker;
     Marker mCurrLocationMarker;
 
-    double latitude,longitude;
+    double latitude, longitude;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,9 +70,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mSearch_button = findViewById(R.id.search_button);
 
         //如果true則初始化Map
-        if(chkPlayService()==true) {
+        if (chkPlayService() == true) {
             initialMap();
-            if(rLocationGranted==true){
+            if (rLocationGranted == true) {
                 // Obtain the SupportMapFragment and get notified when the map is ready to be used.
                 SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                         .findFragmentById(R.id.map);
@@ -87,21 +87,20 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         //制訂權限有哪些
         String[] permissions = {Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION};
         //檢查權限[0][1]有無符合要求
-        if(  (ContextCompat.checkSelfPermission(this.getApplicationContext(),permissions[0])
+        if ((ContextCompat.checkSelfPermission(this.getApplicationContext(), permissions[0])
                 == PackageManager.PERMISSION_GRANTED ||
-                (ContextCompat.checkSelfPermission(this.getApplicationContext(),permissions[1])
+                (ContextCompat.checkSelfPermission(this.getApplicationContext(), permissions[1])
                         == PackageManager.PERMISSION_GRANTED))) {
             //可以取得FINE.....LOCATION
             rLocationGranted = true;
-        }
-        else {
+        } else {
             ActivityCompat.requestPermissions(this, permissions,
                     LOCATION_PERMISSION_REQUEST_CODE
             );
         }
     }
 
-    private void init(){
+    private void init() {
         Log.d("init", "init : Initializing");
 
         mSearchText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
@@ -110,7 +109,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 if (actionId == EditorInfo.IME_ACTION_SEARCH
                         || actionId == EditorInfo.IME_ACTION_DONE
                         || keyEvent.getAction() == KeyEvent.ACTION_DOWN
-                        || keyEvent.getAction() == KeyEvent.KEYCODE_ENTER){
+                        || keyEvent.getAction() == KeyEvent.KEYCODE_ENTER) {
                     //execute our method  for searching
                     geoLocate();
                 }
@@ -133,13 +132,12 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         });
     }
 
-    private boolean chkPlayService(){
+    private boolean chkPlayService() {
         int avai = GoogleApiAvailability.getInstance().isGooglePlayServicesAvailable(MapsActivity.this);
-        if (avai == ConnectionResult.SUCCESS){
-            Log.i("Map Test","版本符合，立即執行MAP");
+        if (avai == ConnectionResult.SUCCESS) {
+            Log.i("Map Test", "版本符合，立即執行MAP");
             return true;
-        }
-        else {
+        } else {
             Toast.makeText(this, "版本不符合，無法執行MAP", Toast.LENGTH_LONG).show();
             return false;
         }
@@ -149,12 +147,12 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         //super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         rLocationGranted = false;
-        switch (requestCode){
-            case 1001:{
+        switch (requestCode) {
+            case 1001: {
 
-                if(grantResults.length>0){
-                    for (int i=0 ; i<grantResults.length;i++){
-                        if(grantResults[i] != PackageManager.PERMISSION_GRANTED){
+                if (grantResults.length > 0) {
+                    for (int i = 0; i < grantResults.length; i++) {
+                        if (grantResults[i] != PackageManager.PERMISSION_GRANTED) {
                             rLocationGranted = false;
                             return;
                         }
@@ -169,12 +167,12 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private void getDeviceLocation() {
         mFusedLocationProvider = LocationServices.getFusedLocationProviderClient(this);
         try {
-            if(rLocationGranted == true){
+            if (rLocationGranted == true) {
                 final Task location = mFusedLocationProvider.getLastLocation();
                 location.addOnCompleteListener(new OnCompleteListener() {
                     @Override
                     public void onComplete(@NonNull Task task) {
-                        if(task.isSuccessful()){
+                        if (task.isSuccessful()) {
                             //找到位置
                             Location mLocation = (Location) task.getResult();
                             LatLng nowlatLng = new LatLng(mLocation.getLatitude(), mLocation.getLongitude());
@@ -185,18 +183,17 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                                     .draggable(true));
 
 
-                            Log.i("location","("+mLocation.getLatitude()+", "+mLocation.getLongitude()+") ");
+                            Log.i("location", "(" + mLocation.getLatitude() + ", " + mLocation.getLongitude() + ") ");
                         }
                     }
                 });
             }
-        }
-        catch (Exception ex){
-            Log.e("LocationError",ex.getMessage());
+        } catch (Exception ex) {
+            Log.e("LocationError", ex.getMessage());
         }
     }
 
-    private void geoLocate(){
+    private void geoLocate() {
         Log.d("geoLocate", "geoLocate : geolocating");
 
         String searchString = mSearchText.getText().toString();
@@ -204,17 +201,17 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         Geocoder geocoder = new Geocoder(MapsActivity.this);
         List<Address> list = new ArrayList<>();
         try {
-            list = geocoder.getFromLocationName(searchString,1);
-        }catch (IOException e){
+            list = geocoder.getFromLocationName(searchString, 1);
+        } catch (IOException e) {
             Log.e("geoLocate", "geoLocate : IOException: " + e.getMessage());
         }
-        if (list.size() > 0){
+        if (list.size() > 0) {
             Address address = list.get(0);
 
             if (marker != null) {
                 marker.remove();
             }
-            LatLng searchlatLng = new LatLng(address.getLatitude(),address.getLongitude());
+            LatLng searchlatLng = new LatLng(address.getLatitude(), address.getLongitude());
             mMap.animateCamera(CameraUpdateFactory.newLatLng(searchlatLng));
             mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(searchlatLng, 17));
             marker = mMap.addMarker(new MarkerOptions()
@@ -231,6 +228,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         Button btnPetStore = findViewById(R.id.PetStore);
         btnPetStore.setOnClickListener(new View.OnClickListener() {
             String PetStore = "PetStore";
+
             @Override
             public void onClick(View v) {
                 Log.d("onClick", "Button is Clicked");
@@ -242,13 +240,20 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 Log.d("onClick", url);
                 GetNearbyPlacesData getNearbyPlacesData = new GetNearbyPlacesData();
                 getNearbyPlacesData.execute(DataTransfer);
-                Toast.makeText(MapsActivity.this,"附近寵物用品店", Toast.LENGTH_LONG).show();
+                Toast.makeText(MapsActivity.this, "附近寵物用品店", Toast.LENGTH_LONG).show();
+            }
+
+            private String getUrl(double latitude, double longitude, String nearbyPlace) {
+                StringBuilder googlePlacesUrl = new StringBuilder("https://maps.googleapis.com/maps/api/place/nearbysearch/json?key=AIzaSyBiU7Qs7b5GjLBZ8kxHrJU-2VOmRXR6XpY&radius=1000&location=25.042036,121.525350&radius=500&type=pet_store&sensor=true");
+                Log.d("getUrl", googlePlacesUrl.toString());
+                return (googlePlacesUrl.toString());
             }
         });
 
         Button btnPetSalon = findViewById(R.id.PetSalon);
         btnPetSalon.setOnClickListener(new View.OnClickListener() {
             String PetSalon = "PetSalon";
+
             @Override
             public void onClick(View v) {
                 Log.d("onClick", "Button is Clicked");
@@ -260,13 +265,20 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 Log.d("onClick", url);
                 GetNearbyPlacesData getNearbyPlacesData = new GetNearbyPlacesData();
                 getNearbyPlacesData.execute(DataTransfer);
-                Toast.makeText(MapsActivity.this,"附近寵物美容店", Toast.LENGTH_LONG).show();
+                Toast.makeText(MapsActivity.this, "附近寵物美容店", Toast.LENGTH_LONG).show();
+            }
+
+            private String getUrl(double latitude, double longitude, String nearbyPlace) {
+                StringBuilder googlePlacesUrl = new StringBuilder("https://maps.googleapis.com/maps/api/place/nearbysearch/json?key=AIzaSyBiU7Qs7b5GjLBZ8kxHrJU-2VOmRXR6XpY&radius=1000&location=25.042036,121.525350&radius=500&type=pet_store&sensor=true");
+                Log.d("getUrl", googlePlacesUrl.toString());
+                return (googlePlacesUrl.toString());
             }
         });
 
         Button btnPetHospital = findViewById(R.id.PetHospital);
         btnPetHospital.setOnClickListener(new View.OnClickListener() {
             String PetHospital = "PetHospital";
+
             @Override
             public void onClick(View v) {
                 Log.d("onClick", "Button is Clicked");
@@ -278,13 +290,20 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 Log.d("onClick", url);
                 GetNearbyPlacesData getNearbyPlacesData = new GetNearbyPlacesData();
                 getNearbyPlacesData.execute(DataTransfer);
-                Toast.makeText(MapsActivity.this,"附近寵物醫院", Toast.LENGTH_LONG).show();
+                Toast.makeText(MapsActivity.this, "附近寵物醫院", Toast.LENGTH_LONG).show();
+            }
+
+            private String getUrl(double latitude, double longitude, String nearbyPlace) {
+                StringBuilder googlePlacesUrl = new StringBuilder("https://maps.googleapis.com/maps/api/place/nearbysearch/json?key=AIzaSyBiU7Qs7b5GjLBZ8kxHrJU-2VOmRXR6XpY&radius=1000&location=25.042036,121.525350&radius=500&type=veterinary_care&sensor=true");
+                Log.d("getUrl", googlePlacesUrl.toString());
+                return (googlePlacesUrl.toString());
             }
         });
 
-        Button btnPetHotel = findViewById(R.id.PetHotel);
+        Button btnPetHotel = findViewById(R.id.Park);
         btnPetHotel.setOnClickListener(new View.OnClickListener() {
-            String PetHotel = "PetHotel";
+            String Park = "Park";
+
             @Override
             public void onClick(View v) {
                 Log.d("onClick", "Button is Clicked");
@@ -292,26 +311,21 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 if (mCurrLocationMarker != null) {
                     mCurrLocationMarker.remove();
                 }
-                String url = getUrl(latitude, longitude, PetHotel);
+                String url = getUrl(latitude, longitude, Park);
                 Object[] DataTransfer = new Object[2];
                 DataTransfer[0] = mMap;
                 DataTransfer[1] = url;
                 Log.d("onClick", url);
                 GetNearbyPlacesData getNearbyPlacesData = new GetNearbyPlacesData();
                 getNearbyPlacesData.execute(DataTransfer);
-                Toast.makeText(MapsActivity.this,"附近寵物旅館", Toast.LENGTH_LONG).show();
+                Toast.makeText(MapsActivity.this, "附近公園", Toast.LENGTH_LONG).show();
+            }
+
+            private String getUrl(double latitude, double longitude, String nearbyPlace) {
+                StringBuilder googlePlacesUrl = new StringBuilder("https://maps.googleapis.com/maps/api/place/nearbysearch/json?key=AIzaSyBiU7Qs7b5GjLBZ8kxHrJU-2VOmRXR6XpY&radius=1000&location=25.042036,121.525350&radius=500&type=park&sensor=true");
+                Log.d("getUrl", googlePlacesUrl.toString());
+                return (googlePlacesUrl.toString());
             }
         });
-    }
-
-    private String getUrl(double latitude, double longitude, String nearbyPlace) {
-        StringBuilder googlePlacesUrl = new StringBuilder("https://maps.googleapis.com/maps/api/place/nearbysearch/json?key=AIzaSyBiU7Qs7b5GjLBZ8kxHrJU-2VOmRXR6XpY&radius=500&location=25.042036, 121.525350");
-        //googlePlacesUrl.append("location=" + latitude + "," + longitude);
-        //googlePlacesUrl.append("&radius=" + PROXIMITY_RADIUS);
-        //googlePlacesUrl.append("&type=" +  nearbyPlace);
-        //googlePlacesUrl.append("&sensor=true");
-        //googlePlacesUrl.append("&key=" + "AIzaSyBiU7Qs7b5GjLBZ8kxHrJU-2VOmRXR6XpY");
-        Log.d("getUrl", googlePlacesUrl.toString());
-        return (googlePlacesUrl.toString());
     }
 }
