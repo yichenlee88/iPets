@@ -43,7 +43,7 @@
                       <b-form-input
                         id="article_introduction"
                         type="text"
-                        placeholder="Introduction"
+                        placeholder="Introduction(建議50-100字)"
                         v-model.trim="introduction"
                       ></b-form-input>
                     </b-col>
@@ -348,14 +348,19 @@ export default {
       image: "",
       introduction: "",
       title1: "",
+      img1: "",
       content1: "",
       title2: "",
+      img2: "",
       content2: "",
       title3: "",
+      img3: "",
       content3: "",
       title4: "",
+      img4: "",
       content4: "",
       title5: "",
+      img5: "",
       content5: "",
       ending: "",
       comments: [],
@@ -392,24 +397,25 @@ export default {
           this.image = "";
           this.introduction = "";
           this.title1 = "";
+          this.img1 = "";
           this.content1 = "";
           this.title2 = "";
+          this.img2 = "";
           this.content2 = "";
           this.title3 = "";
+          this.img3 = "";
           this.content3 = "";
           this.title4 = "";
+          this.img4 = "";
           this.content4 = "";
           this.title5 = "";
+          this.img5 = "";
           this.content5 = "";
           this.ending = "";
           this.comments.push(res.data);
         });
     }
   },
-  // post: {
-  //   input: "",
-  //   comments: []
-  // },
   mounted() {
     axios.get("http://localhost:3000/comments").then(res => {
       console.log(res);
