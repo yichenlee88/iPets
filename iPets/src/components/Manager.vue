@@ -24,13 +24,13 @@
                   </b-row>
                   <b-row class="my-1">
                     <b-col sm="2">
-                      <label for="article_image">圖片位址:</label>
+                      <label for="article_image">標題圖片位址:</label>
                     </b-col>
                     <b-col sm="10">
                       <b-form-input
                         id="article_image"
                         type="url"
-                        placeholder="Input image url"
+                        placeholder="Input title_image url"
                         v-model.trim="image"
                       ></b-form-input>
                     </b-col>
@@ -63,6 +63,19 @@
                   </b-row>
                   <b-row class="my-1">
                     <b-col sm="2">
+                      <label for="article_image">標題1 圖片位址:</label>
+                    </b-col>
+                    <b-col sm="10">
+                      <b-form-input
+                        id="article_image1"
+                        type="url"
+                        placeholder="Input image_1 url"
+                        v-model.trim="img1"
+                      ></b-form-input>
+                    </b-col>
+                  </b-row>
+                  <b-row class="my-1">
+                    <b-col sm="2">
                       <label for="article_content1">內容1:</label>
                     </b-col>
                     <b-col sm="10">
@@ -83,6 +96,19 @@
                         id="article_title2"
                         placeholder="Title 2"
                         v-model.trim="title2"
+                      ></b-form-input>
+                    </b-col>
+                  </b-row>
+                  <b-row class="my-1">
+                    <b-col sm="2">
+                      <label for="article_image">標題2 圖片位址:</label>
+                    </b-col>
+                    <b-col sm="10">
+                      <b-form-input
+                        id="article_image2"
+                        type="url"
+                        placeholder="Input image_2 url"
+                        v-model.trim="img2"
                       ></b-form-input>
                     </b-col>
                   </b-row>
@@ -114,6 +140,19 @@
                   </b-row>
                   <b-row class="my-1">
                     <b-col sm="2">
+                      <label for="article_image">標題3 圖片位址:</label>
+                    </b-col>
+                    <b-col sm="10">
+                      <b-form-input
+                        id="article_image3"
+                        type="url"
+                        placeholder="Input image_3 url"
+                        v-model.trim="img3"
+                      ></b-form-input>
+                    </b-col>
+                  </b-row>
+                  <b-row class="my-1">
+                    <b-col sm="2">
                       <label for="article_content3">內容3:</label>
                     </b-col>
                     <b-col sm="10">
@@ -140,6 +179,19 @@
                   </b-row>
                   <b-row class="my-1">
                     <b-col sm="2">
+                      <label for="article_image">標題4 圖片位址:</label>
+                    </b-col>
+                    <b-col sm="10">
+                      <b-form-input
+                        id="article_image4"
+                        type="url"
+                        placeholder="Input image_4 url"
+                        v-model.trim="img4"
+                      ></b-form-input>
+                    </b-col>
+                  </b-row>
+                  <b-row class="my-1">
+                    <b-col sm="2">
                       <label for="article_content4">內容4:</label>
                     </b-col>
                     <b-col sm="10">
@@ -161,6 +213,19 @@
                         type="text"
                         placeholder="Title 5"
                         v-model.trim="title5"
+                      ></b-form-input>
+                    </b-col>
+                  </b-row>
+                  <b-row class="my-1">
+                    <b-col sm="2">
+                      <label for="article_image">標題5 圖片位址:</label>
+                    </b-col>
+                    <b-col sm="10">
+                      <b-form-input
+                        id="article_image5"
+                        type="url"
+                        placeholder="Input image_5 url"
+                        v-model.trim="img5"
                       ></b-form-input>
                     </b-col>
                   </b-row>
