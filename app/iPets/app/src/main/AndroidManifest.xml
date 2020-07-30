@@ -23,11 +23,17 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
+            android:name=".EditAccountActivity"
+            android:parentActivityName=".EditMasterinfoActivity"/>
+
+        <activity
             android:name=".EditMasterinfoActivity"
-            android:parentActivityName=".SettingActivity"></activity>
+            android:parentActivityName=".SettingActivity" />
+
         <activity
             android:name=".SettingActivity"
-            android:parentActivityName=".HomeActivity"></activity>
+            android:parentActivityName=".HomeActivity" />
+
         <activity android:name=".HomeActivity" />
 
         <meta-data
