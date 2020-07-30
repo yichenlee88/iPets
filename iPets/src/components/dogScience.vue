@@ -1,6 +1,6 @@
 <template>
-  <div class="container" style="margin-top: 20px;">
-    <img src="../assets/狗狗科普.png" class="banner">
+  <b-container>
+    <img src="../assets/狗狗科普.png" class="banner" style="margin-top:20px">
     <div class="container marketing" style="margin-top:20px">
       <div class="row">
         <div class="col-12 col-sm-4" v-for="(item, index) in comments" :key="index">
@@ -11,7 +11,7 @@
               {{item.title}}
             </H5>
             <p>{{ item.introduction }}</p>
-            <a href="#/dogScience/post" target="_blank">
+            <a :href="'#/post/' + item.id" target="_blank">
               <button
                 type="button"
                 class="btn btn-info"
@@ -22,8 +22,7 @@
         </div>
       </div>
     </div>
-    <router-view></router-view>
-  </div>
+  </b-container>
 </template>
 
 <script>
