@@ -36,11 +36,7 @@
     <b-row class="ContactTitle text-center"
       ><b-col><h1>加入我們</h1></b-col></b-row
     >
-    <b-card
-      img-src="../static/img/carousel-01.jpg"
-      img-alt="Card image"
-      img-top
-    >
+    <b-card img-src="../static/img/join-us.png" img-alt="Card image" img-top>
       <b-card-text>
         <b-row
           ><b-col col="6"
