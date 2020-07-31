@@ -1,7 +1,7 @@
 <template>
   <b-container style="margin-top: 40px">
     <u><a href="#/home">首頁</a> > <a href="#/dogScience">狗狗科普</a> > {{this.comments.title}}</u>
-    <div class="title_name">{{this.comments.title}}<br>
+    <div class="title_name" style="margin-top:20px">{{this.comments.title}}<br>
     <img :src="`${this.comments.image}`" style="max-width: 60%"></div>
     <b-container style="padding:20px 120px;">
       <p class="content">{{this.comments.introduction}}</p>
