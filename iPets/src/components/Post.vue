@@ -43,33 +43,26 @@ export default {
   data() {
     return {
       id: this.$route.params.id,
-      title: "",
-      image: "",
-      introduction: "",
-      title1: "",
-      img1: "",
-      content1: "",
-      title2: "",
-      img2: "",
-      content2: "",
-      title3: "",
-      img3: "",
-      content3: "",
-      title4: "",
-      img4: "",
-      content4: "",
-      title5: "",
-      img5: "",
-      content5: "",
-      ending: "",
       comments: []
     };
   },
   mounted() {
+    let id = this.$route.params.id;
+    this.id = id;
     axios.get("http://localhost:3000/comments/" + this.id).then(res => {
       console.log(res.data);
       this.comments = res.data;
     });
+  },
+  watch: {
+    $route(now) {
+      let id = this.$route.params.id;
+      this.id = id;
+      axios.get("http://localhost:3000/comments/" + this.id).then(res => {
+        console.log(now);
+        this.comments = res.data;
+      });
+    }
   }
 };
 </script>
