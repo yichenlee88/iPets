@@ -1,5 +1,6 @@
 <template>
-  <b-container>
+  <div>
+    <b-container>
     <b-row class="MotivationTitle text-center"><b-col>專案動機</b-col> </b-row>
     <b-row class="MotivationContent"
       ><b-col>
@@ -16,6 +17,9 @@
         </p></b-col
       >
     </b-row>
+    </b-container>
+    <div style="background-color:#F5F5F5">
+      <b-container>
     <b-row class="QuestionTitle text-center"><b-col>問題與機會</b-col> </b-row>
     <b-row class="QuestionContent"
       ><b-col>
@@ -39,6 +43,9 @@
         </p></b-col
       >
     </b-row>
+      </b-container>
+    </div>
+    <b-container>
     <b-row class="SpecialTitle text-center"><b-col>特別之處</b-col> </b-row>
     <b-row class="QuestionContent"
       ><b-col
@@ -70,6 +77,9 @@
           （二）寵物飼料分析：從網路搜尋相關資訊並經由系統分析，建立可信的資料集，方便用戶作為飼料購買依據，減少選購時間。<br />
           （三）提供店家資訊：讓用戶可以快速搜尋周遭與寵物有關的店家與醫院，並且可用關鍵字查詢，方便用戶快速找到需要的商家。<br /></p></b-col
     ></b-row>
+    </b-container>
+    <div style="background-color:#F5F5F5">
+    <b-container>
     <b-row class="MemberTitle text-center"><b-col>組員介紹</b-col> </b-row>
     <b-row class="MemberContent" cols-lg="3">
       <div v-for="(item, i) in post" :key="i">
@@ -92,7 +102,9 @@
         </b-col>
       </div>
     </b-row>
-  </b-container>
+    </b-container>
+  </div>
+  </div>
 </template>
 
 <script>
