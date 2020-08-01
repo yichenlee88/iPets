@@ -4,8 +4,8 @@
       ><b-col><h1>歡迎提出您任何的問題</h1></b-col></b-row
     >
     <b-row>
-      <b-col col="4"
-        ><img class="center" src="../assets/4.jpg" width="320" alt="image slot"
+      <b-col col="2"
+        ><img class="center" src="../assets/contact-us-02.png" width="320" alt="image slot"
       /></b-col>
       <b-col col="8">
         <b-form-input
@@ -29,15 +29,17 @@
           placeholder="Your Question..."
           maxlength
         ></b-form-textarea
-        ><b-button class="ButtonClass">Send</b-button></b-col
-      >
+        ><b-button class="ButtonClass">Send</b-button></b-col>
+        <b-col col="2"
+        ><img class="center" src="../assets/contact-us-03.png" width="320" alt="image slot"
+      /></b-col>
     </b-row>
 
     <b-row class="ContactTitle text-center"
       ><b-col><h1>加入我們</h1></b-col></b-row
     >
     <b-card
-      img-src="../static/img/carousel-01.jpg"
+      img-src="../static/img/join-us.png"
       img-alt="Card image"
       img-top
     >
