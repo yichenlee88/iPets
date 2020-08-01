@@ -6,6 +6,8 @@ import router from "./router";
 import { db } from "./db";
 import * as VueGoogleMaps from "vue2-google-maps";
 import VueResource from "vue-resource";
+import VueFormWizard from "vue-form-wizard";
+import "vue-form-wizard/dist/vue-form-wizard.min.css";
 
 // Vuex
 import store from "./_store/index";
@@ -19,6 +21,7 @@ import "bootstrap-vue/dist/bootstrap-vue.css";
 Vue.use(BootstrapVue);
 Vue.use(IconsPlugin);
 Vue.use(VueResource);
+Vue.use(VueFormWizard);
 
 Vue.config.productionTip = false;
 
