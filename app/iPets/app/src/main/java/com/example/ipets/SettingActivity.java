@@ -9,10 +9,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-
 public class SettingActivity extends AppCompatActivity {
+    Button btn_info;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,18 +22,14 @@ public class SettingActivity extends AppCompatActivity {
         getSupportActionBar().setTitle("設定");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         toolbar2.setTitleTextColor(Color.WHITE);
-        Button signout = findViewById(R.id.signout);
-        signout.setOnClickListener(new Button.OnClickListener(){
+
+        btn_info = (Button) findViewById(R.id.masterInfo);
+        btn_info.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                FirebaseAuth auth = FirebaseAuth.getInstance();
-                auth.signOut();
-                Intent intent=new Intent();
-                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
-                intent.setClass(SettingActivity.this,MainActivity.class);
-                startActivity(intent);
+                Intent intentInfo = new Intent(SettingActivity.this,EditMasterinfoActivity.class);
+                startActivity(intentInfo);
             }
         });
     }
-
 }
