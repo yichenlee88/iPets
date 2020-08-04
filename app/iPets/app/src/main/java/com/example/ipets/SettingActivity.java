@@ -9,6 +9,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import com.google.firebase.auth.FirebaseAuth;
+
 public class SettingActivity extends AppCompatActivity {
     Button btn_info;
 
@@ -29,6 +31,18 @@ public class SettingActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intentInfo = new Intent(SettingActivity.this,EditMasterinfoActivity.class);
                 startActivity(intentInfo);
+            }
+        });
+        Button signout = findViewById(R.id.signout);
+        signout.setOnClickListener(new Button.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                FirebaseAuth auth = FirebaseAuth.getInstance();
+                auth.signOut();
+                Intent intent=new Intent();
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
+                intent.setClass(SettingActivity.this,MainActivity.class);
+                startActivity(intent);
             }
         });
     }
