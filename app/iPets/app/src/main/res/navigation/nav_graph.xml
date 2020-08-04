@@ -43,6 +43,9 @@
         <action
             android:id="@+id/action_homeFragment_to_settingActivity"
             app:destination="@id/settingActivity" />
+        <action
+            android:id="@+id/action_homeFragment_to_petsinfoFragment"
+            app:destination="@id/petsinfoFragment" />
     </fragment>
     <fragment
         android:id="@+id/forgotFragment"
@@ -90,6 +93,9 @@
         <action
             android:id="@+id/action_userinfoFragment_to_petsinfoFragment"
             app:destination="@id/petsinfoFragment" />
+        <action
+            android:id="@+id/action_userinfoFragment_to_homeActivity"
+            app:destination="@id/homeActivity" />
     </fragment>
     <fragment
         android:id="@+id/petsinfoFragment"
