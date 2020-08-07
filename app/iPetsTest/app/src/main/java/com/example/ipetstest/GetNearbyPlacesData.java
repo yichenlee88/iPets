@@ -1,5 +1,6 @@
 package com.example.ipetstest;
 
+import android.location.Location;
 import android.os.AsyncTask;
 import android.util.Log;
 
@@ -8,9 +9,13 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 
 import java.util.HashMap;
 import java.util.List;
+
+import androidx.annotation.NonNull;
 
 public class GetNearbyPlacesData extends AsyncTask<Object, String, String> {
 
@@ -37,12 +42,13 @@ public class GetNearbyPlacesData extends AsyncTask<Object, String, String> {
     @Override
     protected void onPostExecute(String result) {
         Log.d("GooglePlacesReadTask", "onPostExecute Entered");
-        List<HashMap<String, String>> nearbyPlacesList = null;
+        List<HashMap<String, String>> nearbyPlacesList;
         DataParser dataParser = new DataParser();
         nearbyPlacesList =  dataParser.parse(result);
         ShowNearbyPlaces(nearbyPlacesList);
         Log.d("GooglePlacesReadTask", "onPostExecute Exit");
     }
+
 
     private void ShowNearbyPlaces(List<HashMap<String, String>> nearbyPlacesList) {
         for (int i = 0; i < nearbyPlacesList.size(); i++) {
@@ -58,6 +64,7 @@ public class GetNearbyPlacesData extends AsyncTask<Object, String, String> {
             markerOptions.title(placeName + " : " + vicinity);
             mMap.addMarker(markerOptions);
             markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED));
+
             //move map camera
             mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
             mMap.animateCamera(CameraUpdateFactory.zoomTo(17));

@@ -180,8 +180,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                             mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(nowlatLng, 17));
                             marker = mMap.addMarker(new MarkerOptions()
                                     .position(nowlatLng)
-                                    .draggable(true));
-
+                                    .draggable(true)
+                                    .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE)));
 
                             Log.i("location", "(" + mLocation.getLatitude() + ", " + mLocation.getLongitude() + ") ");
                         }
@@ -300,8 +300,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             }
         });
 
-        Button btnPetHotel = findViewById(R.id.Park);
-        btnPetHotel.setOnClickListener(new View.OnClickListener() {
+        Button btnPark = findViewById(R.id.Park);
+        btnPark.setOnClickListener(new View.OnClickListener() {
             String Park = "Park";
 
             @Override
