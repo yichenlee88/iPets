@@ -4,6 +4,20 @@
       class="banner_png center"
       src="../static/img/logo_banner.png"
     ></b-img>
+    <!--form-wizard-->
+    <form-wizard @on-complete="onComplete">
+      <tab-content title="Personal details" icon="ti-user">
+        <i class="far fa-user" style="size:12px"></i>
+        My first tab content
+      </tab-content>
+      <tab-content title="Additional Info" icon="ti-settings">
+        My second tab content
+      </tab-content>
+      <tab-content title="Last step" icon="ti-check">
+        Yuhuuu! This seems pretty damn simple
+      </tab-content>
+    </form-wizard>
+    <!--form-wizard end-->
     <b-card
       title="註冊"
       tag="article"
@@ -11,14 +25,15 @@
       style="width:512px;"
     >
       <b-card-text>
-        <p class="center">請輸入您的帳號</p>
+        <!-- username -->
         <b-form-input
           class="InputClass center"
-          id="input-text"
+          id="input-username"
           v-model="text"
           placeholder="Username"
           required
         ></b-form-input>
+        <!-- Email -->
         <b-form-input
           class="InputClass center"
           id="input-email"
@@ -26,6 +41,7 @@
           placeholder="Email"
           required
         ></b-form-input>
+        <!-- password -->
         <div v-if="passwordHidden">
           <b-form-input
             type="password"
@@ -42,7 +58,7 @@
             ></span>
           </b-input-group-prepend>
         </div>
-        <!-- 預設輸入 -->
+        <!-- password預設輸入 -->
         <div v-if="!passwordHidden">
           <b-form-input
             class="InputClass center"
@@ -56,6 +72,7 @@
             <span class="display-eye fa fa-eye" @click="showPassword"></span>
           </b-input-group-prepend>
         </div>
+        <!-- Confirm Password -->
         <div v-if="passwordHidden">
           <b-form-input
             type="password"
@@ -72,7 +89,7 @@
             ></span>
           </b-input-group-prepend>
         </div>
-        <!-- 預設確認 -->
+        <!-- Confirm Password 預設確認 -->
         <div v-if="!passwordHidden">
           <b-form-input
             class="InputClass center"
@@ -86,11 +103,13 @@
             <span class="display-eye fa fa-eye" @click="showPassword"></span>
           </b-input-group-prepend>
         </div>
+        <!-- gender -->
         <b-form-select
           class="InputClass center"
           v-model="selected"
           :options="options"
         ></b-form-select>
+        <!-- Birth -->
         <div>
           <b-form-input
             type="text"
@@ -104,6 +123,14 @@
             <span class="date"></span>
           </b-input-group-prepend>
         </div>
+        <!--Address-->
+        <b-form-input
+          class="InputClass center"
+          id="input-address"
+          v-model="text"
+          placeholder="Address"
+          required
+        ></b-form-input>
         <b-button class="ButtonClass" @click="auth_email">註冊</b-button>
         <b-row
           ><b-col>
