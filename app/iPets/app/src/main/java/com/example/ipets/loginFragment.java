@@ -3,6 +3,7 @@ package com.example.ipets;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -66,8 +67,10 @@ public class loginFragment extends Fragment {
         auth = FirebaseAuth.getInstance();
         FirebaseUser currentUser = auth.getCurrentUser();
         if(currentUser!=null) {
-            NavController controller = Navigation.findNavController(getView());
-            controller.navigate(R.id.action_loginFragment_to_homeActivity);
+            Intent intent=new Intent();
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
+            intent.setClass(getActivity(),HomeActivity.class);
+            startActivity(intent);
         }
 
         /*
@@ -110,8 +113,10 @@ public class loginFragment extends Fragment {
                     builder.setCancelable(true);   //設置按鈕是否可以按返回键取消,false則不可以取消
                     builder.show();
                 }else{
-                    NavController controller = Navigation.findNavController(v);
-                    controller.navigate(R.id.action_loginFragment_to_homeActivity);
+                    Intent intent=new Intent();
+                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
+                    intent.setClass(getActivity(),HomeActivity.class);
+                    startActivity(intent);
                 }
             }
         });

@@ -1,42 +1,34 @@
 package com.example.ipets;
 
 
-import android.app.AlertDialog;
-import android.content.DialogInterface;
-import android.content.Intent;
-import android.graphics.Bitmap;
+import android.app.DatePickerDialog;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
-import android.view.KeyEvent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
-import com.google.android.material.bottomnavigation.BottomNavigationMenu;
-import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.firestore.CollectionReference;
-import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
@@ -44,14 +36,14 @@ import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
-import java.lang.ref.Reference;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.Instant;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 
 /**
@@ -61,6 +53,7 @@ public class homeFragment extends Fragment {
     FirebaseAuth auth = FirebaseAuth.getInstance();
     FirebaseUser currentUser = auth.getCurrentUser();
     String userUID = currentUser.getUid();
+    String pet_query = null;
 
     // Spinner nameSpinner = getView().findViewById(R.id.nameSpinner);
     public homeFragment() {
@@ -102,9 +95,6 @@ public class homeFragment extends Fragment {
         final Spinner petnamespinner = getView().findViewById(R.id.nameSpinner);
         final FirebaseFirestore db = FirebaseFirestore.getInstance();
         final List<String> petname = new ArrayList<>();
-        final TextView text_petsSex = getView().findViewById(R.id.text_petsSex);
-        final TextView text_petsBirth = getView().findViewById(R.id.text_petsBirth);
-        final TextView text_petsAge = getView().findViewById(R.id.text_petsAge);
         db.collection("userInformation").document(userUID).collection("pets").get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
@@ -122,15 +112,25 @@ public class homeFragment extends Fragment {
                             petnamespinner.setAdapter(adapter);
                             petnamespinner.setSelection(0, true);
                             String query = petname.get(0);
+                            pet_query = query;
                             querypet(query);
                             downloadimage(query);
+                            countdown(query);
                             petnamespinner.setPrompt("請選擇");
                             petnamespinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                                 @Override
                                 public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                                    Log.d("homeFramgment 135", "onItemSelected: position: " + position);
                                     String query = petname.get(position);
-                                    querypet(query);
-                                    downloadimage(query);
+                                    pet_query = query;
+                                    if ( position == petname.size()-1){
+                                        NavController controller = Navigation.findNavController(getView());
+                                        controller.navigate(R.id.action_navigation_home_to_petsinfoFragment2);
+                                    }else{
+                                        querypet(query);
+                                        downloadimage(query);
+                                        countdown(query);
+                                    }
                                 }
 
                                 @Override
@@ -138,15 +138,39 @@ public class homeFragment extends Fragment {
 
                                 }
                             });
-
                         } else {
 
                         }
                     }
                 });
+        ProgressBar showerBar = getView().findViewById(R.id.showerBar);
+        ProgressBar hairCutBar = getView().findViewById(R.id.hairCutBar);
+        ProgressBar fleaInBar = getView().findViewById(R.id.fleaInBar);
+        ProgressBar fleaOutBar = getView().findViewById(R.id.fleaOutBar);
+        ProgressBar injectionBar = getView().findViewById(R.id.injectionBar);
+        ProgressBar teethBar = getView().findViewById(R.id.teethBar);
+        ProgressBar bloodBar = getView().findViewById(R.id.bloodBar);
+        showerBar.setOnClickListener(new ProgressBar.OnClickListener() {
+            public void onClick(View v) {
+                String Showercountdownday = "Showercountdownday";
+                String Showerday=  "Showerday";
+                setcountdowndate(Showercountdownday,Showerday);
 
+            }
+        });
 
     }
+
+    private int countdowndate(String count) throws ParseException {
+        Calendar optiondate = Calendar.getInstance();
+        Calendar now = Calendar.getInstance();
+        SimpleDateFormat df = new SimpleDateFormat("yyyy/MM/dd");
+        Date specialdate = df.parse(count);
+        optiondate.setTime(specialdate); //真實的日期為+1個月
+        int showercountdownday = (int) Math.ceil(((optiondate.getTimeInMillis() - now.getTimeInMillis()) / (24 * 60 * 60 * 1000.0)));
+        return showercountdownday;
+    }
+
     public void querypet(String query){
         final FirebaseFirestore db = FirebaseFirestore.getInstance();
         final TextView text_petsSex = getView().findViewById(R.id.text_petsSex);
@@ -176,11 +200,11 @@ public class homeFragment extends Fragment {
                             int year = ca2.get(Calendar.YEAR) - ca1.get(Calendar.YEAR);
                             int month = ca2.get(Calendar.MONTH) - ca1.get(Calendar.MONTH);
                             int day = ca2.get(Calendar.DATE) - ca1.get(Calendar.DATE);
-                            if (month < 0) {
+                            if (month <= 0) {
                                 year--;
                                 month = month + 12;
                             }
-                            if (day < 0) {
+                            if (day <= 0) {
                                 month--;
                             }
                             text_petsAge.setText(year + "歲" + month + "月");
@@ -213,7 +237,63 @@ public class homeFragment extends Fragment {
         }).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception exception) {
-                // Handle any errors
+                // Handle any errors'
+            }
+        });
+    }
+
+    public void setcountdowndate(String countdownday,String countdown){
+        final FirebaseFirestore db = FirebaseFirestore.getInstance();
+        Calendar c = Calendar.getInstance();
+        DatePickerDialog datePickerDialog = new DatePickerDialog(getContext(),R.style.MyDatePickerDialogTheme, new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+                // TODO Auto-generated method stub
+                Calendar optiondate = Calendar.getInstance();
+                Calendar now = Calendar.getInstance();
+                optiondate.set(year, monthOfYear, dayOfMonth); //真實的日期為+1個月
+                int showercountdownday = (int) Math.ceil(((optiondate.getTimeInMillis() - now.getTimeInMillis()) / (24 * 60 * 60 * 1000.0)));
+                monthOfYear = monthOfYear+1;
+                String showerday = year+"/"+monthOfYear+"/"+dayOfMonth;
+                Map<String, Object> countdowndate = new HashMap<>();
+                countdowndate.put(countdownday, showercountdownday);
+                countdowndate.put(countdown, showerday);
+                db.collection("userInformation").document(userUID).collection("pets").document(pet_query).update(countdowndate);
+                countdown(pet_query);
+            }
+        }, c.get(Calendar.YEAR), c.get(Calendar.MONTH), c.get(Calendar.DAY_OF_MONTH));
+        DatePicker datePicker = datePickerDialog.getDatePicker();
+        datePicker.setMinDate(System.currentTimeMillis());
+        datePickerDialog.show();
+    }
+    public void countdown(String query){
+        final FirebaseFirestore db = FirebaseFirestore.getInstance();
+        ProgressBar showerBar = getView().findViewById(R.id.showerBar);
+        ProgressBar hairCutBar = getView().findViewById(R.id.hairCutBar);
+        ProgressBar fleaInBar = getView().findViewById(R.id.fleaInBar);
+        ProgressBar fleaOutBar = getView().findViewById(R.id.fleaOutBar);
+        ProgressBar injectionBar = getView().findViewById(R.id.injectionBar);
+        ProgressBar teethBar = getView().findViewById(R.id.teethBar);
+        ProgressBar bloodBar = getView().findViewById(R.id.bloodBar);
+        db.collection("userInformation").document(userUID).collection("pets").document(pet_query)
+                .get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if (task.isSuccessful()) {
+                    DocumentSnapshot doc = task.getResult();
+                    StringBuilder fields = new StringBuilder("");
+                    StringBuilder fields2 = new StringBuilder("");
+                    int countdownday = Integer.valueOf(fields.append(doc.get("Showercountdownday")).toString());
+                    String showerday = fields2.append(doc.get("Showerday")).toString();
+                    if(showerday !=""){
+                        try {
+                            showerBar.setMax(countdownday);
+                            showerBar.setProgress(countdowndate(showerday));
+                        } catch (ParseException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }
             }
         });
     }
