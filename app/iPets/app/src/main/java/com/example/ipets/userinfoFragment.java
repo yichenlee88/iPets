@@ -1,7 +1,9 @@
 package com.example.ipets;
 
 
+import android.app.AlertDialog;
 import android.app.DatePickerDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
@@ -85,8 +87,18 @@ public class userinfoFragment extends Fragment {
                 userInfo.put("Mygender", mygender);
                 userInfo.put("Myaddress", myaddress);
                 db.collection("userInformation").document(userUID).update(userInfo);
-                NavController controller = Navigation.findNavController(v);
-                controller.navigate(R.id.action_userinfoFragment_to_petsinfoFragment);
+                AlertDialog.Builder finishsignup = new AlertDialog.Builder(getActivity());
+                finishsignup.setMessage("註冊成功");
+                finishsignup.setNegativeButton("確認", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface arg0, int arg1) {
+                        NavController controller = Navigation.findNavController(v);
+                        controller.navigate(R.id.action_userinfoFragment_to_homeActivity);
+                    }
+                });
+                finishsignup.setCancelable(false);
+                finishsignup.show();
+
             }
         });
         final EditText mybirth = getView().findViewById(R.id.mybirth);
