@@ -1,38 +1,25 @@
 <template>
-  <b-container
-    ><b-img
-      class="banner_png center"
-      src="../static/img/logo_banner.png"
-    ></b-img>
+  <b-container>
     <!--form-wizard-->
-    <form-wizard @on-complete="onComplete">
-      <tab-content title="Personal details" icon="ti-user">
-        <i class="far fa-user" style="size:12px"></i>
-        My first tab content
-      </tab-content>
-      <tab-content title="Additional Info" icon="ti-settings">
-        My second tab content
-      </tab-content>
-      <tab-content title="Last step" icon="ti-check">
-        Yuhuuu! This seems pretty damn simple
-      </tab-content>
-    </form-wizard>
-    <!--form-wizard end-->
-    <b-card
-      title="註冊"
-      tag="article"
-      class="text-center center"
-      style="width:512px;"
-    >
-      <b-card-text>
+    <form-wizard class="center" @on-complete="onComplete" style="width:768px">
+      <b-img
+        slot="title"
+        class="banner_png center"
+        src="../static/img/login-01.jpg"
+      ></b-img>
+      <tab-content title="帳號資訊" icon="ti-user">
         <!-- username -->
         <b-form-input
           class="InputClass center"
           id="input-username"
-          v-model="text"
+          name="username"
+          v-model="username"
           placeholder="Username"
-          required
+          v-bind:class="{ 'is-invalid': usernameError }"
         ></b-form-input>
+        <div class="invalid-feedback">
+          {{ userErrMsg }}
+        </div>
         <!-- Email -->
         <b-form-input
           class="InputClass center"
@@ -103,6 +90,8 @@
             <span class="display-eye fa fa-eye" @click="showPassword"></span>
           </b-input-group-prepend>
         </div>
+      </tab-content>
+      <tab-content title="基本資料" icon="ti-settings">
         <!-- gender -->
         <b-form-select
           class="InputClass center"
@@ -131,20 +120,25 @@
           placeholder="Address"
           required
         ></b-form-input>
-        <b-button class="ButtonClass" @click="auth_email">註冊</b-button>
-        <b-row
-          ><b-col>
-            <a class="btn btn-social-icon btn-facebook">
-              <span class="fa fa-facebook fa-2x"></span>
-            </a>
-            <a class="btn btn-social-icon btn-instagram">
-              <span class="fa fa-instagram fa-2x"></span>
-            </a>
-            <a class="btn btn-social-icon btn-google">
-              <span class="fa fa-google fa-2x"></span> </a></b-col
-        ></b-row>
-      </b-card-text> </b-card
-  ></b-container>
+        <b-button class="ButtonClass center" @click="auth_email">註冊</b-button>
+      </tab-content>
+      <tab-content title="完成註冊" icon="ti-check">
+        Yuhuuu! This seems pretty damn simple
+      </tab-content>
+    </form-wizard>
+    <b-row
+      ><b-col>
+        <a class="btn btn-social-icon btn-facebook">
+          <span class="fa fa-facebook fa-2x"></span>
+        </a>
+        <a class="btn btn-social-icon btn-instagram">
+          <span class="fa fa-instagram fa-2x"></span>
+        </a>
+        <a class="btn btn-social-icon btn-google">
+          <span class="fa fa-google fa-2x"></span> </a></b-col
+    ></b-row>
+    <!--form-wizard end-->
+  </b-container>
   <!-- <div class="container">
     <img src="../assets/logo_banner.png" class="center" />
     <div class="card">
@@ -235,6 +229,8 @@ export default {
   data() {
     return {
       username: "",
+      usernameError: false,
+      userErrMsg: "",
       email: "",
       password: "",
       passwordFieldType: "password",
@@ -246,6 +242,20 @@ export default {
         { value: "female", text: "女" }
       ]
     };
+  },
+  watch: {
+    username: function() {
+      var isText = /^[a-zA-Z0-9]+$/;
+      if (!isText.test(this.username)) {
+        this.usernameError = true;
+        this.userErrMsg = "請勿包含特殊字元";
+      } else if (this.username.length > 10) {
+        this.usernameError = true;
+        this.userErrMsg = "請勿超過10個字";
+      } else {
+        this.usernameError = false;
+      }
+    }
   },
   methods: {
     auth_email: function(e) {
@@ -290,7 +300,7 @@ export default {
 <style scoped>
 .InputClass {
   height: 48px;
-  width: 400px;
+  width: 512px;
   border-radius: 40px;
   margin-bottom: 20px;
 }
@@ -333,7 +343,7 @@ export default {
 
 .ButtonClass {
   height: 48px;
-  width: 400px;
+  width: 512px;
   border-radius: 40px;
   margin-bottom: 20px;
   background: -webkit-linear-gradient(
