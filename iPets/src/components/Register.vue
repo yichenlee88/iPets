@@ -7,135 +7,110 @@
     ></b-img>
     <b-card tag="article" class="text-center center" style="width:768px;">
       <b-card-text>
-        <!--form-wizard-->
-        <form-wizard
-          class="center"
-          @on-complete="onComplete"
-          style="width:768px"
-        >
-          <p slot="title"></p>
-          <tab-content title="帳號資訊" icon="ti-user">
-            <!-- username -->
-            <b-form-input
-              class="InputClass center"
-              id="input-username"
-              name="username"
-              v-model="username"
-              placeholder="Username"
-            ></b-form-input>
-            <div class="invalid-feedback">
-              {{ userErrMsg }}
-            </div>
-            <!-- Email -->
-            <b-form-input
-              class="InputClass center"
-              id="input-email"
-              v-model="email"
-              placeholder="Email"
-              required
-            ></b-form-input>
-            <!-- password -->
-            <div v-if="passwordHidden">
-              <b-form-input
-                type="password"
-                class="InputClass center"
-                id="input-password"
-                placeholder="Password"
-                required
-              ></b-form-input>
-              <b-input-group-prepend class="mr-n2">
-                <span
-                  class="display-eye fa fa-eye-slash"
-                  @click="hidePassword"
-                ></span>
-              </b-input-group-prepend>
-            </div>
-            <!-- password預設輸入 -->
-            <div v-if="!passwordHidden">
-              <b-form-input
-                class="InputClass center"
-                id="input-password"
-                type="text"
-                placeholder="Password"
-                required
-              ></b-form-input>
-              <b-input-group-prepend class="mr-n2">
-                <span
-                  class="display-eye fa fa-eye"
-                  @click="showPassword"
-                ></span>
-              </b-input-group-prepend>
-            </div>
-            <!-- Confirm Password -->
-            <div v-if="passwordHidden2">
-              <b-form-input
-                type="password"
-                class="InputClass center"
-                id="Confirm Password"
-                placeholder="Confirm Password"
-                required
-              ></b-form-input>
-              <b-input-group-prepend class="mr-n2">
-                <span
-                  class="display-eye-2 fa fa-eye-slash"
-                  @click="hidePassword2"
-                ></span>
-              </b-input-group-prepend>
-            </div>
-            <!-- Confirm Password 預設確認 -->
-            <div v-if="!passwordHidden2">
-              <b-form-input
-                class="InputClass center"
-                id="Confirm Password"
-                type="text"
-                placeholder="Confirm Password"
-                required
-              ></b-form-input>
-              <b-input-group-prepend class="mr-n2">
-                <span
-                  class="display-eye-2 fa fa-eye"
-                  @click="showPassword2"
-                ></span>
-              </b-input-group-prepend>
-            </div>
-          </tab-content>
-          <tab-content title="基本資料" icon="ti-settings">
-            <!-- gender -->
-            <b-form-select
-              class="InputClass center"
-              v-model="selected"
-              :options="options"
-            ></b-form-select>
-            <!-- Birth -->
-            <div>
-              <b-form-input
-                type="text"
-                class="InputClass center"
-                id="input-birth"
-                v-model="text"
-                placeholder="Birth"
-                required
-              ></b-form-input>
-              <b-input-group-prepend class="mr-n2">
-                <span class="date"></span>
-              </b-input-group-prepend>
-            </div>
-            <!--Address-->
-            <b-form-input
-              class="InputClass center"
-              id="input-address"
-              v-model="text"
-              placeholder="Address"
-              required
-            ></b-form-input>
-            <b-button class="ButtonClass center" @click="auth_email"
-              >註冊</b-button
-            >
-          </tab-content>
-          <tab-content title="完成註冊" icon="ti-check">
-            Yuhuuu! This seems pretty damn simple
-          </tab-content>
-        </form-wizard>
+        <!-- username -->
+        <b-form-input
+          class="InputClass center"
+          id="input-username"
+          name="username"
+          v-model="username"
+          placeholder="Username"
+          required
+        ></b-form-input>
+        <!-- Email -->
+        <b-form-input
+          class="InputClass center"
+          id="input-email"
+          v-model="email"
+          placeholder="Email"
+          required
+        ></b-form-input>
+        <!-- password -->
+        <div v-if="passwordHidden">
+          <b-form-input
+            type="password"
+            class="InputClass center"
+            id="input-password"
+            placeholder="Password"
+            required
+          ></b-form-input>
+          <b-input-group-prepend class="mr-n2">
+            <span
+              class="display-eye fa fa-eye-slash"
+              @click="hidePassword"
+            ></span>
+          </b-input-group-prepend>
+        </div>
+        <!-- password預設輸入 -->
+        <div v-if="!passwordHidden">
+          <b-form-input
+            class="InputClass center"
+            id="input-password"
+            type="text"
+            placeholder="Password"
+            required
+          ></b-form-input>
+          <b-input-group-prepend class="mr-n2">
+            <span class="display-eye fa fa-eye" @click="showPassword"></span>
+          </b-input-group-prepend>
+        </div>
+        <!-- Confirm Password -->
+        <div v-if="passwordHidden2">
+          <b-form-input
+            type="password"
+            class="InputClass center"
+            id="Confirm Password"
+            placeholder="Confirm Password"
+            required
+          ></b-form-input>
+          <b-input-group-prepend class="mr-n2">
+            <span
+              class="display-eye-2 fa fa-eye-slash"
+              @click="hidePassword2"
+            ></span>
+          </b-input-group-prepend>
+        </div>
+        <!-- Confirm Password 預設確認 -->
+        <div v-if="!passwordHidden2">
+          <b-form-input
+            class="InputClass center"
+            id="Confirm Password"
+            type="text"
+            placeholder="Confirm Password"
+            required
+          ></b-form-input>
+          <b-input-group-prepend class="mr-n2">
+            <span class="display-eye-2 fa fa-eye" @click="showPassword2"></span>
+          </b-input-group-prepend>
+        </div>
+        <!-- gender -->
+        <b-form-select
+          class="InputClass center"
+          v-model="selected"
+          :options="options"
+        ></b-form-select>
+        <!-- Birth -->
+        <div>
+          <b-form-input
+            type="text"
+            class="InputClass center"
+            id="input-birth"
+            v-model="text"
+            placeholder="Birth"
+            required
+          ></b-form-input>
+          <b-input-group-prepend class="mr-n2">
+            <span class="date"></span>
+          </b-input-group-prepend>
+        </div>
+        <!--Address-->
+        <b-form-input
+          class="InputClass center"
+          id="input-address"
+          v-model="text"
+          placeholder="Address"
+          required
+        ></b-form-input>
+        <b-button class="ButtonClass center" @click="auth_email">註冊</b-button>
         <b-row
           ><b-col>
             <a class="btn btn-social-icon btn-facebook">
@@ -147,8 +122,7 @@
             <a class="btn btn-social-icon btn-google">
               <span class="fa fa-google fa-2x"></span> </a></b-col
         ></b-row>
-        <!--form-wizard end--></b-card-text
-      >
+      </b-card-text>
     </b-card>
   </b-container>
   <!-- <div class="container">
@@ -311,20 +285,13 @@ export default {
   margin-bottom: 20px;
 }
 
-.InputGroup {
-  height: 48px;
-  width: 400px;
-  border-radius: 40px;
-  margin-bottom: 20px;
-}
-
 .display-eye {
   position: absolute;
   height: 24px;
   width: 24px;
-  top: 60%;
-  margin-top: -10px;
-  right: 115px;
+  top: 31%;
+  right: 140px;
+  margin-top: -20px;
   z-index: 1;
   cursor: pointer;
 }
@@ -333,9 +300,9 @@ export default {
   position: absolute;
   height: 24px;
   width: 24px;
-  top: 72%;
-  margin-top: -14px;
-  right: 115px;
+  top: 41%;
+  margin-top: -16px;
+  right: 140px;
   z-index: 1;
   cursor: pointer;
 }
@@ -368,7 +335,7 @@ export default {
   );
 }
 
-.option {
+.options {
   border-radius: 40px;
 }
 </style>
