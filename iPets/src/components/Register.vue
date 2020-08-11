@@ -89,19 +89,11 @@
           :options="options"
         ></b-form-select>
         <!-- Birth -->
-        <div>
-          <b-form-input
-            type="text"
-            class="InputClass center"
-            id="input-birth"
-            v-model="text"
-            placeholder="Birth"
-            required
-          ></b-form-input>
-          <b-input-group-prepend class="mr-n2">
-            <span class="date"></span>
-          </b-input-group-prepend>
-        </div>
+        <date-picker
+          v-model="Birth"
+          type="date"
+          placeholder="Your Birth"
+        ></date-picker>
         <!--Address-->
         <b-form-input
           class="InputClass center"
@@ -205,7 +197,14 @@
 </template>
 
 <script>
+// Import required dependencies
+import "bootstrap/dist/css/bootstrap.css";
 import { db } from "../db";
+// // Import this component
+// import datePicker from "vue-bootstrap-datetimepicker";
+
+// // Import date picker css
+// import "pc-bootstrap4-datetimepicker/build/css/bootstrap-datetimepicker.css";
 
 const fAuth = db.auth();
 const fStore = db.firestore();
@@ -220,6 +219,7 @@ export default {
       passwordFieldType: "password",
       passwordHidden: true,
       passwordHidden2: true,
+      Birth: "",
       selected: "I prefer not to say",
       options: [
         { value: "I prefer not to say", text: "不透漏" },
@@ -255,6 +255,16 @@ export default {
         });
       e.preventDefault();
     },
+    // convert_timestamp(unixTimestamp) {
+    //   var date = unixTimestamp.toDate();
+    //   var year = date.getFullYear();
+    //   var month = date.getMonth() + 1;
+    //   var day = date.getDate();
+    //   if (month < 10) month = "0" + month;
+    //   if (day < 10) day = "0" + day;
+    //   var formattedTime = [year, month, day].join("-");
+    //   return formattedTime;
+    // },
     hidePassword() {
       this.passwordHidden = false;
       this.passwordFieldType =
@@ -337,5 +347,23 @@ export default {
 
 .options {
   border-radius: 40px;
+}
+
+.mx-datepicker {
+  width: auto;
+}
+.mx-datepicker >>> .mx-icon-calendar,
+.mx-datepicker >>> .mx-icon-clear {
+  margin-right: 8px;
+}
+
+.mx-datepicker >>> .mx-input {
+  height: 48px;
+  width: 512px;
+  border-radius: 40px;
+  margin-bottom: 20px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
 }
 </style>
