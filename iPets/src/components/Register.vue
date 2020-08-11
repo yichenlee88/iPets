@@ -1,35 +1,18 @@
 <template>
-  <b-container
-    ><b-img
+  <b-container>
+    <b-img
       class="banner_png center"
-      src="../static/img/logo_banner.png"
-    ></b-img>
-    <!--form-wizard-->
-    <form-wizard @on-complete="onComplete">
-      <tab-content title="Personal details" icon="ti-user">
-        <i class="far fa-user" style="size:12px"></i>
-        My first tab content
-      </tab-content>
-      <tab-content title="Additional Info" icon="ti-settings">
-        My second tab content
-      </tab-content>
-      <tab-content title="Last step" icon="ti-check">
-        Yuhuuu! This seems pretty damn simple
-      </tab-content>
-    </form-wizard>
-    <!--form-wizard end-->
-    <b-card
-      title="註冊"
-      tag="article"
-      class="text-center center"
+      src="../static/img/login-01.jpg"
       style="width:512px;"
-    >
+    ></b-img>
+    <b-card tag="article" class="text-center center" style="width:768px;">
       <b-card-text>
         <!-- username -->
         <b-form-input
           class="InputClass center"
           id="input-username"
-          v-model="text"
+          name="username"
+          v-model="username"
           placeholder="Username"
           required
         ></b-form-input>
@@ -47,7 +30,6 @@
             type="password"
             class="InputClass center"
             id="input-password"
-            v-model="password"
             placeholder="Password"
             required
           ></b-form-input>
@@ -64,7 +46,6 @@
             class="InputClass center"
             id="input-password"
             type="text"
-            v-model="password"
             placeholder="Password"
             required
           ></b-form-input>
@@ -73,34 +54,32 @@
           </b-input-group-prepend>
         </div>
         <!-- Confirm Password -->
-        <div v-if="passwordHidden">
+        <div v-if="passwordHidden2">
           <b-form-input
             type="password"
             class="InputClass center"
             id="Confirm Password"
-            v-model="password"
             placeholder="Confirm Password"
             required
           ></b-form-input>
           <b-input-group-prepend class="mr-n2">
             <span
-              class="display-eye fa fa-eye-slash"
-              @click="hidePassword"
+              class="display-eye-2 fa fa-eye-slash"
+              @click="hidePassword2"
             ></span>
           </b-input-group-prepend>
         </div>
         <!-- Confirm Password 預設確認 -->
-        <div v-if="!passwordHidden">
+        <div v-if="!passwordHidden2">
           <b-form-input
             class="InputClass center"
             id="Confirm Password"
             type="text"
-            v-model="password"
             placeholder="Confirm Password"
             required
           ></b-form-input>
           <b-input-group-prepend class="mr-n2">
-            <span class="display-eye fa fa-eye" @click="showPassword"></span>
+            <span class="display-eye-2 fa fa-eye" @click="showPassword2"></span>
           </b-input-group-prepend>
         </div>
         <!-- gender -->
@@ -110,19 +89,11 @@
           :options="options"
         ></b-form-select>
         <!-- Birth -->
-        <div>
-          <b-form-input
-            type="text"
-            class="InputClass center"
-            id="input-birth"
-            v-model="text"
-            placeholder="Birth"
-            required
-          ></b-form-input>
-          <b-input-group-prepend class="mr-n2">
-            <span class="date"></span>
-          </b-input-group-prepend>
-        </div>
+        <date-picker
+          v-model="Birth"
+          type="date"
+          placeholder="Your Birth"
+        ></date-picker>
         <!--Address-->
         <b-form-input
           class="InputClass center"
@@ -131,7 +102,7 @@
           placeholder="Address"
           required
         ></b-form-input>
-        <b-button class="ButtonClass" @click="auth_email">註冊</b-button>
+        <b-button class="ButtonClass center" @click="auth_email">註冊</b-button>
         <b-row
           ><b-col>
             <a class="btn btn-social-icon btn-facebook">
@@ -143,8 +114,9 @@
             <a class="btn btn-social-icon btn-google">
               <span class="fa fa-google fa-2x"></span> </a></b-col
         ></b-row>
-      </b-card-text> </b-card
-  ></b-container>
+      </b-card-text>
+    </b-card>
+  </b-container>
   <!-- <div class="container">
     <img src="../assets/logo_banner.png" class="center" />
     <div class="card">
@@ -225,7 +197,14 @@
 </template>
 
 <script>
+// Import required dependencies
+import "bootstrap/dist/css/bootstrap.css";
 import { db } from "../db";
+// // Import this component
+// import datePicker from "vue-bootstrap-datetimepicker";
+
+// // Import date picker css
+// import "pc-bootstrap4-datetimepicker/build/css/bootstrap-datetimepicker.css";
 
 const fAuth = db.auth();
 const fStore = db.firestore();
@@ -239,6 +218,8 @@ export default {
       password: "",
       passwordFieldType: "password",
       passwordHidden: true,
+      passwordHidden2: true,
+      Birth: "",
       selected: "I prefer not to say",
       options: [
         { value: "I prefer not to say", text: "不透漏" },
@@ -274,6 +255,16 @@ export default {
         });
       e.preventDefault();
     },
+    // convert_timestamp(unixTimestamp) {
+    //   var date = unixTimestamp.toDate();
+    //   var year = date.getFullYear();
+    //   var month = date.getMonth() + 1;
+    //   var day = date.getDate();
+    //   if (month < 10) month = "0" + month;
+    //   if (day < 10) day = "0" + day;
+    //   var formattedTime = [year, month, day].join("-");
+    //   return formattedTime;
+    // },
     hidePassword() {
       this.passwordHidden = false;
       this.passwordFieldType =
@@ -281,6 +272,15 @@ export default {
     },
     showPassword() {
       this.passwordHidden = true;
+      this.passwordFieldType = this.passwordFieldType;
+    },
+    hidePassword2() {
+      this.passwordHidden2 = false;
+      this.passwordFieldType =
+        this.passwordFieldType === "password" ? "text" : "password";
+    },
+    showPassword2() {
+      this.passwordHidden2 = true;
       this.passwordFieldType = this.passwordFieldType;
     }
   }
@@ -290,14 +290,7 @@ export default {
 <style scoped>
 .InputClass {
   height: 48px;
-  width: 400px;
-  border-radius: 40px;
-  margin-bottom: 20px;
-}
-
-.InputGroup {
-  height: 48px;
-  width: 400px;
+  width: 512px;
   border-radius: 40px;
   margin-bottom: 20px;
 }
@@ -306,9 +299,20 @@ export default {
   position: absolute;
   height: 24px;
   width: 24px;
-  top: 46%;
-  margin-top: -6px;
-  right: 70px;
+  top: 31%;
+  right: 140px;
+  margin-top: -20px;
+  z-index: 1;
+  cursor: pointer;
+}
+
+.display-eye-2 {
+  position: absolute;
+  height: 24px;
+  width: 24px;
+  top: 41%;
+  margin-top: -16px;
+  right: 140px;
   z-index: 1;
   cursor: pointer;
 }
@@ -325,15 +329,13 @@ export default {
 }
 
 .card {
-  -webkit-box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
-  -moz-box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
-  box-shadow: 0 0 15px 5px rgba(0, 0, 0, 0.2);
+  border: 0px;
   margin-bottom: 20px;
 }
 
 .ButtonClass {
   height: 48px;
-  width: 400px;
+  width: 512px;
   border-radius: 40px;
   margin-bottom: 20px;
   background: -webkit-linear-gradient(
@@ -343,7 +345,25 @@ export default {
   );
 }
 
-.option {
+.options {
   border-radius: 40px;
+}
+
+.mx-datepicker {
+  width: auto;
+}
+.mx-datepicker >>> .mx-icon-calendar,
+.mx-datepicker >>> .mx-icon-clear {
+  margin-right: 8px;
+}
+
+.mx-datepicker >>> .mx-input {
+  height: 48px;
+  width: 512px;
+  border-radius: 40px;
+  margin-bottom: 20px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
 }
 </style>

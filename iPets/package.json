@@ -11,18 +11,23 @@
     "build": "node build/build.js"
   },
   "dependencies": {
+    "@livelybone/vue-datepicker": "^4.0.2",
     "axios": "^0.19.2",
     "bootstrap-vue": "^2.15.0",
     "firebase": "^7.14.2",
     "json-server": "^0.16.1",
+    "luxon": "^1.24.1",
     "vue": "^2.5.2",
     "vue-bootstrap-datetimepicker": "^5.0.1",
+    "vue-datetime": "^1.0.0-beta.13",
     "vue-form-wizard": "^0.8.4",
     "vue-google-maps": "^0.1.21",
     "vue-resource": "^1.5.1",
     "vue-router": "^3.0.1",
+    "vue2-datepicker": "^3.6.2",
     "vue2-google-maps": "^0.10.7",
-    "vuex": "^3.4.0"
+    "vuex": "^3.4.0",
+    "weekstart": "^1.0.1"
   },
   "devDependencies": {
     "autoprefixer": "^7.1.2",
