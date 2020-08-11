@@ -1,5 +1,126 @@
 <template>
-  <div class="container">
+  <b-container>
+    <b-img
+      class="banner_png center"
+      src="../static/img/login-01.jpg"
+      style="width:512px;"
+    ></b-img>
+    <b-card tag="article" class="text-center center" style="width:768px;">
+      <b-card-text>
+        <!-- username -->
+        <b-form-input
+          class="InputClass center"
+          name="username"
+          v-model="username"
+          placeholder="Username"
+          required
+        ></b-form-input>
+        <!-- Email -->
+        <b-form-input
+          class="InputClass center"
+          name="email"
+          v-model="email"
+          placeholder="Email"
+          required
+        ></b-form-input>
+        <!-- password -->
+        <div v-if="passwordHidden">
+          <b-form-input
+            type="password"
+            v-model="password"
+            name="password"
+            class="InputClass center"
+            placeholder="Password"
+            required
+          ></b-form-input>
+          <b-input-group-prepend class="mr-n2">
+            <span
+              class="display-eye fa fa-eye-slash"
+              @click="hidePassword"
+            ></span>
+          </b-input-group-prepend>
+        </div>
+        <!-- password預設輸入 -->
+        <div v-if="!passwordHidden">
+          <b-form-input
+            class="InputClass center"
+            name="password"
+            v-model="password"
+            type="text"
+            placeholder="Password"
+            required
+          ></b-form-input>
+          <b-input-group-prepend class="mr-n2">
+            <span class="display-eye fa fa-eye" @click="showPassword"></span>
+          </b-input-group-prepend>
+        </div>
+        <!-- Confirm Password -->
+        <div v-if="passwordHidden2">
+          <b-form-input
+            type="password"
+            name="confirmPassword"
+            class="InputClass center"
+            placeholder="Confirm Password"
+            required
+          ></b-form-input>
+          <b-input-group-prepend class="mr-n2">
+            <span
+              class="display-eye-2 fa fa-eye-slash"
+              @click="hidePassword2"
+            ></span>
+          </b-input-group-prepend>
+        </div>
+        <!-- Confirm Password 預設確認 -->
+        <div v-if="!passwordHidden2">
+          <b-form-input
+            class="InputClass center"
+            name="confirmPassword"
+            type="text"
+            placeholder="Confirm Password"
+            required
+          ></b-form-input>
+          <b-input-group-prepend class="mr-n2">
+            <span class="display-eye-2 fa fa-eye" @click="showPassword2"></span>
+          </b-input-group-prepend>
+        </div>
+        <!-- gender -->
+        <b-form-select
+          class="InputClass center"
+          name="gender"
+          v-model="gender"
+          :options="options"
+        ></b-form-select>
+        <!-- Birth -->
+        <date-picker
+          v-model="birth"
+          name="birth"
+          type="date"
+          placeholder="Your Birth"
+        ></date-picker>
+        <!--Address-->
+        <b-form-input
+          class="InputClass center"
+          name="address"
+          v-model="address"
+          placeholder="Address"
+          required
+        ></b-form-input>
+        <b-button class="ButtonClass center" @click="auth_email">註冊</b-button>
+        <b-row
+          ><b-col>
+            <a class="btn btn-social-icon btn-facebook">
+              <span class="fa fa-facebook fa-2x"></span>
+            </a>
+            <a class="btn btn-social-icon btn-instagram">
+              <span class="fa fa-instagram fa-2x"></span>
+            </a>
+            <a class="btn btn-social-icon btn-google">
+              <span class="fa fa-google fa-2x"></span> </a></b-col
+        ></b-row>
+      </b-card-text>
+    </b-card>
+  </b-container>
+  <!-- <div class="container">
     <img src="../assets/logo_banner.png" class="center" />
     <div class="card">
       <div class="card-header" style="background-color: #e3f2fd;">註冊</div>
@@ -75,10 +196,12 @@
         </div>
       </div>
     </div>
-  </div>
+  </div> -->
 </template>
 
 <script>
+// Import required dependencies
+import "bootstrap/dist/css/bootstrap.css";
 import { db } from "../db";
 
 const fAuth = db.auth();
@@ -90,7 +213,17 @@ export default {
     return {
       username: "",
       email: "",
-      password: ""
+      password: "",
+      passwordFieldType: "password",
+      passwordHidden: true,
+      passwordHidden2: true,
+      birth: "",
+      gender: "I prefer not to say",
+      options: [
+        { value: "I prefer not to say", text: "不透漏" },
+        { value: "male", text: "男" },
+        { value: "female", text: "女" }
+      ]
     };
   },
   methods: {
@@ -105,6 +238,10 @@ export default {
             .set({
               name: this.username,
               email: this.email,
+              password: this.password,
+              gender: this.gender,
+              birth: this.birth,
+              address: this.address,
               photoURL: ""
             })
             .then(() => {
@@ -119,19 +256,57 @@ export default {
           console.log("恭喜註冊成功了!");
         });
       e.preventDefault();
+    },
+    hidePassword() {
+      this.passwordHidden = false;
+      this.passwordFieldType =
+        this.passwordFieldType === "password" ? "text" : "password";
+    },
+    showPassword() {
+      this.passwordHidden = true;
+      this.passwordFieldType = this.passwordFieldType;
+    },
+    hidePassword2() {
+      this.passwordHidden2 = false;
+      this.passwordFieldType =
+        this.passwordFieldType === "password" ? "text" : "password";
+    },
+    showPassword2() {
+      this.passwordHidden2 = true;
+      this.passwordFieldType = this.passwordFieldType;
     }
   }
 };
 </script>
 
 <style scoped>
-.container {
-  margin-top: 20px;
+.InputClass {
+  height: 48px;
+  width: 512px;
+  border-radius: 40px;
   margin-bottom: 20px;
-  border: 0px;
-  font-family: "Microsoft JhengHei", "sans-serif";
-  width: 40%;
-  min-height: 600px;
+}
+
+.display-eye {
+  position: absolute;
+  height: 24px;
+  width: 24px;
+  top: 31%;
+  right: 140px;
+  margin-top: -20px;
+  z-index: 1;
+  cursor: pointer;
+}
+
+.display-eye-2 {
+  position: absolute;
+  height: 24px;
+  width: 24px;
+  top: 41%;
+  margin-top: -16px;
+  right: 140px;
+  z-index: 1;
+  cursor: pointer;
 }
 
 .banner_png {
@@ -139,63 +314,48 @@ export default {
   margin: auto;
 }
 
-.row {
-  vertical-align: bottom;
-  line-height: 50px;
-  text-align: center;
-}
-
-.btn {
-  width: 80%;
-  padding: 12px;
-  border: none;
-  border-radius: 4px;
-  margin: 5px 0;
-  opacity: 0.85;
-  display: inline-block;
-  font-size: 17px;
-  line-height: 20px;
-  text-decoration: none;
-  opacity: inherit;
-}
-
-input:hover,
-.btn:hover {
-  opacity: 1;
-}
-
-.hide-md-lg {
-  font-family: "Microsoft JhengHei", "sans-serif";
-  text-align: center;
-  margin-top: 15px;
-}
-
-.fb {
-  background-color: #3b5998;
-  color: white;
-}
-
-.twitter {
-  background-color: #55acee;
-  color: white;
-}
-
-.google {
-  background-color: #dd4b39;
-  color: white;
-}
-
 .center {
   display: block;
   margin-left: auto;
   margin-right: auto;
-  width: 80%;
 }
 
-.card-header {
-  background-color: #e3f2fd;
-  font-size: 24px;
-  font-family: "Microsoft JhengHei", Helvetica, Arial, sans-serif;
-  text-align: center;
+.card {
+  border: 0px;
+  margin-bottom: 20px;
+}
+
+.ButtonClass {
+  height: 48px;
+  width: 512px;
+  border-radius: 40px;
+  margin-bottom: 20px;
+  background: -webkit-linear-gradient(
+    left,
+    rgb(148, 115, 221) 0%,
+    rgb(26, 201, 228) 100%
+  );
+}
+
+.options {
+  border-radius: 40px;
+}
+
+.mx-datepicker {
+  width: auto;
+}
+.mx-datepicker >>> .mx-icon-calendar,
+.mx-datepicker >>> .mx-icon-clear {
+  margin-right: 8px;
+}
+
+.mx-datepicker >>> .mx-input {
+  height: 48px;
+  width: 512px;
+  border-radius: 40px;
+  margin-bottom: 20px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
 }
 </style>
