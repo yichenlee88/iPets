@@ -10,7 +10,6 @@
         <!-- username -->
         <b-form-input
           class="InputClass center"
-          id="input-username"
           name="username"
           v-model="username"
           placeholder="Username"
@@ -19,7 +18,7 @@
         <!-- Email -->
         <b-form-input
           class="InputClass center"
-          id="input-email"
+          name="email"
           v-model="email"
           placeholder="Email"
           required
@@ -28,8 +27,9 @@
         <div v-if="passwordHidden">
           <b-form-input
             type="password"
+            v-model="password"
+            name="password"
             class="InputClass center"
-            id="input-password"
             placeholder="Password"
             required
           ></b-form-input>
@@ -44,7 +44,8 @@
         <div v-if="!passwordHidden">
           <b-form-input
             class="InputClass center"
-            id="input-password"
+            name="password"
+            v-model="password"
             type="text"
             placeholder="Password"
             required
@@ -57,8 +58,8 @@
         <div v-if="passwordHidden2">
           <b-form-input
             type="password"
+            name="confirmPassword"
             class="InputClass center"
-            id="Confirm Password"
             placeholder="Confirm Password"
             required
           ></b-form-input>
@@ -73,7 +74,7 @@
         <div v-if="!passwordHidden2">
           <b-form-input
             class="InputClass center"
-            id="Confirm Password"
+            name="confirmPassword"
             type="text"
             placeholder="Confirm Password"
             required
@@ -85,20 +86,22 @@
         <!-- gender -->
         <b-form-select
           class="InputClass center"
-          v-model="selected"
+          name="gender"
+          v-model="gender"
           :options="options"
         ></b-form-select>
         <!-- Birth -->
         <date-picker
-          v-model="Birth"
+          v-model="birth"
+          name="birth"
           type="date"
           placeholder="Your Birth"
         ></date-picker>
         <!--Address-->
         <b-form-input
           class="InputClass center"
-          id="input-address"
-          v-model="text"
+          name="address"
+          v-model="address"
           placeholder="Address"
           required
         ></b-form-input>
@@ -200,11 +203,6 @@
 // Import required dependencies
 import "bootstrap/dist/css/bootstrap.css";
 import { db } from "../db";
-// // Import this component
-// import datePicker from "vue-bootstrap-datetimepicker";
-
-// // Import date picker css
-// import "pc-bootstrap4-datetimepicker/build/css/bootstrap-datetimepicker.css";
 
 const fAuth = db.auth();
 const fStore = db.firestore();
@@ -219,8 +217,8 @@ export default {
       passwordFieldType: "password",
       passwordHidden: true,
       passwordHidden2: true,
-      Birth: "",
-      selected: "I prefer not to say",
+      birth: "",
+      gender: "I prefer not to say",
       options: [
         { value: "I prefer not to say", text: "不透漏" },
         { value: "male", text: "男" },
@@ -240,6 +238,10 @@ export default {
             .set({
               name: this.username,
               email: this.email,
+              password: this.password,
+              gender: this.gender,
+              birth: this.birth,
+              address: this.address,
               photoURL: ""
             })
             .then(() => {
@@ -255,16 +257,6 @@ export default {
         });
       e.preventDefault();
     },
-    // convert_timestamp(unixTimestamp) {
-    //   var date = unixTimestamp.toDate();
-    //   var year = date.getFullYear();
-    //   var month = date.getMonth() + 1;
-    //   var day = date.getDate();
-    //   if (month < 10) month = "0" + month;
-    //   if (day < 10) day = "0" + day;
-    //   var formattedTime = [year, month, day].join("-");
-    //   return formattedTime;
-    // },
     hidePassword() {
       this.passwordHidden = false;
       this.passwordFieldType =
