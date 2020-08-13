@@ -58,7 +58,7 @@
                           id="article_title1"
                           type="text"
                           placeholder="Enter title"
-                          v-model.trim="comment.stitle"
+                          v-model.trim="comment.title"
                         ></b-form-input>
                       </b-col>
                     </b-row>
@@ -195,9 +195,6 @@ export default {
       title: "",
       image: "",
       introduction: "",
-      stitle: "",
-      img: "",
-      content: "",
       ending: "",
       comments: [],
       adoptions: [
@@ -206,22 +203,24 @@ export default {
         { title: "聯絡電話", type: "tel", id: "adoption-date" }
       ],
       contents: [
-        {content: "", stitle: "", img: ""}
+        {content: "", title: "", img: ""}
       ]
     };
   },
   methods: {
     addRow() {
       console.log("Add new row");
-      this.contents.push({content: "", stitle: "", img: ""});
+      this.contents.push({content: "", title: "", img: ""});
     },
     createArticle() {
       var article = {title: this.title, image: this.image, introduction: this.introduction, ending: this.ending};
+      var content = {};
       for (var i = 1; i < this.contents.length; i++) {
-        article["content" + i] = this.contents[i].content;
-        article["img" + i] = this.contents[i].img;
-        article["title" + i] = this.contents[i].stitle;
+        content["content"] = this.contents[i].content;
+        content["img"] = this.contents[i].img;
+        content["title"] = this.contents[i].title;
       }
+      article["content"] = content;
       console.log(article);
       axios
         .post("http://localhost:3000/comments", article)
@@ -232,7 +231,7 @@ export default {
           this.introduction = "";
           this.ending = "";
           this.contents = [
-            {content: "", stitle: "", img: ""}
+            {content: "", title: "", img: ""}
           ];
           this.comments.push(res.data);
         });
