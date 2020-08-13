@@ -11,6 +11,7 @@ import Manager from "@/components/Manager";
 import { db } from "../db";
 import DogScience from "@/components/DogScience";
 import Post from "@/components/Post";
+import Member from "@/components/Member";
 
 const fAuth = db.auth();
 
@@ -70,6 +71,14 @@ let router = new Router({
       path: "/homeLogin",
       name: "HomeLogin",
       component: HomeLogin,
+      meta: {
+        requiresAuth: true
+      }
+    },
+    {
+      path: "/member",
+      name: "Member",
+      component: Member,
       meta: {
         requiresAuth: true
       }
