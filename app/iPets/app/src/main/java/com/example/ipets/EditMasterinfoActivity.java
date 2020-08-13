@@ -18,6 +18,7 @@ import android.widget.Toast;
 
 public class EditMasterinfoActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
     LinearLayout btn_editAcct;
+    Button btn_editPWD;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +43,14 @@ public class EditMasterinfoActivity extends AppCompatActivity implements Adapter
             public void onClick(View v) {
                 Intent intentAcct = new Intent(EditMasterinfoActivity.this,EditAccountActivity.class);
                 startActivity(intentAcct);
+            }
+        });
+        btn_editPWD = (Button) findViewById(R.id.btnPWD);
+        btn_editPWD.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intentPWD = new Intent(EditMasterinfoActivity.this,EditPwdActivity.class);
+                startActivity(intentPWD);
             }
         });
 
