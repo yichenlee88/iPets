@@ -6,10 +6,13 @@ import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentActivity;
 
 import android.Manifest;
+import android.content.ActivityNotFoundException;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.KeyEvent;
@@ -54,6 +57,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private ImageView mGps;
     private Button mSearch_button;
 
+    EditText etSource,etDestination;
+    Button btTrack;
+
     //標記
     Marker marker;
     Marker mCurrLocationMarker;
@@ -69,6 +75,10 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mGps = findViewById(R.id.ic_gps);
         mSearch_button = findViewById(R.id.search_button);
 
+        etSource = findViewById(R.id.et_source);
+        etDestination = findViewById(R.id.et_destination);
+        btTrack = findViewById(R.id.bt_track);
+
         //如果true則初始化Map
         if (chkPlayService() == true) {
             initialMap();
@@ -80,6 +90,54 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             }
         }
         init();
+
+        btTrack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //Get value from edit text
+                String sSource =etSource.getText().toString().trim();
+                String sDestination =etDestination.getText().toString().trim();
+
+                //Check condition
+                if(sSource.equals("") && sDestination.equals("")){
+                    //When both value blank
+                    Toast.makeText(getApplicationContext()
+                    ,"Enter both location",Toast.LENGTH_SHORT).show();
+                }else {
+                    //When both value fill
+                    //Display track
+                    DisplayTrack(sSource,sDestination);
+                }
+            }
+        });
+    }
+
+    private void DisplayTrack(String sSource,String sDestination){
+        //If the device does not have a map installed, then redirect it to play store
+        try {
+            //When google map is installed
+            //Initialize uri
+            Uri uri = Uri.parse("https://www.google.co.in/maps/dir/" + sSource + "/"
+                    + sDestination);
+            //Initialize intent with action view
+            Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+            //Set package
+            intent.setPackage("com.google.android.apps.maps");
+            //Set flag
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            //Start activity
+            startActivity(intent);
+        }catch (ActivityNotFoundException e){
+            //When google map is not installed
+            //Initialize uri
+            Uri uri = Uri.parse("https://play.google.com/store/apps/details?id=com.google.android.apps.maps");
+            //Initialize intent with action view
+            Intent intent = new Intent(Intent.ACTION_VIEW,uri);
+            //Set flag
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            //Start activity
+            startActivity(intent);
+        }
     }
 
     //建立初始化Map的方法
@@ -220,10 +278,12 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         }
     }
 
+
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
         getDeviceLocation();
+
 
         Button btnPetStore = findViewById(R.id.PetStore);
         btnPetStore.setOnClickListener(new View.OnClickListener() {
@@ -248,6 +308,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 Log.d("getUrl", googlePlacesUrl.toString());
                 return (googlePlacesUrl.toString());
             }
+
+
         });
 
         Button btnPetSalon = findViewById(R.id.PetSalon);

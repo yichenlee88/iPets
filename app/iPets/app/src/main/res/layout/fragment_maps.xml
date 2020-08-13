@@ -77,6 +77,39 @@
             app:layout_constraintStart_toStartOf="@+id/guideline15"
             app:layout_constraintTop_toTopOf="@+id/guideline5" />
 
+        <EditText
+            android:id="@+id/et_source"
+            android:layout_width="156dp"
+            android:layout_height="52dp"
+            android:layout_marginStart="4dp"
+            android:layout_marginBottom="20dp"
+            android:background="@android:drawable/editbox_background"
+            android:hint="起點"
+            android:padding="12dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+
+        <EditText
+            android:id="@+id/et_destination"
+            android:layout_width="156dp"
+            android:layout_height="52dp"
+            android:layout_marginStart="160dp"
+            android:layout_marginBottom="20dp"
+            android:background="@android:drawable/editbox_background"
+            android:hint="終點"
+            android:padding="12dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <Button
+            android:id="@+id/bt_track"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Go"
+            tools:layout_editor_absoluteX="311dp"
+            tools:layout_editor_absoluteY="663dp" />
+
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline6"
             android:layout_width="wrap_content"
