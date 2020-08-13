@@ -4,8 +4,6 @@ import Vue from "vue";
 import App from "./App";
 import router from "./router";
 import { db } from "./db";
-import * as VueGoogleMaps from "vue2-google-maps";
-import VueResource from "vue-resource";
 
 // Vuex
 import store from "./_store/index";
@@ -15,10 +13,32 @@ import { BootstrapVue, IconsPlugin } from "bootstrap-vue";
 import "bootstrap/dist/css/bootstrap.css";
 import "bootstrap-vue/dist/bootstrap-vue.css";
 
+// VueGoogleMaps
+import * as VueGoogleMaps from "vue2-google-maps";
+
+// vue2-datepicker
+import DatePicker from "vue2-datepicker";
+import "vue2-datepicker/index.css";
+import "vue2-datepicker/locale/zh-cn";
+
+// ------------------------------------------------------
+
 // BootstrapVue
 Vue.use(BootstrapVue);
 Vue.use(IconsPlugin);
-Vue.use(VueResource);
+
+// VueGoogleMaps
+Vue.use(VueGoogleMaps, {
+  load: {
+    key: "AIzaSyAYCtXOCCgcccdDBl9hCHmSd_m6gy4YgUw",
+    libraries: "places" // necessary for places input
+  }
+});
+
+// vue2-datepicker
+Vue.use(DatePicker);
+
+// ------------------------------------------------------
 
 Vue.config.productionTip = false;
 
@@ -34,12 +54,5 @@ fAuth.onAuthStateChanged(() => {
       components: { App },
       template: "<App/>"
     });
-  }
-});
-
-Vue.use(VueGoogleMaps, {
-  load: {
-    key: "AIzaSyAYCtXOCCgcccdDBl9hCHmSd_m6gy4YgUw",
-    libraries: "places" // necessary for places input
   }
 });

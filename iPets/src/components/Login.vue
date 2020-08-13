@@ -2,7 +2,8 @@
   <b-container
     ><b-img
       class="banner_png center"
-      src="../static/img/logo_banner.png"
+      src="../static/img/login-01.jpg"
+      style="width:512px;"
     ></b-img>
     <b-card
       title="登入"
@@ -39,7 +40,7 @@
           <b-form-input
             class="InputClass center"
             id="input-password"
-            :type="passwordFieldType"
+            type="text"
             v-model="password"
             placeholder="Password"
             required

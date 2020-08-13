@@ -202,15 +202,15 @@ public class petsinfoFragment extends Fragment {
         userInfo.put("Petsnotes", petsnotes);
         db.collection("userInformation").document(userUID).collection("pets").document(petsname).set(userInfo);
         AlertDialog.Builder finishsignup = new AlertDialog.Builder(getActivity());
-        finishsignup.setMessage("註冊成功");
-        finishsignup.setNegativeButton("前往登入", new DialogInterface.OnClickListener() {
+        finishsignup.setMessage("新增成功");
+        finishsignup.setNegativeButton("確認", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface arg0, int arg1) {
-                FirebaseAuth.getInstance().signOut();
                 NavController controller = Navigation.findNavController(getView());
-                controller.navigate(R.id.action_petsinfoFragment_to_loginFragment);
+                controller.navigate(R.id.action_petsinfoFragment2_to_navigation_home);
             }
         });
+        finishsignup.setCancelable(false);
         finishsignup.show();
     }
 
