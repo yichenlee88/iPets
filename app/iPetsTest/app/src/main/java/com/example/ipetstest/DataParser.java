@@ -11,25 +11,50 @@ import java.util.HashMap;
 import java.util.List;
 
 public class DataParser {
-    public List<HashMap<String, String>> parse(String jsonData) {
-        JSONArray jsonArray = null;
-        JSONObject jsonObject;
+
+    private HashMap<String, String> getPlace(JSONObject googlePlaceJson)
+    {
+        HashMap<String, String> googlePlaceMap = new HashMap<>();
+        String placeName = "--NA--";
+        String vicinity = "--NA--";
+        String latitude;
+        String longitude;
+        String reference;
+
+        Log.d("getPlace", "Entered");
 
         try {
-            Log.d("Places", "parse");
-            jsonObject = new JSONObject(jsonData);
-            jsonArray = jsonObject.getJSONArray("results");
+            if (!googlePlaceJson.isNull("name")) {
+                placeName = googlePlaceJson.getString("name");
+            }
+            if (!googlePlaceJson.isNull("vicinity")) {
+                vicinity = googlePlaceJson.getString("vicinity");
+            }
+            latitude = googlePlaceJson.getJSONObject("geometry").getJSONObject("location").getString("lat");
+            longitude = googlePlaceJson.getJSONObject("geometry").getJSONObject("location").getString("lng");
+
+            reference = googlePlaceJson.getString("reference");
+
+            googlePlaceMap.put("place_name", placeName);
+            googlePlaceMap.put("vicinity", vicinity);
+            googlePlaceMap.put("lat", latitude);
+            googlePlaceMap.put("lng", longitude);
+            googlePlaceMap.put("reference", reference);
+
+            Log.d("getPlace", "Putting Places");
+
         } catch (JSONException e) {
-            Log.d("Places", "parse error");
+            Log.d("getPlace", "Error");
             e.printStackTrace();
         }
-        return getPlaces(jsonArray);
+        return googlePlaceMap;
     }
 
-    private List<HashMap<String, String>> getPlaces(JSONArray jsonArray) {
+    private List<HashMap<String, String>> getPlaces(JSONArray jsonArray)
+    {
         int placesCount = jsonArray.length();
         List<HashMap<String, String>> placesList = new ArrayList<>();
-        HashMap<String, String> placeMap = null;
+        HashMap<String, String> placeMap;
         Log.d("Places", "getPlaces");
 
         for (int i = 0; i < placesCount; i++) {
@@ -46,36 +71,18 @@ public class DataParser {
         return placesList;
     }
 
-    private HashMap<String, String> getPlace(JSONObject googlePlaceJson) {
-        HashMap<String, String> googlePlaceMap = new HashMap<String, String>();
-        String placeName = "-NA-";
-        String vicinity = "-NA-";
-        String latitude = "";
-        String longitude = "";
-        String reference = "";
-
-        Log.d("getPlace", "Entered");
+    public List<HashMap<String, String>> parse(String jsonData) {
+        JSONArray jsonArray = null;
+        JSONObject jsonObject;
 
         try {
-            if (!googlePlaceJson.isNull("name")) {
-                placeName = googlePlaceJson.getString("name");
-            }
-            if (!googlePlaceJson.isNull("vicinity")) {
-                vicinity = googlePlaceJson.getString("vicinity");
-            }
-            latitude = googlePlaceJson.getJSONObject("geometry").getJSONObject("location").getString("lat");
-            longitude = googlePlaceJson.getJSONObject("geometry").getJSONObject("location").getString("lng");
-            reference = googlePlaceJson.getString("reference");
-            googlePlaceMap.put("place_name", placeName);
-            googlePlaceMap.put("vicinity", vicinity);
-            googlePlaceMap.put("lat", latitude);
-            googlePlaceMap.put("lng", longitude);
-            googlePlaceMap.put("reference", reference);
-            Log.d("getPlace", "Putting Places");
+            Log.d("Places", "parse");
+            jsonObject = new JSONObject(jsonData);
+            jsonArray = jsonObject.getJSONArray("results");
         } catch (JSONException e) {
-            Log.d("getPlace", "Error");
+            Log.d("Places", "parse error");
             e.printStackTrace();
         }
-        return googlePlaceMap;
+        return getPlaces(jsonArray);
     }
 }
