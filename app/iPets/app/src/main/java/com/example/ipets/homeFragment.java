@@ -285,13 +285,14 @@ public class homeFragment extends Fragment {
                     StringBuilder fields2 = new StringBuilder("");
                     //int countdownday = Integer.valueOf(fields.append(doc.get("Showercountdownday")).toString());
                     String showerday = fields2.append(doc.get("Showerday")).toString();
-                    if(showerday !=""){
-                         /*try {
+                    if(!showerday.equals("null")){
+                        try {
+                            int countdownday = Integer.valueOf(fields.append(doc.get("Showercountdownday")).toString());
                             showerBar.setMax(countdownday);
                             showerBar.setProgress(countdowndate(showerday));
                         } catch (ParseException e) {
                             e.printStackTrace();
-                        } */
+                        }
                     }
                 }
             }
