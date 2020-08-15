@@ -111,6 +111,9 @@
     <string name="TextView_Account">xxxxoooo@gmail.com</string>
     <string name="button_PWD">密碼</string>
     <string name="title_check">確認變更</string>
+    <string name="oldPWD_hint">目前密碼</string>
+    <string name="newPWD_hint">新密碼</string>
+    <string name="checkPWD">確認新密碼</string>
     <string-array name="Spinner_sex">
         <item>男</item>
         <item>女</item>
