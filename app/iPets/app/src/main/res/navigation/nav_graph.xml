@@ -124,4 +124,9 @@
         android:name="com.example.ipets.EditMasterinfoActivity"
         android:label="activity_edit_masterinfo"
         tools:layout="@layout/activity_edit_masterinfo" />
+    <activity
+        android:id="@+id/editAccountActivity"
+        android:name="com.example.ipets.EditAccountActivity"
+        android:label="activity_edit_account"
+        tools:layout="@layout/activity_edit_account" />
 </navigation>
