@@ -241,6 +241,9 @@ export default {
               password: this.password,
               gender: this.gender,
               birth: this.birth,
+              birth_year: this.birth.getUTCFullYear(),
+              birth_month: this.birth.getMonth() + 1,
+              birth_date: this.birth.getDate(),
               address: this.address,
               photoURL: ""
             })
