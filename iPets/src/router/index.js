@@ -7,7 +7,7 @@ import Contact from "@/components/Contact";
 import Login from "@/components/Login";
 import Register from "@/components/Register";
 import HomeLogin from "@/components/HomeLogin";
-import Manager from "@/components/Manager";
+import manageArticle from "@/components/manageArticle";
 import { db } from "../db";
 import DogScience from "@/components/DogScience";
 import Post from "@/components/Post";
@@ -92,11 +92,11 @@ let router = new Router({
       }
     },
     {
-      path: "/manager",
-      name: "Manager",
-      component: Manager,
+      path: "/manageArticle",
+      name: "manageArticle",
+      component: manageArticle,
       meta: {
-        requiresGuest: true
+        requiresManager: true
       }
     },
     {
@@ -124,6 +124,14 @@ router.beforeEach((to, from, next) => {
     if (fAuth.currentUser) {
       // Go to login
       next("/HomeLogin");
+    } else {
+      next();
+    }
+  } else if (to.matched.some(record => record.meta.requiresManager)) {
+    // check if MANAGER logged in
+    if (fAuth.currentUser.doc.db().permission === true) {
+      // Go to login
+      next("/managerArticle");
     } else {
       next();
     }
