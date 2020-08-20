@@ -69,6 +69,7 @@
         <b-card-text>
           {{ pet.breed }}
         </b-card-text>
+        <i class="fas fa-cog"></i>
       </b-card-body>
     </b-card>
     <!-- End -- 寵物簡介 -->
