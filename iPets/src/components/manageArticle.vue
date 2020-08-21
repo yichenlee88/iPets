@@ -105,6 +105,7 @@
               </b-col>
             </b-row>
             <b-button class="left" v-on:click="addRow">新增內容</b-button>
+            <b-button class="left2" v-on:click="deleteRow">刪除內容</b-button>
             <b-button class="right" v-on:click="createArticle">確認新增文章</b-button>
           </b-card>
         </b-col>
@@ -132,6 +133,10 @@ export default {
     addRow() {
       console.log("Add new row");
       this.contents.push({ content: "", title: "", img: "" });
+    },
+    deleteRow(index) {
+      console.log("Delete row");
+      this.contents.splice((this.contents.length - 1), 1);
     },
     createArticle() {
       var article = {
@@ -175,6 +180,10 @@ export default {
 }
 .left {
   margin: 20px 0 0;
+  float: left;
+}
+.left2 {
+  margin: 20px 20px 0;
   float: left;
 }
 </style>
