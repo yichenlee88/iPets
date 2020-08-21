@@ -125,11 +125,6 @@ export default {
       introduction: "",
       ending: "",
       comments: [],
-      adoptions: [
-        { title: "名稱", type: "text", id: "adoption-title" },
-        { title: "地址", type: "text", id: "adoption-subtitle" },
-        { title: "聯絡電話", type: "tel", id: "adoption-date" }
-      ],
       contents: [{ content: "", title: "", img: "" }]
     };
   },
