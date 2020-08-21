@@ -141,12 +141,14 @@ export default {
         ending: this.ending
       };
       var content = {};
+      article["contents"] = [];
       for (var i = 1; i < this.contents.length; i++) {
         content["content"] = this.contents[i].content;
         content["img"] = this.contents[i].img;
         content["title"] = this.contents[i].title;
+        article["contents"].push(content[i]);
       }
-      article["content"] = content;
+      article["contents"] = this.contents;
       console.log(article);
       axios.post("http://localhost:3000/comments", article).then(res => {
         console.log(res);
@@ -159,7 +161,6 @@ export default {
           this.contents[i].img = "";
           this.contents[i].title = "";
         }
-        // this.contents = [{ content: "", title: "", img: "" }];
         this.comments.push(res.data);
       });
     }
