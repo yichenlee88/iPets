@@ -96,7 +96,7 @@ let router = new Router({
       name: "manageArticle",
       component: manageArticle,
       meta: {
-        requiresManager: true
+        requiresGuest: true
       }
     },
     {
@@ -124,14 +124,6 @@ router.beforeEach((to, from, next) => {
     if (fAuth.currentUser) {
       // Go to login
       next("/HomeLogin");
-    } else {
-      next();
-    }
-  } else if (to.matched.some(record => record.meta.requiresManager)) {
-    // check if MANAGER logged in
-    if (fAuth.currentUser.doc.db().permission === true) {
-      // Go to login
-      next("/managerArticle");
     } else {
       next();
     }
