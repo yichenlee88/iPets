@@ -15,7 +15,7 @@
               <button
                 type="button"
                 class="btn btn-info"
-                style="position: absolute; right: 20px; bottom: 5px;"
+                style="position: absolute; right: 20px; bottom: 5px; background-color: #5F9EA0; border:0;"
               >了解更多</button>
             </a>
           </div>
