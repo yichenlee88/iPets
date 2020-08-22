@@ -12,7 +12,7 @@
     </div>
     <b-container style="padding:20px 120px;">
       <p class="content">{{this.comments.introduction}}</p>
-      <div v-for="(item, index) in comments.article" :key="index">
+      <div v-for="(item, index) in comments.contents" :key="index">
       <div style="text-align: center">
         <span class="content-title" v-if="item.title">{{item.title}}</span>
         <br>
