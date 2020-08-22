@@ -52,7 +52,7 @@
         android:layout_marginTop="10dp"
         android:paddingHorizontal="15dp"
         android:spinnerMode="dialog"
-        android:entries="@array/Spinner_sex"/>
+        android:entries="@array/Spinner_sex" />
 
     <EditText
         android:id="@+id/masterBirth"
@@ -65,7 +65,7 @@
         android:backgroundTint="#0071BC"
         android:ems="10"
         android:hint="@string/masterBirth_hint"
-        android:inputType="none"
+        android:inputType="date"
         android:textSize="20sp" />
 
     <com.google.android.material.textfield.TextInputLayout

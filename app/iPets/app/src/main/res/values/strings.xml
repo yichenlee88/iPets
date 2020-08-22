@@ -100,7 +100,7 @@
     <string name="TextView_EN">English</string>
     <string name="TextView_ON">開啟</string>
     <string name="TextView_OFF">關閉</string>
-    <string name="button_editPet">編輯寵物資訊(需刪除請聯絡客服)</string>
+    <string name="button_editPet">編輯寵物資訊 (需刪除請聯絡客服)</string>
     <string name="TextView_sysVer">系統版本</string>
     <string name="TextView_Version">9.10.13</string>
     <string name="button_question">常見問題</string>
@@ -114,9 +114,15 @@
     <string name="oldPWD_hint">目前密碼</string>
     <string name="newPWD_hint">新密碼</string>
     <string name="checkPWD">確認新密碼</string>
+    <string name="button_changeHead">更換寵物頭貼</string>
+    <string name="petBirth_hint">生日</string>
     <string-array name="Spinner_sex">
         <item>男</item>
         <item>女</item>
         <item>不願透露</item>
+    </string-array>
+    <string-array name="Spinner_petSex">
+        <item>公的</item>
+        <item>母的</item>
     </string-array>
 </resources>
