@@ -52,6 +52,32 @@
     <!-- End -- 新增寵物 -->
 
     <!-- Start -- 寵物簡介 -->
+    <b-card-group deck>
+      <b-card v-if="show" title="Title" style="max-width:300px">
+        <img
+          v-if="show"
+          width="256"
+          v-bind:img-src="pet.image"
+          alt="image slot"
+        />
+        <b-button href="#" variant="primary">Go somewhere</b-button>
+      </b-card>
+
+      <b-card>
+        <b-card-body :title="pet.name">
+          <b-card-text v-if="pet.gender">
+            沒看過帥哥膩
+          </b-card-text>
+          <b-card-text v-else>
+            人家是女森
+          </b-card-text>
+          <b-card-text>
+            {{ pet.breed }}
+          </b-card-text>
+          <i class="fas fa-cog"></i>
+        </b-card-body>
+      </b-card>
+    </b-card-group>
     <b-card
       v-if="show"
       v-bind:img-src="pet.image"
