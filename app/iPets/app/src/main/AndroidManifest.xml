@@ -23,6 +23,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
+            android:name=".EditPetsinfoActivity"
+            android:parentActivityName=".SettingActivity" />
+        <activity
             android:name=".EditPwdActivity"
             android:parentActivityName=".EditMasterinfoActivity" />
         <activity
