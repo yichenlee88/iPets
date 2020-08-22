@@ -116,6 +116,14 @@
     <string name="checkPWD">確認新密碼</string>
     <string name="button_changeHead">更換寵物頭貼</string>
     <string name="petBirth_hint">生日</string>
+    <string name="TextView_countdown">倒數計時</string>
+    <string name="CheckBox_shower">洗澡</string>
+    <string name="CheckBox_hair">毛髮</string>
+    <string name="CkeckBox_debugIn">體內除蟲</string>
+    <string name="CheckBox_debugOut">體外除蟲</string>
+    <string name="CheckBox_inject">疫苗</string>
+    <string name="CheckBox_teeth">牙齒</string>
+    <string name="CheckBox_period">月經</string>
     <string-array name="Spinner_sex">
         <item>男</item>
         <item>女</item>
