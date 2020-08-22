@@ -14,4 +14,65 @@
         android:background="#0071BC"
         android:minHeight="?attr/actionBarSize"
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/petsHead"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_gravity="center_horizontal|center_vertical"
+        android:layout_marginTop="20dp"
+        android:src="@drawable/dog_icon_1" />
+
+    <Button
+        android:id="@+id/btnChangeHead"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal|center_vertical"
+        android:background="@drawable/btn_click"
+        android:gravity="start|center_horizontal|center_vertical"
+        android:paddingHorizontal="17dp"
+        android:stateListAnimator="@null"
+        android:text="@string/button_changeHead"
+        android:textColor="#0071BC"
+        android:textSize="22sp" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:paddingHorizontal="17dp">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/mypetName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="#0071BC"
+            android:hint="@string/Name_hint"
+            android:textSize="20sp" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <Spinner
+        android:id="@+id/petSexSpinner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:paddingHorizontal="15dp"
+        android:spinnerMode="dialog"
+        android:entries="@array/Spinner_petSex" />
+
+    <EditText
+        android:id="@+id/mypetBirth"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="17dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="17dp"
+        android:autofillHints=""
+        android:backgroundTint="#0071BC"
+        android:ems="10"
+        android:hint="@string/petBirth_hint"
+        android:inputType="date"
+        android:textSize="20sp" />
+
+
 </LinearLayout>
