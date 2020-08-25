@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "@livelybone/vue-datepicker": "^4.0.2",
+    "ajax": "0.0.4",
     "axios": "^0.19.2",
     "bootstrap-vue": "^2.15.0",
     "firebase": "^7.14.2",
