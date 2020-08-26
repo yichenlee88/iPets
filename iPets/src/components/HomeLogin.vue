@@ -52,32 +52,32 @@
     <!-- End -- 新增寵物 -->
 
     <!-- Start -- 寵物簡介 -->
-    <b-card-group deck>
-      <b-card v-if="show" title="Title" style="max-width:300px">
-        <img
-          v-if="show"
-          width="256"
-          v-bind:img-src="pet.image"
-          alt="image slot"
-        />
-        <b-button href="#" variant="primary">Go somewhere</b-button>
+    <b-card-group class="PetProfile" deck>
+      <b-card
+        v-if="show"
+        v-bind:img-src="pet.image"
+        class="mb-3"
+        style="max-width:300px;border:0"
+        img-top
+      >
+        <b-card-text>
+          <b-button class="btn btn-block mb-3" href="#" variant="primary"
+            >Edit profile</b-button
+          ></b-card-text
+        >
       </b-card>
 
       <b-card>
-        <b-card-body :title="pet.name">
-          <b-card-text v-if="pet.gender">
-            沒看過帥哥膩
-          </b-card-text>
-          <b-card-text v-else>
-            人家是女森
-          </b-card-text>
-          <b-card-text>
-            {{ pet.breed }}
-          </b-card-text>
-          <i class="fas fa-cog"></i>
+        <b-card-body :title="pet.name" style="max-height:300px">
+          <b-card-text>性別：{{ pet.gender }}</b-card-text>
+          <b-card-text>生日：{{ pet.gender }}</b-card-text>
+          <b-card-text>年齡：{{ pet.age }}</b-card-text>
+          <b-card-text>品種：{{ pet.breed }}</b-card-text>
+          <b-card-text>本日行程：{{ pet.today }}</b-card-text>
         </b-card-body>
       </b-card>
     </b-card-group>
+
     <b-card
       v-if="show"
       v-bind:img-src="pet.image"
@@ -358,6 +358,15 @@ export default {
 </script>
 
 <style scoped>
+.PetProfile {
+  padding-top: 20px;
+}
+
+.btn {
+  color: #24292e;
+  background-color: #fafbfc;
+  border-color: rgba(27, 31, 35, 0.15);
+}
 .container {
   margin-top: 20px;
   margin-bottom: 20px;

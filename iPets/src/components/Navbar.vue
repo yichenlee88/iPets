@@ -21,6 +21,9 @@
             >登出</b-nav-item
           >
         </b-nav-form>
+        <b-nav-item href="#/register" v-if="isSignedIn"
+          ><i class="far fa-user" style="size:12px"></i
+        ></b-nav-item>
         <b-nav-form>
           <b-nav-item href="#/login" v-if="!isSignedIn"
             ><i class="fas fa-sign-in-alt" style="size:12px"></i
