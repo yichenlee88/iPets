@@ -57,7 +57,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private ImageView mGps;
     private Button mSearch_button;
 
-    EditText etSource,etDestination;
+    EditText etSource;
+    TextView etDestination;
     Button btTrack;
 
     //標記
@@ -75,9 +76,12 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mGps = findViewById(R.id.ic_gps);
         mSearch_button = findViewById(R.id.search_button);
 
-        etSource = findViewById(R.id.et_source);
-        etDestination = findViewById(R.id.et_destination);
+        etSource = findViewById(R.id.input_search);
+        etDestination = findViewById(R.id.te_ntub);
         btTrack = findViewById(R.id.bt_track);
+
+
+
 
         //如果true則初始化Map
         if (chkPlayService() == true) {
@@ -95,7 +99,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             @Override
             public void onClick(View v) {
                 //Get value from edit text
-                String sSource =etSource.getText().toString().trim();
+                String sSource = mSearchText.getText().toString().trim();
                 String sDestination =etDestination.getText().toString().trim();
 
                 //Check condition
@@ -300,7 +304,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 Log.d("onClick", url);
                 GetNearbyPlacesData getNearbyPlacesData = new GetNearbyPlacesData();
                 getNearbyPlacesData.execute(DataTransfer);
-                Toast.makeText(MapsActivity.this, "附近寵物用品店", Toast.LENGTH_LONG).show();
             }
 
             private String getUrl(double latitude, double longitude, String nearbyPlace) {
@@ -308,6 +311,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 Log.d("getUrl", googlePlacesUrl.toString());
                 return (googlePlacesUrl.toString());
             }
+
 
 
         });
@@ -327,7 +331,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 Log.d("onClick", url);
                 GetNearbyPlacesData getNearbyPlacesData = new GetNearbyPlacesData();
                 getNearbyPlacesData.execute(DataTransfer);
-                Toast.makeText(MapsActivity.this, "附近寵物美容店", Toast.LENGTH_LONG).show();
             }
 
             private String getUrl(double latitude, double longitude, String nearbyPlace) {
@@ -352,7 +355,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 Log.d("onClick", url);
                 GetNearbyPlacesData getNearbyPlacesData = new GetNearbyPlacesData();
                 getNearbyPlacesData.execute(DataTransfer);
-                Toast.makeText(MapsActivity.this, "附近寵物醫院", Toast.LENGTH_LONG).show();
             }
 
             private String getUrl(double latitude, double longitude, String nearbyPlace) {
@@ -380,7 +382,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 Log.d("onClick", url);
                 GetNearbyPlacesData getNearbyPlacesData = new GetNearbyPlacesData();
                 getNearbyPlacesData.execute(DataTransfer);
-                Toast.makeText(MapsActivity.this, "附近公園", Toast.LENGTH_LONG).show();
             }
 
             private String getUrl(double latitude, double longitude, String nearbyPlace) {
