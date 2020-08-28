@@ -124,7 +124,7 @@
         android:id="@+id/signout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/btn_click"
+        android:background="#00FFFFFF"
         android:gravity="start|center_horizontal|center_vertical"
         android:paddingHorizontal="17dp"
         android:stateListAnimator="@null"

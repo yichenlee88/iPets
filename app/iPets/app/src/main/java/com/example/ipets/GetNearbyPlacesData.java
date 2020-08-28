@@ -45,6 +45,7 @@ public class GetNearbyPlacesData extends AsyncTask<Object, String, String> {
     }
 
     private void ShowNearbyPlaces(List<HashMap<String, String>> nearbyPlacesList) {
+
         for (int i = 0; i < nearbyPlacesList.size(); i++) {
             Log.d("onPostExecute","Entered into showing locations");
             MarkerOptions markerOptions = new MarkerOptions();
@@ -62,5 +63,6 @@ public class GetNearbyPlacesData extends AsyncTask<Object, String, String> {
             mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
             mMap.animateCamera(CameraUpdateFactory.zoomTo(14));
         }
+
     }
 }
