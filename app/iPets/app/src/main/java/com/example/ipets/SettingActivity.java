@@ -13,6 +13,7 @@ import com.google.firebase.auth.FirebaseAuth;
 
 public class SettingActivity extends AppCompatActivity {
     Button btn_info;
+    Button btn_editPets;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +34,16 @@ public class SettingActivity extends AppCompatActivity {
                 startActivity(intentInfo);
             }
         });
+
+        btn_editPets = (Button) findViewById(R.id.petInfoEdit);
+        btn_editPets.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intentPets = new Intent(SettingActivity.this,EditPetsinfoActivity.class);
+                startActivity(intentPets);
+            }
+        });
+
         Button signout = findViewById(R.id.signout);
         signout.setOnClickListener(new Button.OnClickListener(){
             @Override

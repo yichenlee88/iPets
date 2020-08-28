@@ -2,10 +2,18 @@ package com.example.ipets;
 
 
 import android.app.DatePickerDialog;
+import android.app.Notification;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.app.NotificationCompat;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
@@ -158,6 +166,29 @@ public class homeFragment extends Fragment {
 
             }
         });
+    }
+    public void notification(){
+        String id ="channel_1";//channel的id
+        int importance = NotificationManager.IMPORTANCE_LOW;//channel的重要性
+        NotificationChannel channel = new NotificationChannel(id, "123", importance);//生成channel
+        //为channel添加属性
+        channel.enableVibration(true);
+        channel.enableLights(true);
+        NotificationManager manager = (NotificationManager)getActivity().getSystemService(getActivity().NOTIFICATION_SERVICE);
+        manager.createNotificationChannel(channel);//添加channel
+        Intent it = new Intent(getActivity(), HomeActivity.class);
+        it.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        PendingIntent pit = PendingIntent.getActivity(getActivity(), 0, it,PendingIntent.FLAG_ONE_SHOT);
+        Notification notification = new Notification.Builder(getActivity(),id)
+                .setCategory(Notification.CATEGORY_MESSAGE)
+                .setSmallIcon(R.drawable.app_logo1)
+                .setLargeIcon(BitmapFactory.decodeResource(getResources(), R.drawable.app_logo1))
+                .setContentTitle("倒數計時器")
+                .setContentText("某項行程該做囉!點擊確認")
+                .setContentIntent(pit)
+                .setAutoCancel(true)
+                .build();
+        manager.notify(1,notification);
 
     }
 
@@ -285,13 +316,17 @@ public class homeFragment extends Fragment {
                     StringBuilder fields2 = new StringBuilder("");
                     //int countdownday = Integer.valueOf(fields.append(doc.get("Showercountdownday")).toString());
                     String showerday = fields2.append(doc.get("Showerday")).toString();
-                    if(showerday !=""){
-                         /*try {
+                    if(!showerday.equals("null")){
+                        try {
+                            int countdownday = Integer.valueOf(fields.append(doc.get("Showercountdownday")).toString());
                             showerBar.setMax(countdownday);
                             showerBar.setProgress(countdowndate(showerday));
+                            if (countdowndate(showerday) == 0){
+                                notification();
+                            }
                         } catch (ParseException e) {
                             e.printStackTrace();
-                        } */
+                        }
                     }
                 }
             }
