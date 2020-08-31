@@ -12,6 +12,10 @@ import { db } from "../db";
 import DogScience from "@/components/DogScience";
 import Post from "@/components/Post";
 import Member from "@/components/Member";
+import Manage from "@/components/Manage";
+import CreateArticle from "@/components/CreateArticle";
+import deleteArticle from "@/components/deleteArticle";
+import manageUser from "@/components/manageUser";
 
 const fAuth = db.auth();
 
@@ -92,12 +96,30 @@ let router = new Router({
       }
     },
     {
-      path: "/manageArticle",
-      name: "manageArticle",
-      component: manageArticle,
+      path: "/Manage",
+      name: "Manage",
+      component: Manage,
       meta: {
         requiresGuest: true
-      }
+      },
+      children: [
+        {
+          path: "manageArticle",
+          component: manageArticle,
+          children: [
+            {
+              path: "createArticle", component: CreateArticle
+            },
+            {
+              path: "deleteArticle", component: deleteArticle
+            }
+          ]
+        },
+        {
+          path: "manageUser",
+          component: manageUser
+        }
+      ]
     },
     {
       path: "/post/:id",
