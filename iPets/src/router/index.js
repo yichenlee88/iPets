@@ -7,6 +7,7 @@ import Contact from "@/components/Contact";
 import Login from "@/components/Login";
 import Register from "@/components/Register";
 import PetProfile from "@/components/PetProfile";
+import Calendar from "@/components/Calendar";
 import manageArticle from "@/components/manageArticle";
 import { db } from "../db";
 import DogScience from "@/components/DogScience";
@@ -71,6 +72,14 @@ let router = new Router({
       path: "/petProfile",
       name: "PetProfile",
       component: PetProfile,
+      meta: {
+        requiresAuth: true
+      }
+    },
+    {
+      path: "/calendar",
+      name: "Calendar",
+      component: Calendar,
       meta: {
         requiresAuth: true
       }

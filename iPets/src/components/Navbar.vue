@@ -11,7 +11,7 @@
           >人與狗的關係</b-nav-item
         >
         <b-nav-item href="#/contact" v-if="!isSignedIn">聯繫我們</b-nav-item>
-        <b-nav-item href="#/petProfile" v-if="isSignedIn">行事曆</b-nav-item>
+        <b-nav-item href="#/calendar" v-if="isSignedIn">行事曆</b-nav-item>
         <b-nav-item href="#/" v-if="isSignedIn">相簿</b-nav-item>
         <b-nav-item href="#/member" v-if="isSignedIn">會員專區</b-nav-item>
         <b-nav-item href="#/" v-if="isSignedIn">設定</b-nav-item>
