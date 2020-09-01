@@ -6,7 +6,7 @@ import DogInfo from "@/components/DogInfo";
 import Contact from "@/components/Contact";
 import Login from "@/components/Login";
 import Register from "@/components/Register";
-import HomeLogin from "@/components/HomeLogin";
+import PetProfile from "@/components/PetProfile";
 import manageArticle from "@/components/manageArticle";
 import { db } from "../db";
 import DogScience from "@/components/DogScience";
@@ -68,9 +68,9 @@ let router = new Router({
       }
     },
     {
-      path: "/homeLogin",
-      name: "HomeLogin",
-      component: HomeLogin,
+      path: "/petProfile",
+      name: "PetProfile",
+      component: PetProfile,
       meta: {
         requiresAuth: true
       }
@@ -123,7 +123,7 @@ router.beforeEach((to, from, next) => {
     // check if logged in
     if (fAuth.currentUser) {
       // Go to login
-      next("/HomeLogin");
+      next("/petProfile");
     } else {
       next();
     }

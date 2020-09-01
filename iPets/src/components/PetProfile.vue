@@ -141,7 +141,7 @@
         </b-card-body>
       </b-card>
     </b-card-group>
-    <!-- 
+    <!--
     <b-card
       v-if="show"
       v-bind:img-src="pet.image"
@@ -246,7 +246,7 @@ export default {
   data() {
     return {
       modalShow: false,
-      name: "HomeLogin",
+      name: "PetProfile",
       date: new Date(),
       timerSelected: [],
       timers: [
