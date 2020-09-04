@@ -1,5 +1,5 @@
 <template>
-  <div id="manageUser">
+  <div id="ManageUser">
     <b-container style="margin-top:20px">
       This is manageUser page
     </b-container>
@@ -8,7 +8,7 @@
 
 <script>
 export default {
-  name: "manageUser",
+  name: "ManageUser",
   data() {}
 };
 </script>

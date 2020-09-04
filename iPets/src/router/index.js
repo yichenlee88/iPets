@@ -7,15 +7,15 @@ import Contact from "@/components/Contact";
 import Login from "@/components/Login";
 import Register from "@/components/Register";
 import HomeLogin from "@/components/HomeLogin";
-import manageArticle from "@/components/manageArticle";
 import { db } from "../db";
 import DogScience from "@/components/DogScience";
 import Post from "@/components/Post";
 import Member from "@/components/Member";
 import Manage from "@/components/Manage";
 import CreateArticle from "@/components/CreateArticle";
-import deleteArticle from "@/components/deleteArticle";
-import manageUser from "@/components/manageUser";
+import DeleteArticle from "@/components/DeleteArticle";
+import ManageArticle from "@/components/ManageArticle";
+import ManageUser from "@/components/ManageUser";
 
 const fAuth = db.auth();
 
@@ -96,7 +96,7 @@ let router = new Router({
       }
     },
     {
-      path: "/Manage",
+      path: "/manage",
       name: "Manage",
       component: Manage,
       meta: {
@@ -105,19 +105,21 @@ let router = new Router({
       children: [
         {
           path: "manageArticle",
-          component: manageArticle,
+          name: "ManageArticle",
+          component: ManageArticle,
           children: [
             {
-              path: "createArticle", component: CreateArticle
+              path: "createArticle", name: "CreateArticle", component: CreateArticle
             },
             {
-              path: "deleteArticle", component: deleteArticle
+              path: "deleteArticle", name: "DeleteArticle", component: DeleteArticle
             }
           ]
         },
         {
           path: "manageUser",
-          component: manageUser
+          name: "ManageUser",
+          component: ManageUser
         }
       ]
     },
