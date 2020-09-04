@@ -3,104 +3,99 @@
     <div id="content" class="container">
       <b-row class="justify-content-md-center" style="margin:20px 0">
         <b-col cols="10" style="margin:0 auto">
-          <b-card bg-variant="light">
+          <!-- <b-card bg-variant="light"> -->
+          <b-row class="my-1">
+            <b-col sm="2">
+              <label for="article_title">標題:</label>
+            </b-col>
+            <b-col sm="10">
+              <b-form-input id="article_title" type="text" placeholder="Title" v-model.trim="title"></b-form-input>
+            </b-col>
+          </b-row>
+          <b-row class="my-1">
+            <b-col sm="2">
+              <label for="article_image">圖片位址:</label>
+            </b-col>
+            <b-col sm="10">
+              <b-form-input
+                id="article_image"
+                type="url"
+                placeholder="Input image url"
+                v-model.trim="image"
+              ></b-form-input>
+            </b-col>
+          </b-row>
+          <b-row class="my-1">
+            <b-col sm="2">
+              <label for="article_introduction">簡介:</label>
+            </b-col>
+            <b-col sm="10">
+              <b-form-input
+                id="article_introduction"
+                type="text"
+                placeholder="Introduction"
+                v-model.trim="introduction"
+              ></b-form-input>
+            </b-col>
+          </b-row>
+          <div v-for="(comment, index) in contents" :key="index">
             <b-row class="my-1">
               <b-col sm="2">
-                <label for="article_title">標題:</label>
+                <label for="article_title1">標題 {{index+1}}:</label>
               </b-col>
               <b-col sm="10">
                 <b-form-input
-                  id="article_title"
+                  id="article_title1"
                   type="text"
-                  placeholder="Title"
-                  v-model.trim="title"
+                  placeholder="Enter title"
+                  v-model.trim="comment.title"
                 ></b-form-input>
               </b-col>
             </b-row>
             <b-row class="my-1">
               <b-col sm="2">
-                <label for="article_image">圖片位址:</label>
+                <label for="article_img1">圖片 {{index+1}}:</label>
               </b-col>
               <b-col sm="10">
                 <b-form-input
-                  id="article_image"
-                  type="url"
-                  placeholder="Input image url"
-                  v-model.trim="image"
-                ></b-form-input>
-              </b-col>
-            </b-row>
-            <b-row class="my-1">
-              <b-col sm="2">
-                <label for="article_introduction">簡介:</label>
-              </b-col>
-              <b-col sm="10">
-                <b-form-input
-                  id="article_introduction"
+                  id="article_img1"
                   type="text"
-                  placeholder="Introduction"
-                  v-model.trim="introduction"
+                  placeholder="Enter img url"
+                  v-model.trim="comment.img"
                 ></b-form-input>
               </b-col>
             </b-row>
-            <div v-for="(comment, index) in contents" :key="index">
-              <b-row class="my-1">
-                <b-col sm="2">
-                  <label for="article_title1">標題 {{index+1}}:</label>
-                </b-col>
-                <b-col sm="10">
-                  <b-form-input
-                    id="article_title1"
-                    type="text"
-                    placeholder="Enter title"
-                    v-model.trim="comment.title"
-                  ></b-form-input>
-                </b-col>
-              </b-row>
-              <b-row class="my-1">
-                <b-col sm="2">
-                  <label for="article_img1">圖片 {{index+1}}:</label>
-                </b-col>
-                <b-col sm="10">
-                  <b-form-input
-                    id="article_img1"
-                    type="text"
-                    placeholder="Enter img url"
-                    v-model.trim="comment.img"
-                  ></b-form-input>
-                </b-col>
-              </b-row>
-              <b-row class="my-1">
-                <b-col sm="2">
-                  <label for="article_content1">內容 {{index+1}}:</label>
-                </b-col>
-                <b-col sm="10">
-                  <b-form-textarea
-                    id="article_content1"
-                    placeholder="Enter content"
-                    rows="2"
-                    v-model.trim="comment.content"
-                  ></b-form-textarea>
-                </b-col>
-              </b-row>
-            </div>
             <b-row class="my-1">
               <b-col sm="2">
-                <label for="article_ending">結語:</label>
+                <label for="article_content1">內容 {{index+1}}:</label>
               </b-col>
               <b-col sm="10">
-                <b-form-input
-                  id="article_ending"
-                  type="text"
-                  placeholder="Ending..."
-                  v-model.trim="ending"
-                ></b-form-input>
+                <b-form-textarea
+                  id="article_content1"
+                  placeholder="Enter content"
+                  rows="2"
+                  v-model.trim="comment.content"
+                ></b-form-textarea>
               </b-col>
             </b-row>
-            <b-button class="left" v-on:click="addRow">新增內容</b-button>
-            <b-button class="left2" v-on:click="deleteRow">刪除內容</b-button>
-            <b-button class="right" v-on:click="createArticle">確認新增文章</b-button>
-          </b-card>
+          </div>
+          <b-row class="my-1">
+            <b-col sm="2">
+              <label for="article_ending">結語:</label>
+            </b-col>
+            <b-col sm="10">
+              <b-form-input
+                id="article_ending"
+                type="text"
+                placeholder="Ending..."
+                v-model.trim="ending"
+              ></b-form-input>
+            </b-col>
+          </b-row>
+          <b-button class="left" v-on:click="addRow">新增內容</b-button>
+          <b-button class="left2" v-on:click="deleteRow">刪除內容</b-button>
+          <b-button class="right" v-on:click="createArticle">確認新增文章</b-button>
+          <!-- </b-card> -->
         </b-col>
       </b-row>
     </div>
@@ -129,7 +124,7 @@ export default {
     },
     deleteRow(index) {
       console.log("Delete row");
-      this.contents.splice((this.contents.length - 1), 1);
+      this.contents.splice(this.contents.length - 1, 1);
     },
     createArticle() {
       var article = {
