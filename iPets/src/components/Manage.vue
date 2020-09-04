@@ -7,8 +7,8 @@
           <b-col cols="12">管理權限：最高管理員</b-col>
         </b-row>
         <div class="center">
-          <router-link to="/Manage/manageArticle">管理文章</router-link>
-          <router-link to="/Manage/manageUser">管理使用者資訊</router-link>
+          <router-link to="/manage/manageArticle">管理文章</router-link>
+          <router-link to="/manage/manageUser">管理使用者資訊</router-link>
           <router-view></router-view>
         </div>
       </b-container>
