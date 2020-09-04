@@ -15,6 +15,7 @@ public class SettingActivity extends AppCompatActivity {
     Button btn_info;
     Button btn_editPets;
     Button btn_question;
+    Button btn_communicate;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,6 +52,15 @@ public class SettingActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intentQuestion = new Intent(SettingActivity.this,EditQuestionActivity.class);
                 startActivity(intentQuestion);
+            }
+        });
+
+        btn_communicate = (Button) findViewById(R.id.communicate);
+        btn_communicate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intentCommunicate = new Intent(SettingActivity.this,EditContactusActivity.class);
+                startActivity(intentCommunicate);
             }
         });
 
