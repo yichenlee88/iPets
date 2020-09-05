@@ -14,6 +14,7 @@ import Member from "@/components/Member";
 import Manage from "@/components/Manage";
 import CreateArticle from "@/components/CreateArticle";
 import DeleteArticle from "@/components/DeleteArticle";
+import EditArticle from "@/components/EditArticle";
 import ManageArticle from "@/components/ManageArticle";
 import ManageUser from "@/components/ManageUser";
 
@@ -113,6 +114,9 @@ let router = new Router({
             },
             {
               path: "deleteArticle", name: "DeleteArticle", component: DeleteArticle
+            },
+            {
+              path: "editArticle", name: "EditArticle", component: EditArticle
             }
           ]
         },
