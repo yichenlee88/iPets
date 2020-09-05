@@ -2,9 +2,9 @@
   <b-container>
     <b-row class="justify-content-md-center" style="margin:20px 0">
       <b-col cols="10" style="margin:0 auto">
-        <div v-for="(item, index) in comments" :key="index">
+        <div v-for="(item, index) in comments" :key="item.id">
           <b-row class="text-left" style="margin-top:20px">
-            <b-col cols="8">{{item.id}}.{{item.title}}</b-col>
+            <b-col cols="8">{{index + 1}}.{{item.title}}</b-col>
             <b-col>
               <b-button pill v-on:click="$bvModal.show(`${index}`)">查看文章</b-button>
               <b-button
