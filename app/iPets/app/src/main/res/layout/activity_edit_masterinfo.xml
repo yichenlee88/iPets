@@ -52,20 +52,20 @@
         android:layout_marginTop="10dp"
         android:paddingHorizontal="15dp"
         android:spinnerMode="dialog"
-        android:entries="@array/Spinner_sex"/>
+        android:entries="@array/Spinner_sex" />
 
     <EditText
         android:id="@+id/masterBirth"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="8dp"
         android:layout_marginStart="17dp"
         android:layout_marginEnd="17dp"
         android:autofillHints=""
         android:backgroundTint="#0071BC"
         android:ems="10"
         android:hint="@string/masterBirth_hint"
-        android:inputType="none"
+        android:inputType="date"
         android:textSize="20sp" />
 
     <com.google.android.material.textfield.TextInputLayout
