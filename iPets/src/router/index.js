@@ -7,11 +7,16 @@ import Contact from "@/components/Contact";
 import Login from "@/components/Login";
 import Register from "@/components/Register";
 import HomeLogin from "@/components/HomeLogin";
-import manageArticle from "@/components/manageArticle";
 import { db } from "../db";
 import DogScience from "@/components/DogScience";
 import Post from "@/components/Post";
 import Member from "@/components/Member";
+import Manage from "@/components/Manage";
+import CreateArticle from "@/components/CreateArticle";
+import DeleteArticle from "@/components/DeleteArticle";
+import EditArticle from "@/components/EditArticle";
+import ManageArticle from "@/components/ManageArticle";
+import ManageUser from "@/components/ManageUser";
 
 const fAuth = db.auth();
 
@@ -92,12 +97,35 @@ let router = new Router({
       }
     },
     {
-      path: "/manageArticle",
-      name: "manageArticle",
-      component: manageArticle,
+      path: "/manage",
+      name: "Manage",
+      component: Manage,
       meta: {
         requiresGuest: true
-      }
+      },
+      children: [
+        {
+          path: "manageArticle",
+          name: "ManageArticle",
+          component: ManageArticle,
+          children: [
+            {
+              path: "createArticle", name: "CreateArticle", component: CreateArticle
+            },
+            {
+              path: "deleteArticle", name: "DeleteArticle", component: DeleteArticle
+            },
+            {
+              path: "editArticle", name: "EditArticle", component: EditArticle
+            }
+          ]
+        },
+        {
+          path: "manageUser",
+          name: "ManageUser",
+          component: ManageUser
+        }
+      ]
     },
     {
       path: "/post/:id",
