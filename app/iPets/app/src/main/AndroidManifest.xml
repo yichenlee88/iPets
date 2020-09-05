@@ -35,6 +35,12 @@
             android:name=".EditMasterinfoActivity"
             android:parentActivityName=".SettingActivity" />
         <activity
+            android:name=".EditQuestionActivity"
+            android:parentActivityName=".SettingActivity" />
+        <activity
+            android:name=".EditContactusActivity"
+            android:parentActivityName=".SettingActivity" />
+        <activity
             android:name=".SettingActivity"
             android:parentActivityName=".HomeActivity" />
         <activity android:name=".HomeActivity" />

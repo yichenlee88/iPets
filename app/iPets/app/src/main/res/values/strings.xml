@@ -133,4 +133,8 @@
         <item>公的</item>
         <item>母的</item>
     </string-array>
+    <string-array name="Spinner_question1">
+        <item>BUG通知</item>
+        <item>非常抱歉造成各位使用上的不便，iPets對於已確認狀況的問題和對策進行了更新，在APP版本無法讀取的狀態下，請試著使用網頁版本。</item>
+    </string-array>
 </resources>
