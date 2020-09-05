@@ -7,25 +7,30 @@
             <b-col cols="8">{{item.id}}.{{item.title}}</b-col>
             <b-col>
               <b-button pill v-on:click="$bvModal.show(`${index}`)">查看文章</b-button>
-              <b-button pill v-on:click="deletePost" style="background: #CD5C5C;border: #CD5C5C">刪除文章</b-button>
+              <b-button
+                pill
+                v-on:click="deletePost(index)"
+                style="background: #CD5C5C;border: #CD5C5C"
+              >刪除文章</b-button>
             </b-col>
           </b-row>
-          <b-modal size="lg" :id="`${index}`" :title="item.title">
+          <b-modal hide-footer size="lg" :id="`${index}`" :title="item.title">
             <div class="center" style="margin-top:20px">
               <img :src="`${item.image}`" style="max-width: 60%;">
             </div>
             <b-container style="padding:20px 120px;">
               <p class="content">{{item.introduction}}</p>
-              <div v-for="(item, i) in comments.contents" :key="i">
+              <div v-for="(items, i) in item.contents" :key="i">
                 <div style="text-align: center">
-                  <span class="content-title">{{item.title}}</span>
+                  <span class="content-title" v-if="items.title">{{items.title}}</span>
                   <br>
-                  <img class="rounded" :src="item.img" style="max-width: 30%">
+                  <img class="rounded" v-if="items.img" :src="items.img" style="max-width: 30%">
                 </div>
-                <p class="content">{{item.content}}</p>
+                <p class="content">{{items.content}}</p>
               </div>
               <p class="content-end">{{item.ending}}</p>
             </b-container>
+            <b-button block v-on:click="$bvModal.hide(`${index}`)">關閉視窗</b-button>
           </b-modal>
         </div>
       </b-col>
@@ -55,10 +60,17 @@ export default {
     });
   },
   methods: {
-    viewPost() {
-      this.$refs["my-modal"].show();
-    },
-    deletePost() {}
+    deletePost(index) {
+      let target = this.comments[index];
+      if (confirm(`是否刪除 ${target.title} ?`)) {
+        axios.delete(`http://localhost:3000/comments/${target.id}`).then((res) => {
+          console.log(res);
+          this.comments.splice(index, 1);
+        }).catch((err) => {
+          console.log(err);
+        });
+      };
+    }
   }
 };
 </script>
