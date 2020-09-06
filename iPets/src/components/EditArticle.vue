@@ -20,7 +20,7 @@
                   <div style="text-align: center">
                     <span class="content-title" v-if="items.title">{{items.title}}</span>
                     <br>
-                    <img class="rounded" v-if="items.img" :src="items.img" style="max-width: 30%">
+                    <img v-if="items.img" :src="items.img" style="max-width: 30%">
                   </div>
                   <p class="content">{{items.content}}</p>
                 </div>
