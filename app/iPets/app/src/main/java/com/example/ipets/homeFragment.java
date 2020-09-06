@@ -166,6 +166,54 @@ public class homeFragment extends Fragment {
 
             }
         });
+        hairCutBar.setOnClickListener(new ProgressBar.OnClickListener() {
+            public void onClick(View v) {
+                String Haircutcountdownday = "Haircutcountdownday";
+                String Haircutday=  "Haircutday";
+                setcountdowndate(Haircutcountdownday,Haircutday);
+
+            }
+        });
+        fleaInBar.setOnClickListener(new ProgressBar.OnClickListener() {
+            public void onClick(View v) {
+                String Fleaincountdownday = "Fleaincountdownday";
+                String Fleainday=  "Fleainday";
+                setcountdowndate(Fleaincountdownday,Fleainday);
+
+            }
+        });
+        fleaOutBar.setOnClickListener(new ProgressBar.OnClickListener() {
+            public void onClick(View v) {
+                String Fleaoutcountdownday = "Fleaoutcountdownday";
+                String Fleaoutday=  "Fleaoutday";
+                setcountdowndate(Fleaoutcountdownday,Fleaoutday);
+
+            }
+        });
+        injectionBar.setOnClickListener(new ProgressBar.OnClickListener() {
+            public void onClick(View v) {
+                String Injectioncountdownday = "Injectioncountdownday";
+                String Injectionday=  "Injectionday";
+                setcountdowndate(Injectioncountdownday,Injectionday);
+
+            }
+        });
+        teethBar.setOnClickListener(new ProgressBar.OnClickListener() {
+            public void onClick(View v) {
+                String Teethcountdownday = "Teethcountdownday";
+                String Teethday=  "Teethday";
+                setcountdowndate(Teethcountdownday,Teethday);
+
+            }
+        });
+        bloodBar.setOnClickListener(new ProgressBar.OnClickListener() {
+            public void onClick(View v) {
+                String Bloodcountdownday = "Bloodcountdownday";
+                String Bloodday=  "Bloodday";
+                setcountdowndate(Bloodcountdownday,Bloodday);
+
+            }
+        });
     }
     public void notification(){
         String id ="channel_1";//channel的id
@@ -312,16 +360,98 @@ public class homeFragment extends Fragment {
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                 if (task.isSuccessful()) {
                     DocumentSnapshot doc = task.getResult();
-                    StringBuilder fields = new StringBuilder("");
-                    StringBuilder fields2 = new StringBuilder("");
-                    //int countdownday = Integer.valueOf(fields.append(doc.get("Showercountdownday")).toString());
-                    String showerday = fields2.append(doc.get("Showerday")).toString();
+                    StringBuilder Showercountdownday = new StringBuilder("");StringBuilder Showerday = new StringBuilder("");
+                    StringBuilder Haircutcountdownday = new StringBuilder("");StringBuilder Haircutday = new StringBuilder("");
+                    StringBuilder Fleaincountdownday = new StringBuilder("");StringBuilder Fleainday = new StringBuilder("");
+                    StringBuilder Fleaoutcountdownday = new StringBuilder("");StringBuilder Fleaoutday = new StringBuilder("");
+                    StringBuilder Injectioncountdownday = new StringBuilder("");StringBuilder Injectionday = new StringBuilder("");
+                    StringBuilder Teethcountdownday = new StringBuilder("");StringBuilder Teethday = new StringBuilder("");
+                    StringBuilder Bloodcountdownday = new StringBuilder("");StringBuilder Bloodday = new StringBuilder("");
+                    String showerday = Showerday.append(doc.get("Showerday")).toString();
+                    String haircutday = Haircutday.append(doc.get("Haircutday")).toString();
+                    String fleainday = Fleainday.append(doc.get("Fleainday")).toString();
+                    String fleaoutday = Fleaoutday.append(doc.get("Fleaoutday")).toString();
+                    String injectionday = Injectionday.append(doc.get("Injectionday")).toString();
+                    String teethday = Teethday.append(doc.get("Teethday")).toString();
+                    String bloodday = Bloodday.append(doc.get("Bloodday")).toString();
                     if(!showerday.equals("null")){
                         try {
-                            int countdownday = Integer.valueOf(fields.append(doc.get("Showercountdownday")).toString());
+                            int countdownday = Integer.valueOf(Showercountdownday.append(doc.get("Showercountdownday")).toString());
                             showerBar.setMax(countdownday);
                             showerBar.setProgress(countdowndate(showerday));
                             if (countdowndate(showerday) == 0){
+                                notification();
+                            }
+                        } catch (ParseException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                    if(!haircutday.equals("null")){
+                        try {
+                            int haircutcountdownday = Integer.valueOf(Haircutcountdownday.append(doc.get("Haircutcountdownday")).toString());
+                            hairCutBar.setMax(haircutcountdownday);
+                            hairCutBar.setProgress(countdowndate(haircutday));
+                            if (countdowndate(haircutday) == 0){
+                                notification();
+                            }
+                        } catch (ParseException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                    if(!fleainday.equals("null")){
+                        try {
+                            int fleaincountdownday = Integer.valueOf(Fleaincountdownday.append(doc.get("Fleaincountdownday")).toString());
+                            fleaInBar.setMax(fleaincountdownday);
+                            fleaInBar.setProgress(countdowndate(fleainday));
+                            if (countdowndate(fleainday) == 0){
+                                notification();
+                            }
+                        } catch (ParseException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                    if(!fleaoutday.equals("null")){
+                        try {
+                            int fleaoutcountdownday = Integer.valueOf(Fleaoutcountdownday.append(doc.get("Fleaoutcountdownday")).toString());
+                            fleaOutBar.setMax(fleaoutcountdownday);
+                            fleaOutBar.setProgress(countdowndate(fleaoutday));
+                            if (countdowndate(fleaoutday) == 0){
+                                notification();
+                            }
+                        } catch (ParseException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                    if(!injectionday.equals("null")){
+                        try {
+                            int injectioncountdownday = Integer.valueOf(Injectioncountdownday.append(doc.get("Injectioncountdownday")).toString());
+                            injectionBar.setMax(injectioncountdownday);
+                            injectionBar.setProgress(countdowndate(injectionday));
+                            if (countdowndate(injectionday) == 0){
+                                notification();
+                            }
+                        } catch (ParseException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                    if(!teethday.equals("null")){
+                        try {
+                            int teethcountdownday = Integer.valueOf(Teethcountdownday.append(doc.get("Teethcountdownday")).toString());
+                            teethBar.setMax(teethcountdownday);
+                            teethBar.setProgress(countdowndate(teethday));
+                            if (countdowndate(teethday) == 0){
+                                notification();
+                            }
+                        } catch (ParseException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                    if(!bloodday.equals("null")){
+                        try {
+                            int bloodcountdownday = Integer.valueOf(Bloodcountdownday.append(doc.get("Bloodcountdownday")).toString());
+                            bloodBar.setMax(bloodcountdownday);
+                            bloodBar.setProgress(countdowndate(bloodday));
+                            if (countdowndate(bloodday) == 0){
                                 notification();
                             }
                         } catch (ParseException e) {
