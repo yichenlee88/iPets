@@ -28,7 +28,7 @@
 <script>
 import axios from "axios";
 export default {
-  name: "dogScience",
+  name: "DogScience",
   data() {
     return {
       title: "",

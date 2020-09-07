@@ -124,6 +124,13 @@
     <string name="CheckBox_inject">疫苗</string>
     <string name="CheckBox_teeth">牙齒</string>
     <string name="CheckBox_period">月經</string>
+    <string name="material_calendar_monday">一</string>
+    <string name="material_calendar_tuesday">二</string>
+    <string name="material_calendar_wednesday">三</string>
+    <string name="material_calendar_thursday">四</string>
+    <string name="material_calendar_friday">五</string>
+    <string name="material_calendar_saturday">六</string>
+    <string name="material_calendar_sunday">日</string>
     <string-array name="Spinner_sex">
         <item>男</item>
         <item>女</item>
@@ -133,4 +140,22 @@
         <item>公的</item>
         <item>母的</item>
     </string-array>
+    <string-array name="Spinner_question1">
+        <item>BUG通知</item>
+        <item>非常抱歉造成各位使用上的不便，iPets對於已確認狀況的問題和對策進行了更新，在APP版本無法讀取的狀態下，請試著使用網頁版本。</item>
+    </string-array>
+    <array name="material_calendar_months_array">
+        <item>一月</item>
+        <item>二月</item>
+        <item>三月</item>
+        <item>四月</item>
+        <item>五月</item>
+        <item>六月</item>
+        <item>七月</item>
+        <item>八月</item>
+        <item>九月</item>
+        <item>十月</item>
+        <item>十一月</item>
+        <item>十二月</item>
+    </array>
 </resources>

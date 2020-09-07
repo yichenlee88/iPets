@@ -22,6 +22,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".CalendarActivity"></activity>
         <activity
             android:name=".EditPetsinfoActivity"
             android:parentActivityName=".SettingActivity" />
@@ -33,6 +34,12 @@
             android:parentActivityName=".EditMasterinfoActivity" />
         <activity
             android:name=".EditMasterinfoActivity"
+            android:parentActivityName=".SettingActivity" />
+        <activity
+            android:name=".EditQuestionActivity"
+            android:parentActivityName=".SettingActivity" />
+        <activity
+            android:name=".EditContactusActivity"
             android:parentActivityName=".SettingActivity" />
         <activity
             android:name=".SettingActivity"
