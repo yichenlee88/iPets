@@ -32,6 +32,12 @@ public class EditQuestionActivity extends AppCompatActivity implements AdapterVi
         adapter.setDropDownViewResource(R.layout.myspinner_dropdown_layout);
         question1Spinner.setAdapter(adapter);
         question1Spinner.setOnItemSelectedListener(this);
+
+        Spinner question2Spinner = findViewById(R.id.question2Spinner);
+        ArrayAdapter adapter2 = ArrayAdapter.createFromResource(this, R.array.Spinner_question2, R.layout.myspinner_layout);
+        adapter2.setDropDownViewResource(R.layout.myspinner_dropdown_layout);
+        question2Spinner.setAdapter(adapter2);
+        question2Spinner.setOnItemSelectedListener(this);
     }
 
     @Override

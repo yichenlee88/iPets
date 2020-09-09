@@ -25,5 +25,14 @@
         android:paddingHorizontal="15dp"
         android:spinnerMode="dialog" />
 
+    <Spinner
+        android:id="@+id/question2Spinner"
+        android:layout_width="match_parent"
+        android:layout_height="52dp"
+        android:layout_marginTop="10dp"
+        android:entries="@array/Spinner_question2"
+        android:paddingHorizontal="15dp"
+        android:spinnerMode="dialog" />
+
 
 </LinearLayout>
