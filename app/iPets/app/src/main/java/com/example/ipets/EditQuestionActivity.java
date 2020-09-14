@@ -19,7 +19,7 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 
-public class EditQuestionActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
+public class EditQuestionActivity extends AppCompatActivity {
 
     Button btn_q1;
     Button btn_q2;
@@ -52,7 +52,7 @@ public class EditQuestionActivity extends AppCompatActivity implements AdapterVi
                             public void onClick(DialogInterface dialog, int which) {
 
                             }
-                        }).show();
+                }).show();
             }
         });
 
@@ -68,7 +68,7 @@ public class EditQuestionActivity extends AppCompatActivity implements AdapterVi
                             public void onClick(DialogInterface dialog, int which) {
 
                             }
-                        }).show();
+                }).show();
             }
         });
 
@@ -105,12 +105,12 @@ public class EditQuestionActivity extends AppCompatActivity implements AdapterVi
                             public void onClick(DialogInterface dialog, int which) {
 
                             }
-                        }).show();
+                }).show();
             }
         });
 
-        btn_q4 = findViewById(R.id.button_q5);
-        btn_q4.setOnClickListener(new View.OnClickListener() {
+        btn_q5 = findViewById(R.id.button_q5);
+        btn_q5.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 new AlertDialog.Builder(EditQuestionActivity.this)
@@ -121,12 +121,12 @@ public class EditQuestionActivity extends AppCompatActivity implements AdapterVi
                             public void onClick(DialogInterface dialog, int which) {
 
                             }
-                        }).show();
+                }).show();
             }
         });
 
-        btn_q4 = findViewById(R.id.button_q6);
-        btn_q4.setOnClickListener(new View.OnClickListener() {
+        btn_q6 = findViewById(R.id.button_q6);
+        btn_q6.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 new AlertDialog.Builder(EditQuestionActivity.this)
@@ -140,12 +140,12 @@ public class EditQuestionActivity extends AppCompatActivity implements AdapterVi
                             public void onClick(DialogInterface dialog, int which) {
 
                             }
-                        }).show();
+                }).show();
             }
         });
 
-        btn_q4 = findViewById(R.id.button_q7);
-        btn_q4.setOnClickListener(new View.OnClickListener() {
+        btn_q7 = findViewById(R.id.button_q7);
+        btn_q7.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 new AlertDialog.Builder(EditQuestionActivity.this)
@@ -156,31 +156,17 @@ public class EditQuestionActivity extends AppCompatActivity implements AdapterVi
                             public void onClick(DialogInterface dialog, int which) {
 
                             }
-                        }).show();
+                }).show();
             }
         });
 
-
     }
-
-
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.toolbar_menu,menu);
         return true;
-    }
-
-    @Override
-    public void onItemSelected(AdapterView<?> adapterView, View view, int position, long id) {
-        Toast.makeText(this,adapterView.getSelectedItem().toString(),Toast.LENGTH_SHORT).show();
-    }
-
-    @Override
-    public void onNothingSelected(AdapterView<?> parent) {
-
     }
 
 }
