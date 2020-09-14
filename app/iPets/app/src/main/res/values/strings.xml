@@ -131,6 +131,13 @@
     <string name="material_calendar_friday">五</string>
     <string name="material_calendar_saturday">六</string>
     <string name="material_calendar_sunday">日</string>
+    <string name="button_q1">▼  BUG通知</string>
+    <string name="button_q2">▼  錯誤403</string>
+    <string name="button_q3">▼  註冊帳號</string>
+    <string name="button_q4">▼  如何重新登入?</string>
+    <string name="button_q5">▼  定位無法啟用?</string>
+    <string name="button_q6">▼  能在無網路環境使用嗎?</string>
+    <string name="button_q7">▼  iPets行事曆能和其他行事曆同步嗎?</string>
     <string-array name="Spinner_sex">
         <item>男</item>
         <item>女</item>
@@ -139,14 +146,6 @@
     <string-array name="Spinner_petSex">
         <item>公的</item>
         <item>母的</item>
-    </string-array>
-    <string-array name="Spinner_question1">
-        <item>BUG通知</item>
-        <item>非常抱歉造成各位使用上的不便，iPets對於已確認狀況的問題和對策進行了更新，在APP版本無法讀取的狀態下，請試著使用網頁版本。</item>
-    </string-array>
-    <string-array name="Spinner_question2">
-        <item>錯誤403</item>
-        <item>錯誤403表示未能連接至iPets伺服器。要解決這個問題，您可以重新登入或者重新安裝iPets應用程式。</item>
     </string-array>
     <string-array name="Spinner_problem">
         <item>首頁</item>
