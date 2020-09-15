@@ -49,6 +49,11 @@ public class HomeActivity extends AppCompatActivity {
                         fragment = new homeFragment();
                         loadFragment(fragment);
                         return true;
+                    case R.id.calendar:
+                        Intent intentCalendar = new Intent(HomeActivity.this,CalendarActivity.class);
+                        intentCalendar.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                        startActivity(intentCalendar);
+                        return true;
                     case R.id.locate:
                         Intent intentMap = new Intent(HomeActivity.this,MapsActivity.class);
                         intentMap.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
