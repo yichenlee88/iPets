@@ -26,10 +26,10 @@
                 </div>
                 <p class="content-end">{{item.ending}}</p>
               </b-container>
-              <b-button block v-on:click="$bvModal.show(modify + `${index}`)">編輯文章</b-button>
+              <b-button block v-on:click="$bvModal.show(`${item.title}`)">編輯文章</b-button>
               <b-button block v-on:click="$bvModal.hide(`${index}`)">關閉視窗</b-button>
             </b-modal>
-            <b-modal hide-footer size="lg" :id="modify + `${index}`">
+            <b-modal hide-footer size="lg" :id="`${item.title}`">
               <b-container>
                 <b-row class="justify-content-md-center" style="margin:20px 0">
                   <b-col cols="10" style="margin:0 auto">
@@ -39,12 +39,7 @@
                           <label for="article_title">id:</label>
                         </b-col>
                         <b-col sm="10">
-                          <b-form-input
-                            id="article_title"
-                            type="text"
-                            placeholder="文章id"
-                            v-model.trim="id"
-                          ></b-form-input>
+                          {{item.id}}
                         </b-col>
                       </b-row>
                       <b-row class="my-1">
@@ -55,7 +50,6 @@
                           <b-form-input
                             id="article_title"
                             type="text"
-                            placeholder="Title"
                             v-model.trim="title"
                           ></b-form-input>
                         </b-col>
@@ -81,7 +75,7 @@
                           <b-form-input
                             id="article_introduction"
                             type="text"
-                            placeholder="Introduction"
+                            :placeholder="item.introduction"
                             v-model.trim="introduction"
                           ></b-form-input>
                         </b-col>
@@ -96,6 +90,7 @@
                               id="article_title1"
                               type="text"
                               placeholder="Enter title"
+                              :value="comment.title"
                               v-model.trim="comment.title"
                             ></b-form-input>
                           </b-col>
@@ -142,7 +137,7 @@
                       </b-row>
                       <b-button class="left" v-on:click="addRow">新增內容</b-button>
                       <b-button class="left2" v-on:click="deleteRow">刪除內容</b-button>
-                      <b-button class="right" v-on:click="createArticle">確認儲存文章</b-button>
+                      <b-button class="right" v-on:click="updateArticle">確認儲存文章</b-button>
                     </b-card>
                   </b-col>
                 </b-row>
@@ -188,7 +183,7 @@ export default {
       console.log("Delete row");
       this.contents.splice(this.contents.length - 1, 1);
     },
-    createArticle() {
+    updateArticle() {
       var article = {
         title: this.title,
         image: this.image,
