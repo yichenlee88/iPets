@@ -34,13 +34,6 @@ public class EditContactusActivity extends AppCompatActivity implements AdapterV
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.toolbar_menu,menu);
-        return true;
-    }
-
-    @Override
     public void onItemSelected(AdapterView<?> adapterView, View view, int position, long id) {
         //Toast.makeText(this,adapterView.getSelectedItem().toString(),Toast.LENGTH_SHORT).show();
     }
