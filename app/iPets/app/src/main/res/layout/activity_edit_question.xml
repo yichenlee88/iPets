@@ -16,14 +16,96 @@
         android:minHeight="?attr/actionBarSize"
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar" />
 
-    <Spinner
-        android:id="@+id/question1Spinner"
+    <Button
+        android:id="@+id/button_q1"
         android:layout_width="match_parent"
-        android:layout_height="52dp"
+        android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:entries="@array/Spinner_question1"
-        android:paddingHorizontal="15dp"
-        android:spinnerMode="dialog" />
+        android:background="@drawable/btn_click"
+        android:gravity="start|center_horizontal|center_vertical"
+        android:paddingHorizontal="17dp"
+        android:stateListAnimator="@null"
+        android:text="▼  BUG通知"
+        android:textColor="#000000"
+        android:textSize="20sp"/>
+
+    <Button
+        android:id="@+id/button_q2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/btn_click"
+        android:gravity="start|center_horizontal|center_vertical"
+        android:paddingHorizontal="17dp"
+        android:stateListAnimator="@null"
+        android:textColor="#000000"
+        android:textSize="20sp"
+        android:text="▼  錯誤403" />
+
+    <Button
+        android:id="@+id/button_q3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/btn_click"
+        android:gravity="start|center_horizontal|center_vertical"
+        android:paddingHorizontal="17dp"
+        android:stateListAnimator="@null"
+        android:textColor="#000000"
+        android:textSize="20sp"
+        android:text="▼  註冊帳號" />
+
+    <Button
+    android:id="@+id/button_q4"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="10dp"
+    android:background="@drawable/btn_click"
+    android:gravity="start|center_horizontal|center_vertical"
+    android:paddingHorizontal="17dp"
+    android:stateListAnimator="@null"
+    android:textColor="#000000"
+    android:textSize="20sp"
+    android:text="▼  如何重新登入?" />
+
+    <Button
+        android:id="@+id/button_q5"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/btn_click"
+        android:gravity="start|center_horizontal|center_vertical"
+        android:paddingHorizontal="17dp"
+        android:stateListAnimator="@null"
+        android:textColor="#000000"
+        android:textSize="20sp"
+        android:text="▼  定位無法啟用?" />
+
+    <Button
+        android:id="@+id/button_q6"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/btn_click"
+        android:gravity="start|center_horizontal|center_vertical"
+        android:paddingHorizontal="17dp"
+        android:stateListAnimator="@null"
+        android:textColor="#000000"
+        android:textSize="20sp"
+        android:text="▼  能在無網路環境使用嗎?" />
+
+    <Button
+        android:id="@+id/button_q7"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/btn_click"
+        android:gravity="start|center_horizontal|center_vertical"
+        android:paddingHorizontal="17dp"
+        android:stateListAnimator="@null"
+        android:textColor="#000000"
+        android:textSize="20sp"
+        android:text="▼  iPets行事曆能和其他行事曆同步嗎?" />
 
 
 </LinearLayout>

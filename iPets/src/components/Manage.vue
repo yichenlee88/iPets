@@ -18,7 +18,9 @@
 <script>
 export default {
   name: "Manage",
-  data() {}
+  data() {
+    return {};
+  }
 };
 </script>
 
