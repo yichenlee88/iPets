@@ -12,7 +12,9 @@
 <script>
 export default {
   name: "ManageArticle",
-  data() {}
+  data() {
+    return {};
+  }
 };
 </script>
 
