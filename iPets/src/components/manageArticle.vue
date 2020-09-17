@@ -16,7 +16,7 @@
                   </b-button>
                   <b-button
                     pill
-                    v-on:click="$bvModal.show(`${index}`)"
+                    v-on:click="$bvModal.show(`${item.title}`); putData(index);"
                     style="background: #6495ED;border: #6495ED"
                   >
                     <b-icon icon="pencil"></b-icon>
@@ -47,6 +47,111 @@
                   <p class="content-end">{{item.ending}}</p>
                 </b-container>
                 <b-button block v-on:click="$bvModal.hide(`${index}`)">關閉視窗</b-button>
+              </b-modal>
+              <b-modal hide-footer size="lg" :id="`${item.title}`">
+                <b-container>
+                  <b-row class="justify-content-md-center" style="margin:20px 0">
+                    <b-col cols="10" style="margin:0 auto">
+                      <b-card bg-variant="light">
+                        <b-row class="my-1">
+                          <b-col sm="2">
+                            <label for="article_title">id:</label>
+                          </b-col>
+                          <b-col sm="10">{{item.id}}</b-col>
+                        </b-row>
+                        <b-row class="my-1">
+                          <b-col sm="2">
+                            <label for="article_title">標題:</label>
+                          </b-col>
+                          <b-col sm="10">
+                            <b-form-input id="article_title" type="text" v-model.trim="item.title"></b-form-input>
+                          </b-col>
+                        </b-row>
+                        <b-row class="my-1">
+                          <b-col sm="2">
+                            <label for="article_image">圖片位址:</label>
+                          </b-col>
+                          <b-col sm="10">
+                            <b-form-input
+                              id="article_image"
+                              type="url"
+                              placeholder="Input image url"
+                              v-model.trim="item.image"
+                            ></b-form-input>
+                          </b-col>
+                        </b-row>
+                        <b-row class="my-1">
+                          <b-col sm="2">
+                            <label for="article_introduction">簡介:</label>
+                          </b-col>
+                          <b-col sm="10">
+                            <b-form-input
+                              id="article_introduction"
+                              type="text"
+                              v-model.trim="item.introduction"
+                            ></b-form-input>
+                          </b-col>
+                        </b-row>
+                        <div v-for="(comment, index) in contents" :key="index">
+                          <b-row class="my-1">
+                            <b-col sm="2">
+                              <label for="article_title1">標題 {{index+1}}:</label>
+                            </b-col>
+                            <b-col sm="10">
+                              <b-form-input
+                                id="article_title1"
+                                type="text"
+                                :v-if="comment.title"
+                                v-model.trim="comment.title"
+                              ></b-form-input>
+                            </b-col>
+                          </b-row>
+                          <b-row class="my-1">
+                            <b-col sm="2">
+                              <label for="article_img1">圖片 {{index+1}}:</label>
+                            </b-col>
+                            <b-col sm="10">
+                              <b-form-input
+                                id="article_img1"
+                                type="text"
+                                :v-if="comment.img"
+                                v-model.trim="comment.img"
+                              ></b-form-input>
+                            </b-col>
+                          </b-row>
+                          <b-row class="my-1">
+                            <b-col sm="2">
+                              <label for="article_content1">內容 {{index+1}}:</label>
+                            </b-col>
+                            <b-col sm="10">
+                              <b-form-textarea
+                                id="article_content1"
+                                rows="2"
+                                :v-if="comment.content"
+                                v-model.trim="comment.content"
+                              ></b-form-textarea>
+                            </b-col>
+                          </b-row>
+                        </div>
+                        <b-row class="my-1">
+                          <b-col sm="2">
+                            <label for="article_ending">結語:</label>
+                          </b-col>
+                          <b-col sm="10">
+                            <b-form-input
+                              id="article_ending"
+                              type="text"
+                              v-model.trim="item.ending"
+                            ></b-form-input>
+                          </b-col>
+                        </b-row>
+                        <b-button class="left" v-on:click="addRow">新增內容</b-button>
+                        <b-button class="left2" v-on:click="deleteRow">刪除內容</b-button>
+                        <b-button class="right" v-on:click="updateArticle(index)">確認儲存文章</b-button>
+                      </b-card>
+                    </b-col>
+                  </b-row>
+                </b-container>
               </b-modal>
             </div>
           </b-col>
@@ -235,6 +340,53 @@ export default {
         }
         this.comments.push(res.data);
       });
+    },
+    putData(index) {
+      let target = this.comments[index];
+      axios.get(`http://localhost:3000/comments/${target.id}`).then(res => {
+        console.log(res);
+        this.comments = res.data;
+      });
+      for (var i = 0; i < this.contents.length; i++) {
+        this.contents[i].content = `${target.contents[i].content}`;
+        this.contents[i].img = `${target.contents[i].img}`;
+        this.contents[i].title = `${target.contents[i].title}`;
+        console.log(this.contents.length);
+      }
+    },
+    updateArticle(index) {
+      let target = this.comments[index];
+      var article = {
+        title: this.title,
+        image: this.image,
+        introduction: this.introduction,
+        ending: this.ending
+      };
+      var content = {};
+      article["contents"] = [];
+      for (var i = 1; i < this.contents.length; i++) {
+        content["content"] = this.contents[i].content;
+        content["img"] = this.contents[i].img;
+        content["title"] = this.contents[i].title;
+        article["contents"].push(content[i]);
+      }
+      article["contents"] = this.contents;
+      console.log(article);
+      axios
+        .patch(`http://localhost:3000/comments/${target.id}`, article)
+        .then(res => {
+          console.log(res);
+          this.title = "";
+          this.image = "";
+          this.introduction = "";
+          this.ending = "";
+          for (var i = 0; i < this.contents.length; i++) {
+            this.contents[i].content = "";
+            this.contents[i].img = "";
+            this.contents[i].title = "";
+          }
+          this.comments.push(res.data);
+        });
     }
   }
 };
