@@ -4,10 +4,14 @@
       <b-container>
         <b-row class="justify-content-md-center" style="margin:20px 0">
           <b-col cols="10" style="margin:0 auto">
-            <b-button block variant="outline-secondary" v-on:click="$bvModal.show(`createPost`)">
+            <b-button
+              block
+              variant="outline-secondary"
+              v-on:click="$bvModal.show(`createPost`); cleanData();"
+            >
               <b-icon icon="plus"></b-icon>
             </b-button>
-            <div v-for="(item, index) in comments" :key="item.id">
+            <div v-for="(item, index) in comments" :key="index">
               <b-row class="text-left" style="margin-top:20px">
                 <b-col cols="8">{{index + 1}}.{{item.title}}</b-col>
                 <b-col>
@@ -16,7 +20,7 @@
                   </b-button>
                   <b-button
                     pill
-                    v-on:click="$bvModal.show(`${item.title}`); putData(index);"
+                    v-on:click="cleanData(); $bvModal.show(`${item.title}`); putData(index);"
                     style="background: #6495ED;border: #6495ED"
                   >
                     <b-icon icon="pencil"></b-icon>
@@ -48,7 +52,7 @@
                 </b-container>
                 <b-button block v-on:click="$bvModal.hide(`${index}`)">關閉視窗</b-button>
               </b-modal>
-              <b-modal hide-footer size="lg" :id="`${item.title}`">
+              <b-modal hide-footer size="lg" :id="`${item.title}`" title="編輯文章">
                 <b-container>
                   <b-row class="justify-content-md-center" style="margin:20px 0">
                     <b-col cols="10" style="margin:0 auto">
@@ -101,7 +105,7 @@
                               <b-form-input
                                 id="article_title1"
                                 type="text"
-                                :v-if="comment.title"
+                                placeholder="Input title"
                                 v-model.trim="comment.title"
                               ></b-form-input>
                             </b-col>
@@ -114,7 +118,7 @@
                               <b-form-input
                                 id="article_img1"
                                 type="text"
-                                :v-if="comment.img"
+                                placeholder="Input image url"
                                 v-model.trim="comment.img"
                               ></b-form-input>
                             </b-col>
@@ -127,7 +131,7 @@
                               <b-form-textarea
                                 id="article_content1"
                                 rows="2"
-                                :v-if="comment.content"
+                                placeholder="Input content"
                                 v-model.trim="comment.content"
                               ></b-form-textarea>
                             </b-col>
@@ -310,6 +314,13 @@ export default {
       console.log("Delete row");
       this.contents.splice(this.contents.length - 1, 1);
     },
+    cleanData() {
+      this.title = "";
+      this.image = "";
+      this.introduction = "";
+      this.ending = "";
+      this.contents = [{ content: "", title: "", img: "" }];
+    },
     createArticle() {
       var article = {
         title: this.title,
@@ -343,24 +354,23 @@ export default {
     },
     putData(index) {
       let target = this.comments[index];
-      axios.get(`http://localhost:3000/comments/${target.id}`).then(res => {
-        console.log(res);
-        this.comments = res.data;
-      });
-      for (var i = 0; i < this.contents.length; i++) {
+      for (var i = 0; i < target.contents.length; i++) {
         this.contents[i].content = `${target.contents[i].content}`;
         this.contents[i].img = `${target.contents[i].img}`;
         this.contents[i].title = `${target.contents[i].title}`;
-        console.log(this.contents.length);
+        if (this.contents.length >= target.contents.length) {
+          continue;
+        }
+        this.contents.push({ content: "", title: "", img: "" });
       }
     },
     updateArticle(index) {
       let target = this.comments[index];
       var article = {
-        title: this.title,
-        image: this.image,
-        introduction: this.introduction,
-        ending: this.ending
+        title: target.title,
+        image: target.image,
+        introduction: target.introduction,
+        ending: target.ending
       };
       var content = {};
       article["contents"] = [];
@@ -376,17 +386,8 @@ export default {
         .patch(`http://localhost:3000/comments/${target.id}`, article)
         .then(res => {
           console.log(res);
-          this.title = "";
-          this.image = "";
-          this.introduction = "";
-          this.ending = "";
-          for (var i = 0; i < this.contents.length; i++) {
-            this.contents[i].content = "";
-            this.contents[i].img = "";
-            this.contents[i].title = "";
-          }
-          this.comments.push(res.data);
         });
+      // this.$refs[`${target.title}`].hide();
     }
   }
 };
