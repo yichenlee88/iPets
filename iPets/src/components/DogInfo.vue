@@ -3,28 +3,9 @@
   <b-container>
     <h1 class="title top">人與狗的關係</h1>
     <img
+      v-for="n in 5" :key="n"
       class="d-block img-fluid top"
-      src="../assets/dogInfo-01.png"
-      alt="image slot"
-    >
-    <img
-      class="d-block img-fluid top"
-      src="../assets/dogInfo-02.png"
-      alt="image slot"
-    >
-    <img
-      class="d-block img-fluid top"
-      src="../assets/dogInfo-03.png"
-      alt="image slot"
-    >
-    <img
-      class="d-block img-fluid top"
-      src="../assets/dogInfo-04.png"
-      alt="image slot"
-    >
-    <img
-      class="d-block img-fluid top"
-      src="../assets/dogInfo-05.png"
+      :src="`../static/dogInfo-0${ n }.png`"
       alt="image slot"
     >
   </b-container>
