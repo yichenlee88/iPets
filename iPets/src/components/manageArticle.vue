@@ -52,7 +52,13 @@
                 </b-container>
                 <b-button block v-on:click="$bvModal.hide(`${index}`)">關閉視窗</b-button>
               </b-modal>
-              <b-modal hide-footer size="lg" :id="`${item.title}`" title="編輯文章">
+              <b-modal
+                hide-footer
+                size="lg"
+                :id="`${item.title}`"
+                title="編輯文章"
+                @hidden="cleanData(); putData(index);"
+              >
                 <b-container>
                   <b-row class="justify-content-md-center" style="margin:20px 0">
                     <b-col cols="10" style="margin:0 auto">
@@ -151,7 +157,10 @@
                         </b-row>
                         <b-button class="left" v-on:click="addRow">新增內容</b-button>
                         <b-button class="left2" v-on:click="deleteRow">刪除內容</b-button>
-                        <b-button class="right" v-on:click="updateArticle(index)">確認儲存文章</b-button>
+                        <b-button
+                          class="right"
+                          v-on:click="updateArticle(index); $bvModal.hide(`${item.title}`)"
+                        >確認儲存文章</b-button>
                       </b-card>
                     </b-col>
                   </b-row>
@@ -261,7 +270,7 @@
                 </b-row>
                 <b-button class="left" v-on:click="addRow">新增內容</b-button>
                 <b-button class="left2" v-on:click="deleteRow">刪除內容</b-button>
-                <b-button class="right" v-on:click="createArticle">確認新增文章</b-button>
+                <b-button class="right" v-on:click="$bvModal.hide(`createPost`); createArticle()">確認新增文章</b-button>
               </b-card>
             </b-col>
           </b-row>
@@ -337,7 +346,6 @@ export default {
         article["contents"].push(content[i]);
       }
       article["contents"] = this.contents;
-      console.log(article);
       axios.post("http://localhost:3000/comments", article).then(res => {
         console.log(res);
         this.title = "";
@@ -381,13 +389,11 @@ export default {
         article["contents"].push(content[i]);
       }
       article["contents"] = this.contents;
-      console.log(article);
       axios
         .patch(`http://localhost:3000/comments/${target.id}`, article)
         .then(res => {
           console.log(res);
         });
-      // this.$refs[`${target.title}`].hide();
     }
   }
 };
