@@ -54,11 +54,13 @@
 
     <Spinner
         android:id="@+id/problemSpinner"
-        android:layout_width="match_parent"
-        android:layout_height="52dp"
+        android:layout_width="375dp"
+        android:layout_height="48dp"
         android:layout_marginTop="10dp"
+        android:layout_marginLeft="20dp"
+        android:background="@drawable/spinner_back"
         android:entries="@array/Spinner_problem"
-        android:paddingHorizontal="15dp"
+        android:paddingHorizontal="10dp"
         android:spinnerMode="dropdown" />
 
     <com.google.android.material.textfield.TextInputLayout
@@ -76,18 +78,36 @@
             android:textSize="20sp" />
     </com.google.android.material.textfield.TextInputLayout>
 
-    <com.google.android.material.textfield.TextInputLayout
+    <TextView
+        android:id="@+id/textView2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
+        android:paddingHorizontal="20dp"
+        android:text="*描述"
+        android:textAlignment="viewStart"
+        android:textColor="@color/colorGrey"
+        android:textSize="18sp" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:paddingHorizontal="17dp">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/description"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:backgroundTint="#0071BC"
-            android:hint="@string/TextView_description"
+            android:layout_height="140dp"
+            android:background="@drawable/bg_edittext"
+            android:gravity="left"
             android:textSize="20sp" />
     </com.google.android.material.textfield.TextInputLayout>
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="149dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="130dp"
+        android:text="確認送出" />
 </LinearLayout>
