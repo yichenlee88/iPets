@@ -294,9 +294,9 @@ export default {
   position: absolute;
   height: 24px;
   width: 24px;
-  top: 31%;
+  top: 30%;
   right: 140px;
-  margin-top: -20px;
+  margin-top: -22px;
   z-index: 1;
   cursor: pointer;
 }
@@ -305,8 +305,8 @@ export default {
   position: absolute;
   height: 24px;
   width: 24px;
-  top: 41%;
-  margin-top: -16px;
+  top: 40%;
+  margin-top: -20px;
   right: 140px;
   z-index: 1;
   cursor: pointer;
