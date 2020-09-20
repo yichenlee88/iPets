@@ -16,13 +16,13 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:selectionColor="@color/colorAccent"
-        app:todayLabelColor="#0071BC" />
+        app:selectionColor="#0071BC"
+        app:todayLabelColor="@color/colorAccent" />
     <Button
         android:id="@+id/addNoteButton"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="儲存"
+        android:text="@string/save"
         android:backgroundTint="#0071BC"
         android:gravity="center_horizontal|center_vertical"
         android:textColor="#FFFFFF"

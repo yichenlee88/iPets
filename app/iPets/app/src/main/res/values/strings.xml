@@ -131,6 +131,8 @@
     <string name="material_calendar_friday">五</string>
     <string name="material_calendar_saturday">六</string>
     <string name="material_calendar_sunday">日</string>
+    <string name="nonote">目前沒有行程</string>
+    <string name="save">儲存</string>
     <string-array name="Spinner_sex">
         <item>男</item>
         <item>女</item>
