@@ -14,6 +14,7 @@ import Member from "@/components/Member";
 import Manage from "@/components/Manage";
 import ManageArticle from "@/components/ManageArticle";
 import ManageUser from "@/components/ManageUser";
+import ManageAdoption from "@/components/ManageAdoption";
 
 const fAuth = db.auth();
 
@@ -105,6 +106,11 @@ let router = new Router({
           path: "manageArticle",
           name: "ManageArticle",
           component: ManageArticle
+        },
+        {
+          path: "manageAdoption",
+          name: "ManageAdoption",
+          component: ManageAdoption
         },
         {
           path: "manageUser",
