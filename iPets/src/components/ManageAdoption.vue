@@ -36,18 +36,18 @@
               </b-row>
               <b-modal hide-footer size="lg" :id="`${index}`" :title="item.name">
                 <div class="center" style="margin-top:20px">
-                  <img :src="`${item.image}`" style="max-width: 60%;">
+                  <img :src="`${item.src}`" style="max-width: 60%;">
                 </div>
                 <b-container style="padding:20px 120px;">
-                  <p class="content">{{item.introduction}}</p>
-                  <div v-for="(items, i) in item.contents" :key="i">
-                    <div style="text-align: center">
-                      <span class="content-title" v-if="items.name">{{items.name}}</span>
-                      <br>
-                      <img v-if="items.src" :src="items.src" style="max-width: 30%">
-                    </div>
-                  </div>
-                  <p class="content-end">{{item.address}}</p>
+                  <p class="content">
+                    簡介：
+                    <br>
+                    {{item.introduction}}
+                  </p>
+                  <p>地址：{{item.address}}</p>
+                  <p>電話：{{item.phone}}</p>
+                  <p>介紹：{{item.content}}</p>
+                  <p>座標：{{item.center.lat}}/{{item.center.lng}}</p>
                 </b-container>
                 <b-button block v-on:click="$bvModal.hide(`${index}`)">關閉視窗</b-button>
               </b-modal>
@@ -113,6 +113,46 @@
                             ></b-form-input>
                           </b-col>
                         </b-row>
+                        <b-row class="my-1">
+                          <b-col sm="2">
+                            <label for="adoption_phone">電話:</label>
+                          </b-col>
+                          <b-col sm="10">
+                            <b-form-input id="adoption_phone" type="text" v-model.trim="item.phone"></b-form-input>
+                          </b-col>
+                        </b-row>
+                        <b-row class="my-1">
+                          <b-col sm="2">
+                            <label for="adoption_content">介紹:</label>
+                          </b-col>
+                          <b-col sm="10">
+                            <b-form-textarea
+                              id="adoption_content"
+                              placeholder="Enter content"
+                              rows="2"
+                              v-model.trim="item.content"
+                            ></b-form-textarea>
+                          </b-col>
+                        </b-row>
+                        <b-row class="my-1">
+                          <b-col sm="2">
+                            <label for="adoption_center">座標:</label>
+                          </b-col>
+                          <b-col sm="5">
+                            <b-form-input
+                              id="adoption_lat"
+                              type="text"
+                              v-model.trim="item.center.lat"
+                            ></b-form-input>
+                          </b-col>
+                          <b-col sm="5">
+                            <b-form-input
+                              id="adoption_lng"
+                              type="text"
+                              v-model.trim="item.center.lng"
+                            ></b-form-input>
+                          </b-col>
+                        </b-row>
                         <b-button
                           class="right"
                           v-on:click="updateAdoption(index); $bvModal.hide(`${item.name}`)"
@@ -137,7 +177,7 @@
                   </b-col>
                   <b-col sm="10">
                     <b-form-input
-                      id="article_name"
+                      id="adoption_name"
                       type="text"
                       placeholder="Input Adoption Agencie's Name"
                       v-model.trim="name"
@@ -183,6 +223,54 @@
                     ></b-form-input>
                   </b-col>
                 </b-row>
+                <b-row class="my-1">
+                  <b-col sm="2">
+                    <label for="adoption_phone">電話:</label>
+                  </b-col>
+                  <b-col sm="10">
+                    <b-form-input
+                      id="adoption_phone"
+                      type="text"
+                      placeholder="Input phone number"
+                      v-model.trim="phone"
+                    ></b-form-input>
+                  </b-col>
+                </b-row>
+                <b-row class="my-1">
+                  <b-col sm="2">
+                    <label for="adoption_content">介紹:</label>
+                  </b-col>
+                  <b-col sm="10">
+                    <b-form-textarea
+                      id="adoption_content"
+                      type="text"
+                      placeholder="Input content"
+                      rows="2"
+                      v-model.trim="content"
+                    ></b-form-textarea>
+                  </b-col>
+                </b-row>
+                <b-row class="my-1">
+                  <b-col sm="2">
+                    <label for="adoption_center">座標:</label>
+                  </b-col>
+                  <b-col sm="5">
+                    <b-form-input
+                      id="adoption_lat"
+                      type="text"
+                      placeholder="Input adoption_lat"
+                      v-model.trim="center.lat"
+                    ></b-form-input>
+                  </b-col>
+                  <b-col sm="5">
+                    <b-form-input
+                      id="adoption_lng"
+                      type="text"
+                      placeholder="Input adoption_lng"
+                      v-model.trim="center.lng"
+                    ></b-form-input>
+                  </b-col>
+                </b-row>
                 <b-button
                   class="right"
                   v-on:click="$bvModal.hide(`createAdoption`); createAdoption()"
@@ -203,10 +291,13 @@ export default {
   data() {
     return {
       name: "",
-      image: "",
+      src: "",
       introduction: "",
       address: "",
-      comments: []
+      phone: "",
+      content: "",
+      comments: [],
+      center: { lat: "", lng: "" }
     };
   },
   mounted() {
@@ -232,40 +323,56 @@ export default {
     },
     cleanData() {
       this.name = "";
-      this.image = "";
+      this.src = "";
       this.introduction = "";
       this.address = "";
+      this.phone = "";
+      this.content = "";
+      this.center = { lat: "", lng: "" };
     },
     createAdoption() {
       var adoption = {
         name: this.name,
-        image: this.image,
+        src: this.src,
         introduction: this.introduction,
-        address: this.address
+        address: this.address,
+        phone: this.phone,
+        content: this.content
       };
       var center = {};
-      adoption["center"] = [];
-      center["lat"] = this.contents.lat;
-      center["lng"] = this.contents.lng;
+      adoption["center"] = {};
+      center["lat"] = this.center.lat;
+      center["lng"] = this.center.lng;
       adoption["center"].push(center);
       adoption["center"] = this.center;
       axios.post("http://localhost:4000/comments", adoption).then(res => {
         console.log(res);
         this.name = "";
-        this.image = "";
+        this.src = "";
         this.introduction = "";
         this.address = "";
+        this.phone = "";
+        this.content = "";
+        this.center = { lat: "", lng: "" };
         this.comments.push(res.data);
       });
     },
-    updateArticle(index) {
+    updateAdoption(index) {
       let target = this.comments[index];
       var adoption = {
-        title: target.title,
-        image: target.image,
+        name: target.name,
+        src: target.src,
         introduction: target.introduction,
-        ending: target.ending
+        address: target.address,
+        phone: target.phone,
+        content: target.content
       };
+      var center = {};
+      adoption["center"] = {};
+      center["lat"] = this.center.lat;
+      center["lng"] = this.center.lng;
+      // adoption["center"].push(center);
+      adoption["center"] = this.center;
       axios
         .patch(`http://localhost:4000/comments/${target.id}`, adoption)
         .then(res => {
