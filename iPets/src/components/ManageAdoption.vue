@@ -339,11 +339,8 @@ export default {
         phone: this.phone,
         content: this.content
       };
-      var center = {};
       adoption["center"] = {};
-      center["lat"] = this.center.lat;
-      center["lng"] = this.center.lng;
-      adoption["center"].push(center);
+      this.center = { lat: this.center.lat, lng: this.center.lng };
       adoption["center"] = this.center;
       axios.post("http://localhost:4000/comments", adoption).then(res => {
         console.log(res);
@@ -353,7 +350,8 @@ export default {
         this.address = "";
         this.phone = "";
         this.content = "";
-        this.center = { lat: "", lng: "" };
+        this.center.lat = "";
+        this.center.lng = "";
         this.comments.push(res.data);
       });
     },
@@ -367,11 +365,8 @@ export default {
         phone: target.phone,
         content: target.content
       };
-      var center = {};
       adoption["center"] = {};
-      center["lat"] = this.center.lat;
-      center["lng"] = this.center.lng;
-      // adoption["center"].push(center);
+      this.center = { lat: target.center.lat, lng: target.center.lng };
       adoption["center"] = this.center;
       axios
         .patch(`http://localhost:4000/comments/${target.id}`, adoption)
