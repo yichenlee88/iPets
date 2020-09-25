@@ -11,8 +11,8 @@
           >人與狗的關係</b-nav-item
         >
         <b-nav-item href="#/contact" v-if="!isSignedIn">聯繫我們</b-nav-item>
-        <b-nav-item href="#/homeLogin" v-if="isSignedIn">行事曆</b-nav-item>
-        <b-nav-item href="#/" v-if="isSignedIn">相簿</b-nav-item>
+        <b-nav-item href="#/calendar" v-if="isSignedIn">行事曆</b-nav-item>
+        <b-nav-item href="#/album" v-if="isSignedIn">相簿</b-nav-item>
         <b-nav-item href="#/member" v-if="isSignedIn">會員專區</b-nav-item>
         <b-nav-item href="#/" v-if="isSignedIn">設定</b-nav-item>
         <b-nav-form>
@@ -21,6 +21,9 @@
             >登出</b-nav-item
           >
         </b-nav-form>
+        <b-nav-item href="#/register" v-if="isSignedIn"
+          ><i class="far fa-user" style="size:12px"></i
+        ></b-nav-item>
         <b-nav-form>
           <b-nav-item href="#/login" v-if="!isSignedIn"
             ><i class="fas fa-sign-in-alt" style="size:12px"></i

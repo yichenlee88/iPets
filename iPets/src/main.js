@@ -5,6 +5,11 @@ import App from "./App";
 import router from "./router";
 import { db } from "./db";
 
+// Vuetify
+import Vuetify from "vuetify";
+import "vuetify/dist/vuetify.min.css";
+import VueTextareaAutosize from "vue-textarea-autosize";
+
 // Vuex
 import store from "./_store/index";
 
@@ -22,6 +27,9 @@ import "vue2-datepicker/index.css";
 import "vue2-datepicker/locale/zh-cn";
 
 // ------------------------------------------------------
+// Vuetify
+Vue.use(Vuetify);
+Vue.use(VueTextareaAutosize);
 
 // BootstrapVue
 Vue.use(BootstrapVue);
@@ -51,6 +59,7 @@ fAuth.onAuthStateChanged(() => {
       el: "#app",
       router,
       store,
+      vuetify: new Vuetify(),
       components: { App },
       template: "<App/>"
     });
