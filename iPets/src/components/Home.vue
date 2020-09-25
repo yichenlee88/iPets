@@ -48,44 +48,44 @@
         ><b-col>領養機構資訊</b-col>
       </b-row>
       <b-row class="adoptionAgencies" cols-lg="3">
-        <div v-for="(item, i) in post" :key="i">
+        <div v-for="(item, i) in comments" :key="i">
           <b-col>
             <b-card
-              v-bind:title="item.Name"
+              v-bind:title="item.name"
               v-bind:img-src="item.src"
               img-alt="Image"
               img-top
               tag="article"
             >
               <b-card-text>
-                {{ item.Introduction }}
+                {{ item.introduction }}
               </b-card-text>
               <b-button
                 href="#"
                 class="learnMore"
-                @click="$bvModal.show(`${i}`)"
+                @click="$bvModal.show(`${i}`); convertCenter();"
                 >了解更多</b-button
               >
-              <b-modal :id="`${i}`" v-bind:title="item.Name">
+              <b-modal :id="`${i}`" v-bind:title="item.name">
                 <b-container>
                   <b-card v-bind:img-src="item.src" img-alt="Image" img-top>
                     <b-card-text>
                       <b-row>
                         <b-col cols="4"><strong>地址</strong>：</b-col>
-                        <b-col>{{ item.Addres }}</b-col>
+                        <b-col>{{ item.address }}</b-col>
                       </b-row>
                       <b-row>
                         <b-col cols="4"><strong>連絡電話</strong>：</b-col>
-                        <b-col>{{ item.Phone }}</b-col>
+                        <b-col>{{ item.phone }}</b-col>
                       </b-row>
                       <b-row>
                         <b-col cols="4"><strong>簡介</strong>:</b-col>
-                        <b-col>{{ item.Content }}</b-col>
+                        <b-col>{{ item.content }}</b-col>
                       </b-row>
                     </b-card-text>
                     <GmapMap
                       :id="`map_${i}`"
-                      :center="convertCenter(item.Center)"
+                      :center="convertCenter(i)"
                       :zoom="15"
                       map-type-id="roadmap"
                       style="  width: 100%;  height: 200px;"
@@ -103,24 +103,26 @@
 </template>
 
 <script>
+import axios from "axios";
 export default {
   name: "Home",
   data() {
     return {
       center: { lat: 25.0325917, lng: 121.5624999 },
-      markers: [],
-      places: [],
-      infowindow: [],
-      currentPlace: null,
-      post: []
+      comments: [],
+      currentPlace: null
     };
   },
 
   mounted() {
-    this.geolocate();
-    this.$http.get("/static/AdoptionAgencies.json").then(response => {
-      this.post = response.data;
+    axios.get("http://localhost:4000/comments").then(res => {
+      console.log(res);
+      this.comments = res.data;
     });
+    // this.geolocate();
+    // this.$http.get("/static/AdoptionAgencies.json").then(response => {
+    //   this.post = response.data;
+    // });
   },
 
   methods: {
@@ -132,10 +134,11 @@ export default {
         };
       });
     },
-    convertCenter(center) {
+    convertCenter(i) {
+      let target = this.comments[i];
       return {
-        lat: parseFloat(center.lat),
-        lng: parseFloat(center.lng)
+        lat: parseFloat(target.center.lat),
+        lng: parseFloat(target.center.lng)
       };
     }
   }
