@@ -8,6 +8,7 @@
         </b-row>
         <div class="center">
           <router-link to="/manage/manageArticle">管理文章</router-link>
+          <router-link to="/manage/manageAdoption">管理領養機構</router-link>
           <router-link to="/manage/manageUser">管理使用者資訊</router-link>
           <router-view></router-view>
         </div>
