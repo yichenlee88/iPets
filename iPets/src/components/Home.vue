@@ -103,6 +103,7 @@
 </template>
 
 <script>
+import axios from "axios";
 export default {
   name: "Home",
   data() {
@@ -118,7 +119,7 @@ export default {
 
   mounted() {
     this.geolocate();
-    this.$http.get("/static/AdoptionAgencies.json").then(response => {
+    axios.get("/static/AdoptionAgencies.json").then(response => {
       this.post = response.data;
     });
   },

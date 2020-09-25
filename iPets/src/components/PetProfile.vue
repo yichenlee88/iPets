@@ -52,6 +52,96 @@
     <!-- End -- 新增寵物 -->
 
     <!-- Start -- 寵物簡介 -->
+    <b-card-group class="PetProfile" deck>
+      <b-card
+        v-if="show"
+        v-bind:img-src="pet.image"
+        class="mb-3"
+        style="max-width:300px;border:0"
+        img-top
+      >
+        <b-card-text>
+          <b-button
+            class="btn btn-block mb-3"
+            href="#"
+            variant="primary"
+            @click="modalShow = !modalShow"
+            >Edit profile</b-button
+          ></b-card-text
+        >
+      </b-card>
+      <!-- 修改寵物資訊 -->
+      <b-modal title="編輯寵物資訊" size="xl" v-model="modalShow">
+        <div class="border-bottom">
+          <b-row>
+            <b-col col="2">
+              <b-img
+                src="../static/img/4.jpg"
+                style="max-height:300px"
+                class="center"
+              ></b-img>
+              <b-button
+                class="center btn btn-block mb-3"
+                href="#"
+                variant="primary"
+                style="max-width:300px;margin-top:10px"
+                @click="modalShow = !modalShow"
+                >上傳照片</b-button
+              >
+            </b-col>
+            <b-col>
+              <b-form-group
+                label-cols-sm="2"
+                label="寵物id："
+                label-for="petID"
+              >
+                <b-form-input id="petID"></b-form-input>
+              </b-form-group>
+              <b-form-group
+                label-cols-sm="2"
+                label="姓名："
+                label-for="petName"
+              >
+                <b-form-input id="petName"></b-form-input>
+              </b-form-group>
+              <b-form-group label-cols-sm="2" label="性別：" label-for="gender">
+                <b-form-input id="gender"></b-form-input>
+              </b-form-group>
+              <b-form-group label-cols-sm="2" label="生日：" label-for="birth">
+                <b-form-input id="birth"></b-form-input> </b-form-group
+              ><b-form-group label-cols-sm="2" label="年齡：" label-for="age">
+                <b-form-input id="age"></b-form-input> </b-form-group
+              ><b-form-group
+                label-cols-sm="2"
+                label="備註："
+                label-for="remarks"
+              >
+                <b-form-textarea v-model="text" id="remarks"></b-form-textarea>
+              </b-form-group>
+            </b-col>
+          </b-row>
+        </div>
+        <h2 class="TimerTitle">時間計時器</h2>
+        <b-form-group>
+          <b-form-checkbox-group
+            v-model="timerSelected"
+            :options="timers"
+            switches
+          ></b-form-checkbox-group>
+        </b-form-group>
+      </b-modal>
+
+      <b-card style="max-height:365px">
+        <b-card-body :title="pet.name">
+          <b-card-text>性別：{{ pet.gender }}</b-card-text>
+          <b-card-text>生日：{{ pet.gender }}</b-card-text>
+          <b-card-text>年齡：{{ pet.age }}</b-card-text>
+          <b-card-text>品種：{{ pet.breed }}</b-card-text>
+          <b-card-text>本日行程：{{ pet.today }}</b-card-text>
+        </b-card-body>
+      </b-card>
+    </b-card-group>
+    <!--
     <b-card
       v-if="show"
       v-bind:img-src="pet.image"
@@ -69,8 +159,9 @@
         <b-card-text>
           {{ pet.breed }}
         </b-card-text>
+        <i class="fas fa-cog"></i>
       </b-card-body>
-    </b-card>
+    </b-card> -->
     <!-- End -- 寵物簡介 -->
 
     <!-- Start -- 進行中 -->
@@ -154,8 +245,18 @@ const fStore = db.firestore();
 export default {
   data() {
     return {
-      name: "HomeLogin",
+      modalShow: false,
+      name: "PetProfile",
       date: new Date(),
+      timerSelected: [],
+      timers: [
+        { text: "洗澡", value: "bath" },
+        { text: "修剪毛髮", value: "trimming" },
+        { text: "體內驅蟲", value: "anthelmintic" },
+        { text: "體外驅蟲", value: "repellent" },
+        { text: "疫苗接種", value: "injection" },
+        { text: "生理期", value: "menstrual " }
+      ],
       options: {
         format: "DD/MM/YYYY",
         useCurrent: false
@@ -331,6 +432,29 @@ export default {
 </script>
 
 <style scoped>
+.PetProfile {
+  padding-top: 20px;
+}
+
+.center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.border-bottom {
+  border-bottom: 1px solid #e1e4e8 !important;
+}
+.TimerTitle {
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.btn {
+  color: #24292e;
+  background-color: #fafbfc;
+  border-color: rgba(27, 31, 35, 0.15);
+}
 .container {
   margin-top: 20px;
   margin-bottom: 20px;
