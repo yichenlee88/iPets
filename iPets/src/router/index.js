@@ -13,6 +13,7 @@ import { db } from "../db";
 import DogScience from "@/components/DogScience";
 import Post from "@/components/Post";
 import Member from "@/components/Member";
+import Album from "@/components/Album";
 
 const fAuth = db.auth();
 
@@ -114,6 +115,14 @@ let router = new Router({
       component: Post,
       meta: {
         requiresGuest: true
+      }
+    },
+    {
+      path: "/album",
+      name: "Album",
+      component: Album,
+      meta: {
+        requiresAuth: true
       }
     }
   ]
