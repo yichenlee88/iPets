@@ -6,13 +6,15 @@ import DogInfo from "@/components/DogInfo";
 import Contact from "@/components/Contact";
 import Login from "@/components/Login";
 import Register from "@/components/Register";
-import PetProfile from "@/components/PetProfile";
-import Calendar from "@/components/Calendar";
-import manageArticle from "@/components/manageArticle";
+import HomeLogin from "@/components/HomeLogin";
 import { db } from "../db";
 import DogScience from "@/components/DogScience";
 import Post from "@/components/Post";
 import Member from "@/components/Member";
+import Manage from "@/components/Manage";
+import ManageArticle from "@/components/ManageArticle";
+import ManageUser from "@/components/ManageUser";
+import ManageAdoption from "@/components/ManageAdoption";
 
 const fAuth = db.auth();
 
@@ -69,17 +71,9 @@ let router = new Router({
       }
     },
     {
-      path: "/petProfile",
-      name: "PetProfile",
-      component: PetProfile,
-      meta: {
-        requiresAuth: true
-      }
-    },
-    {
-      path: "/calendar",
-      name: "Calendar",
-      component: Calendar,
+      path: "/homeLogin",
+      name: "HomeLogin",
+      component: HomeLogin,
       meta: {
         requiresAuth: true
       }
@@ -101,12 +95,29 @@ let router = new Router({
       }
     },
     {
-      path: "/manageArticle",
-      name: "manageArticle",
-      component: manageArticle,
+      path: "/manage",
+      name: "Manage",
+      component: Manage,
       meta: {
         requiresGuest: true
-      }
+      },
+      children: [
+        {
+          path: "manageArticle",
+          name: "ManageArticle",
+          component: ManageArticle
+        },
+        {
+          path: "manageAdoption",
+          name: "ManageAdoption",
+          component: ManageAdoption
+        },
+        {
+          path: "manageUser",
+          name: "ManageUser",
+          component: ManageUser
+        }
+      ]
     },
     {
       path: "/post/:id",
@@ -132,7 +143,7 @@ router.beforeEach((to, from, next) => {
     // check if logged in
     if (fAuth.currentUser) {
       // Go to login
-      next("/petProfile");
+      next("/HomeLogin");
     } else {
       next();
     }
