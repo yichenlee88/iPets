@@ -6,15 +6,14 @@ import DogInfo from "@/components/DogInfo";
 import Contact from "@/components/Contact";
 import Login from "@/components/Login";
 import Register from "@/components/Register";
-import HomeLogin from "@/components/HomeLogin";
+import PetProfile from "@/components/PetProfile";
+import Calendar from "@/components/Calendar";
+import manageArticle from "@/components/manageArticle";
 import { db } from "../db";
 import DogScience from "@/components/DogScience";
 import Post from "@/components/Post";
 import Member from "@/components/Member";
-import Manage from "@/components/Manage";
-import ManageArticle from "@/components/ManageArticle";
-import ManageUser from "@/components/ManageUser";
-import ManageAdoption from "@/components/ManageAdoption";
+import Album from "@/components/Album";
 
 const fAuth = db.auth();
 
@@ -71,9 +70,17 @@ let router = new Router({
       }
     },
     {
-      path: "/homeLogin",
-      name: "HomeLogin",
-      component: HomeLogin,
+      path: "/petProfile",
+      name: "PetProfile",
+      component: PetProfile,
+      meta: {
+        requiresAuth: true
+      }
+    },
+    {
+      path: "/calendar",
+      name: "Calendar",
+      component: Calendar,
       meta: {
         requiresAuth: true
       }
@@ -95,29 +102,12 @@ let router = new Router({
       }
     },
     {
-      path: "/manage",
-      name: "Manage",
-      component: Manage,
+      path: "/manageArticle",
+      name: "manageArticle",
+      component: manageArticle,
       meta: {
         requiresGuest: true
-      },
-      children: [
-        {
-          path: "manageArticle",
-          name: "ManageArticle",
-          component: ManageArticle
-        },
-        {
-          path: "manageAdoption",
-          name: "ManageAdoption",
-          component: ManageAdoption
-        },
-        {
-          path: "manageUser",
-          name: "ManageUser",
-          component: ManageUser
-        }
-      ]
+      }
     },
     {
       path: "/post/:id",
@@ -125,6 +115,14 @@ let router = new Router({
       component: Post,
       meta: {
         requiresGuest: true
+      }
+    },
+    {
+      path: "/album",
+      name: "Album",
+      component: Album,
+      meta: {
+        requiresAuth: true
       }
     }
   ]
@@ -143,7 +141,7 @@ router.beforeEach((to, from, next) => {
     // check if logged in
     if (fAuth.currentUser) {
       // Go to login
-      next("/HomeLogin");
+      next("/petProfile");
     } else {
       next();
     }
