@@ -5,7 +5,7 @@
     <img
       v-for="n in 5" :key="n"
       class="d-block img-fluid"
-      :src="`../static/img/dogInfo-0${ n }.png`"
+      :src="`../static/dogInfo-0${ n }.png`"
     >
   </div>
 </template>
