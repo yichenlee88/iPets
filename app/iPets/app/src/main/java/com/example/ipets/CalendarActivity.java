@@ -61,10 +61,16 @@ public class CalendarActivity extends AppCompatActivity {
         }
 
         private void previewNote(EventDay eventDay) {
+            Calendar clickedDayCalendar = eventDay.getCalendar();
+            Date date=clickedDayCalendar.getTime();
+            SimpleDateFormat sdf= new SimpleDateFormat("yyyy-MM-dd");
+            String dateStr=sdf.format(date);
             Intent intent = new Intent(this, NotePreviewActivity.class);
+            intent.putExtra("dateStr",dateStr);
             startActivity(intent);
         }
-        protected void onStart() {
+
+    protected void onStart() {
             super.onStart();
 
             mCalendarView = findViewById(R.id.calendarView);
