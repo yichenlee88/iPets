@@ -156,6 +156,7 @@
         <item>其他</item>
     </string-array>
     <string name="TextView_description">描述</string>
+    <string name="menu_photoGallery">photoGallery</string>
     <array name="material_calendar_months_array">
         <item>一月</item>
         <item>二月</item>
