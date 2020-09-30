@@ -1,21 +1,28 @@
 <template>
-  <v-container>
-    <v-layout class="border-bottom" row>
-      <v-flex class="high text-left font-weight-black">
-        <h1>相簿</h1>
-      </v-flex>
-      <v-btn class="btn-right" style="margin-top:30px" @click="click1"
-        >＋新增相簿</v-btn
-      >
-    </v-layout>
-    <v-layout row>
-      <b-img
-        class="banner_png center"
-        src="../static/img/gray.png"
-        style="width:468px;"
-      ></b-img>
-    </v-layout>
-  </v-container>
+  <b-container>
+    <div class="border-bottom">
+      <div class="row">
+        <h1 class="high">相簿</h1>
+        <b-button
+          class="ml-auto mt-auto"
+          style="height: 45px"
+          variant="outline-primary"
+          v-b-modal="'my-modal'"
+          >+新增相簿</b-button
+        >
+        <b-modal size="lg" id="my-modal">
+          <b-button class="btn btn-block mb-3" variant="info">
+            Brose
+          </b-button>
+        </b-modal>
+      </div>
+    </div>
+    <b-img
+      class="banner_png center"
+      src="../static/img/gray.png"
+      style="width:468px;"
+    ></b-img>
+  </b-container>
 </template>
 
 <script>
