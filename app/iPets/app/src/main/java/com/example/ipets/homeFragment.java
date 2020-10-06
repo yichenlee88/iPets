@@ -7,17 +7,8 @@ import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.core.app.NotificationCompat;
-import androidx.fragment.app.Fragment;
-import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
-
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -29,6 +20,12 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
 
 import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -255,6 +252,7 @@ public class homeFragment extends Fragment {
         final TextView text_petsSex = getView().findViewById(R.id.text_petsSex);
         final TextView text_petsBirth = getView().findViewById(R.id.text_petsBirth);
         final TextView text_petsAge = getView().findViewById(R.id.text_petsAge);
+        final TextView text_route = getView().findViewById(R.id.text_route);
         db.collection("userInformation").document(userUID).collection("pets").document(query)
                 .get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
@@ -263,10 +261,13 @@ public class homeFragment extends Fragment {
                     DocumentSnapshot doc = task.getResult();
                     StringBuilder fields = new StringBuilder("");
                     StringBuilder fields2 = new StringBuilder("");
+                    StringBuilder fields3 = new StringBuilder("");
                     fields.append(doc.get("Petsgender")).toString();
                     fields2.append(doc.get("Petsbirth")).toString();
+                    fields3.append(doc.get("Petsvariety")).toString();
                         text_petsSex.setText(fields);
                         text_petsBirth.setText(fields2);
+                        text_route.setText(fields3);
                         SimpleDateFormat df = new SimpleDateFormat("yyyy/MM/dd");
                         String petsBirth = fields2.toString();
                         try {
