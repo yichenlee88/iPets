@@ -96,7 +96,7 @@ public class EditMasterinfoActivity extends AppCompatActivity{
                         userInfo.put("Mygender", sex);
                         db.collection("userInformation").document(userUID).update(userInfo);
                         AlertDialog.Builder finishsignup = new AlertDialog.Builder(EditMasterinfoActivity.this);
-                        finishsignup.setMessage("註冊成功");
+                        finishsignup.setMessage("修改成功");
                         finishsignup.setNegativeButton("確認", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface arg0, int arg1) {
