@@ -9,6 +9,9 @@ import Register from "@/components/Register";
 import PetProfile from "@/components/PetProfile";
 import Calendar from "@/components/Calendar";
 import manageArticle from "@/components/manageArticle";
+import manageAdoption from "@/components/manageAdoption";
+import manageUser from "@/components/manageUser";
+import manage from "@/components/manage";
 import { db } from "../db";
 import DogScience from "@/components/DogScience";
 import Post from "@/components/Post";
@@ -102,12 +105,25 @@ let router = new Router({
       }
     },
     {
-      path: "/manageArticle",
-      name: "manageArticle",
-      component: manageArticle,
+      path: "/manage",
+      name: "manage",
+      component: manage,
       meta: {
         requiresGuest: true
-      }
+      },
+      children: [
+        {
+          path: "manageArticle",
+          component: manageArticle
+        },
+        {
+          path: "manageUser",
+          component: manageUser
+        }, {
+          path: "manageAdoption",
+          component: manageAdoption
+        }
+      ]
     },
     {
       path: "/post/:id",
