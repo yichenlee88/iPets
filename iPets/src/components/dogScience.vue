@@ -1,4 +1,5 @@
 <template>
+<<<<<<< Updated upstream
   <div class="container" style="margin-top: 20px;">
     <img src="../assets/狗狗科普.png" width="80%"><br>
     <div class="container marketing" style="margin-top: 20px;">
@@ -100,6 +101,32 @@
             </p>
             <a href="https://maoup.com.tw/?p=23571" target="_blank">
               <button type="button" class="btn btn-info" style="position:absolute; bottom: 5px">了解更多</button>
+=======
+  <b-container>
+    <img src="../assets/狗狗科普.png" class="banner" style="margin-top:20px" />
+    <div class="container marketing">
+      <div class="row">
+        <div
+          class="col-12 col-sm-4"
+          v-for="(item, index) in comments.reverse()"
+          :key="index"
+          style="margin-top: 20px"
+        >
+          <div class="img-thumbnail" style="margin-left: 15px; height: 540px;">
+            <img class="rounded" :src="item.image" style="max-width: 100%" />
+            <H5>
+              <br />
+              {{ item.title }}
+            </H5>
+            <p>{{ item.introduction }}</p>
+            <a :href="'#/post/' + item.id" target="_blank">
+              <b-button
+                style="position: absolute; right: 20px; bottom: 15px; border:0;"
+                variant="outline-primary"
+              >
+                了解更多</b-button
+              >
+>>>>>>> Stashed changes
             </a>
           </div>
         </div>
