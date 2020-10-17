@@ -1,12 +1,16 @@
 <template>
   <v-app>
-    <v-main>
+    <v-content>
       <v-row class="fill-height">
         <v-col>
           <v-sheet height="64">
             <v-toolbar flat color="white">
-              <v-btn color="primary" dark @click="dialog = true">New Event</v-btn>
-              <v-btn outlined class="mr-4" @click="setToday">Today</v-btn>
+              <v-btn color="primary" dark @click="dialog = true">
+                New Event
+              </v-btn>
+              <v-btn outlined class="mr-4" @click="setToday">
+                Today
+              </v-btn>
               <v-btn fab text small @click="prev">
                 <v-icon small>mdi-chevron-left</v-icon>
               </v-btn>
@@ -44,10 +48,26 @@
             <v-card>
               <v-container>
                 <v-form @submit.prevent="addEvent">
-                  <v-text-field v-model="name" type="text" label="event name (required)"></v-text-field>
-                  <v-text-field v-model="details" type="text" label="detail"></v-text-field>
-                  <v-text-field v-model="start" type="date" label="start (required)"></v-text-field>
-                  <v-text-field v-model="end" type="date" label="end (required)"></v-text-field>
+                  <v-text-field
+                    v-model="name"
+                    type="text"
+                    label="event name (required)"
+                  ></v-text-field>
+                  <v-text-field
+                    v-model="details"
+                    type="text"
+                    label="detail"
+                  ></v-text-field>
+                  <v-text-field
+                    v-model="start"
+                    type="date"
+                    label="start (required)"
+                  ></v-text-field>
+                  <v-text-field
+                    v-model="end"
+                    type="date"
+                    label="end (required)"
+                  ></v-text-field>
                   <v-text-field
                     v-model="color"
                     type="color"
@@ -58,7 +78,9 @@
                     color="primary"
                     class="mr-4"
                     @click.stop="dialog = false"
-                  >create event</v-btn>
+                  >
+                    create event
+                  </v-btn>
                 </v-form>
               </v-container>
             </v-card>
@@ -68,10 +90,26 @@
             <v-card>
               <v-container>
                 <v-form @submit.prevent="addEvent">
-                  <v-text-field v-model="name" type="text" label="event name (required)"></v-text-field>
-                  <v-text-field v-model="details" type="text" label="detail"></v-text-field>
-                  <v-text-field v-model="start" type="date" label="start (required)"></v-text-field>
-                  <v-text-field v-model="end" type="date" label="end (required)"></v-text-field>
+                  <v-text-field
+                    v-model="name"
+                    type="text"
+                    label="event name (required)"
+                  ></v-text-field>
+                  <v-text-field
+                    v-model="details"
+                    type="text"
+                    label="detail"
+                  ></v-text-field>
+                  <v-text-field
+                    v-model="start"
+                    type="date"
+                    label="start (required)"
+                  ></v-text-field>
+                  <v-text-field
+                    v-model="end"
+                    type="date"
+                    label="end (required)"
+                  ></v-text-field>
                   <v-text-field
                     v-model="color"
                     type="color"
@@ -82,7 +120,9 @@
                     color="primary"
                     class="mr-4"
                     @click.stop="dialog = false"
-                  >create event</v-btn>
+                  >
+                    create event
+                  </v-btn>
                 </v-form>
               </v-container>
             </v-card>
@@ -115,12 +155,16 @@
                   <v-btn @click="deleteEvent(selectedEvent.id)" icon>
                     <v-icon>mdi-delete</v-icon>
                   </v-btn>
-                  <v-toolbar-title v-html="selectedEvent.name"></v-toolbar-title>
+                  <v-toolbar-title
+                    v-html="selectedEvent.name"
+                  ></v-toolbar-title>
                   <div class="flex-grow-1"></div>
                 </v-toolbar>
 
                 <v-card-text>
-                  <form v-if="currentlyEditing !== selectedEvent.id">{{ selectedEvent.details }}</form>
+                  <form v-if="currentlyEditing !== selectedEvent.id">
+                    {{ selectedEvent.details }}
+                  </form>
                   <form v-else>
                     <textarea-autosize
                       v-model="selectedEvent.details"
@@ -128,25 +172,37 @@
                       style="width: 100%"
                       :min-height="100"
                       placeholder="add note"
-                    ></textarea-autosize>
+                    >
+                    </textarea-autosize>
                   </form>
                 </v-card-text>
 
                 <v-card-actions>
-                  <v-btn text color="secondary" @click="selectedOpen = false">close</v-btn>
+                  <v-btn text color="secondary" @click="selectedOpen = false">
+                    close
+                  </v-btn>
                   <v-btn
                     v-if="currentlyEditing !== selectedEvent.id"
                     text
                     @click.prevent="editEvent(selectedEvent)"
-                  >edit</v-btn>
-                  <v-btn text v-else type="submit" @click.prevent="updateEvent(selectedEvent.id)">Save</v-btn>
+                  >
+                    edit
+                  </v-btn>
+                  <v-btn
+                    text
+                    v-else
+                    type="submit"
+                    @click.prevent="updateEvent(selectedEvent)"
+                  >
+                    Save
+                  </v-btn>
                 </v-card-actions>
               </v-card>
             </v-menu>
           </v-sheet>
         </v-col>
       </v-row>
-    </v-main>
+    </v-content>
   </v-app>
 </template>
 
@@ -278,43 +334,22 @@ export default {
       this.currentlyEditing = ev.id;
     },
     async updateEvent(ev) {
-      let selectedEvent = this.selectedEvent;
       await fStore
         .collection("pets")
-        .doc("3heOY1mUC6wCbo2jdE9M")
-        .collection("calEvent")
-        .doc(ev)
+        .doc(this.currentlyEditing)
         .update({
-          details: selectedEvent.details
-        })
-        .then(res => {
-          console.log("update completed");
-        })
-        .catch(err => {
-          console.log(err);
+          details: ev.details
         });
       this.selectedOpen = false;
       this.currentlyEditing = null;
-      console.log(ev);
     },
     async deleteEvent(ev) {
-      let selectedEvent = this.selectedEvent.name;
-      if (confirm(`確定是否刪除 ${selectedEvent} ?`)) {
-        await fStore
-          .collection("pets")
-          .doc("3heOY1mUC6wCbo2jdE9M")
-          .collection("calEvent")
-          .doc(ev)
-          .delete()
-          .then(res => {
-            console.log(res);
-          })
-          .catch(err => {
-            console.log(err);
-          });
-        this.selectedOpen = false;
-        this.getEvents();
-      }
+      await fStore
+        .collection("pets")
+        .doc(ev)
+        .delete();
+      this.selectedOpen = false;
+      this.getEvents();
     },
     showEvent({ nativeEvent, event }) {
       const open = () => {
