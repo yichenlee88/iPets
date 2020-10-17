@@ -8,10 +8,10 @@ import Login from "@/components/Login";
 import Register from "@/components/Register";
 import PetProfile from "@/components/PetProfile";
 import Calendar from "@/components/Calendar";
-import manageArticle from "@/components/manageArticle";
-import manageAdoption from "@/components/manageAdoption";
-import manageUser from "@/components/manageUser";
-import manage from "@/components/manage";
+import ManageArticle from "@/components/ManageArticle";
+import ManageAdoption from "@/components/ManageAdoption";
+import ManageUser from "@/components/ManageUser";
+import manage from "@/components/Manage";
 import { db } from "../db";
 import DogScience from "@/components/DogScience";
 import Post from "@/components/Post";
@@ -114,14 +114,14 @@ let router = new Router({
       children: [
         {
           path: "manageArticle",
-          component: manageArticle
+          component: ManageArticle
         },
         {
           path: "manageUser",
-          component: manageUser
+          component: ManageUser
         }, {
           path: "manageAdoption",
-          component: manageAdoption
+          component: ManageAdoption
         }
       ]
     },
