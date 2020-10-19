@@ -17,6 +17,7 @@ import DogScience from "@/components/DogScience";
 import Post from "@/components/Post";
 import Member from "@/components/Member";
 import Album from "@/components/Album";
+import Setting from "@/components/Setting";
 
 const fAuth = db.auth();
 
@@ -119,7 +120,8 @@ let router = new Router({
         {
           path: "manageUser",
           component: ManageUser
-        }, {
+        },
+        {
           path: "manageAdoption",
           component: ManageAdoption
         }
@@ -137,6 +139,14 @@ let router = new Router({
       path: "/album",
       name: "Album",
       component: Album,
+      meta: {
+        requiresAuth: true
+      }
+    },
+    {
+      path: "/setting",
+      name: "Setting",
+      component: Setting,
       meta: {
         requiresAuth: true
       }
