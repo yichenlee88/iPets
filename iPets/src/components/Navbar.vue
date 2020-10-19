@@ -1,5 +1,5 @@
 <template>
-  <b-navbar toggleable="lg" variant="faded" type="light">
+  <b-navbar toggleable="lg" variant="faded" type="light" class="navcolor">
     <b-navbar-brand href="/" style="  font-size: 24px;">iPets</b-navbar-brand>
     <!-- Right aligned nav items -->
     <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
@@ -83,6 +83,9 @@ export default {
 };
 </script>
 <style>
+.navcolor {
+  background-color: white;
+}
 .navbar-brand,
 .form-input,
 .botton,
