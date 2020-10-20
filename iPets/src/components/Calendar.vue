@@ -71,12 +71,11 @@
                   <v-text-field v-model="name" type="text" label="event name (required)"></v-text-field>
                   <v-text-field v-model="details" type="text" label="detail"></v-text-field>
                   <v-text-field v-model="start" type="date" label="start (required)"></v-text-field>
-                  <v-text-field v-model="end" type="date" label="end (required)"></v-text-field>
-                  <v-text-field
-                    v-model="color"
-                    type="color"
-                    label="color (click to open color menu)"
-                  ></v-text-field>
+                  <v-text-field v-model="end" type="date" label="end (required)"></v-text-field>color (click to open color menu)
+                  <v-select v-model="color" :v-for="color in colors" :items="colors"></v-select>
+                  <v-radio-group :v-for="frequency in repeats">
+                    <v-radio v-model="frequency" :label="repeats" :value="repeats"></v-radio>
+                  </v-radio-group>
                   <v-btn
                     type="submit"
                     color="primary"
@@ -107,10 +106,10 @@
               v-model="selectedOpen"
               :close-on-content-click="false"
               :activator="selectedElement"
-              full-width
+              min-width="400"
               offset-x
             >
-              <v-card color="grey lighten-4" :width="350" flat>
+              <v-card color="grey lighten-4" flat>
                 <v-toolbar :color="selectedEvent.color" dark>
                   <v-btn @click="deleteEvent(selectedEvent.id)" icon>
                     <v-icon>mdi-delete</v-icon>
@@ -126,9 +125,10 @@
                       v-model="selectedEvent.details"
                       type="text"
                       style="width: 100%"
-                      :min-height="100"
+                      :min-height="50"
                       placeholder="add note"
                     ></textarea-autosize>
+                    <v-select v-model="color" :v-for="color in colors" :items="colors"></v-select>
                   </form>
                 </v-card-text>
 
@@ -139,7 +139,12 @@
                     text
                     @click.prevent="editEvent(selectedEvent)"
                   >edit</v-btn>
-                  <v-btn text v-else type="submit" @click.prevent="updateEvent(selectedEvent.id)">Save</v-btn>
+                  <v-btn
+                    text
+                    v-else
+                    type="submit"
+                    @click.prevent="updateEvent(selectedEvent.id)"
+                  >Save</v-btn>
                 </v-card-actions>
               </v-card>
             </v-menu>
@@ -167,11 +172,22 @@ export default {
         day: "Day",
         "4day": "4 Days"
       },
+      colors: [
+        { text: "red" },
+        { text: "green" },
+        { text: "blue" },
+        { text: "purple" },
+        { text: "yellow" },
+        { text: "pink" },
+        { text: "brown" }
+      ],
+      repeats: [{ text: "不重複" }, { text: "重複" }],
+      frequency: "不重複",
       name: null,
       details: null,
-      start: null,
+      start: "2020-09-08",
       end: null,
-      color: "#1976D2", // default event color
+      color: "red", // default event color
       currentlyEditing: null,
       selectedEvent: {},
       selectedElement: null,
@@ -276,6 +292,9 @@ export default {
     },
     editEvent(ev) {
       this.currentlyEditing = ev.id;
+      this.start = ev.start;
+      this.end = ev.end;
+      this.color = ev.color;
     },
     async updateEvent(ev) {
       let selectedEvent = this.selectedEvent;
@@ -285,7 +304,8 @@ export default {
         .collection("calEvent")
         .doc(ev)
         .update({
-          details: selectedEvent.details
+          details: selectedEvent.details,
+          color: this.color
         })
         .then(res => {
           console.log("update completed");
@@ -295,6 +315,7 @@ export default {
         });
       this.selectedOpen = false;
       this.currentlyEditing = null;
+      this.color = ev.color;
       console.log(ev);
     },
     async deleteEvent(ev) {
