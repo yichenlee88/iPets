@@ -47,12 +47,15 @@
                   <v-text-field v-model="name" type="text" label="event name (required)"></v-text-field>
                   <v-text-field v-model="details" type="text" label="detail"></v-text-field>
                   <v-text-field v-model="start" type="date" label="start (required)"></v-text-field>
-                  <v-text-field v-model="end" type="date" label="end (required)"></v-text-field>
-                  <v-text-field
-                    v-model="color"
-                    type="color"
-                    label="color (click to open color menu)"
-                  ></v-text-field>
+                  <v-text-field v-model="end" type="date" label="end (required)"></v-text-field>choose event's color
+                  <v-select v-model="color" :v-for="color in colors" :items="colors"></v-select>
+                  <v-radio-group v-model="frequency">
+                    <v-radio label="不重複"></v-radio>
+                    <v-radio label="每日"></v-radio>
+                    <v-radio label="每週"></v-radio>
+                    <v-radio label="每月"></v-radio>
+                    <v-radio label="每年"></v-radio>
+                  </v-radio-group>
                   <v-btn
                     type="submit"
                     color="primary"
@@ -68,13 +71,18 @@
             <v-card>
               <v-container>
                 <v-form @submit.prevent="addEvent">
+                  <h4 style="text-align: center">新增事件</h4>
                   <v-text-field v-model="name" type="text" label="event name (required)"></v-text-field>
                   <v-text-field v-model="details" type="text" label="detail"></v-text-field>
                   <v-text-field v-model="start" type="date" label="start (required)"></v-text-field>
-                  <v-text-field v-model="end" type="date" label="end (required)"></v-text-field>color (click to open color menu)
+                  <v-text-field v-model="end" type="date" label="end (required)"></v-text-field>choose event's color
                   <v-select v-model="color" :v-for="color in colors" :items="colors"></v-select>
-                  <v-radio-group :v-for="frequency in repeats">
-                    <v-radio v-model="frequency" :label="repeats" :value="repeats"></v-radio>
+                  <v-radio-group v-model="frequency">
+                    <v-radio label="不重複"></v-radio>
+                    <v-radio label="每日"></v-radio>
+                    <v-radio label="每週"></v-radio>
+                    <v-radio label="每月"></v-radio>
+                    <v-radio label="每年"></v-radio>
                   </v-radio-group>
                   <v-btn
                     type="submit"
@@ -121,6 +129,13 @@
                 <v-card-text>
                   <form v-if="currentlyEditing !== selectedEvent.id">{{ selectedEvent.details }}</form>
                   <form v-else>
+                    <p>title</p>
+                    <textarea-autosize
+                      v-model="selectedEvent.name"
+                      type="text"
+                      style="width: 100%"
+                      placeholder="title"
+                    ></textarea-autosize>
                     <textarea-autosize
                       v-model="selectedEvent.details"
                       type="text"
@@ -129,6 +144,13 @@
                       placeholder="add note"
                     ></textarea-autosize>
                     <v-select v-model="color" :v-for="color in colors" :items="colors"></v-select>
+                    <v-radio-group v-model="frequency">
+                    <v-radio label="不重複"></v-radio>
+                    <v-radio label="每日"></v-radio>
+                    <v-radio label="每週"></v-radio>
+                    <v-radio label="每月"></v-radio>
+                    <v-radio label="每年"></v-radio>
+                  </v-radio-group>
                   </form>
                 </v-card-text>
 
@@ -181,8 +203,14 @@ export default {
         { text: "pink" },
         { text: "brown" }
       ],
-      repeats: [{ text: "不重複" }, { text: "重複" }],
-      frequency: "不重複",
+      // repeats: [
+      //   { text: "不重複" },
+      //   { text: "每年" },
+      //   { text: "每月" },
+      //   { text: "每週" },
+      //   { text: "每日" }
+      // ],
+      frequency: 0,
       name: null,
       details: null,
       start: "2020-09-08",
@@ -250,6 +278,8 @@ export default {
     setDialogDate({ date }) {
       this.dialogDate = true;
       this.focus = date;
+      this.start = date;
+      this.end = date;
     },
     viewDay({ date }) {
       this.focus = date;
@@ -287,11 +317,12 @@ export default {
         this.end = "";
         this.color = "";
       } else {
-        alert("You must enter event name, start, and end time");
+        alert("You must enter the event name, start, and end time");
       }
     },
     editEvent(ev) {
       this.currentlyEditing = ev.id;
+      this.name = ev.name;
       this.start = ev.start;
       this.end = ev.end;
       this.color = ev.color;
@@ -305,7 +336,10 @@ export default {
         .doc(ev)
         .update({
           details: selectedEvent.details,
-          color: this.color
+          name: selectedEvent.name,
+          color: this.color,
+          start: this.start,
+          end: this.end
         })
         .then(res => {
           console.log("update completed");
@@ -315,7 +349,6 @@ export default {
         });
       this.selectedOpen = false;
       this.currentlyEditing = null;
-      this.color = ev.color;
       console.log(ev);
     },
     async deleteEvent(ev) {
