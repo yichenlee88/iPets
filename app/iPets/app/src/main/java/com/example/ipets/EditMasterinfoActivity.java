@@ -37,11 +37,7 @@ public class EditMasterinfoActivity extends AppCompatActivity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_masterinfo);
-        FirebaseAuth auth = FirebaseAuth.getInstance();
-        FirebaseUser currentUser = auth.getCurrentUser();
-        String userUID = currentUser.getUid();
-        FirebaseFirestore db;
-        db = FirebaseFirestore.getInstance();
+
         Toolbar toolbar3 = findViewById(R.id.toolbar3);
         setSupportActionBar(toolbar3);
         getSupportActionBar().setTitle("編輯主人基本資料");
@@ -74,45 +70,58 @@ public class EditMasterinfoActivity extends AppCompatActivity{
             public boolean onMenuItemClick(MenuItem item) {
                 switch (item.getItemId()) {
                     case R.id.check:
-                        String[] Spinner_sex =getResources().getStringArray(R.array.Spinner_sex);
-                        TextInputEditText edmasterName = findViewById(R.id.masterName);
-                        TextInputEditText eduserName = findViewById(R.id.userName);
-                        EditText edmasterBirth = findViewById(R.id.masterBirth);
-                        TextInputEditText edphoneNum = findViewById(R.id.phoneNum);
-                        TextInputEditText edmasterAddress = findViewById(R.id.masterAddress);
-                        String masterName = edmasterName.getText().toString();
-                        String masterBirth = edmasterBirth.getText().toString();
-                        String userName = eduserName.getText().toString();
-                        String phoneNum  = edphoneNum .getText().toString();
-                        String masterAddress = edmasterAddress.getText().toString();
-                        int idsex=sexSpinner.getSelectedItemPosition();
-                        String sex = Spinner_sex[idsex];
-                        Map<String, Object> userInfo = new HashMap<>();
-                        userInfo.put("Myname",masterName);
-                        userInfo.put("Username",userName);
-                        userInfo.put("Mybirth", masterBirth);
-                        userInfo.put("Myaddress", phoneNum);
-                        userInfo.put("Myaddress", masterAddress);
-                        userInfo.put("Mygender", sex);
-                        db.collection("userInformation").document(userUID).update(userInfo);
-                        AlertDialog.Builder finishsignup = new AlertDialog.Builder(EditMasterinfoActivity.this);
-                        finishsignup.setMessage("修改成功");
-                        finishsignup.setNegativeButton("確認", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface arg0, int arg1) {
-                                Intent intent=new Intent();
-                                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
-                                intent.setClass(EditMasterinfoActivity.this,HomeActivity.class);
-                                startActivity(intent);
-                            }
-                        });
-                        finishsignup.setCancelable(false);
-                        finishsignup.show();
+                        setmasterinfo();
                         break;
                 }
                 return false;
             }
         });
+        seteditText();
+
+    }
+    public void setmasterinfo(){
+        FirebaseAuth auth = FirebaseAuth.getInstance();
+        FirebaseUser currentUser = auth.getCurrentUser();
+        String userUID = currentUser.getUid();
+        FirebaseFirestore db;
+        db = FirebaseFirestore.getInstance();
+        String[] Spinner_sex =getResources().getStringArray(R.array.Spinner_sex);
+        TextInputEditText edmasterName = findViewById(R.id.masterName);
+        TextInputEditText eduserName = findViewById(R.id.userName);
+        EditText edmasterBirth = findViewById(R.id.masterBirth);
+        TextInputEditText edphoneNum = findViewById(R.id.phoneNum);
+        TextInputEditText edmasterAddress = findViewById(R.id.masterAddress);
+        String masterName = edmasterName.getText().toString();
+        String masterBirth = edmasterBirth.getText().toString();
+        String userName = eduserName.getText().toString();
+        String phoneNum  = edphoneNum .getText().toString();
+        String masterAddress = edmasterAddress.getText().toString();
+        Spinner sexSpinner = findViewById(R.id.sexSpinner);
+        int idsex=sexSpinner.getSelectedItemPosition();
+        String sex = Spinner_sex[idsex];
+        Map<String, Object> userInfo = new HashMap<>();
+        userInfo.put("Myname",masterName);
+        userInfo.put("Username",userName);
+        userInfo.put("Mybirth", masterBirth);
+        userInfo.put("Myaddress", phoneNum);
+        userInfo.put("Myaddress", masterAddress);
+        userInfo.put("Mygender", sex);
+        db.collection("userInformation").document(userUID).update(userInfo);
+        AlertDialog.Builder finishsignup = new AlertDialog.Builder(EditMasterinfoActivity.this);
+        finishsignup.setMessage("修改成功");
+        finishsignup.setNegativeButton("確認", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface arg0, int arg1) {
+                Intent intent=new Intent();
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
+                intent.setClass(EditMasterinfoActivity.this,HomeActivity.class);
+                startActivity(intent);
+            }
+        });
+        finishsignup.setCancelable(false);
+        finishsignup.show();
+    }
+    public void seteditText(){
         EditText edmasterBirth = findViewById(R.id.masterBirth);
         edmasterBirth.setInputType(InputType.TYPE_NULL); //不顯示系統輸入鍵盤
         edmasterBirth.setOnFocusChangeListener(new View.OnFocusChangeListener() {
@@ -137,12 +146,7 @@ public class EditMasterinfoActivity extends AppCompatActivity{
                 }
             }
         });
-
-
-
     }
-
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
