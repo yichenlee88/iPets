@@ -145,12 +145,12 @@
                     ></textarea-autosize>
                     <v-select v-model="color" :v-for="color in colors" :items="colors"></v-select>
                     <v-radio-group v-model="frequency">
-                    <v-radio label="不重複"></v-radio>
-                    <v-radio label="每日"></v-radio>
-                    <v-radio label="每週"></v-radio>
-                    <v-radio label="每月"></v-radio>
-                    <v-radio label="每年"></v-radio>
-                  </v-radio-group>
+                      <v-radio label="不重複"></v-radio>
+                      <v-radio label="每日"></v-radio>
+                      <v-radio label="每週"></v-radio>
+                      <v-radio label="每月"></v-radio>
+                      <v-radio label="每年"></v-radio>
+                    </v-radio-group>
                   </form>
                 </v-card-text>
 
@@ -299,6 +299,37 @@ export default {
     },
     async addEvent() {
       if (this.name && this.start && this.end) {
+        if (this.frequency === 1) {
+          for (let i = 1; i <= 5; i++) {
+            if (this.i === 1) {
+              await fStore
+                .collection("pets")
+                .doc("3heOY1mUC6wCbo2jdE9M")
+                .collection("calEvent")
+                .add({
+                  name: this.name,
+                  details: this.details,
+                  start: this.start,
+                  end: this.end,
+                  color: this.color
+                });
+              this.getEvents();
+            } else {
+              await fStore
+                .collection("pets")
+                .doc("3heOY1mUC6wCbo2jdE9M")
+                .collection("calEvent")
+                .add({
+                  name: this.name,
+                  details: this.details,
+                  start: (parseInt(this.start) + i),
+                  end: (parseInt(this.end) + i),
+                  color: this.color
+                });
+              this.getEvents();
+            }
+          }
+        }
         await fStore
           .collection("pets")
           .doc("3heOY1mUC6wCbo2jdE9M")
