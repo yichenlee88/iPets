@@ -4,45 +4,52 @@
       ><b-col><h1>歡迎提出您任何的問題</h1></b-col></b-row
     >
     <b-row>
-      <b-col col="2"
-        ><img class="center" src="../assets/contact-us-02.png" width="320" alt="image slot"
+      <b-col col="3" sm="3" md="3"
+        ><img
+          class="imgcenter"
+          src="../assets/contact-us-02.png"
+          width="auto"
+          alt="image slot"
       /></b-col>
-      <b-col col="8">
-        <b-form-input
-          class="InputClass"
-          v-model="text"
-          placeholder="First Name"
-        ></b-form-input>
-        <b-form-input
-          class="InputClass"
-          v-model="text"
-          placeholder="Last Name"
-        ></b-form-input
-        ><b-form-input
-          class="InputClass"
-          v-model="email"
-          placeholder="Your Email"
-        ></b-form-input>
-        <b-form-textarea
-          class="TextareaClass"
-          id="textarea-default"
-          placeholder="Your Question..."
-          maxlength
-        ></b-form-textarea
-        ><b-button class="ButtonClass">Send</b-button></b-col>
-        <b-col col="2"
-        ><img class="center" src="../assets/contact-us-03.png" width="320" alt="image slot"
+      <b-col col="6" sm="6" md="6">
+        <div style="margin-top: 20%">
+          <b-form-input
+            class="InputClass"
+            v-model="text"
+            placeholder="First Name"
+          ></b-form-input>
+          <b-form-input
+            class="InputClass"
+            v-model="text"
+            placeholder="Last Name"
+          ></b-form-input
+          ><b-form-input
+            class="InputClass"
+            v-model="email"
+            placeholder="Your Email"
+          ></b-form-input>
+          <b-form-textarea
+            class="TextareaClass"
+            id="textarea-default"
+            placeholder="Your Question..."
+            maxlength
+          ></b-form-textarea
+          ><b-button class="ButtonClass">Send</b-button>
+        </div></b-col
+      >
+      <b-col col="3" sm="3" md="3"
+        ><img
+          class="imgcenter"
+          src="../assets/contact-us-03.png"
+          width="auto"
+          alt="image slot"
       /></b-col>
     </b-row>
 
     <b-row class="ContactTitle text-center"
       ><b-col><h1>加入我們</h1></b-col></b-row
     >
-    <b-card
-      img-src="../static/img/join-us.png"
-      img-alt="Card image"
-      img-top
-    >
+    <b-card img-src="../static/img/join-us.png" img-alt="Card image" img-top>
       <b-card-text>
         <b-row
           ><b-col col="6"
@@ -75,9 +82,15 @@ export default {
 </script>
 
 <style>
-.ContactTitle {
+/* .ContactTitle {
   margin-top: 100px;
   margin-bottom: 100px;
+} */
+.imgcenter {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 100%;
 }
 
 .center {
@@ -103,21 +116,21 @@ export default {
 
 .InputClass {
   height: 48px;
-  width: 400px;
+  max-width: auto;
   border-radius: 40px;
   margin-bottom: 20px;
 }
 
 .TextareaClass {
   height: 120px;
-  width: 400px;
+  max-width: auto;
   border-radius: 16px;
   margin-bottom: 20px;
 }
 
 .ButtonClass {
   height: 48px;
-  width: 400px;
+  width: 100%;
   border-radius: 40px;
   margin-bottom: 20px;
   background: -webkit-linear-gradient(
