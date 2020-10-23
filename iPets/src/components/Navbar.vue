@@ -1,6 +1,6 @@
 <template>
   <div>
-    <b-navbar class="navbar-custom" toggleable="md">
+    <b-navbar class="navbar-custom" toggleable="lg">
       <b-navbar-brand href="/" style="font-size: 30px;">iPets</b-navbar-brand>
       <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
 
