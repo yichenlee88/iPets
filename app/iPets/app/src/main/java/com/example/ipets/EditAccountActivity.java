@@ -25,11 +25,7 @@ public class EditAccountActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_account);
-        FirebaseAuth auth = FirebaseAuth.getInstance();
-        FirebaseUser currentUser = auth.getCurrentUser();
-        String userUID = currentUser.getUid();
-        FirebaseFirestore db;
-        db = FirebaseFirestore.getInstance();
+
         Toolbar toolbar4 = findViewById(R.id.toolbar4);
         setSupportActionBar(toolbar4);
         getSupportActionBar().setTitle("變更帳號 (Email)");
@@ -40,25 +36,7 @@ public class EditAccountActivity extends AppCompatActivity {
             public boolean onMenuItemClick(MenuItem item) {
                 switch (item.getItemId()) {
                     case R.id.check:
-                        TextInputEditText editAcct = findViewById(R.id.editAcct);
-                        String email = editAcct.getText().toString();
-                        currentUser.updateEmail(email);
-                        Map<String, Object> userInfo = new HashMap<>();
-                        userInfo.put("Email",email);
-                        db.collection("userInformation").document(userUID).update(userInfo);
-                        AlertDialog.Builder finishsignup = new AlertDialog.Builder(EditAccountActivity.this);
-                        finishsignup.setMessage("修改成功");
-                        finishsignup.setNegativeButton("確認", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface arg0, int arg1) {
-                                Intent intent=new Intent();
-                                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
-                                intent.setClass(EditAccountActivity.this,HomeActivity.class);
-                                startActivity(intent);
-                            }
-                        });
-                        finishsignup.setCancelable(false);
-                        finishsignup.show();
+                        setaccount();
                         break;
                 }
                 return false;
@@ -71,5 +49,31 @@ public class EditAccountActivity extends AppCompatActivity {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.toolbar_menu,menu);
         return true;
+    }
+    public void setaccount(){
+        FirebaseAuth auth = FirebaseAuth.getInstance();
+        FirebaseUser currentUser = auth.getCurrentUser();
+        String userUID = currentUser.getUid();
+        FirebaseFirestore db;
+        db = FirebaseFirestore.getInstance();
+        TextInputEditText editAcct = findViewById(R.id.editAcct);
+        String email = editAcct.getText().toString();
+        currentUser.updateEmail(email);
+        Map<String, Object> userInfo = new HashMap<>();
+        userInfo.put("Email",email);
+        db.collection("userInformation").document(userUID).update(userInfo);
+        AlertDialog.Builder finishsignup = new AlertDialog.Builder(EditAccountActivity.this);
+        finishsignup.setMessage("修改成功");
+        finishsignup.setNegativeButton("確認", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface arg0, int arg1) {
+                Intent intent=new Intent();
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
+                intent.setClass(EditAccountActivity.this,HomeActivity.class);
+                startActivity(intent);
+            }
+        });
+        finishsignup.setCancelable(false);
+        finishsignup.show();
     }
 }
