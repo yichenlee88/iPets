@@ -56,7 +56,7 @@
     </b-col>
     <b-col col="4" sm="4" md="4"></b-col>
     <b-col col="8" sm="8" md="8">
-      <b-button class="ButtonClass">Send</b-button>
+      <b-button class="ButtonClass">送出</b-button>
     </b-col>
   </b-row>
 </template>
@@ -82,7 +82,6 @@ export default {
   height: 48px;
   width: 70%;
   border-radius: 40px;
-  margin-bottom: 20px;
   background: -webkit-linear-gradient(
     left,
     rgb(148, 115, 221) 0%,

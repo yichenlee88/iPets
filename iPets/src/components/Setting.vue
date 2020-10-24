@@ -45,7 +45,7 @@
           col="6"
           sm="8"
           md="8"
-          style="height: 75vh; margin-top:15px; padding-bottom: 10px; background-color:#FFFFFF; border: 1px solid; border-color: #ADADAD;"
+          style="height: 75vh; margin-top:15px; background-color:#FFFFFF; border: 1px solid; border-color: #ADADAD;"
         >
           <router-view></router-view>
         </b-col>
