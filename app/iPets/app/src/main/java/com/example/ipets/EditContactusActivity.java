@@ -5,15 +5,28 @@ import androidx.appcompat.widget.Toolbar;
 
 import android.graphics.Color;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.Spinner;
-import android.widget.Toast;
 
-public class EditContactusActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener{
+import com.google.android.material.textfield.TextInputEditText;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.FirebaseFirestore;
+
+import java.util.HashMap;
+import java.util.Map;
+
+public class EditContactusActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
+
+    FirebaseAuth auth = FirebaseAuth.getInstance();
+    FirebaseUser currentUser = auth.getCurrentUser();
+    String userUID = currentUser.getUid();
+    TextInputEditText edmasterName,edemail,eddescription;
+    Button edbutton;
+    Spinner problemSpinner;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +44,15 @@ public class EditContactusActivity extends AppCompatActivity implements AdapterV
         adapter.setDropDownViewResource(R.layout.myspinner_dropdown_layout);
         problemSpinner.setAdapter(adapter);
         problemSpinner.setOnItemSelectedListener(this);
+
+        edbutton = findViewById(R.id.buttongo);
+        edbutton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                addContactUs();
+            }
+        });
+
     }
 
     @Override
@@ -43,4 +65,36 @@ public class EditContactusActivity extends AppCompatActivity implements AdapterV
 
     }
 
+
+    public void addContactUs() {
+        edmasterName = findViewById(R.id.masterName);
+        String masterName = edmasterName.getText().toString();
+        edemail = findViewById(R.id.email);
+        String Contactemail = edemail.getText().toString();
+        eddescription = findViewById(R.id.description);
+        String description = eddescription.getText().toString();
+
+        problemSpinner = findViewById(R.id.problemSpinner);
+        String problemtype = problemSpinner.getSelectedItem().toString();
+
+        FirebaseFirestore db;
+        db = FirebaseFirestore.getInstance();
+        Map<String, Object> newContact = new HashMap<>();
+        newContact.put("MasterName", masterName);
+        newContact.put("Contactemail", Contactemail);
+        newContact.put("Description", description);
+        newContact.put("Problemtype", problemtype);
+
+        db.collection("userInformation").document(userUID).collection("ContactUs").document("Contactinfo").set(newContact);
+
+    }
 }
+
+
+
+
+
+
+
+
+
