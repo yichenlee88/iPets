@@ -17,6 +17,16 @@ import DogScience from "@/components/DogScience";
 import Post from "@/components/Post";
 import Member from "@/components/Member";
 import Album from "@/components/Album";
+import Setting from "@/components/Setting";
+import EditProfile from "@/components/EditProfile";
+import EditPetProfile from "@/components/EditPetProfile";
+import Password from "@/components/Password";
+import Mail from "@/components/Mail";
+import LoginActivity from "@/components/LoginActivity";
+import FAQ from "@/components/FAQ";
+import Feedback from "@/components/Feedback";
+
+// import { component } from "vue/types/umd";
 
 const fAuth = db.auth();
 
@@ -119,7 +129,8 @@ let router = new Router({
         {
           path: "manageUser",
           component: ManageUser
-        }, {
+        },
+        {
           path: "manageAdoption",
           component: ManageAdoption
         }
@@ -140,6 +151,44 @@ let router = new Router({
       meta: {
         requiresAuth: true
       }
+    },
+    {
+      path: "/setting",
+      name: "Setting",
+      component: Setting,
+      meta: {
+        requiresAuth: true
+      },
+      children: [
+        {
+          path: "editProfile",
+          component: EditProfile
+        },
+        {
+          path: "editPetProfile",
+          component: EditPetProfile
+        },
+        {
+          path: "password",
+          component: Password
+        },
+        {
+          path: "mail",
+          component: Mail
+        },
+        {
+          path: "loginActivity",
+          component: LoginActivity
+        },
+        {
+          path: "FAQ",
+          component: FAQ
+        },
+        {
+          path: "feedback",
+          component: Feedback
+        }
+      ]
     }
   ]
 });
