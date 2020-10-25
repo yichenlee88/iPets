@@ -74,7 +74,7 @@
 <script>
 import axios from "axios";
 export default {
-  name: "Member",
+  name: "Identify",
   data() {
     return {
       preview: null,
