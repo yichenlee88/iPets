@@ -62,10 +62,10 @@
         android:layout_marginStart="17dp"
         android:layout_marginEnd="17dp"
         android:autofillHints=""
+        android:inputType="none"
         android:backgroundTint="#0071BC"
         android:ems="10"
         android:hint="@string/masterBirth_hint"
-        android:inputType="date"
         android:textSize="20sp" />
 
     <com.google.android.material.textfield.TextInputLayout
@@ -80,6 +80,7 @@
             android:layout_height="wrap_content"
             android:backgroundTint="#0071BC"
             android:hint="@string/phoneNum_hint"
+            android:inputType="phone"
             android:textSize="20sp" />
     </com.google.android.material.textfield.TextInputLayout>
 
