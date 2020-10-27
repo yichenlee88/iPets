@@ -199,21 +199,14 @@ export default {
         { text: "green" },
         { text: "blue" },
         { text: "purple" },
-        { text: "yellow" },
+        { text: "orange" },
         { text: "pink" },
         { text: "brown" }
       ],
-      // repeats: [
-      //   { text: "不重複" },
-      //   { text: "每年" },
-      //   { text: "每月" },
-      //   { text: "每週" },
-      //   { text: "每日" }
-      // ],
       frequency: 0,
       name: null,
       details: null,
-      start: "2020-09-08",
+      start: null,
       end: null,
       color: "red", // default event color
       currentlyEditing: null,
@@ -300,34 +293,125 @@ export default {
     async addEvent() {
       if (this.name && this.start && this.end) {
         if (this.frequency === 1) {
-          for (let i = 1; i <= 5; i++) {
-            if (this.i === 1) {
-              await fStore
-                .collection("pets")
-                .doc("3heOY1mUC6wCbo2jdE9M")
-                .collection("calEvent")
-                .add({
-                  name: this.name,
-                  details: this.details,
-                  start: this.start,
-                  end: this.end,
-                  color: this.color
-                });
-              this.getEvents();
-            } else {
-              await fStore
-                .collection("pets")
-                .doc("3heOY1mUC6wCbo2jdE9M")
-                .collection("calEvent")
-                .add({
-                  name: this.name,
-                  details: this.details,
-                  start: (parseInt(this.start) + i),
-                  end: (parseInt(this.end) + i),
-                  color: this.color
-                });
-              this.getEvents();
-            }
+          for (let i = 1; i < 5; i++) {
+            //   if (
+            //     parseInt(this.start.substr(5, 2)) ===
+            //       (1 || 3 || 5 || 7 || 8 || 10 || 12) &&
+            //     parseInt(this.start.substr(8, 2)) + i > 31
+            //   ) {
+            //     this.st =
+            //       this.start.substr(0, 5) +
+            //       parseInt(this.start.substr(5, 2) + 1).toString() +
+            //       "-" +
+            //       (parseInt(this.start.substr(8, 2)) + i - 31).toString();
+            //     this.en =
+            //       this.end.substr(0, 5) +
+            //       parseInt(this.end.substr(5, 2) + 1).toString() +
+            //       "-" +
+            //       (parseInt(this.end.substr(8, 2)) + i - 31).toString();
+            //   } else if (
+            //     parseInt(this.start.substr(5, 2)) === (2 || 4 || 6 || 9 || 11) &&
+            //     parseInt(this.start.substr(8, 2)) + i > 30
+            //   ) {
+            //     this.st =
+            //       this.start.substr(0, 5) +
+            //       parseInt(this.start.substr(5, 2) + 1).toString() +
+            //       "-" +
+            //       (parseInt(this.start.substr(8, 2)) + i - 30).toString();
+            //     this.en =
+            //       this.end.substr(0, 5) +
+            //       parseInt(this.end.substr(5, 2) + 1).toString() +
+            //       "-" +
+            //       (parseInt(this.end.substr(8, 2)) + i - 30).toString();
+            //   } else {
+            this.st =
+              this.start.substr(0, 8) +
+              (parseInt(this.start.substr(8, 2)) + i).toString();
+            this.en =
+              this.end.substr(0, 8) +
+              (parseInt(this.end.substr(8, 2)) + i).toString();
+            // }
+            await fStore
+              .collection("pets")
+              .doc("3heOY1mUC6wCbo2jdE9M")
+              .collection("calEvent")
+              .add({
+                name: this.name,
+                details: this.details,
+                frequency: this.frequency,
+                start: this.st,
+                end: this.en,
+                color: this.color
+              });
+            this.getEvents();
+          }
+        } else if (this.frequency === 2) {
+          for (let i = 1; i < 4; i++) {
+            this.st =
+              this.start.substr(0, 8) +
+              (parseInt(this.start.substr(8, 2)) + i * 7).toString();
+            this.en =
+              this.end.substr(0, 8) +
+              (parseInt(this.end.substr(8, 2)) + i * 7).toString();
+            await fStore
+              .collection("pets")
+              .doc("3heOY1mUC6wCbo2jdE9M")
+              .collection("calEvent")
+              .add({
+                name: this.name,
+                details: this.details,
+                frequency: this.frequency,
+                start: this.st,
+                end: this.en,
+                color: this.color
+              });
+            this.getEvents();
+          }
+        } else if (this.frequency === 3) {
+          for (let i = 1; i < 4; i++) {
+            this.st =
+              this.start.substr(0, 5) +
+              (parseInt(this.start.substr(5, 2)) + i).toString() +
+              this.start.substr(7, 3);
+            this.en =
+              this.end.substr(0, 5) +
+              (parseInt(this.end.substr(5, 2)) + i).toString() +
+              this.end.substr(7, 3);
+            await fStore
+              .collection("pets")
+              .doc("3heOY1mUC6wCbo2jdE9M")
+              .collection("calEvent")
+              .add({
+                name: this.name,
+                details: this.details,
+                frequency: this.frequency,
+                start: this.st,
+                end: this.en,
+                color: this.color
+              });
+            this.getEvents();
+          }
+        } else if (this.frequency === 4) {
+          for (let i = 1; i < 4; i++) {
+            this.st =
+              (parseInt(this.start.substr(0, 4)) + i).toString() +
+              this.start.substr(4, 6);
+            this.en =
+              (parseInt(this.end.substr(0, 4)) + i).toString() +
+              this.end.substr(4, 6);
+            await fStore
+              .collection("pets")
+              .doc("3heOY1mUC6wCbo2jdE9M")
+              .collection("calEvent")
+              .add({
+                name: this.name,
+                details: this.details,
+                frequency: this.frequency,
+                start: this.st,
+                end: this.en,
+                color: this.color
+              });
+            this.getEvents();
           }
         }
         await fStore
@@ -337,6 +421,7 @@ export default {
           .add({
             name: this.name,
             details: this.details,
+            frequency: this.frequency,
             start: this.start,
             end: this.end,
             color: this.color
@@ -344,6 +429,7 @@ export default {
         this.getEvents();
         this.name = "";
         this.details = "";
+        this.frequency = "";
         this.start = "";
         this.end = "";
         this.color = "";
@@ -355,6 +441,7 @@ export default {
       this.currentlyEditing = ev.id;
       this.name = ev.name;
       this.start = ev.start;
+      this.frequency = ev.frequency;
       this.end = ev.end;
       this.color = ev.color;
     },
@@ -369,6 +456,7 @@ export default {
           details: selectedEvent.details,
           name: selectedEvent.name,
           color: this.color,
+          frequency: this.frequency,
           start: this.start,
           end: this.end
         })
@@ -381,6 +469,7 @@ export default {
       this.selectedOpen = false;
       this.currentlyEditing = null;
       console.log(ev);
+      location.reload();
     },
     async deleteEvent(ev) {
       let selectedEvent = this.selectedEvent.name;
