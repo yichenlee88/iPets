@@ -26,6 +26,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:backgroundTint="#0071BC"
+            android:inputType="textEmailAddress"
             android:hint="@string/Email_hint"
             android:textSize="20sp" />
     </com.google.android.material.textfield.TextInputLayout>

@@ -1,45 +1,28 @@
 <template>
-  <v-container>
-    <v-layout row>
-      <v-flex class="text-center font-weight-black">
-        <h1>Upload a photo</h1>
-      </v-flex>
-    </v-layout>
-
-    <v-layout row>
-      <v-flex md6 offset-sm3>
-        <div>
-          <div>
-            <v-btn @click="click1">choose photo</v-btn>
-            <input
-              type="file"
-              ref="input1"
-              style="display: none"
-              @change="previewImage"
-              accept="image/*"
-            />
-          </div>
-
-          <div v-if="imageData != null">
-            <img class="preview" height="268" width="356" :src="img1" />
-            <br />
-          </div>
-        </div>
-      </v-flex>
-    </v-layout>
-
-    <v-layout row>
-      <v-flex md6 offset-sm3 class="text-center">
-        <v-text-field solo v-model="caption" label="Caption goes here">
-        </v-text-field>
-      </v-flex>
-    </v-layout>
-    <v-layout row>
-      <v-flex class="text-center">
-        <v-btn color="pink" @click="create">upload</v-btn>
-      </v-flex>
-    </v-layout>
-  </v-container>
+  <b-container>
+    <div class="border-bottom">
+      <div class="row">
+        <h1 class="high">相簿</h1>
+        <b-button
+          class="ml-auto mt-auto"
+          style="height: 45px"
+          variant="outline-primary"
+          v-b-modal="'my-modal'"
+          >+新增相簿</b-button
+        >
+        <b-modal size="lg" id="my-modal">
+          <b-button class="btn btn-block mb-3" variant="info">
+            Brose
+          </b-button>
+        </b-modal>
+      </div>
+    </div>
+    <b-img
+      class="banner_png center"
+      src="../static/img/gray.png"
+      style="width:468px;"
+    ></b-img>
+  </b-container>
 </template>
 
 <script>
@@ -106,3 +89,21 @@ export default {
   }
 };
 </script>
+
+<style scoped>
+.high {
+  margin-top: 20px;
+}
+
+.center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 20px;
+}
+
+.border-bottom {
+  height: 90px;
+  border-bottom: 2px solid #888888 !important;
+}
+</style>
