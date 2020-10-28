@@ -11,6 +11,7 @@ import java.util.HashMap;
 import java.util.List;
 
 public class DataParser {
+
     public List<HashMap<String, String>> parse(String jsonData) {
         JSONArray jsonArray = null;
         JSONObject jsonObject;
