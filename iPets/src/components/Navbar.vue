@@ -18,7 +18,7 @@
           <b-nav-item href="#/album" v-if="isSignedIn">相簿</b-nav-item>
           <b-nav-item href="#/identify" v-if="isSignedIn">寵物辨識</b-nav-item>
           <b-nav-item href="#/tunit" v-if="isSignedIn">風格轉換</b-nav-item>
-          <b-nav-item href="#/setting/EditProfile" v-if="isSignedIn"
+          <b-nav-item href="#/setting/editProfile" v-if="isSignedIn"
             >設定</b-nav-item
           >
         </b-navbar-nav>
