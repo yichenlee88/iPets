@@ -26,6 +26,7 @@ import Mail from "@/components/Mail";
 import LoginActivity from "@/components/LoginActivity";
 import FAQ from "@/components/FAQ";
 import Feedback from "@/components/Feedback";
+import pageNotFound from "@/components/pageNotFound";
 
 // import { component } from "vue/types/umd";
 
@@ -198,6 +199,11 @@ let router = new Router({
           component: Feedback
         }
       ]
+    },
+    {
+      path: "*",
+      name: "pageNotFound",
+      component: pageNotFound
     }
   ]
 });
