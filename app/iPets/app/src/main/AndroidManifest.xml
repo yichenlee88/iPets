@@ -23,8 +23,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".PhotoGalleryActivity"
-            android:parentActivityName=".HomeActivity"/>
+            android:name=".PhotoGalleryActivity" />
         <activity android:name=".NotePreviewActivity"></activity>
         <activity android:name=".AddNoteActivity" />
         <activity android:name=".CalendarActivity" />
