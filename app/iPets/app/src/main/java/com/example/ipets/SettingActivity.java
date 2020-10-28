@@ -8,6 +8,8 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 
@@ -61,6 +63,14 @@ public class SettingActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intentCommunicate = new Intent(SettingActivity.this,EditContactusActivity.class);
                 startActivity(intentCommunicate);
+            }
+        });
+
+        LinearLayout Version = findViewById(R.id.btnVersion);
+        Version.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(SettingActivity.this, "9.10.13 為目前最新版本", Toast.LENGTH_LONG).show();
             }
         });
 
