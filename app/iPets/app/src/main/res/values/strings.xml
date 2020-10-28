@@ -68,8 +68,8 @@
     <string name="TextView_petsBirth">YYYY/MM/DD</string>
     <string name="TextView_age">年齡：</string>
     <string name="TextView_petsAge">？歲</string>
-    <string name="TextView_schedule">本日行程：</string>
-    <string name="TextView_route">無/洗澡...？？？？</string>
+    <string name="TextView_schedule">品種：</string>
+    <string name="TextView_route">？？</string>
     <string name="img_shower" />
     <string name="img_haircut" />
     <string name="img_fleaIn" />

@@ -7,28 +7,26 @@ import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.core.app.NotificationCompat;
-import androidx.fragment.app.Fragment;
-import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
-
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
 
 import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -136,6 +134,7 @@ public class homeFragment extends Fragment {
                                         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
                                         intent.setClass(getActivity(),petsInfoActivity.class);
                                         startActivity(intent);
+                                    }else{
                                         querypet(query);
                                         downloadimage(query);
                                         countdown(query);
@@ -215,6 +214,15 @@ public class homeFragment extends Fragment {
 
             }
         });
+        Button btn_editPets =getView().findViewById(R.id.petInfoEdit);
+        btn_editPets.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intentPets = new Intent(getActivity(),EditPetsinfoActivity.class);
+                intentPets.putExtra("date",pet_query);
+                startActivity(intentPets);
+            }
+        });
     }
     public void notification(){
         String id ="channel_1";//channel的id
@@ -256,6 +264,7 @@ public class homeFragment extends Fragment {
         final TextView text_petsSex = getView().findViewById(R.id.text_petsSex);
         final TextView text_petsBirth = getView().findViewById(R.id.text_petsBirth);
         final TextView text_petsAge = getView().findViewById(R.id.text_petsAge);
+        final TextView text_route = getView().findViewById(R.id.text_route);
         db.collection("userInformation").document(userUID).collection("pets").document(query)
                 .get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
@@ -264,10 +273,13 @@ public class homeFragment extends Fragment {
                     DocumentSnapshot doc = task.getResult();
                     StringBuilder fields = new StringBuilder("");
                     StringBuilder fields2 = new StringBuilder("");
+                    StringBuilder fields3 = new StringBuilder("");
                     fields.append(doc.get("Petsgender")).toString();
                     fields2.append(doc.get("Petsbirth")).toString();
+                    fields3.append(doc.get("Petsvariety")).toString();
                         text_petsSex.setText(fields);
                         text_petsBirth.setText(fields2);
+                        text_route.setText(fields3);
                         SimpleDateFormat df = new SimpleDateFormat("yyyy/MM/dd");
                         String petsBirth = fields2.toString();
                         try {
@@ -379,9 +391,17 @@ public class homeFragment extends Fragment {
                         try {
                             int countdownday = Integer.valueOf(Showercountdownday.append(doc.get("Showercountdownday")).toString());
                             showerBar.setMax(countdownday);
-                            showerBar.setProgress(countdowndate(showerday));
-                            if (countdowndate(showerday) == 0){
+                            showerBar.setProgress(countdownday-countdowndate(showerday));
+                            if (countdowndate(showerday) <= 0){
                                 notification();
+                                Drawable progressDrawable = showerBar.getProgressDrawable().mutate();
+                                progressDrawable.setColorFilter(0xFFFF0000, android.graphics.PorterDuff.Mode.SRC_IN);
+                                showerBar.setProgressDrawable(progressDrawable);
+                            }
+                            if(countdowndate(showerday)<=countdownday*0.5 && countdowndate(showerday)>=0){
+                                Drawable progressDrawable = showerBar.getProgressDrawable().mutate();
+                                progressDrawable.setColorFilter(0xFFFF6600, android.graphics.PorterDuff.Mode.SRC_IN);
+                                showerBar.setProgressDrawable(progressDrawable);
                             }
                         } catch (ParseException e) {
                             e.printStackTrace();
@@ -391,9 +411,17 @@ public class homeFragment extends Fragment {
                         try {
                             int haircutcountdownday = Integer.valueOf(Haircutcountdownday.append(doc.get("Haircutcountdownday")).toString());
                             hairCutBar.setMax(haircutcountdownday);
-                            hairCutBar.setProgress(countdowndate(haircutday));
-                            if (countdowndate(haircutday) == 0){
+                            hairCutBar.setProgress(haircutcountdownday-countdowndate(haircutday));
+                            if (countdowndate(haircutday) <= 0){
                                 notification();
+                                Drawable progressDrawable = hairCutBar.getProgressDrawable().mutate();
+                                progressDrawable.setColorFilter(Color.RED, android.graphics.PorterDuff.Mode.SRC_IN);
+                                hairCutBar.setProgressDrawable(progressDrawable);
+                            }
+                            if(countdowndate(haircutday)<=haircutcountdownday*0.5 && countdowndate(haircutday)>= 0){
+                                Drawable progressDrawable = hairCutBar.getProgressDrawable().mutate();
+                                progressDrawable.setColorFilter( 0xFFFF6600, android.graphics.PorterDuff.Mode.SRC_IN);
+                                hairCutBar.setProgressDrawable(progressDrawable);
                             }
                         } catch (ParseException e) {
                             e.printStackTrace();
@@ -403,9 +431,17 @@ public class homeFragment extends Fragment {
                         try {
                             int fleaincountdownday = Integer.valueOf(Fleaincountdownday.append(doc.get("Fleaincountdownday")).toString());
                             fleaInBar.setMax(fleaincountdownday);
-                            fleaInBar.setProgress(countdowndate(fleainday));
-                            if (countdowndate(fleainday) == 0){
+                            fleaInBar.setProgress(fleaincountdownday-countdowndate(fleainday));
+                            if (countdowndate(fleainday) <= 0){
                                 notification();
+                                Drawable progressDrawable = fleaInBar.getProgressDrawable().mutate();
+                                progressDrawable.setColorFilter(Color.RED, android.graphics.PorterDuff.Mode.SRC_IN);
+                                fleaInBar.setProgressDrawable(progressDrawable);
+                            }
+                            if(countdowndate(fleainday)<=fleaincountdownday*0.5 && countdowndate(fleainday)>= 0){
+                                Drawable progressDrawable = fleaInBar.getProgressDrawable().mutate();
+                                progressDrawable.setColorFilter(0xFFFF6600, android.graphics.PorterDuff.Mode.SRC_IN);
+                                fleaInBar.setProgressDrawable(progressDrawable);
                             }
                         } catch (ParseException e) {
                             e.printStackTrace();
@@ -415,9 +451,17 @@ public class homeFragment extends Fragment {
                         try {
                             int fleaoutcountdownday = Integer.valueOf(Fleaoutcountdownday.append(doc.get("Fleaoutcountdownday")).toString());
                             fleaOutBar.setMax(fleaoutcountdownday);
-                            fleaOutBar.setProgress(countdowndate(fleaoutday));
-                            if (countdowndate(fleaoutday) == 0){
+                            fleaOutBar.setProgress(fleaoutcountdownday-countdowndate(fleaoutday));
+                            if (countdowndate(fleaoutday) <= 0){
                                 notification();
+                                Drawable progressDrawable =  fleaOutBar.getProgressDrawable().mutate();
+                                progressDrawable.setColorFilter(Color.RED, android.graphics.PorterDuff.Mode.SRC_IN);
+                                fleaOutBar.setProgressDrawable(progressDrawable);
+                            }
+                            if(countdowndate(fleaoutday)<=fleaoutcountdownday*0.5 && countdowndate(fleaoutday)>=0){
+                                Drawable progressDrawable =  fleaOutBar.getProgressDrawable().mutate();
+                                progressDrawable.setColorFilter(0xFFFF6600, android.graphics.PorterDuff.Mode.SRC_IN);
+                                fleaOutBar.setProgressDrawable(progressDrawable);
                             }
                         } catch (ParseException e) {
                             e.printStackTrace();
@@ -427,9 +471,17 @@ public class homeFragment extends Fragment {
                         try {
                             int injectioncountdownday = Integer.valueOf(Injectioncountdownday.append(doc.get("Injectioncountdownday")).toString());
                             injectionBar.setMax(injectioncountdownday);
-                            injectionBar.setProgress(countdowndate(injectionday));
-                            if (countdowndate(injectionday) == 0){
+                            injectionBar.setProgress(injectioncountdownday-countdowndate(injectionday));
+                            if (countdowndate(injectionday) <= 0){
                                 notification();
+                                Drawable progressDrawable =  injectionBar.getProgressDrawable().mutate();
+                                progressDrawable.setColorFilter(Color.RED, android.graphics.PorterDuff.Mode.SRC_IN);
+                                injectionBar.setProgressDrawable(progressDrawable);
+                            }
+                            if(countdowndate(injectionday)<=injectioncountdownday*0.5 && countdowndate(injectionday)>= 0){
+                                Drawable progressDrawable =  injectionBar.getProgressDrawable().mutate();
+                                progressDrawable.setColorFilter(0xFFFF6600, android.graphics.PorterDuff.Mode.SRC_IN);
+                                injectionBar.setProgressDrawable(progressDrawable);
                             }
                         } catch (ParseException e) {
                             e.printStackTrace();
@@ -439,9 +491,17 @@ public class homeFragment extends Fragment {
                         try {
                             int teethcountdownday = Integer.valueOf(Teethcountdownday.append(doc.get("Teethcountdownday")).toString());
                             teethBar.setMax(teethcountdownday);
-                            teethBar.setProgress(countdowndate(teethday));
-                            if (countdowndate(teethday) == 0){
+                            teethBar.setProgress(teethcountdownday-countdowndate(teethday));
+                            if (countdowndate(teethday) <= 0){
                                 notification();
+                                Drawable progressDrawable = teethBar.getProgressDrawable().mutate();
+                                progressDrawable.setColorFilter(Color.RED, android.graphics.PorterDuff.Mode.SRC_IN);
+                                teethBar.setProgressDrawable(progressDrawable);
+                            }
+                            if(countdowndate(teethday)<=teethcountdownday*0.5 && countdowndate(teethday)>= 0){
+                                Drawable progressDrawable =  teethBar.getProgressDrawable().mutate();
+                                progressDrawable.setColorFilter(0xFFFF6600, android.graphics.PorterDuff.Mode.SRC_IN);
+                                teethBar.setProgressDrawable(progressDrawable);
                             }
                         } catch (ParseException e) {
                             e.printStackTrace();
@@ -451,9 +511,17 @@ public class homeFragment extends Fragment {
                         try {
                             int bloodcountdownday = Integer.valueOf(Bloodcountdownday.append(doc.get("Bloodcountdownday")).toString());
                             bloodBar.setMax(bloodcountdownday);
-                            bloodBar.setProgress(countdowndate(bloodday));
-                            if (countdowndate(bloodday) == 0){
+                            bloodBar.setProgress(bloodcountdownday-countdowndate(bloodday));
+                            if (countdowndate(bloodday) <= 0){
                                 notification();
+                                Drawable progressDrawable = bloodBar.getProgressDrawable().mutate();
+                                progressDrawable.setColorFilter(Color.RED, android.graphics.PorterDuff.Mode.SRC_IN);
+                                bloodBar.setProgressDrawable(progressDrawable);
+                            }
+                            if(countdowndate(bloodday)<=bloodcountdownday*0.5 && countdowndate(bloodday)>= 0){
+                                Drawable progressDrawable =  bloodBar.getProgressDrawable().mutate();
+                                progressDrawable.setColorFilter(0xFFFF6600, android.graphics.PorterDuff.Mode.SRC_IN);
+                                bloodBar.setProgressDrawable(progressDrawable);
                             }
                         } catch (ParseException e) {
                             e.printStackTrace();

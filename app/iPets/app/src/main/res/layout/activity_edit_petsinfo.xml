@@ -20,26 +20,44 @@
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:layout_gravity="center_horizontal|center_vertical"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="20dp"
         android:src="@drawable/dog_icon_1" />
 
-    <Button
-        android:id="@+id/btnChangeHead"
-        android:layout_width="wrap_content"
-        android:layout_height="35dp"
-        android:layout_gravity="center_horizontal|center_vertical"
-        android:background="#00FFFFFF"
-        android:gravity="start|center_horizontal|center_vertical"
-        android:paddingHorizontal="17dp"
-        android:stateListAnimator="@null"
-        android:text="@string/button_changeHead"
-        android:textColor="#0071BC"
-        android:textSize="20sp" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="10dp">
+
+        <ImageButton
+            android:id="@+id/album"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginStart="85dp"
+            android:backgroundTint="#0071BC"
+            android:contentDescription="@string/imgbutton_album"
+            android:scaleType="fitCenter"
+            android:src="@android:drawable/ic_menu_gallery" />
+
+        <ImageButton
+            android:id="@+id/camera1"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginStart="40dp"
+            android:backgroundTint="#0071BC"
+            android:contentDescription="@string/imgbutton_camera1"
+            android:scaleType="fitCenter"
+            android:src="@android:drawable/ic_menu_camera" />
+    </LinearLayout>
 
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingHorizontal="17dp">
+        android:paddingHorizontal="17dp"
+        android:layout_marginTop="20dp"
+        >
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/mypetName"
@@ -54,17 +72,17 @@
         android:id="@+id/petSexSpinner"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="20dp"
+        android:entries="@array/Spinner_petSex"
         android:paddingHorizontal="15dp"
-        android:spinnerMode="dialog"
-        android:entries="@array/Spinner_petSex" />
+        android:spinnerMode="dialog" />
 
     <EditText
         android:id="@+id/mypetBirth"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="17dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="20dp"
         android:layout_marginEnd="17dp"
         android:autofillHints=""
         android:backgroundTint="#0071BC"
@@ -73,102 +91,8 @@
         android:inputType="date"
         android:textSize="20sp" />
 
-    <TextView
-        android:id="@+id/textView_countdown"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="17dp"
-        android:layout_marginTop="15dp"
-        android:layout_marginEnd="17dp"
-        android:gravity="center_horizontal|center_vertical"
-        android:text="@string/TextView_countdown"
-        android:textColor="#000000"
-        android:textSize="22sp" />
 
-    <CheckBox
-        android:id="@+id/checkBox_shower"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="17dp"
-        android:layout_marginTop="5dp"
-        android:layout_marginEnd="17dp"
-        android:buttonTint="#0071BC"
-        android:scaleX="1"
-        android:scaleY="1"
-        android:text="@string/CheckBox_shower"
-        android:textSize="18sp" />
 
-    <CheckBox
-        android:id="@+id/checkBox_hair"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="17dp"
-        android:layout_marginEnd="17dp"
-        android:buttonTint="#0071BC"
-        android:scaleX="1"
-        android:scaleY="1"
-        android:text="@string/CheckBox_hair"
-        android:textSize="18sp" />
-
-    <CheckBox
-        android:id="@+id/checkBox_debugIn"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="17dp"
-        android:layout_marginEnd="17dp"
-        android:buttonTint="#0071BC"
-        android:scaleX="1"
-        android:scaleY="1"
-        android:text="@string/CkeckBox_debugIn"
-        android:textSize="18sp" />
-
-    <CheckBox
-        android:id="@+id/checkBox_debugOut"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="17dp"
-        android:layout_marginEnd="17dp"
-        android:buttonTint="#0071BC"
-        android:scaleX="1"
-        android:scaleY="1"
-        android:text="@string/CheckBox_debugOut"
-        android:textSize="18sp" />
-
-    <CheckBox
-        android:id="@+id/checkBox_inject"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="17dp"
-        android:layout_marginEnd="17dp"
-        android:buttonTint="#0071BC"
-        android:scaleX="1"
-        android:scaleY="1"
-        android:text="@string/CheckBox_inject"
-        android:textSize="18sp" />
-
-    <CheckBox
-        android:id="@+id/checkBox_teeth"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="17dp"
-        android:layout_marginEnd="17dp"
-        android:buttonTint="#0071BC"
-        android:scaleX="1"
-        android:scaleY="1"
-        android:text="@string/CheckBox_teeth"
-        android:textSize="18sp" />
-
-    <CheckBox
-        android:id="@+id/checkBox_period"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="17dp"
-        android:layout_marginEnd="17dp"
-        android:buttonTint="#0071BC"
-        android:scaleX="1"
-        android:scaleY="1"
-        android:text="@string/CheckBox_period"
-        android:textSize="18sp" />
 
 
 </LinearLayout>

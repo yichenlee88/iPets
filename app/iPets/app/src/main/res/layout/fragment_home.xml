@@ -68,6 +68,21 @@
             app:layout_constraintStart_toStartOf="@+id/guideline16"
             app:layout_constraintTop_toTopOf="@+id/guideline85" />
 
+        <Button
+            android:id="@+id/petInfoEdit"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:background="#00FFFFFF"
+            android:gravity="center_horizontal|center_vertical"
+            android:stateListAnimator="@null"
+            android:text="編輯寵物"
+            android:textColor="#0071BC"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toTopOf="@+id/guideline94"
+            app:layout_constraintEnd_toStartOf="@+id/guideline79"
+            app:layout_constraintStart_toStartOf="@+id/guideline16"
+            app:layout_constraintTop_toTopOf="@+id/guideline95"
+            app:layout_constraintVertical_bias="0.0" />
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline77"
             android:layout_width="wrap_content"
@@ -422,6 +437,20 @@
             app:layout_constraintEnd_toStartOf="@+id/guideline87"
             app:layout_constraintStart_toStartOf="@+id/guideline77"
             app:layout_constraintTop_toTopOf="@+id/guideline90" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline95"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.27" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline94"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.34" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,8 +1,5 @@
 package com.example.ipets;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -10,6 +7,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import com.google.firebase.auth.FirebaseAuth;
 
@@ -39,14 +39,6 @@ public class SettingActivity extends AppCompatActivity {
             }
         });
 
-        btn_editPets = (Button) findViewById(R.id.petInfoEdit);
-        btn_editPets.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intentPets = new Intent(SettingActivity.this,EditPetsinfoActivity.class);
-                startActivity(intentPets);
-            }
-        });
 
         btn_question = (Button) findViewById(R.id.question);
         btn_question.setOnClickListener(new View.OnClickListener() {
