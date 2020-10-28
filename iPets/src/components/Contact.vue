@@ -22,8 +22,8 @@
             ></b-form-input>
             <b-form-select
               class="InputClass center"
-              name="questionType"
-              v-model="questionType"
+              name="prombleType"
+              v-model="prombleType"
               :options="options"
             ></b-form-select
             ><b-form-input
@@ -90,7 +90,7 @@ export default {
   name: "Contact",
   data() {
     return {
-      questionType: null,
+      prombleType: null,
       username: "",
       email: "",
       description: "",
@@ -114,7 +114,7 @@ export default {
         .set({
           username: this.username,
           email: this.email,
-          questionType: this.questionType,
+          prombleType: this.prombleType,
           description: this.description
         })
         .then(() => {
