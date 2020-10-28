@@ -117,8 +117,11 @@ export default {
           questionType: this.questionType,
           description: this.description
         })
+        .then(() => {
+          this.$router.go({ path: this.$router.path });
+        })
         .finally(() => {
-          console.log("您的建議已經送出囉~!");
+          alert("您的建議已經送出囉~!");
         });
     }
   }
