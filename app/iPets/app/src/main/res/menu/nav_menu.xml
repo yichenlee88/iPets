@@ -8,12 +8,10 @@
         android:id="@+id/calendar"
         android:icon="@drawable/ic_calendar"
         android:title="@string/menu_calendar" />
-    <!--
     <item
-        android:id="@+id/analyze"
-        android:icon="@drawable/ic_analyze"
-        android:title="@string/menu_analyze" />
-    -->
+        android:id="@+id/photoGallery"
+        android:icon="@android:drawable/ic_menu_gallery"
+        android:title="@string/menu_photoGallery" />
     <item
         android:id="@+id/locate"
         android:icon="@drawable/ic_locate"
