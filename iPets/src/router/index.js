@@ -15,7 +15,8 @@ import manage from "@/components/Manage";
 import { db } from "../db";
 import DogScience from "@/components/DogScience";
 import Post from "@/components/Post";
-import Member from "@/components/Member";
+import Identify from "@/components/Identify";
+import Tunit from "@/components/Tunit";
 import Album from "@/components/Album";
 import Setting from "@/components/Setting";
 import EditProfile from "@/components/EditProfile";
@@ -99,9 +100,17 @@ let router = new Router({
       }
     },
     {
-      path: "/member",
-      name: "Member",
-      component: Member,
+      path: "/identify",
+      name: "Identify",
+      component: Identify,
+      meta: {
+        requiresAuth: true
+      }
+    },
+    {
+      path: "/tunit",
+      name: "Tunit",
+      component: Tunit,
       meta: {
         requiresAuth: true
       }

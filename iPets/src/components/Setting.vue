@@ -1,5 +1,5 @@
 <template>
-  <div style="background-color:#F5F5F5">
+  <div class="screen" style="background-color:#F5F5F5">
     <div class="center">
       <b-row>
         <b-col col="6" sm="4" md="4">
@@ -45,7 +45,7 @@
           col="6"
           sm="8"
           md="8"
-          style="margin-top:15px; margin-bottom:15px; background-color:#FFFFFF"
+          style="height: 75vh; margin-top:15px; background-color:#FFFFFF; border: 1px solid; border-color: #ADADAD;"
         >
           <router-view></router-view>
         </b-col>
@@ -135,8 +135,11 @@ export default {
   display: block;
   margin-left: auto;
   margin-right: auto;
-  margin-top: 30px;
   width: 70%;
+}
+
+.screen {
+  height: 80vh;
 }
 
 a {
