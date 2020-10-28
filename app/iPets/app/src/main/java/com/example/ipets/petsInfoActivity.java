@@ -1,5 +1,12 @@
 package com.example.ipets;
 
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
+import androidx.core.content.FileProvider;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
 
 import android.Manifest;
 import android.app.AlertDialog;
@@ -13,36 +20,18 @@ import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
 import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
-import androidx.core.content.FileProvider;
-import androidx.fragment.app.Fragment;
-import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
-
-import android.os.Environment;
 import android.provider.MediaStore;
 import android.text.InputType;
 import android.util.DisplayMetrics;
-import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.RadioGroup;
-import android.widget.Toast;
 
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -59,11 +48,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+public class petsInfoActivity extends AppCompatActivity {
 
-/**
- * A simple {@link Fragment} subclass.
- */
-public class petsinfoFragment extends Fragment {
     private ImageView img;
     private DisplayMetrics mPhone;
     private final static int CAMERA = 1;
@@ -72,26 +58,14 @@ public class petsinfoFragment extends Fragment {
     FirebaseAuth auth = FirebaseAuth.getInstance();
     FirebaseUser currentUser = auth.getCurrentUser();
     String userUID = currentUser.getUid();
-    public petsinfoFragment() {
-        // Required empty public constructor
-
-    }
-
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_petsinfo, container, false);
-
-    }
-
-    @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_pets_info);
         getrequest_permissions();
-        ImageButton camera = getView().findViewById(R.id.camera1);
-        ImageButton photo = getView().findViewById(R.id.album);
+        ImageButton camera = findViewById(R.id.camera1);
+        ImageButton photo = findViewById(R.id.album);
         camera.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -100,8 +74,8 @@ public class petsinfoFragment extends Fragment {
                 File file = new File(FILE_PATH);
                 Intent takePhotoIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
                 Uri uri = FileProvider.getUriForFile(
-                        getContext(),
-                        getActivity().getPackageName() + ".provider",
+                        v.getContext(),
+                        petsInfoActivity.this.getPackageName() + ".provider",
                         file);
                 takePhotoIntent.putExtra(MediaStore.EXTRA_OUTPUT, uri);
                 startActivityForResult(intent, CAMERA);
@@ -118,14 +92,14 @@ public class petsinfoFragment extends Fragment {
                 startActivityForResult(intent, PHOTO);
             }
         });
-        Button finish = getView().findViewById(R.id.finish);
+        Button finish = findViewById(R.id.finish);
         finish.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 uploadimage();
             }
         });
-        final EditText edpetsbirth = getView().findViewById(R.id.petsbirth);
+        final EditText edpetsbirth = findViewById(R.id.petsbirth);
         edpetsbirth.setInputType(InputType.TYPE_NULL); //不顯示系統輸入鍵盤
         edpetsbirth.setOnFocusChangeListener(new View.OnFocusChangeListener() {
 
@@ -134,7 +108,7 @@ public class petsinfoFragment extends Fragment {
                 // TODO Auto-generated method stub
                 if(hasFocus){
                     Calendar c = Calendar.getInstance();
-                    DatePickerDialog datePickerDialog = new DatePickerDialog(getContext(),R.style.MyDatePickerDialogTheme, new DatePickerDialog.OnDateSetListener() {
+                    DatePickerDialog datePickerDialog = new DatePickerDialog(v.getContext(),R.style.MyDatePickerDialogTheme, new DatePickerDialog.OnDateSetListener() {
 
                         @Override
                         public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
@@ -151,7 +125,7 @@ public class petsinfoFragment extends Fragment {
     }
 
     private void uploadimage() {
-        EditText edpetsname = getView().findViewById(R.id.petsname);
+        EditText edpetsname = findViewById(R.id.petsname);
         final String petsname = edpetsname.getText().toString();
         FirebaseStorage storage = FirebaseStorage.getInstance("gs://ipets-app.appspot.com");
         StorageReference mStorageRef = storage.getReference();
@@ -169,11 +143,11 @@ public class petsinfoFragment extends Fragment {
     }
 
     private void petsinfo(String petsimage) {
-        EditText edpetsname = getView().findViewById(R.id.petsname);
-        final EditText edpetsbirth = getView().findViewById(R.id.petsbirth);
-        final EditText edvariety = getView().findViewById(R.id.variety);
-        final EditText edlikes = getView().findViewById(R.id.likes);
-        final EditText ednotes = getView().findViewById(R.id.notes);
+        EditText edpetsname = findViewById(R.id.petsname);
+        final EditText edpetsbirth = findViewById(R.id.petsbirth);
+        final EditText edvariety = findViewById(R.id.variety);
+        final EditText edlikes = findViewById(R.id.likes);
+        final EditText ednotes = findViewById(R.id.notes);
         String petsbirth = edpetsbirth.getText().toString();
         final String petsname = edpetsname.getText().toString();
         String petsvariety = edvariety.getText().toString();
@@ -181,7 +155,7 @@ public class petsinfoFragment extends Fragment {
         String petsnotes = ednotes.getText().toString();
         String petsgender = null;
 
-        RadioGroup sexselect = getView().findViewById(R.id.sexselect);
+        RadioGroup sexselect = findViewById(R.id.sexselect);
         switch(sexselect.getCheckedRadioButtonId()){
             case R.id.malepet: //case mRadioButton0.getId():
                 petsgender = "公的";
@@ -201,13 +175,15 @@ public class petsinfoFragment extends Fragment {
         userInfo.put("Petslikes", petslikes);
         userInfo.put("Petsnotes", petsnotes);
         db.collection("userInformation").document(userUID).collection("pets").document(petsname).set(userInfo);
-        AlertDialog.Builder finishsignup = new AlertDialog.Builder(getActivity());
+        AlertDialog.Builder finishsignup = new AlertDialog.Builder(petsInfoActivity.this);
         finishsignup.setMessage("新增成功");
         finishsignup.setNegativeButton("確認", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface arg0, int arg1) {
-                NavController controller = Navigation.findNavController(getView());
-                controller.navigate(R.id.action_petsinfoFragment2_to_navigation_home);
+                Intent intent=new Intent();
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
+                intent.setClass(petsInfoActivity.this,HomeActivity.class);
+                startActivity(intent);
             }
         });
         finishsignup.setCancelable(false);
@@ -218,24 +194,24 @@ public class petsinfoFragment extends Fragment {
         List<String> permissionList = new ArrayList<>();
 
         // 判断有無權限,如果沒有就加入列表
-        if (ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.CAMERA)
+        if (ContextCompat.checkSelfPermission(petsInfoActivity.this, Manifest.permission.CAMERA)
                 != PackageManager.PERMISSION_GRANTED) {
             permissionList.add(Manifest.permission.CAMERA);
         }
 
-        if (ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.WRITE_EXTERNAL_STORAGE)
+        if (ContextCompat.checkSelfPermission(petsInfoActivity.this, Manifest.permission.WRITE_EXTERNAL_STORAGE)
                 != PackageManager.PERMISSION_GRANTED) {
             permissionList.add(Manifest.permission.WRITE_EXTERNAL_STORAGE);
         }
 
-        if (ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.READ_EXTERNAL_STORAGE)
+        if (ContextCompat.checkSelfPermission(petsInfoActivity.this, Manifest.permission.READ_EXTERNAL_STORAGE)
                 != PackageManager.PERMISSION_GRANTED) {
             permissionList.add(Manifest.permission.READ_EXTERNAL_STORAGE);
         }
 
         // 列表為空及權限都有了
         if (!permissionList.isEmpty()) {
-            ActivityCompat.requestPermissions(getActivity(),
+            ActivityCompat.requestPermissions(petsInfoActivity.this,
                     permissionList.toArray(new String[permissionList.size()]), 1002);
         }
     }
@@ -245,11 +221,11 @@ public class petsinfoFragment extends Fragment {
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         //讀取手機解析度
         mPhone = new DisplayMetrics();
-        getActivity().getWindowManager().getDefaultDisplay().getMetrics(mPhone);
+        petsInfoActivity.this.getWindowManager().getDefaultDisplay().getMetrics(mPhone);
         if (requestCode == PHOTO && data != null) {
             //取得照片路徑uri
             Uri uri = data.getData();
-            ContentResolver cr = this.getActivity().getContentResolver();
+            ContentResolver cr = petsInfoActivity.this.getContentResolver();
             try {
                 //讀取照片，型態為Bitmap
                 Bitmap bitmap = BitmapFactory.decodeStream(cr.openInputStream(uri));
@@ -285,7 +261,7 @@ public class petsinfoFragment extends Fragment {
     private void ScalePic(Bitmap bitmap, int phone) {
         //縮放比例預設為1
         float mScale = 1;
-        img = getView().findViewById(R.id.img);
+        img = findViewById(R.id.img);
         //如果圖片寬度大於手機寬度則進行縮放，否則直接將圖片放入ImageView內
         if (bitmap.getWidth() > phone) {
             //判斷縮放比例
@@ -301,7 +277,7 @@ public class petsinfoFragment extends Fragment {
                     bitmap.getHeight(),
                     mMat,
                     false);
-           img.setImageBitmap(mScaleBitmap);
+            img.setImageBitmap(mScaleBitmap);
         } else img.setImageBitmap(bitmap);
     }
 }
