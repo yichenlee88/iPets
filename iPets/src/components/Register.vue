@@ -223,7 +223,8 @@ export default {
         { value: "I prefer not to say", text: "不透漏" },
         { value: "male", text: "男" },
         { value: "female", text: "女" }
-      ]
+      ],
+      address: ""
     };
   },
   methods: {
