@@ -8,12 +8,27 @@ import Login from "@/components/Login";
 import Register from "@/components/Register";
 import PetProfile from "@/components/PetProfile";
 import Calendar from "@/components/Calendar";
-import manageArticle from "@/components/manageArticle";
+import ManageArticle from "@/components/ManageArticle";
+import ManageAdoption from "@/components/ManageAdoption";
+import ManageUser from "@/components/ManageUser";
+import manage from "@/components/Manage";
 import { db } from "../db";
 import DogScience from "@/components/DogScience";
 import Post from "@/components/Post";
-import Member from "@/components/Member";
+import Identify from "@/components/Identify";
+import Tunit from "@/components/Tunit";
 import Album from "@/components/Album";
+import Setting from "@/components/Setting";
+import EditProfile from "@/components/EditProfile";
+import EditPetProfile from "@/components/EditPetProfile";
+import Password from "@/components/Password";
+import Mail from "@/components/Mail";
+import LoginActivity from "@/components/LoginActivity";
+import FAQ from "@/components/FAQ";
+import Feedback from "@/components/Feedback";
+import pageNotFound from "@/components/pageNotFound";
+
+// import { component } from "vue/types/umd";
 
 const fAuth = db.auth();
 
@@ -86,9 +101,17 @@ let router = new Router({
       }
     },
     {
-      path: "/member",
-      name: "Member",
-      component: Member,
+      path: "/identify",
+      name: "Identify",
+      component: Identify,
+      meta: {
+        requiresAuth: true
+      }
+    },
+    {
+      path: "/tunit",
+      name: "Tunit",
+      component: Tunit,
       meta: {
         requiresAuth: true
       }
@@ -102,12 +125,26 @@ let router = new Router({
       }
     },
     {
-      path: "/manageArticle",
-      name: "manageArticle",
-      component: manageArticle,
+      path: "/manage",
+      name: "manage",
+      component: manage,
       meta: {
         requiresGuest: true
-      }
+      },
+      children: [
+        {
+          path: "manageArticle",
+          component: ManageArticle
+        },
+        {
+          path: "manageUser",
+          component: ManageUser
+        },
+        {
+          path: "manageAdoption",
+          component: ManageAdoption
+        }
+      ]
     },
     {
       path: "/post/:id",
@@ -124,6 +161,49 @@ let router = new Router({
       meta: {
         requiresAuth: true
       }
+    },
+    {
+      path: "/setting",
+      name: "Setting",
+      component: Setting,
+      meta: {
+        requiresAuth: true
+      },
+      children: [
+        {
+          path: "editProfile",
+          component: EditProfile
+        },
+        {
+          path: "editPetProfile",
+          component: EditPetProfile
+        },
+        {
+          path: "password",
+          component: Password
+        },
+        {
+          path: "mail",
+          component: Mail
+        },
+        {
+          path: "loginActivity",
+          component: LoginActivity
+        },
+        {
+          path: "FAQ",
+          component: FAQ
+        },
+        {
+          path: "feedback",
+          component: Feedback
+        }
+      ]
+    },
+    {
+      path: "*",
+      name: "pageNotFound",
+      component: pageNotFound
     }
   ]
 });

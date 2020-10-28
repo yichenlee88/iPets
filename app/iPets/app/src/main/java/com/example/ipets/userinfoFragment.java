@@ -4,13 +4,8 @@ package com.example.ipets;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
-
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
-
 import android.text.InputType;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,8 +13,10 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
-import android.widget.RadioButton;
 import android.widget.RadioGroup;
+
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -92,8 +89,10 @@ public class userinfoFragment extends Fragment {
                 finishsignup.setNegativeButton("確認", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface arg0, int arg1) {
-                        NavController controller = Navigation.findNavController(v);
-                        controller.navigate(R.id.action_userinfoFragment_to_homeActivity);
+                        Intent intent=new Intent();
+                        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
+                        intent.setClass(getActivity(),HomeActivity.class);
+                        startActivity(intent);
                     }
                 });
                 finishsignup.setCancelable(false);

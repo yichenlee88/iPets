@@ -4,45 +4,59 @@
       ><b-col><h1>歡迎提出您任何的問題</h1></b-col></b-row
     >
     <b-row>
-      <b-col col="2"
-        ><img class="center" src="../assets/contact-us-02.png" width="320" alt="image slot"
+      <b-col class="col col-3 col-sm-3 col-md-3"
+        ><img
+          class="imgcenter"
+          src="../assets/contact-us-02.png"
+          width="auto"
+          alt="image slot"
       /></b-col>
-      <b-col col="8">
-        <b-form-input
-          class="InputClass"
-          v-model="text"
-          placeholder="First Name"
-        ></b-form-input>
-        <b-form-input
-          class="InputClass"
-          v-model="text"
-          placeholder="Last Name"
-        ></b-form-input
-        ><b-form-input
-          class="InputClass"
-          v-model="email"
-          placeholder="Your Email"
-        ></b-form-input>
-        <b-form-textarea
-          class="TextareaClass"
-          id="textarea-default"
-          placeholder="Your Question..."
-          maxlength
-        ></b-form-textarea
-        ><b-button class="ButtonClass">Send</b-button></b-col>
-        <b-col col="2"
-        ><img class="center" src="../assets/contact-us-03.png" width="320" alt="image slot"
+      <b-col class="col col-12 col-sm-6 col-md-6">
+        <div style="margin-top: 20%">
+          <b-form @submit="onSubmit">
+            <b-form-input
+              class="InputClass"
+              name="username"
+              v-model="username"
+              placeholder="使用者名稱"
+            ></b-form-input>
+            <b-form-select
+              class="InputClass center"
+              name="questionType"
+              v-model="questionType"
+              :options="options"
+            ></b-form-select
+            ><b-form-input
+              class="InputClass"
+              name="email"
+              v-model="email"
+              placeholder="電子郵件"
+            ></b-form-input>
+            <b-form-textarea
+              class="TextareaClass"
+              name="description"
+              id="description"
+              v-model="description"
+              placeholder="您遇到的問題是..."
+              maxlength
+            ></b-form-textarea
+            ><b-button type="submit" class="ButtonClass">送出</b-button></b-form
+          >
+        </div></b-col
+      >
+      <b-col class="col col-3 col-sm-3 col-md-3"
+        ><img
+          class="imgcenter"
+          src="../assets/contact-us-03.png"
+          width="auto"
+          alt="image slot"
       /></b-col>
     </b-row>
 
     <b-row class="ContactTitle text-center"
       ><b-col><h1>加入我們</h1></b-col></b-row
     >
-    <b-card
-      img-src="../static/img/join-us.png"
-      img-alt="Card image"
-      img-top
-    >
+    <b-card img-src="../static/img/join-us.png" img-alt="Card image" img-top>
       <b-card-text>
         <b-row
           ><b-col col="6"
@@ -69,22 +83,64 @@
 </template>
 
 <script>
+import { db } from "../db";
+const fStore = db.firestore();
+
 export default {
-  name: "Contact"
+  name: "Contact",
+  data() {
+    return {
+      questionType: null,
+      username: "",
+      email: "",
+      description: "",
+      options: [
+        { value: "null", text: "選擇您的問題型態" },
+        { value: "帳號安全", text: "帳號安全" },
+        { value: "關於行事曆", text: "關於行事曆" },
+        { value: "關於倒數計時器", text: "關於倒數計時器" },
+        { value: "關於相簿", text: "關於相簿" },
+        { value: "關於辨識功能", text: "關於辨識功能" },
+        { value: "關於風格轉換", text: "關於風格轉換" },
+        { value: "給iPets的建議", text: "給iPets的建議" }
+      ]
+    };
+  },
+  methods: {
+    onSubmit(e) {
+      e.preventDefault();
+      var docRef = fStore.collection("contact").doc();
+      docRef
+        .set({
+          username: this.username,
+          email: this.email,
+          questionType: this.questionType,
+          description: this.description
+        })
+        .finally(() => {
+          console.log("您的建議已經送出囉~!");
+        });
+    }
+  }
 };
 </script>
 
 <style>
-.ContactTitle {
+/* .ContactTitle {
   margin-top: 100px;
   margin-bottom: 100px;
+} */
+.imgcenter {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 100%;
 }
 
 .center {
   display: block;
   margin-left: auto;
   margin-right: auto;
-  width: 50%;
 }
 
 .Qrcenter {
@@ -103,21 +159,21 @@ export default {
 
 .InputClass {
   height: 48px;
-  width: 400px;
+  max-width: auto;
   border-radius: 40px;
   margin-bottom: 20px;
 }
 
 .TextareaClass {
   height: 120px;
-  width: 400px;
+  max-width: auto;
   border-radius: 16px;
   margin-bottom: 20px;
 }
 
 .ButtonClass {
   height: 48px;
-  width: 400px;
+  width: 100%;
   border-radius: 40px;
   margin-bottom: 20px;
   background: -webkit-linear-gradient(

@@ -131,9 +131,10 @@ public class homeFragment extends Fragment {
                                     String query = petname.get(position);
                                     pet_query = query;
                                     if ( position == petname.size()-1){
-                                        NavController controller = Navigation.findNavController(getView());
-                                        controller.navigate(R.id.action_navigation_home_to_petsinfoFragment2);
-                                    }else{
+                                        Intent intent=new Intent();
+                                        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
+                                        intent.setClass(getActivity(),petsInfoActivity.class);
+                                        startActivity(intent);
                                         querypet(query);
                                         downloadimage(query);
                                         countdown(query);

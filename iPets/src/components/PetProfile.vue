@@ -1,6 +1,8 @@
 <template>
   <b-container>
     <!-- Start -- 新增寵物 -->
+    <p v-if="!show">123</p>
+    <p v-if="show">666</p>
     <b-card id="card-create-pet" v-if="!show">
       <b-card-header header-bg-variant="dark" header-text-variant="white">
         <div>
@@ -52,9 +54,8 @@
     <!-- End -- 新增寵物 -->
 
     <!-- Start -- 寵物簡介 -->
-    <b-card-group class="PetProfile" deck>
+    <b-card-group class="PetProfile" deck v-if="show">
       <b-card
-        v-if="show"
         v-bind:img-src="pet.image"
         class="mb-3"
         style="max-width:300px;border:0"
@@ -74,7 +75,7 @@
       <b-modal title="編輯寵物資訊" size="xl" v-model="modalShow">
         <div class="border-bottom">
           <b-row>
-            <b-col col="2">
+            <b-col>
               <b-img
                 src="../static/img/4.jpg"
                 style="max-height:300px"
@@ -116,7 +117,7 @@
                 label="備註："
                 label-for="remarks"
               >
-                <b-form-textarea v-model="text" id="remarks"></b-form-textarea>
+                <b-form-textarea id="remarks"></b-form-textarea>
               </b-form-group>
             </b-col>
           </b-row>
@@ -243,10 +244,10 @@ import { db } from "../db";
 const fStore = db.firestore();
 
 export default {
+  name: "PetProfile",
   data() {
     return {
       modalShow: false,
-      name: "PetProfile",
       date: new Date(),
       timerSelected: [],
       timers: [
