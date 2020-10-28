@@ -254,6 +254,21 @@ export default {
     }
   },
   methods: {
+    add: function() {
+      fStore
+        .collection("pets")
+        .doc("3heOY1mUC6wCbo2jdE9M")
+        .collection("calEvent")
+        .add({
+          name: this.name,
+          details: this.details,
+          frequency: this.frequency,
+          start: this.st,
+          end: this.en,
+          color: this.color
+        });
+      this.getEvents();
+    },
     async getEvents() {
       let snapshot = await fStore
         .collection("pets")
@@ -331,19 +346,7 @@ export default {
               this.end.substr(0, 8) +
               (parseInt(this.end.substr(8, 2)) + i).toString();
             // }
-            await fStore
-              .collection("pets")
-              .doc("3heOY1mUC6wCbo2jdE9M")
-              .collection("calEvent")
-              .add({
-                name: this.name,
-                details: this.details,
-                frequency: this.frequency,
-                start: this.st,
-                end: this.en,
-                color: this.color
-              });
-            this.getEvents();
+            this.add();
           }
         } else if (this.frequency === 2) {
           for (let i = 1; i < 4; i++) {
@@ -353,19 +356,7 @@ export default {
             this.en =
               this.end.substr(0, 8) +
               (parseInt(this.end.substr(8, 2)) + i * 7).toString();
-            await fStore
-              .collection("pets")
-              .doc("3heOY1mUC6wCbo2jdE9M")
-              .collection("calEvent")
-              .add({
-                name: this.name,
-                details: this.details,
-                frequency: this.frequency,
-                start: this.st,
-                end: this.en,
-                color: this.color
-              });
-            this.getEvents();
+            this.add();
           }
         } else if (this.frequency === 3) {
           for (let i = 1; i < 4; i++) {
@@ -377,19 +368,7 @@ export default {
               this.end.substr(0, 5) +
               (parseInt(this.end.substr(5, 2)) + i).toString() +
               this.end.substr(7, 3);
-            await fStore
-              .collection("pets")
-              .doc("3heOY1mUC6wCbo2jdE9M")
-              .collection("calEvent")
-              .add({
-                name: this.name,
-                details: this.details,
-                frequency: this.frequency,
-                start: this.st,
-                end: this.en,
-                color: this.color
-              });
-            this.getEvents();
+            this.add();
           }
         } else if (this.frequency === 4) {
           for (let i = 1; i < 4; i++) {
@@ -399,19 +378,7 @@ export default {
             this.en =
               (parseInt(this.end.substr(0, 4)) + i).toString() +
               this.end.substr(4, 6);
-            await fStore
-              .collection("pets")
-              .doc("3heOY1mUC6wCbo2jdE9M")
-              .collection("calEvent")
-              .add({
-                name: this.name,
-                details: this.details,
-                frequency: this.frequency,
-                start: this.st,
-                end: this.en,
-                color: this.color
-              });
-            this.getEvents();
+            this.add();
           }
         }
         await fStore
