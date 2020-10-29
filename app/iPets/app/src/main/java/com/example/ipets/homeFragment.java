@@ -159,57 +159,50 @@ public class homeFragment extends Fragment {
         ProgressBar bloodBar = getView().findViewById(R.id.bloodBar);
         showerBar.setOnClickListener(new ProgressBar.OnClickListener() {
             public void onClick(View v) {
-                String Showercountdownday = "Showercountdownday";
-                String Showerday=  "Showerday";
-                setcountdowndate(Showercountdownday,Showerday);
+                String Shower =pet_query + "洗澡";
+                setcountdowndate(Shower);
 
             }
         });
         hairCutBar.setOnClickListener(new ProgressBar.OnClickListener() {
             public void onClick(View v) {
-                String Haircutcountdownday = "Haircutcountdownday";
-                String Haircutday=  "Haircutday";
-                setcountdowndate(Haircutcountdownday,Haircutday);
+                String Haircut = pet_query + "修剪毛髮";
+                setcountdowndate(Haircut);
 
             }
         });
         fleaInBar.setOnClickListener(new ProgressBar.OnClickListener() {
             public void onClick(View v) {
-                String Fleaincountdownday = "Fleaincountdownday";
-                String Fleainday=  "Fleainday";
-                setcountdowndate(Fleaincountdownday,Fleainday);
+                String Fleain = pet_query + "體內除蟲";
+                setcountdowndate(Fleain);
 
             }
         });
         fleaOutBar.setOnClickListener(new ProgressBar.OnClickListener() {
             public void onClick(View v) {
-                String Fleaoutcountdownday = "Fleaoutcountdownday";
-                String Fleaoutday=  "Fleaoutday";
-                setcountdowndate(Fleaoutcountdownday,Fleaoutday);
+                String Fleaout = pet_query + "體外除蟲";
+                setcountdowndate(Fleaout);
 
             }
         });
         injectionBar.setOnClickListener(new ProgressBar.OnClickListener() {
             public void onClick(View v) {
-                String Injectioncountdownday = "Injectioncountdownday";
-                String Injectionday=  "Injectionday";
-                setcountdowndate(Injectioncountdownday,Injectionday);
+                String Injection = pet_query + "注射";
+                setcountdowndate(Injection);
 
             }
         });
         teethBar.setOnClickListener(new ProgressBar.OnClickListener() {
             public void onClick(View v) {
-                String Teethcountdownday = "Teethcountdownday";
-                String Teethday=  "Teethday";
-                setcountdowndate(Teethcountdownday,Teethday);
+                String Teeth = pet_query + "看牙醫";
+                setcountdowndate(Teeth);
 
             }
         });
         bloodBar.setOnClickListener(new ProgressBar.OnClickListener() {
             public void onClick(View v) {
-                String Bloodcountdownday = "Bloodcountdownday";
-                String Bloodday=  "Bloodday";
-                setcountdowndate(Bloodcountdownday,Bloodday);
+                String Blood = pet_query + "經期";
+                setcountdowndate(Blood);
 
             }
         });
@@ -256,6 +249,19 @@ public class homeFragment extends Fragment {
         optiondate.setTime(specialdate); //真實的日期為+1個月
         int showercountdownday = (int) Math.ceil(((optiondate.getTimeInMillis() - now.getTimeInMillis()) / (24 * 60 * 60 * 1000.0)));
         return showercountdownday;
+    }
+    private int dueDay(String start,String end) throws ParseException {
+        String startday=start;
+        SimpleDateFormat sdf= new SimpleDateFormat("yyyy/MM/dd");
+        Date date =sdf.parse(startday);
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(date);
+        String endday = end;
+        Date date1 =sdf.parse(endday);
+        Calendar calendar1 = Calendar.getInstance();
+        calendar1.setTime(date1);
+        int dueday = (int) Math.ceil(((calendar1.getTimeInMillis() - calendar.getTimeInMillis()) / (24 * 60 * 60 * 1000.0)));
+        return dueday;
     }
 
     public void querypet(String query){
@@ -333,7 +339,7 @@ public class homeFragment extends Fragment {
         });
     }
 
-    public void setcountdowndate(String countdownday,String countdown){
+    public void setcountdowndate(String countdownEvent){
         final FirebaseFirestore db = FirebaseFirestore.getInstance();
         Calendar c = Calendar.getInstance();
         DatePickerDialog datePickerDialog = new DatePickerDialog(getContext(),R.style.MyDatePickerDialogTheme, new DatePickerDialog.OnDateSetListener() {
@@ -343,12 +349,15 @@ public class homeFragment extends Fragment {
                 Calendar optiondate = Calendar.getInstance();
                 Calendar now = Calendar.getInstance();
                 optiondate.set(year, monthOfYear, dayOfMonth); //真實的日期為+1個月
-                int showercountdownday = (int) Math.ceil(((optiondate.getTimeInMillis() - now.getTimeInMillis()) / (24 * 60 * 60 * 1000.0)));
                 monthOfYear = monthOfYear+1;
+                SimpleDateFormat formatter = new SimpleDateFormat("yyyy/MM/dd");
+                Date curDate = new Date(System.currentTimeMillis()) ; // 獲取當前時間
+                String showercountdownday = formatter.format(curDate);
                 String showerday = year+"/"+monthOfYear+"/"+dayOfMonth;
                 Map<String, Object> countdowndate = new HashMap<>();
-                countdowndate.put(countdownday, showercountdownday);
-                countdowndate.put(countdown, showerday);
+                countdowndate.put("startDay", showercountdownday);
+                countdowndate.put("endDay", showerday);
+                countdowndate.put("countdownEvent",countdownEvent);
                 db.collection("userInformation").document(userUID).collection("pets").document(pet_query).update(countdowndate);
                 countdown(pet_query);
             }
@@ -372,32 +381,25 @@ public class homeFragment extends Fragment {
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                 if (task.isSuccessful()) {
                     DocumentSnapshot doc = task.getResult();
-                    StringBuilder Showercountdownday = new StringBuilder("");StringBuilder Showerday = new StringBuilder("");
-                    StringBuilder Haircutcountdownday = new StringBuilder("");StringBuilder Haircutday = new StringBuilder("");
-                    StringBuilder Fleaincountdownday = new StringBuilder("");StringBuilder Fleainday = new StringBuilder("");
-                    StringBuilder Fleaoutcountdownday = new StringBuilder("");StringBuilder Fleaoutday = new StringBuilder("");
-                    StringBuilder Injectioncountdownday = new StringBuilder("");StringBuilder Injectionday = new StringBuilder("");
-                    StringBuilder Teethcountdownday = new StringBuilder("");StringBuilder Teethday = new StringBuilder("");
-                    StringBuilder Bloodcountdownday = new StringBuilder("");StringBuilder Bloodday = new StringBuilder("");
-                    String showerday = Showerday.append(doc.get("Showerday")).toString();
-                    String haircutday = Haircutday.append(doc.get("Haircutday")).toString();
-                    String fleainday = Fleainday.append(doc.get("Fleainday")).toString();
-                    String fleaoutday = Fleaoutday.append(doc.get("Fleaoutday")).toString();
-                    String injectionday = Injectionday.append(doc.get("Injectionday")).toString();
-                    String teethday = Teethday.append(doc.get("Teethday")).toString();
-                    String bloodday = Bloodday.append(doc.get("Bloodday")).toString();
-                    if(!showerday.equals("null")){
+                    StringBuilder field = new StringBuilder("");
+                    StringBuilder field1 = new StringBuilder("");
+                    StringBuilder field2 = new StringBuilder("");
+                    String startDay =field.append(doc.get("startDay")).toString();
+                    String endDay = field1.append(doc.get("endDay")).toString();
+                    String countdownEvent = field2.append(doc.get("countdownEvent")).toString();
+
+                    if(countdownEvent.equals(pet_query+"洗澡")){
                         try {
-                            int countdownday = Integer.valueOf(Showercountdownday.append(doc.get("Showercountdownday")).toString());
+                            int countdownday = dueDay(startDay,endDay);
                             showerBar.setMax(countdownday);
-                            showerBar.setProgress(countdownday-countdowndate(showerday));
-                            if (countdowndate(showerday) <= 0){
+                            showerBar.setProgress(countdownday-countdowndate(endDay));
+                            if (countdowndate(endDay) <= 0){
                                 notification();
                                 Drawable progressDrawable = showerBar.getProgressDrawable().mutate();
                                 progressDrawable.setColorFilter(0xFFFF0000, android.graphics.PorterDuff.Mode.SRC_IN);
                                 showerBar.setProgressDrawable(progressDrawable);
                             }
-                            if(countdowndate(showerday)<=countdownday*0.5 && countdowndate(showerday)>=0){
+                            if(countdowndate(endDay)<=countdownday*0.5 && countdowndate(endDay)>=0){
                                 Drawable progressDrawable = showerBar.getProgressDrawable().mutate();
                                 progressDrawable.setColorFilter(0xFFFF6600, android.graphics.PorterDuff.Mode.SRC_IN);
                                 showerBar.setProgressDrawable(progressDrawable);
@@ -406,18 +408,18 @@ public class homeFragment extends Fragment {
                             e.printStackTrace();
                         }
                     }
-                    if(!haircutday.equals("null")){
+                    if(countdownEvent.equals(pet_query+"修剪毛髮")){
                         try {
-                            int haircutcountdownday = Integer.valueOf(Haircutcountdownday.append(doc.get("Haircutcountdownday")).toString());
+                            int haircutcountdownday = dueDay(startDay,endDay);
                             hairCutBar.setMax(haircutcountdownday);
-                            hairCutBar.setProgress(haircutcountdownday-countdowndate(haircutday));
-                            if (countdowndate(haircutday) <= 0){
+                            hairCutBar.setProgress(haircutcountdownday-countdowndate(endDay));
+                            if (countdowndate(endDay) <= 0){
                                 notification();
                                 Drawable progressDrawable = hairCutBar.getProgressDrawable().mutate();
                                 progressDrawable.setColorFilter(Color.RED, android.graphics.PorterDuff.Mode.SRC_IN);
                                 hairCutBar.setProgressDrawable(progressDrawable);
                             }
-                            if(countdowndate(haircutday)<=haircutcountdownday*0.5 && countdowndate(haircutday)>= 0){
+                            if(countdowndate(endDay)<=haircutcountdownday*0.5 && countdowndate(endDay)>= 0){
                                 Drawable progressDrawable = hairCutBar.getProgressDrawable().mutate();
                                 progressDrawable.setColorFilter( 0xFFFF6600, android.graphics.PorterDuff.Mode.SRC_IN);
                                 hairCutBar.setProgressDrawable(progressDrawable);
@@ -426,18 +428,18 @@ public class homeFragment extends Fragment {
                             e.printStackTrace();
                         }
                     }
-                    if(!fleainday.equals("null")){
+                    if(countdownEvent.equals(pet_query+"體內除蟲")){
                         try {
-                            int fleaincountdownday = Integer.valueOf(Fleaincountdownday.append(doc.get("Fleaincountdownday")).toString());
+                            int fleaincountdownday = dueDay(startDay,endDay);
                             fleaInBar.setMax(fleaincountdownday);
-                            fleaInBar.setProgress(fleaincountdownday-countdowndate(fleainday));
-                            if (countdowndate(fleainday) <= 0){
+                            fleaInBar.setProgress(fleaincountdownday-countdowndate(endDay));
+                            if (countdowndate(endDay) <= 0){
                                 notification();
                                 Drawable progressDrawable = fleaInBar.getProgressDrawable().mutate();
                                 progressDrawable.setColorFilter(Color.RED, android.graphics.PorterDuff.Mode.SRC_IN);
                                 fleaInBar.setProgressDrawable(progressDrawable);
                             }
-                            if(countdowndate(fleainday)<=fleaincountdownday*0.5 && countdowndate(fleainday)>= 0){
+                            if(countdowndate(endDay)<=fleaincountdownday*0.5 && countdowndate(endDay)>= 0){
                                 Drawable progressDrawable = fleaInBar.getProgressDrawable().mutate();
                                 progressDrawable.setColorFilter(0xFFFF6600, android.graphics.PorterDuff.Mode.SRC_IN);
                                 fleaInBar.setProgressDrawable(progressDrawable);
@@ -446,18 +448,18 @@ public class homeFragment extends Fragment {
                             e.printStackTrace();
                         }
                     }
-                    if(!fleaoutday.equals("null")){
+                    if(countdownEvent.equals(pet_query+"體外除蟲")){
                         try {
-                            int fleaoutcountdownday = Integer.valueOf(Fleaoutcountdownday.append(doc.get("Fleaoutcountdownday")).toString());
+                            int fleaoutcountdownday = dueDay(startDay,endDay);
                             fleaOutBar.setMax(fleaoutcountdownday);
-                            fleaOutBar.setProgress(fleaoutcountdownday-countdowndate(fleaoutday));
-                            if (countdowndate(fleaoutday) <= 0){
+                            fleaOutBar.setProgress(fleaoutcountdownday-countdowndate(endDay));
+                            if (countdowndate(endDay) <= 0){
                                 notification();
                                 Drawable progressDrawable =  fleaOutBar.getProgressDrawable().mutate();
                                 progressDrawable.setColorFilter(Color.RED, android.graphics.PorterDuff.Mode.SRC_IN);
                                 fleaOutBar.setProgressDrawable(progressDrawable);
                             }
-                            if(countdowndate(fleaoutday)<=fleaoutcountdownday*0.5 && countdowndate(fleaoutday)>=0){
+                            if(countdowndate(endDay)<=fleaoutcountdownday*0.5 && countdowndate(endDay)>=0){
                                 Drawable progressDrawable =  fleaOutBar.getProgressDrawable().mutate();
                                 progressDrawable.setColorFilter(0xFFFF6600, android.graphics.PorterDuff.Mode.SRC_IN);
                                 fleaOutBar.setProgressDrawable(progressDrawable);
@@ -466,18 +468,18 @@ public class homeFragment extends Fragment {
                             e.printStackTrace();
                         }
                     }
-                    if(!injectionday.equals("null")){
+                    if(countdownEvent.equals(pet_query+"注射")){
                         try {
-                            int injectioncountdownday = Integer.valueOf(Injectioncountdownday.append(doc.get("Injectioncountdownday")).toString());
+                            int injectioncountdownday = dueDay(startDay,endDay);
                             injectionBar.setMax(injectioncountdownday);
-                            injectionBar.setProgress(injectioncountdownday-countdowndate(injectionday));
-                            if (countdowndate(injectionday) <= 0){
+                            injectionBar.setProgress(injectioncountdownday-countdowndate(endDay));
+                            if (countdowndate(endDay) <= 0){
                                 notification();
                                 Drawable progressDrawable =  injectionBar.getProgressDrawable().mutate();
                                 progressDrawable.setColorFilter(Color.RED, android.graphics.PorterDuff.Mode.SRC_IN);
                                 injectionBar.setProgressDrawable(progressDrawable);
                             }
-                            if(countdowndate(injectionday)<=injectioncountdownday*0.5 && countdowndate(injectionday)>= 0){
+                            if(countdowndate(endDay)<=injectioncountdownday*0.5 && countdowndate(endDay)>= 0){
                                 Drawable progressDrawable =  injectionBar.getProgressDrawable().mutate();
                                 progressDrawable.setColorFilter(0xFFFF6600, android.graphics.PorterDuff.Mode.SRC_IN);
                                 injectionBar.setProgressDrawable(progressDrawable);
@@ -486,18 +488,18 @@ public class homeFragment extends Fragment {
                             e.printStackTrace();
                         }
                     }
-                    if(!teethday.equals("null")){
+                    if(countdownEvent.equals(pet_query+"看牙醫")){
                         try {
-                            int teethcountdownday = Integer.valueOf(Teethcountdownday.append(doc.get("Teethcountdownday")).toString());
+                            int teethcountdownday = dueDay(startDay,endDay);
                             teethBar.setMax(teethcountdownday);
-                            teethBar.setProgress(teethcountdownday-countdowndate(teethday));
-                            if (countdowndate(teethday) <= 0){
+                            teethBar.setProgress(teethcountdownday-countdowndate(endDay));
+                            if (countdowndate(endDay) <= 0){
                                 notification();
                                 Drawable progressDrawable = teethBar.getProgressDrawable().mutate();
                                 progressDrawable.setColorFilter(Color.RED, android.graphics.PorterDuff.Mode.SRC_IN);
                                 teethBar.setProgressDrawable(progressDrawable);
                             }
-                            if(countdowndate(teethday)<=teethcountdownday*0.5 && countdowndate(teethday)>= 0){
+                            if(countdowndate(endDay)<=teethcountdownday*0.5 && countdowndate(endDay)>= 0){
                                 Drawable progressDrawable =  teethBar.getProgressDrawable().mutate();
                                 progressDrawable.setColorFilter(0xFFFF6600, android.graphics.PorterDuff.Mode.SRC_IN);
                                 teethBar.setProgressDrawable(progressDrawable);
@@ -506,18 +508,18 @@ public class homeFragment extends Fragment {
                             e.printStackTrace();
                         }
                     }
-                    if(!bloodday.equals("null")){
+                    if(countdownEvent.equals(pet_query+"經期")){
                         try {
-                            int bloodcountdownday = Integer.valueOf(Bloodcountdownday.append(doc.get("Bloodcountdownday")).toString());
+                            int bloodcountdownday = dueDay(startDay,endDay);
                             bloodBar.setMax(bloodcountdownday);
-                            bloodBar.setProgress(bloodcountdownday-countdowndate(bloodday));
-                            if (countdowndate(bloodday) <= 0){
+                            bloodBar.setProgress(bloodcountdownday-countdowndate(endDay));
+                            if (countdowndate(endDay) <= 0){
                                 notification();
                                 Drawable progressDrawable = bloodBar.getProgressDrawable().mutate();
                                 progressDrawable.setColorFilter(Color.RED, android.graphics.PorterDuff.Mode.SRC_IN);
                                 bloodBar.setProgressDrawable(progressDrawable);
                             }
-                            if(countdowndate(bloodday)<=bloodcountdownday*0.5 && countdowndate(bloodday)>= 0){
+                            if(countdowndate(endDay)<=bloodcountdownday*0.5 && countdowndate(endDay)>= 0){
                                 Drawable progressDrawable =  bloodBar.getProgressDrawable().mutate();
                                 progressDrawable.setColorFilter(0xFFFF6600, android.graphics.PorterDuff.Mode.SRC_IN);
                                 bloodBar.setProgressDrawable(progressDrawable);
