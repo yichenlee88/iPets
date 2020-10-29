@@ -10,7 +10,7 @@ import PetProfile from "@/components/PetProfile";
 import Calendar from "@/components/Calendar";
 import ManageArticle from "@/components/ManageArticle";
 import ManageAdoption from "@/components/ManageAdoption";
-import ManageUser from "@/components/ManageUser";
+import manageContact from "@/components/manageContact";
 import manage from "@/components/Manage";
 import { db } from "../db";
 import DogScience from "@/components/DogScience";
@@ -137,8 +137,8 @@ let router = new Router({
           component: ManageArticle
         },
         {
-          path: "manageUser",
-          component: ManageUser
+          path: "manageContact",
+          component: manageContact
         },
         {
           path: "manageAdoption",
