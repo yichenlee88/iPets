@@ -5,7 +5,9 @@
         <v-col>
           <v-sheet height="64">
             <v-toolbar flat color="white">
-              <v-btn color="primary" dark @click="dialog = true">New Event</v-btn>
+              <v-btn color="primary" dark @click="dialog = true"
+                >New Event</v-btn
+              >
               <v-btn outlined class="mr-4" @click="setToday">Today</v-btn>
               <v-btn fab text small @click="prev">
                 <v-icon small>mdi-chevron-left</v-icon>
@@ -44,11 +46,32 @@
             <v-card>
               <v-container>
                 <v-form @submit.prevent="addEvent">
-                  <v-text-field v-model="name" type="text" label="event name (required)"></v-text-field>
-                  <v-text-field v-model="details" type="text" label="detail"></v-text-field>
-                  <v-text-field v-model="start" type="date" label="start (required)"></v-text-field>
-                  <v-text-field v-model="end" type="date" label="end (required)"></v-text-field>choose event's color
-                  <v-select v-model="color" :v-for="color in colors" :items="colors"></v-select>
+                  <v-text-field
+                    v-model="name"
+                    type="text"
+                    label="event name (required)"
+                  ></v-text-field>
+                  <v-text-field
+                    v-model="details"
+                    type="text"
+                    label="detail"
+                  ></v-text-field>
+                  <v-text-field
+                    v-model="start"
+                    type="date"
+                    label="start (required)"
+                  ></v-text-field>
+                  <v-text-field
+                    v-model="end"
+                    type="date"
+                    label="end (required)"
+                  ></v-text-field
+                  >choose event's color
+                  <v-select
+                    v-model="color"
+                    :v-for="color in colors"
+                    :items="colors"
+                  ></v-select>
                   <v-radio-group v-model="frequency">
                     <v-radio label="不重複"></v-radio>
                     <v-radio label="每日"></v-radio>
@@ -61,7 +84,8 @@
                     color="primary"
                     class="mr-4"
                     @click.stop="dialog = false"
-                  >create event</v-btn>
+                    >create event</v-btn
+                  >
                 </v-form>
               </v-container>
             </v-card>
@@ -72,11 +96,32 @@
               <v-container>
                 <v-form @submit.prevent="addEvent">
                   <h4 style="text-align: center">新增事件</h4>
-                  <v-text-field v-model="name" type="text" label="event name (required)"></v-text-field>
-                  <v-text-field v-model="details" type="text" label="detail"></v-text-field>
-                  <v-text-field v-model="start" type="date" label="start (required)"></v-text-field>
-                  <v-text-field v-model="end" type="date" label="end (required)"></v-text-field>choose event's color
-                  <v-select v-model="color" :v-for="color in colors" :items="colors"></v-select>
+                  <v-text-field
+                    v-model="name"
+                    type="text"
+                    label="event name (required)"
+                  ></v-text-field>
+                  <v-text-field
+                    v-model="details"
+                    type="text"
+                    label="detail"
+                  ></v-text-field>
+                  <v-text-field
+                    v-model="start"
+                    type="date"
+                    label="start (required)"
+                  ></v-text-field>
+                  <v-text-field
+                    v-model="end"
+                    type="date"
+                    label="end (required)"
+                  ></v-text-field
+                  >choose event's color
+                  <v-select
+                    v-model="color"
+                    :v-for="color in colors"
+                    :items="colors"
+                  ></v-select>
                   <v-radio-group v-model="frequency">
                     <v-radio label="不重複"></v-radio>
                     <v-radio label="每日"></v-radio>
@@ -89,7 +134,8 @@
                     color="primary"
                     class="mr-4"
                     @click.stop="dialog = false"
-                  >create event</v-btn>
+                    >create event</v-btn
+                  >
                 </v-form>
               </v-container>
             </v-card>
@@ -122,12 +168,16 @@
                   <v-btn @click="deleteEvent(selectedEvent.id)" icon>
                     <v-icon>mdi-delete</v-icon>
                   </v-btn>
-                  <v-toolbar-title v-html="selectedEvent.name"></v-toolbar-title>
+                  <v-toolbar-title
+                    v-html="selectedEvent.name"
+                  ></v-toolbar-title>
                   <div class="flex-grow-1"></div>
                 </v-toolbar>
 
                 <v-card-text>
-                  <form v-if="currentlyEditing !== selectedEvent.id">{{ selectedEvent.details }}</form>
+                  <form v-if="currentlyEditing !== selectedEvent.id">
+                    {{ selectedEvent.details }}
+                  </form>
                   <form v-else>
                     <p>title</p>
                     <textarea-autosize
@@ -143,7 +193,11 @@
                       :min-height="50"
                       placeholder="add note"
                     ></textarea-autosize>
-                    <v-select v-model="color" :v-for="color in colors" :items="colors"></v-select>
+                    <v-select
+                      v-model="color"
+                      :v-for="color in colors"
+                      :items="colors"
+                    ></v-select>
                     <v-radio-group v-model="frequency">
                       <v-radio label="不重複"></v-radio>
                       <v-radio label="每日"></v-radio>
@@ -155,18 +209,22 @@
                 </v-card-text>
 
                 <v-card-actions>
-                  <v-btn text color="secondary" @click="selectedOpen = false">close</v-btn>
+                  <v-btn text color="secondary" @click="selectedOpen = false"
+                    >close</v-btn
+                  >
                   <v-btn
                     v-if="currentlyEditing !== selectedEvent.id"
                     text
                     @click.prevent="editEvent(selectedEvent)"
-                  >edit</v-btn>
+                    >edit</v-btn
+                  >
                   <v-btn
                     text
                     v-else
                     type="submit"
                     @click.prevent="updateEvent(selectedEvent.id)"
-                  >Save</v-btn>
+                    >Save</v-btn
+                  >
                 </v-card-actions>
               </v-card>
             </v-menu>
@@ -185,8 +243,9 @@ const fStore = db.firestore();
 export default {
   data() {
     return {
-      today: new Date().toISOString().substr(0, 10),
-      focus: new Date().toISOString().substr(0, 10),
+      today: new Date(),
+      start: new Date(),
+      focus: new Date(),
       type: "month",
       typeToLabel: {
         month: "Month",
@@ -206,8 +265,7 @@ export default {
       frequency: 0,
       name: null,
       details: null,
-      start: null,
-      end: null,
+      end: new Date(),
       color: "red", // default event color
       currentlyEditing: null,
       selectedEvent: {},
@@ -227,8 +285,8 @@ export default {
       if (!start || !end) {
         return "";
       }
-      const startMonth = this.monthFormatter(start);
-      const endMonth = this.monthFormatter(end);
+      const startMonth = this.start.getMonth;
+      const endMonth = this.end.getMonth;
       const suffixMonth = startMonth === endMonth ? "" : endMonth;
       const startYear = start.year;
       const endYear = end.year;
@@ -245,16 +303,17 @@ export default {
           return `${startMonth} ${startDay} ${startYear}`;
       }
       return "";
-    },
-    monthFormatter() {
-      return this.$refs.calendar.getFormatter({
-        timeZone: "UTC",
-        month: "long"
-      });
     }
+    // monthFormatter() {
+    //   return this.$refs.calendar.getFormatter({
+    //     timeZone: "UTC",
+    //     month: "long"
+    //   });
+    // }
   },
   methods: {
-    add: function() {
+    add: function(newdate) {
+      console.log(".");
       fStore
         .collection("pets")
         .doc("3heOY1mUC6wCbo2jdE9M")
@@ -263,8 +322,8 @@ export default {
           name: this.name,
           details: this.details,
           frequency: this.frequency,
-          start: this.st,
-          end: this.en,
+          start: newdate,
+          end: newdate,
           color: this.color
         });
       this.getEvents();
@@ -308,102 +367,67 @@ export default {
     async addEvent() {
       if (this.name && this.start && this.end) {
         if (this.frequency === 1) {
-          for (let i = 1; i < 5; i++) {
-            //   if (
-            //     parseInt(this.start.substr(5, 2)) ===
-            //       (1 || 3 || 5 || 7 || 8 || 10 || 12) &&
-            //     parseInt(this.start.substr(8, 2)) + i > 31
-            //   ) {
-            //     this.st =
-            //       this.start.substr(0, 5) +
-            //       parseInt(this.start.substr(5, 2) + 1).toString() +
-            //       "-" +
-            //       (parseInt(this.start.substr(8, 2)) + i - 31).toString();
-            //     this.en =
-            //       this.end.substr(0, 5) +
-            //       parseInt(this.end.substr(5, 2) + 1).toString() +
-            //       "-" +
-            //       (parseInt(this.end.substr(8, 2)) + i - 31).toString();
-            //   } else if (
-            //     parseInt(this.start.substr(5, 2)) === (2 || 4 || 6 || 9 || 11) &&
-            //     parseInt(this.start.substr(8, 2)) + i > 30
-            //   ) {
-            //     this.st =
-            //       this.start.substr(0, 5) +
-            //       parseInt(this.start.substr(5, 2) + 1).toString() +
-            //       "-" +
-            //       (parseInt(this.start.substr(8, 2)) + i - 30).toString();
-            //     this.en =
-            //       this.end.substr(0, 5) +
-            //       parseInt(this.end.substr(5, 2) + 1).toString() +
-            //       "-" +
-            //       (parseInt(this.end.substr(8, 2)) + i - 30).toString();
-            //   } else {
-            this.st =
-              this.start.substr(0, 8) +
-              (parseInt(this.start.substr(8, 2)) + i).toString();
-            this.en =
-              this.end.substr(0, 8) +
-              (parseInt(this.end.substr(8, 2)) + i).toString();
-            // }
-            this.add();
-          }
-        } else if (this.frequency === 2) {
-          for (let i = 1; i < 4; i++) {
-            this.st =
-              this.start.substr(0, 8) +
-              (parseInt(this.start.substr(8, 2)) + i * 7).toString();
-            this.en =
-              this.end.substr(0, 8) +
-              (parseInt(this.end.substr(8, 2)) + i * 7).toString();
-            this.add();
-          }
-        } else if (this.frequency === 3) {
-          for (let i = 1; i < 4; i++) {
-            this.st =
-              this.start.substr(0, 5) +
-              (parseInt(this.start.substr(5, 2)) + i).toString() +
-              this.start.substr(7, 3);
-            this.en =
-              this.end.substr(0, 5) +
-              (parseInt(this.end.substr(5, 2)) + i).toString() +
-              this.end.substr(7, 3);
-            this.add();
-          }
-        } else if (this.frequency === 4) {
-          for (let i = 1; i < 4; i++) {
-            this.st =
-              (parseInt(this.start.substr(0, 4)) + i).toString() +
-              this.start.substr(4, 6);
-            this.en =
-              (parseInt(this.end.substr(0, 4)) + i).toString() +
-              this.end.substr(4, 6);
-            this.add();
+          this.start = new Date(this.start);
+          for (let i = 0; i < 3; i++) {
+            var newdate = new Date(this.start);
+            newdate.setDate(this.start.getDate() + i);
+            this.add(newdate.toISOString().slice(0, 10));
           }
         }
-        await fStore
-          .collection("pets")
-          .doc("3heOY1mUC6wCbo2jdE9M")
-          .collection("calEvent")
-          .add({
-            name: this.name,
-            details: this.details,
-            frequency: this.frequency,
-            start: this.start,
-            end: this.end,
-            color: this.color
-          });
-        this.getEvents();
-        this.name = "";
-        this.details = "";
-        this.frequency = "";
-        this.start = "";
-        this.end = "";
-        this.color = "";
-      } else {
-        alert("You must enter the event name, start, and end time");
+      } else if (this.frequency === 2) {
+        for (let i = 1; i < 4; i++) {
+          this.st =
+            this.start.substr(0, 8) +
+            (parseInt(this.start.substr(8, 2)) + i * 7).toString();
+          this.en =
+            this.end.substr(0, 8) +
+            (parseInt(this.end.substr(8, 2)) + i * 7).toString();
+          this.add();
+        }
+      } else if (this.frequency === 3) {
+        for (let i = 1; i < 4; i++) {
+          this.st =
+            this.start.substr(0, 5) +
+            (parseInt(this.start.substr(5, 2)) + i).toString() +
+            this.start.substr(7, 3);
+          this.en =
+            this.end.substr(0, 5) +
+            (parseInt(this.end.substr(5, 2)) + i).toString() +
+            this.end.substr(7, 3);
+          this.add();
+        }
+      } else if (this.frequency === 4) {
+        for (let i = 1; i < 4; i++) {
+          this.st =
+            (parseInt(this.start.substr(0, 4)) + i).toString() +
+            this.start.substr(4, 6);
+          this.en =
+            (parseInt(this.end.substr(0, 4)) + i).toString() +
+            this.end.substr(4, 6);
+          this.add();
+        }
       }
     },
+    //   await fStore
+    //     .collection("pets")
+    //     .doc("3heOY1mUC6wCbo2jdE9M")
+    //     .collection("calEvent")
+    //     .add({
+    //       name: this.name,
+    //       details: this.details,
+    //       frequency: this.frequency,
+    //       start: this.start,
+    //       end: this.end,
+    //       color: this.color
+    //     });
+    //   this.getEvents();
+    //   this.name = "";
+    //   this.details = "";
+    //   this.frequency = "";
+    //   this.start = "";
+    //   this.end = "";
+    //   this.color = "";
+    // },
     editEvent(ev) {
       this.currentlyEditing = ev.id;
       this.name = ev.name;
