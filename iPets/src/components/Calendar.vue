@@ -368,43 +368,40 @@ export default {
       if (this.name && this.start && this.end) {
         if (this.frequency === 1) {
           this.start = new Date(this.start);
-          for (let i = 0; i < 3; i++) {
-            var newdate = new Date(this.start);
+          for (let i = 0; i < 5; i++) {
+            let newdate = new Date(this.start);
             newdate.setDate(this.start.getDate() + i);
             this.add(newdate.toISOString().slice(0, 10));
           }
-        }
-      } else if (this.frequency === 2) {
-        for (let i = 1; i < 4; i++) {
-          this.st =
-            this.start.substr(0, 8) +
-            (parseInt(this.start.substr(8, 2)) + i * 7).toString();
-          this.en =
-            this.end.substr(0, 8) +
-            (parseInt(this.end.substr(8, 2)) + i * 7).toString();
-          this.add();
-        }
-      } else if (this.frequency === 3) {
-        for (let i = 1; i < 4; i++) {
-          this.st =
-            this.start.substr(0, 5) +
-            (parseInt(this.start.substr(5, 2)) + i).toString() +
-            this.start.substr(7, 3);
-          this.en =
-            this.end.substr(0, 5) +
-            (parseInt(this.end.substr(5, 2)) + i).toString() +
-            this.end.substr(7, 3);
-          this.add();
-        }
-      } else if (this.frequency === 4) {
-        for (let i = 1; i < 4; i++) {
-          this.st =
-            (parseInt(this.start.substr(0, 4)) + i).toString() +
-            this.start.substr(4, 6);
-          this.en =
-            (parseInt(this.end.substr(0, 4)) + i).toString() +
-            this.end.substr(4, 6);
-          this.add();
+        } else if (this.frequency === 2) {
+          this.start = new Date(this.start);
+          for (let i = 0; i < 5; i++) {
+            let newdate = new Date(this.start);
+            newdate.setDate(this.start.getDate() + i * 7);
+            this.add(newdate.toISOString().slice(0, 10));
+          }
+        } else if (this.frequency === 3) {
+          for (let i = 1; i < 4; i++) {
+            this.st =
+              this.start.substr(0, 5) +
+              (parseInt(this.start.substr(5, 2)) + i).toString() +
+              this.start.substr(7, 3);
+            this.en =
+              this.end.substr(0, 5) +
+              (parseInt(this.end.substr(5, 2)) + i).toString() +
+              this.end.substr(7, 3);
+            this.add();
+          }
+        } else if (this.frequency === 4) {
+          for (let i = 1; i < 4; i++) {
+            this.st =
+              (parseInt(this.start.substr(0, 4)) + i).toString() +
+              this.start.substr(4, 6);
+            this.en =
+              (parseInt(this.end.substr(0, 4)) + i).toString() +
+              this.end.substr(4, 6);
+            this.add();
+          }
         }
       }
     },
