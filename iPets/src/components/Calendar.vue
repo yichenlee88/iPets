@@ -83,7 +83,10 @@
                     type="submit"
                     color="primary"
                     class="mr-4"
-                    @click.stop="dialog = false"
+                    @click.stop="
+                      dialog = false;
+                      closeDialog();
+                    "
                     >建立事件</v-btn
                   >
                 </v-form>
@@ -133,7 +136,10 @@
                     type="submit"
                     color="primary"
                     class="mr-4"
-                    @click.stop="dialog = false"
+                    @click.stop="
+                      dialog = false;
+                      closeDialog();
+                    "
                     >建立事件</v-btn
                   >
                 </v-form>
@@ -304,7 +310,6 @@ export default {
   },
   methods: {
     add: function(newdate) {
-      console.log(".");
       fStore
         .collection("pets")
         .doc("3heOY1mUC6wCbo2jdE9M")
@@ -338,6 +343,9 @@ export default {
       this.focus = date;
       this.start = date;
       this.end = date;
+    },
+    closeDialog() {
+      this.dialogDate = false;
     },
     viewDay({ date }) {
       this.focus = date;
@@ -385,8 +393,13 @@ export default {
             newdate.setFullYear(this.start.getFullYear() + i);
             this.add(newdate.toISOString().slice(0, 10));
           }
+        } else if (this.frequency === 0) {
+          let newdate = new Date(this.start);
+          this.add(newdate.toISOString().slice(0, 10));
         }
       }
+      this.name = "";
+      this.details = "";
     },
     editEvent(ev) {
       this.currentlyEditing = ev.id;
@@ -459,11 +472,6 @@ export default {
       this.start = start;
       this.end = end;
     }
-    // nth(d) {
-    //   return d > 3 && d < 21
-    //     ? "th"
-    //     : ["th", "st", "nd", "rd", "th", "th", "th", "th", "th", "th"][d % 10];
-    // }
   }
 };
 </script>
