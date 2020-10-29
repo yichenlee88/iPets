@@ -18,12 +18,17 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.Calendar;
@@ -33,6 +38,7 @@ import java.util.Map;
 public class EditMasterinfoActivity extends AppCompatActivity{
     LinearLayout btn_editAcct;
     Button btn_editPWD;
+    String email;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,8 +59,9 @@ public class EditMasterinfoActivity extends AppCompatActivity{
         btn_editAcct.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intentAcct = new Intent(EditMasterinfoActivity.this,EditAccountActivity.class);
-                startActivity(intentAcct);
+                Intent intent = new Intent(EditMasterinfoActivity.this,EditAccountActivity.class);
+                intent.putExtra("email",email);
+                startActivity(intent);
             }
         });
         btn_editPWD = (Button) findViewById(R.id.btnPWD);
@@ -77,7 +84,7 @@ public class EditMasterinfoActivity extends AppCompatActivity{
             }
         });
         seteditText();
-
+        getMasterInfo();
     }
     public void setmasterinfo(){
         FirebaseAuth auth = FirebaseAuth.getInstance();
@@ -103,7 +110,7 @@ public class EditMasterinfoActivity extends AppCompatActivity{
         userInfo.put("Myname",masterName);
         userInfo.put("Username",userName);
         userInfo.put("Mybirth", masterBirth);
-        userInfo.put("Myaddress", phoneNum);
+        userInfo.put("Myphone", phoneNum);
         userInfo.put("Myaddress", masterAddress);
         userInfo.put("Mygender", sex);
         db.collection("userInformation").document(userUID).update(userInfo);
@@ -146,6 +153,58 @@ public class EditMasterinfoActivity extends AppCompatActivity{
                 }
             }
         });
+    }
+    public void getMasterInfo(){
+        EditText edmasterName = findViewById(R.id.masterName);
+        final EditText eduserName = findViewById(R.id.userName);
+        final EditText edmasterBirth = findViewById(R.id.masterBirth);
+        final EditText edphoneNum = findViewById(R.id.phoneNum);
+        final EditText edmasterAddress = findViewById(R.id.masterAddress);
+        Spinner sexSpinner = findViewById(R.id.sexSpinner);
+        FirebaseAuth auth = FirebaseAuth.getInstance();
+        FirebaseUser currentUser = auth.getCurrentUser();
+        String userUID = currentUser.getUid();
+        FirebaseFirestore db;
+        db = FirebaseFirestore.getInstance();
+        db.collection("userInformation").document(userUID)
+                .get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if (task.isSuccessful()) {
+                    DocumentSnapshot doc = task.getResult();
+                    StringBuilder fields = new StringBuilder("");
+                    StringBuilder fields2 = new StringBuilder("");
+                    StringBuilder fields3 = new StringBuilder("");
+                    StringBuilder fields4 = new StringBuilder("");
+                    StringBuilder fields5 = new StringBuilder("");
+                    StringBuilder fields6 = new StringBuilder("");
+                    StringBuilder fields7 = new StringBuilder("");
+                    fields.append(doc.get("Myname")).toString();
+                    fields2.append(doc.get("Username")).toString();
+                    fields3.append(doc.get("Mybirth")).toString();
+                    fields4.append(doc.get("Myphone")).toString();
+                    fields5.append(doc.get("Myaddress")).toString();
+                    String gender = fields6.append(doc.get("Mygender")).toString();
+                    email = fields7.append(doc.get("Email")).toString();
+                    edmasterName.setText(fields);
+                    eduserName.setText(fields2);
+                    edmasterBirth.setText(fields3);
+                    edphoneNum.setText(fields4);
+                    edmasterAddress.setText(fields5);
+                    if(gender.equals("女")) {
+                        sexSpinner.setSelection(1);
+                    }
+                    if(gender.equals("不願透露")) {
+                        sexSpinner.setSelection(2);
+                    }
+                }
+            }
+        })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                    }
+                });
     }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

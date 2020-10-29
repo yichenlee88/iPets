@@ -131,7 +131,6 @@ public class homeFragment extends Fragment {
                                     pet_query = query;
                                     if ( position == petname.size()-1){
                                         Intent intent=new Intent();
-                                        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
                                         intent.setClass(getActivity(),petsInfoActivity.class);
                                         startActivity(intent);
                                     }else{

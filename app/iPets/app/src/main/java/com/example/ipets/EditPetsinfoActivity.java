@@ -136,7 +136,6 @@ public class EditPetsinfoActivity extends AppCompatActivity implements AdapterVi
     private void getPetInfo() {
         EditText edmypetName = findViewById(R.id.mypetName);
         final EditText edpetsbirth = findViewById(R.id.mypetBirth);
-        String[] petSex =getResources().getStringArray(R.array.Spinner_petSex);
         Spinner petSexSpinner = findViewById(R.id.petSexSpinner);
         Intent intent = this.getIntent();
         //取得傳遞過來的資料

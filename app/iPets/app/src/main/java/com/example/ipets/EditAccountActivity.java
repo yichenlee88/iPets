@@ -25,7 +25,7 @@ public class EditAccountActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_account);
-
+        getAccount();
         Toolbar toolbar4 = findViewById(R.id.toolbar4);
         setSupportActionBar(toolbar4);
         getSupportActionBar().setTitle("變更帳號 (Email)");
@@ -75,5 +75,12 @@ public class EditAccountActivity extends AppCompatActivity {
         });
         finishsignup.setCancelable(false);
         finishsignup.show();
+    }
+    public void getAccount(){
+        Intent intent = this.getIntent();
+        //取得傳遞過來的資料
+        String email = intent.getStringExtra("email");
+        TextInputEditText editAcct = findViewById(R.id.editAcct);
+        editAcct.setText(email);
     }
 }
