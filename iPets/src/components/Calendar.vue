@@ -381,26 +381,18 @@ export default {
             this.add(newdate.toISOString().slice(0, 10));
           }
         } else if (this.frequency === 3) {
-          for (let i = 1; i < 4; i++) {
-            this.st =
-              this.start.substr(0, 5) +
-              (parseInt(this.start.substr(5, 2)) + i).toString() +
-              this.start.substr(7, 3);
-            this.en =
-              this.end.substr(0, 5) +
-              (parseInt(this.end.substr(5, 2)) + i).toString() +
-              this.end.substr(7, 3);
-            this.add();
+          this.start = new Date(this.start);
+          for (let i = 0; i < 5; i++) {
+            let newdate = new Date(this.start);
+            newdate.setMonth(this.start.getMonth() + i);
+            this.add(newdate.toISOString().slice(0, 10));
           }
         } else if (this.frequency === 4) {
-          for (let i = 1; i < 4; i++) {
-            this.st =
-              (parseInt(this.start.substr(0, 4)) + i).toString() +
-              this.start.substr(4, 6);
-            this.en =
-              (parseInt(this.end.substr(0, 4)) + i).toString() +
-              this.end.substr(4, 6);
-            this.add();
+          this.start = new Date(this.start);
+          for (let i = 0; i < 2; i++) {
+            let newdate = new Date(this.start);
+            newdate.setFullYear(this.start.getFullYear() + i);
+            this.add(newdate.toISOString().slice(0, 10));
           }
         }
       }
