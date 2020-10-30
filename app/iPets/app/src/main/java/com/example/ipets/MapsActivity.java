@@ -139,6 +139,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         }
     }
 
+    // 初始化，給一些對象賦值
     private void init() {
         Log.d("init", "init : Initializing");
 
