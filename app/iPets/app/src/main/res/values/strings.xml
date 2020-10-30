@@ -159,6 +159,10 @@
     <string name="save">儲存</string>
     <string name="nonote">目前沒有事件喔!</string>
     <string name="menu_photoGallery">gallery</string>
+    <string name="addNote_hint">輸入想要新增的事件</string>
+    <string name="addDetail_hint">輸入詳細內容</string>
+    <string name="startDate_hint">起始日</string>
+    <string name="endDate_hint">到期日</string>
     <array name="material_calendar_months_array">
         <item>一月</item>
         <item>二月</item>
@@ -173,4 +177,11 @@
         <item>十一月</item>
         <item>十二月</item>
     </array>
+    <string-array name="Spinner_repeat">
+        <item>不重複</item>
+        <item>每日</item>
+        <item>每週</item>
+        <item>每月</item>
+        <item>每年</item>
+    </string-array>
 </resources>

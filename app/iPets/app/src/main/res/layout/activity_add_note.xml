@@ -1,47 +1,160 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:scrollbars="vertical"
     tools:context=".AddNoteActivity">
-    <com.applandeo.materialcalendarview.CalendarView
-        android:id="@+id/datePicker"
-        android:layout_width="0dp"
-        android:layout_height="370dp"
-        app:datePicker="true"
-        app:eventsEnabled="true"
-        app:type="one_day_picker"
-        app:headerColor="#0071BC"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:selectionColor="#0071BC"
-        app:todayLabelColor="@color/colorAccent" />
-    <Button
-        android:id="@+id/addNoteButton"
-        android:layout_width="0dp"
+
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/save"
-        android:backgroundTint="#0071BC"
-        android:gravity="center_horizontal|center_vertical"
-        android:textColor="#FFFFFF"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent" />
+        android:orientation="vertical">
 
+        <com.applandeo.materialcalendarview.CalendarView
+            android:id="@+id/datePicker"
+            android:layout_width="match_parent"
+            android:layout_height="370dp"
+            app:datePicker="true"
+            app:eventsEnabled="true"
+            app:headerColor="#0071BC"
+            app:selectionColor="#0071BC"
+            app:todayLabelColor="@color/colorAccent"
+            app:type="one_day_picker" />
 
-    <EditText
-        android:id="@+id/noteEditText"
-        android:layout_width="0dp"
-        android:layout_height="72dp"
-        android:background="@null"
-        android:gravity="top"
-        android:hint="輸入想要新增的事件"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/addNoteButton"
-        app:layout_constraintTop_toBottomOf="@id/datePicker" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="445dp"
+            android:background="@drawable/layout_bgstyle"
+            android:layout_margin="20dp"
+            android:orientation="vertical">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:paddingHorizontal="17dp">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/noteEditText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="#0071BC"
+                    android:hint="@string/addNote_hint"
+                    android:textSize="20sp" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:paddingHorizontal="17dp">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/detailEdirText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="#0071BC"
+                    android:hint="@string/addNote_hint"
+                    android:textSize="20sp" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <EditText
+                android:id="@+id/startDate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="17dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginEnd="17dp"
+                android:autofillHints=""
+                android:backgroundTint="#0071BC"
+                android:ems="10"
+                android:hint="@string/startDate_hint"
+                android:inputType="date"
+                android:textSize="20sp" />
+
+            <EditText
+                android:id="@+id/endDate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="17dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginEnd="17dp"
+                android:autofillHints=""
+                android:backgroundTint="#0071BC"
+                android:ems="10"
+                android:hint="@string/endDate_hint"
+                android:inputType="date"
+                android:textSize="20sp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:orientation="horizontal">
+
+                <CheckBox
+                    android:id="@+id/redCircle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="33dp"
+                    android:buttonTint="#0071BC"
+                    android:drawableEnd="@drawable/ic_red" />
+
+                <CheckBox
+                    android:id="@+id/orangeCircle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:buttonTint="#0071BC"
+                    android:drawableEnd="@drawable/ic_orange" />
+
+                <CheckBox
+                    android:id="@+id/yellowCircle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:buttonTint="#0071BC"
+                    android:drawableEnd="@drawable/ic_yellow" />
+
+                <CheckBox
+                    android:id="@+id/Circle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginEnd="17dp"
+                    android:buttonTint="#0071BC"
+                    android:drawableEnd="@drawable/ic_green" />
+
+            </LinearLayout>
+
+            <Spinner
+                android:id="@+id/repeatSpinner"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="17dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginEnd="17dp"
+                android:background="@drawable/spinner_style"
+                android:entries="@array/Spinner_repeat"
+                android:spinnerMode="dialog" />
+
+            <Button
+                android:id="@+id/addNoteButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:layout_marginStart="17dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="17dp"
+                android:backgroundTint="#0071BC"
+                android:gravity="center_horizontal|center_vertical"
+                android:text="@string/save"
+                android:textColor="#FFFFFF"
+                android:textSize="20sp" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+</ScrollView>

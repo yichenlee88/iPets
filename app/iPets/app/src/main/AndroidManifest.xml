@@ -25,26 +25,33 @@
         <activity android:name=".petsInfoActivity"></activity>
         <activity android:name=".PhotoGalleryActivity" />
         <activity android:name=".NotePreviewActivity" />
-        <activity android:name=".AddNoteActivity" />
+        <activity
+            android:name=".AddNoteActivity"
+            android:windowSoftInputMode="adjustPan" />
         <activity android:name=".CalendarActivity" />
         <activity
             android:name=".EditPetsinfoActivity"
-            android:parentActivityName=".SettingActivity" />
+            android:parentActivityName=".SettingActivity"
+            android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".EditPwdActivity"
-            android:parentActivityName=".EditMasterinfoActivity" />
+            android:parentActivityName=".EditMasterinfoActivity"
+            android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".EditAccountActivity"
-            android:parentActivityName=".EditMasterinfoActivity" />
+            android:parentActivityName=".EditMasterinfoActivity"
+            android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".EditMasterinfoActivity"
-            android:parentActivityName=".SettingActivity" />
+            android:parentActivityName=".SettingActivity"
+            android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".EditQuestionActivity"
             android:parentActivityName=".SettingActivity" />
         <activity
             android:name=".EditContactusActivity"
-            android:parentActivityName=".SettingActivity" />
+            android:parentActivityName=".SettingActivity"
+            android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".SettingActivity"
             android:parentActivityName=".HomeActivity" />
