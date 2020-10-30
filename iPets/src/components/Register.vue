@@ -185,9 +185,9 @@ export default {
               password: this.password,
               userGender: this.userGender,
               userBirth: this.userBirth.toISOString().slice(0, 10),
-              birth_year: this.userBirth.getUTCFullYear(),
-              birth_month: this.userBirth.getMonth() + 1,
-              birth_date: this.userBirth.getDate(),
+              userBirth_year: this.userBirth.getUTCFullYear(),
+              userBirth_month: this.userBirth.getMonth() + 1,
+              userBirth_date: this.userBirth.getDate(),
               address: this.address,
               phone: this.phone,
               photoURL: ""
