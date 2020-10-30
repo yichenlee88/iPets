@@ -1,8 +1,8 @@
 <template>
   <b-container>
     <!-- Start -- 新增寵物 -->
-    <p v-if="!show">123</p>
-    <p v-if="show">666</p>
+    <!-- <p v-if="!show">123</p> -->
+    <!-- <p v-if="show">666</p> -->
     <b-card id="card-create-pet" v-if="!show">
       <b-card-header header-bg-variant="dark" header-text-variant="white">
         <div>
@@ -11,40 +11,72 @@
         </div>
       </b-card-header>
       <b-card-body>
-        <b-form class="px-3" @submit="onSubmit">
-          <b-form-group
-            id="group-pet-name"
-            label="名字"
-            label-for="input-pet-name"
-          >
-            <b-form-input
-              id="input-pet-name"
-              type="text"
-              v-model="form.name"
-            ></b-form-input>
-          </b-form-group>
-          <b-form-group
-            id="group-pet-breed"
-            label="品種"
-            label-for="select-pet-breed"
-          >
+        <b-form @submit="onSubmit">
+          <!-- petImage -->
+          <v-row no-gutters justify="center" align="center">
+            <v-col>
+              <v-file-input
+                type="file"
+                @change="selectFile($image)"
+                accept="image/jpeg, image/png"
+                placeholder="選擇寵物相片"
+                name="petImage"
+                v-model="petImage"
+              ></v-file-input>
+            </v-col>
+          </v-row>
+          <!-- petName -->
+          <b-form-input
+            class="InputClass center"
+            name="petName"
+            v-model="petName"
+            placeholder="寵物名稱"
+            required
+          ></b-form-input>
+          <!-- petGender -->
+          <b-form-select
+            class="InputClass center"
+            name="petGender"
+            v-model="petGender"
+            :options="petGenderOptions"
+          ></b-form-select>
+          <!-- petBirth -->
+          <date-picker
+            class="InputClass center"
+            v-model="petBirth"
+            name="petBirth"
+            type="date"
+            placeholder="寵物生日"
+          ></date-picker>
+          <!-- breed -->
+          <b-form-group id="group-pet-breed" label-for="select-pet-breed">
             <b-form-select
+              class="InputClass center"
               id="select-pet-breed"
-              v-model="form.breed"
+              v-model="breed"
+              name="breed"
               :options="breed_options"
+              placeholder="寵物品種"
             ></b-form-select>
           </b-form-group>
-          <b-form-group
-            id="group-pet-gender"
-            label="性別"
-            label-for="select-pet-gender"
-          >
-            <b-form-select
-              id="select-pet-gender"
-              v-model="form.gender"
-              :options="gender_options"
-            ></b-form-select>
-          </b-form-group>
+          <!-- petHobby -->
+          <b-form-textarea
+            class="TextareaClass"
+            name="petHobby"
+            id="petHobby"
+            v-model="petHobby"
+            placeholder="寵物喜好"
+            maxlength
+          ></b-form-textarea>
+          <!-- petNote -->
+          <b-form-textarea
+            class="TextareaClass"
+            name="petNote"
+            id="petNote"
+            v-model="petNote"
+            placeholder="備註"
+            maxlength
+          ></b-form-textarea>
           <div class="d-flex flex-row-reverse">
             <b-button type="submit" variant="dark">建立</b-button>
           </div>
@@ -235,7 +267,7 @@
 import "bootstrap/dist/css/bootstrap.css";
 
 // Import this component
-import datePicker from "vue-bootstrap-datetimepicker";
+// import datePicker from "vue-bootstrap-datetimepicker";
 
 // Import date picker css
 import "pc-bootstrap4-datetimepicker/build/css/bootstrap-datetimepicker.css";
@@ -249,19 +281,19 @@ export default {
     return {
       modalShow: false,
       date: new Date(),
-      timerSelected: [],
-      timers: [
-        { text: "洗澡", value: "bath" },
-        { text: "修剪毛髮", value: "trimming" },
-        { text: "體內驅蟲", value: "anthelmintic" },
-        { text: "體外驅蟲", value: "repellent" },
-        { text: "疫苗接種", value: "injection" },
-        { text: "生理期", value: "menstrual " }
+      petImage: "",
+      petName: "",
+      petGender: "null",
+      petGenderOptions: [
+        { value: "null", text: "寵物性別" },
+        { value: "I prefer not to say", text: "不透漏" },
+        { value: "boy", text: "男孩" },
+        { value: "gril", text: "女孩" }
       ],
-      options: {
-        format: "DD/MM/YYYY",
-        useCurrent: false
-      },
+      petBirth: "",
+      petHobby: "",
+      petNote: "",
+      breed: "null",
       breed_options: [
         { value: null, text: "選擇品種", disabled: true },
         { value: "台灣土狗", text: "台灣土狗" },
@@ -314,28 +346,41 @@ export default {
         { value: "德國杜賓犬", text: "德國杜賓犬" },
         { value: "牛頭梗", text: "牛頭梗" },
         { value: "日本柴犬", text: "日本柴犬" }
-      ],
-      gender_options: [
-        { value: null, text: "選擇性別", disabled: true },
-        { value: true, text: "男孩" },
-        { value: false, text: "女孩" }
-      ],
-      form: {
-        name: null,
-        breed: null,
-        gender: null,
-        image:
-          "http://icons.iconarchive.com/icons/google/noto-emoji-animals-nature/1024/22214-dog-face-icon.png"
-      },
-      periodUnitOptions: [
-        { item: "day", name: "天" },
-        { item: "week", name: "週" },
-        { item: "month", name: "個月" }
       ]
+      // timerSelected: [],
+      // timers: [
+      //   { text: "洗澡", value: "bath" },
+      //   { text: "修剪毛髮", value: "trimming" },
+      //   { text: "體內驅蟲", value: "anthelmintic" },
+      //   { text: "體外驅蟲", value: "repellent" },
+      //   { text: "疫苗接種", value: "injection" },
+      //   { text: "生理期", value: "menstrual " }
+      // ],
+      // options: {
+      //   format: "DD/MM/YYYY",
+      //   useCurrent: false
+      // },
+      // gender_options: [
+      //   { value: null, text: "選擇性別", disabled: true },
+      //   { value: true, text: "男孩" },
+      //   { value: false, text: "女孩" }
+      // ],
+      // form: {
+      //   name: null,
+      //   breed: null,
+      //   gender: null,
+      //   image:
+      //     "http://icons.iconarchive.com/icons/google/noto-emoji-animals-nature/1024/22214-dog-face-icon.png"
+      // },
+      // periodUnitOptions: [
+      //   { item: "day", name: "天" },
+      //   { item: "week", name: "週" },
+      //   { item: "month", name: "個月" }
+      // ]
     };
   },
   components: {
-    datePicker
+    // datePicker
   },
   methods: {
     onSubmit(e) {
@@ -343,11 +388,17 @@ export default {
       var docRef = fStore.collection("pets").doc();
       docRef
         .set({
-          name: this.form.name,
-          breed: this.form.breed,
-          gender: this.form.gender,
-          master_uid: this.uid,
-          image: this.form.image,
+          petImage: this.petImage,
+          petName: this.petName,
+          petGender: this.petGender,
+          petBirth: this.petBirth.toISOString().slice(0, 10),
+          petBirth_year: this.petBirth.getUTCFullYear(),
+          petBirth_month: this.petBirth.getMonth() + 1,
+          petBirth_date: this.petBirth.getDate(),
+          breed: this.breed,
+          petHobby: this.petHobby,
+          petNote: this.petNote,
+          uid: this.uid,
           timestamp: new Date()
         })
         .then(() => {
@@ -437,7 +488,50 @@ export default {
   padding-top: 20px;
 }
 
+.cloud {
+  position: absolute;
+  height: 24px;
+  width: auto;
+  top: 14%;
+  right: 50px;
+  margin-top: 3px;
+  z-index: 1;
+  cursor: pointer;
+}
+
 .center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.InputClass {
+  height: 48px;
+  max-width: auto;
+  border-radius: 40px;
+  margin-bottom: 20px;
+}
+
+.TextareaClass {
+  height: 100px;
+  max-width: auto;
+  border-radius: 16px;
+  margin-bottom: 20px;
+}
+
+.mx-datepicker {
+  width: auto;
+}
+
+.mx-datepicker >>> .mx-icon-calendar,
+.mx-datepicker >>> .mx-icon-clear {
+  margin-right: 8px;
+}
+.mx-datepicker >>> .mx-input {
+  height: 48px;
+  max-width: auto;
+  border-radius: 40px;
+  margin-bottom: 20px;
   display: block;
   margin-left: auto;
   margin-right: auto;
