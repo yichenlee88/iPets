@@ -148,7 +148,7 @@ public class EditPetsinfoActivity extends AppCompatActivity implements AdapterVi
         String pet = intent.getStringExtra("date");
         FirebaseFirestore db;
         db = FirebaseFirestore.getInstance();
-        db.collection("pets").whereEqualTo("uid", userUID)
+        db.collection("pets").whereEqualTo("petName", pet)
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
