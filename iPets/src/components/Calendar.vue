@@ -5,15 +5,17 @@
         <v-col>
           <v-sheet height="64">
             <v-toolbar flat color="white">
-              <v-btn color="primary" dark @click="dialog = true">New Event</v-btn>
-              <v-btn outlined class="mr-4" @click="setToday">Today</v-btn>
+              <v-btn color="primary" dark @click="dialog = true"
+                >新增事件</v-btn
+              >
+              <v-btn outlined class="mr-4" @click="setToday">今天</v-btn>
               <v-btn fab text small @click="prev">
                 <v-icon small>mdi-chevron-left</v-icon>
               </v-btn>
               <v-btn fab text small @click="next">
                 <v-icon small>mdi-chevron-right</v-icon>
               </v-btn>
-              <v-toolbar-title>{{ title }}</v-toolbar-title>
+              <v-toolbar-title>{{ title }} </v-toolbar-title>
               <div class="flex-grow-1"></div>
               <v-menu bottom right>
                 <template v-slot:activator="{ on }">
@@ -24,16 +26,16 @@
                 </template>
                 <v-list>
                   <v-list-item @click="type = 'day'">
-                    <v-list-item-title>Day</v-list-item-title>
+                    <v-list-item-title>日</v-list-item-title>
                   </v-list-item>
                   <v-list-item @click="type = 'week'">
-                    <v-list-item-title>Week</v-list-item-title>
+                    <v-list-item-title>週</v-list-item-title>
                   </v-list-item>
                   <v-list-item @click="type = 'month'">
-                    <v-list-item-title>Month</v-list-item-title>
+                    <v-list-item-title>月</v-list-item-title>
                   </v-list-item>
                   <v-list-item @click="type = '4day'">
-                    <v-list-item-title>4 days</v-list-item-title>
+                    <v-list-item-title>四天</v-list-item-title>
                   </v-list-item>
                 </v-list>
               </v-menu>
@@ -44,11 +46,32 @@
             <v-card>
               <v-container>
                 <v-form @submit.prevent="addEvent">
-                  <v-text-field v-model="name" type="text" label="event name (required)"></v-text-field>
-                  <v-text-field v-model="details" type="text" label="detail"></v-text-field>
-                  <v-text-field v-model="start" type="date" label="start (required)"></v-text-field>
-                  <v-text-field v-model="end" type="date" label="end (required)"></v-text-field>choose event's color
-                  <v-select v-model="color" :v-for="color in colors" :items="colors"></v-select>
+                  <v-text-field
+                    v-model="name"
+                    type="text"
+                    label="事件名稱"
+                  ></v-text-field>
+                  <v-text-field
+                    v-model="details"
+                    type="text"
+                    label="描述"
+                  ></v-text-field>
+                  <v-text-field
+                    v-model="start"
+                    type="date"
+                    label="開始日期 (必須)"
+                  ></v-text-field>
+                  <v-text-field
+                    v-model="end"
+                    type="date"
+                    label="結束日期 (必須)"
+                  ></v-text-field
+                  >選擇顏色
+                  <v-select
+                    v-model="color"
+                    :v-for="color in colors"
+                    :items="colors"
+                  ></v-select>
                   <v-radio-group v-model="frequency">
                     <v-radio label="不重複"></v-radio>
                     <v-radio label="每日"></v-radio>
@@ -61,7 +84,8 @@
                     color="primary"
                     class="mr-4"
                     @click.stop="dialog = false"
-                  >create event</v-btn>
+                    >建立事件</v-btn
+                  >
                 </v-form>
               </v-container>
             </v-card>
@@ -72,11 +96,32 @@
               <v-container>
                 <v-form @submit.prevent="addEvent">
                   <h4 style="text-align: center">新增事件</h4>
-                  <v-text-field v-model="name" type="text" label="event name (required)"></v-text-field>
-                  <v-text-field v-model="details" type="text" label="detail"></v-text-field>
-                  <v-text-field v-model="start" type="date" label="start (required)"></v-text-field>
-                  <v-text-field v-model="end" type="date" label="end (required)"></v-text-field>choose event's color
-                  <v-select v-model="color" :v-for="color in colors" :items="colors"></v-select>
+                  <v-text-field
+                    v-model="name"
+                    type="text"
+                    label="事件名稱"
+                  ></v-text-field>
+                  <v-text-field
+                    v-model="details"
+                    type="text"
+                    label="描述"
+                  ></v-text-field>
+                  <v-text-field
+                    v-model="start"
+                    type="date"
+                    label="開始日期 (必須)"
+                  ></v-text-field>
+                  <v-text-field
+                    v-model="end"
+                    type="date"
+                    label="結束日期 (必須)"
+                  ></v-text-field
+                  >選擇顏色
+                  <v-select
+                    v-model="color"
+                    :v-for="color in colors"
+                    :items="colors"
+                  ></v-select>
                   <v-radio-group v-model="frequency">
                     <v-radio label="不重複"></v-radio>
                     <v-radio label="每日"></v-radio>
@@ -89,7 +134,8 @@
                     color="primary"
                     class="mr-4"
                     @click.stop="dialog = false"
-                  >create event</v-btn>
+                    >建立事件</v-btn
+                  >
                 </v-form>
               </v-container>
             </v-card>
@@ -100,6 +146,7 @@
               ref="calendar"
               v-model="focus"
               color="primary"
+              locale="ch"
               :events="events"
               :event-color="getEventColor"
               :event-margin-bottom="3"
@@ -122,51 +169,56 @@
                   <v-btn @click="deleteEvent(selectedEvent.id)" icon>
                     <v-icon>mdi-delete</v-icon>
                   </v-btn>
-                  <v-toolbar-title v-html="selectedEvent.name"></v-toolbar-title>
+                  <v-toolbar-title
+                    v-html="selectedEvent.name"
+                  ></v-toolbar-title>
                   <div class="flex-grow-1"></div>
                 </v-toolbar>
 
                 <v-card-text>
-                  <form v-if="currentlyEditing !== selectedEvent.id">{{ selectedEvent.details }}</form>
+                  <form v-if="currentlyEditing !== selectedEvent.id">
+                    {{ selectedEvent.details }}
+                  </form>
                   <form v-else>
                     <p>title</p>
                     <textarea-autosize
                       v-model="selectedEvent.name"
                       type="text"
                       style="width: 100%"
-                      placeholder="title"
+                      placeholder="標題"
                     ></textarea-autosize>
                     <textarea-autosize
                       v-model="selectedEvent.details"
                       type="text"
                       style="width: 100%"
                       :min-height="50"
-                      placeholder="add note"
+                      placeholder="描述"
                     ></textarea-autosize>
-                    <v-select v-model="color" :v-for="color in colors" :items="colors"></v-select>
-                    <v-radio-group v-model="frequency">
-                      <v-radio label="不重複"></v-radio>
-                      <v-radio label="每日"></v-radio>
-                      <v-radio label="每週"></v-radio>
-                      <v-radio label="每月"></v-radio>
-                      <v-radio label="每年"></v-radio>
-                    </v-radio-group>
+                    <v-select
+                      v-model="color"
+                      :v-for="color in colors"
+                      :items="colors"
+                    ></v-select>
                   </form>
                 </v-card-text>
 
                 <v-card-actions>
-                  <v-btn text color="secondary" @click="selectedOpen = false">close</v-btn>
+                  <v-btn text color="secondary" @click="selectedOpen = false"
+                    >關閉</v-btn
+                  >
                   <v-btn
                     v-if="currentlyEditing !== selectedEvent.id"
                     text
                     @click.prevent="editEvent(selectedEvent)"
-                  >edit</v-btn>
+                    >編輯</v-btn
+                  >
                   <v-btn
                     text
                     v-else
                     type="submit"
                     @click.prevent="updateEvent(selectedEvent.id)"
-                  >Save</v-btn>
+                    >儲存</v-btn
+                  >
                 </v-card-actions>
               </v-card>
             </v-menu>
@@ -185,14 +237,16 @@ const fStore = db.firestore();
 export default {
   data() {
     return {
-      today: new Date().toISOString().substr(0, 10),
-      focus: new Date().toISOString().substr(0, 10),
+      today: new Date().toISOString().slice(0, 10),
+      start: new Date().toISOString().slice(0, 10),
+      focus: new Date(),
+      date: new Date(),
       type: "month",
       typeToLabel: {
-        month: "Month",
-        week: "Week",
-        day: "Day",
-        "4day": "4 Days"
+        month: "月",
+        week: "週",
+        day: "日",
+        "4day": "四天"
       },
       colors: [
         { text: "red" },
@@ -206,8 +260,7 @@ export default {
       frequency: 0,
       name: null,
       details: null,
-      start: null,
-      end: null,
+      end: new Date().toISOString().slice(0, 10),
       color: "red", // default event color
       currentlyEditing: null,
       selectedEvent: {},
@@ -227,34 +280,31 @@ export default {
       if (!start || !end) {
         return "";
       }
-      const startMonth = this.monthFormatter(start);
-      const endMonth = this.monthFormatter(end);
-      const suffixMonth = startMonth === endMonth ? "" : endMonth;
+      const startMonth = start.month;
+      const endMonth = end.month;
+      const suffixMonth = startMonth === endMonth ? startMonth : endMonth;
       const startYear = start.year;
       const endYear = end.year;
-      const suffixYear = startYear === endYear ? "" : endYear;
-      const startDay = start.day + this.nth(start.day);
-      const endDay = end.day + this.nth(end.day);
+      const suffixYear = startYear === endYear ? startYear : endYear;
+      const startDay = start.day;
+      const endDay = end.day;
       switch (this.type) {
         case "month":
-          return `${startMonth} ${startYear}`;
+          return `${startYear} 年 ${startMonth} 月`;
         case "week":
+          return `${startYear} 年 ${startMonth} 月 ${startDay} 日 - ${suffixYear} 年 ${suffixMonth} 月 ${endDay} 日`;
         case "4day":
-          return `${startMonth} ${startDay} ${startYear} - ${suffixMonth} ${endDay} ${suffixYear}`;
+          return `${startYear} 年 ${startMonth} 月 ${startDay} 日 - ${suffixYear} 年 ${suffixMonth} 月 ${endDay -
+            1} 日`;
         case "day":
-          return `${startMonth} ${startDay} ${startYear}`;
+          return `${startYear} 年 ${startMonth} 月 ${startDay} 日`;
       }
       return "";
-    },
-    monthFormatter() {
-      return this.$refs.calendar.getFormatter({
-        timeZone: "UTC",
-        month: "long"
-      });
     }
   },
   methods: {
-    add: function() {
+    add: function(newdate) {
+      console.log(".");
       fStore
         .collection("pets")
         .doc("3heOY1mUC6wCbo2jdE9M")
@@ -263,8 +313,8 @@ export default {
           name: this.name,
           details: this.details,
           frequency: this.frequency,
-          start: this.st,
-          end: this.en,
+          start: newdate,
+          end: newdate,
           color: this.color
         });
       this.getEvents();
@@ -308,100 +358,34 @@ export default {
     async addEvent() {
       if (this.name && this.start && this.end) {
         if (this.frequency === 1) {
-          for (let i = 1; i < 5; i++) {
-            //   if (
-            //     parseInt(this.start.substr(5, 2)) ===
-            //       (1 || 3 || 5 || 7 || 8 || 10 || 12) &&
-            //     parseInt(this.start.substr(8, 2)) + i > 31
-            //   ) {
-            //     this.st =
-            //       this.start.substr(0, 5) +
-            //       parseInt(this.start.substr(5, 2) + 1).toString() +
-            //       "-" +
-            //       (parseInt(this.start.substr(8, 2)) + i - 31).toString();
-            //     this.en =
-            //       this.end.substr(0, 5) +
-            //       parseInt(this.end.substr(5, 2) + 1).toString() +
-            //       "-" +
-            //       (parseInt(this.end.substr(8, 2)) + i - 31).toString();
-            //   } else if (
-            //     parseInt(this.start.substr(5, 2)) === (2 || 4 || 6 || 9 || 11) &&
-            //     parseInt(this.start.substr(8, 2)) + i > 30
-            //   ) {
-            //     this.st =
-            //       this.start.substr(0, 5) +
-            //       parseInt(this.start.substr(5, 2) + 1).toString() +
-            //       "-" +
-            //       (parseInt(this.start.substr(8, 2)) + i - 30).toString();
-            //     this.en =
-            //       this.end.substr(0, 5) +
-            //       parseInt(this.end.substr(5, 2) + 1).toString() +
-            //       "-" +
-            //       (parseInt(this.end.substr(8, 2)) + i - 30).toString();
-            //   } else {
-            this.st =
-              this.start.substr(0, 8) +
-              (parseInt(this.start.substr(8, 2)) + i).toString();
-            this.en =
-              this.end.substr(0, 8) +
-              (parseInt(this.end.substr(8, 2)) + i).toString();
-            // }
-            this.add();
+          this.start = new Date(this.start);
+          for (let i = 0; i < 5; i++) {
+            let newdate = new Date(this.start);
+            newdate.setDate(this.start.getDate() + i);
+            this.add(newdate.toISOString().slice(0, 10));
           }
         } else if (this.frequency === 2) {
-          for (let i = 1; i < 4; i++) {
-            this.st =
-              this.start.substr(0, 8) +
-              (parseInt(this.start.substr(8, 2)) + i * 7).toString();
-            this.en =
-              this.end.substr(0, 8) +
-              (parseInt(this.end.substr(8, 2)) + i * 7).toString();
-            this.add();
+          this.start = new Date(this.start);
+          for (let i = 0; i < 5; i++) {
+            let newdate = new Date(this.start);
+            newdate.setDate(this.start.getDate() + i * 7);
+            this.add(newdate.toISOString().slice(0, 10));
           }
         } else if (this.frequency === 3) {
-          for (let i = 1; i < 4; i++) {
-            this.st =
-              this.start.substr(0, 5) +
-              (parseInt(this.start.substr(5, 2)) + i).toString() +
-              this.start.substr(7, 3);
-            this.en =
-              this.end.substr(0, 5) +
-              (parseInt(this.end.substr(5, 2)) + i).toString() +
-              this.end.substr(7, 3);
-            this.add();
+          this.start = new Date(this.start);
+          for (let i = 0; i < 5; i++) {
+            let newdate = new Date(this.start);
+            newdate.setMonth(this.start.getMonth() + i);
+            this.add(newdate.toISOString().slice(0, 10));
           }
         } else if (this.frequency === 4) {
-          for (let i = 1; i < 4; i++) {
-            this.st =
-              (parseInt(this.start.substr(0, 4)) + i).toString() +
-              this.start.substr(4, 6);
-            this.en =
-              (parseInt(this.end.substr(0, 4)) + i).toString() +
-              this.end.substr(4, 6);
-            this.add();
+          this.start = new Date(this.start);
+          for (let i = 0; i < 2; i++) {
+            let newdate = new Date(this.start);
+            newdate.setFullYear(this.start.getFullYear() + i);
+            this.add(newdate.toISOString().slice(0, 10));
           }
         }
-        await fStore
-          .collection("pets")
-          .doc("3heOY1mUC6wCbo2jdE9M")
-          .collection("calEvent")
-          .add({
-            name: this.name,
-            details: this.details,
-            frequency: this.frequency,
-            start: this.start,
-            end: this.end,
-            color: this.color
-          });
-        this.getEvents();
-        this.name = "";
-        this.details = "";
-        this.frequency = "";
-        this.start = "";
-        this.end = "";
-        this.color = "";
-      } else {
-        alert("You must enter the event name, start, and end time");
       }
     },
     editEvent(ev) {
@@ -474,12 +458,12 @@ export default {
     updateRange({ start, end }) {
       this.start = start;
       this.end = end;
-    },
-    nth(d) {
-      return d > 3 && d < 21
-        ? "th"
-        : ["th", "st", "nd", "rd", "th", "th", "th", "th", "th", "th"][d % 10];
     }
+    // nth(d) {
+    //   return d > 3 && d < 21
+    //     ? "th"
+    //     : ["th", "st", "nd", "rd", "th", "th", "th", "th", "th", "th"][d % 10];
+    // }
   }
 };
 </script>
