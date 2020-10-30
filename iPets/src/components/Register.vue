@@ -10,17 +10,25 @@
         <!-- username -->
         <b-form-input
           class="InputClass center"
-          name="username"
-          v-model="username"
-          placeholder="Username"
+          name="userName"
+          v-model="userName"
+          placeholder="用戶名稱"
+          required
+        ></b-form-input>
+        <!-- name -->
+        <b-form-input
+          class="InputClass center"
+          name="name"
+          v-model="name"
+          placeholder="姓名"
           required
         ></b-form-input>
         <!-- Email -->
         <b-form-input
           class="InputClass center"
-          name="email"
-          v-model="email"
-          placeholder="Email"
+          name="Email"
+          v-model="Email"
+          placeholder="電子郵件"
           required
         ></b-form-input>
         <!-- password -->
@@ -30,7 +38,7 @@
             v-model="password"
             name="password"
             class="InputClass center"
-            placeholder="Password"
+            placeholder="密碼"
             required
           ></b-form-input>
           <b-input-group-prepend class="mr-n2">
@@ -47,7 +55,7 @@
             name="password"
             v-model="password"
             type="text"
-            placeholder="Password"
+            placeholder="密碼"
             required
           ></b-form-input>
           <b-input-group-prepend class="mr-n2">
@@ -60,7 +68,7 @@
             type="password"
             name="confirmPassword"
             class="InputClass center"
-            placeholder="Confirm Password"
+            placeholder="確認密碼"
             required
           ></b-form-input>
           <b-input-group-prepend class="mr-n2">
@@ -76,33 +84,41 @@
             class="InputClass center"
             name="confirmPassword"
             type="text"
-            placeholder="Confirm Password"
+            placeholder="確認密碼"
             required
           ></b-form-input>
           <b-input-group-prepend class="mr-n2">
             <span class="display-eye-2 fa fa-eye" @click="showPassword2"></span>
           </b-input-group-prepend>
         </div>
-        <!-- gender -->
+        <!-- userBirth -->
+        <date-picker
+          v-model="userBirth"
+          name="userBirth"
+          type="date"
+          placeholder="用戶生日"
+        ></date-picker>
+        <!-- userGender -->
         <b-form-select
           class="InputClass center"
-          name="gender"
-          v-model="gender"
+          name="userGender"
+          v-model="userGender"
           :options="options"
         ></b-form-select>
-        <!-- Birth -->
-        <date-picker
-          v-model="birth"
-          name="birth"
-          type="date"
-          placeholder="Your Birth"
-        ></date-picker>
-        <!--Address-->
+        <!-- phone -->
+        <b-form-input
+          class="InputClass center"
+          name="phone"
+          v-model="phone"
+          placeholder="電話"
+          required
+        ></b-form-input>
+        <!--address-->
         <b-form-input
           class="InputClass center"
           name="address"
           v-model="address"
-          placeholder="Address"
+          placeholder="地址"
           required
         ></b-form-input>
         <b-button class="ButtonClass center" @click="auth_email">註冊</b-button>
@@ -120,83 +136,6 @@
       </b-card-text>
     </b-card>
   </b-container>
-  <!-- <div class="container">
-    <img src="../assets/logo_banner.png" class="center" />
-    <div class="card">
-      <div class="card-header" style="background-color: #e3f2fd;">註冊</div>
-      <div class="card-body">
-        <form>
-          <div class="form-group mx-auto my-3" style="width: 80%;">
-            <label for="input-username">使用者名稱</label>
-            <span class="text-danger ml-1">*</span>
-            <input
-              id="input-username"
-              class="form-control"
-              type="text"
-              required
-              placeholder="帳號長度為8~12，不可有空白"
-              v-model="username"
-            />
-          </div>
-
-          <div class="form-group mx-auto my-3" style="width: 80%;">
-            <label for="input-email">電子郵件</label>
-            <span class="text-danger ml-1">*</span>
-            <input
-              id="input-email"
-              class="form-control"
-              type="email"
-              required
-              placeholder="格式為:xxx@gmail.com"
-              v-model="email"
-            />
-          </div>
-
-          <div class="form-group mx-auto my-3" style="width: 80%;">
-            <label for="input-password">密碼</label>
-            <span class="text-danger ml-1">*</span>
-            <input
-              id="input-password"
-              class="form-control"
-              type="password"
-              required
-              placeholder="帳號長度為8~12"
-              v-model="password"
-            />
-          </div>
-
-          <button
-            type="submit"
-            class="w-25 btn btn-primary center"
-            @click="auth_email"
-          >
-            註冊
-          </button>
-        </form>
-
-        <div class="hide-md-lg">
-          <p>或者</p>
-        </div>
-        <div class="row">
-          <div class="col-12">
-            <a href="#" class="fb btn">
-              <i class="fa fa-facebook fa-fw"></i> Register with Facebook
-            </a>
-          </div>
-          <div class="col-12">
-            <a href="#" class="twitter btn">
-              <i class="fa fa-twitter fa-fw"></i> Register with Twitter
-            </a>
-          </div>
-          <div class="col-12">
-            <a href="#" class="google btn">
-              <i class="fa fa-google fa-fw"></i> Register with Google+
-            </a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div> -->
 </template>
 
 <script>
@@ -211,41 +150,46 @@ export default {
   name: "Register",
   data() {
     return {
-      username: "",
-      email: "",
+      userName: "",
+      name: "",
+      Email: "",
       password: "",
       passwordFieldType: "password",
       passwordHidden: true,
       passwordHidden2: true,
-      birth: "",
-      gender: "I prefer not to say",
+      userBirth: "",
+      userGender: "null",
       options: [
+        { value: "null", text: "用戶性別" },
         { value: "I prefer not to say", text: "不透漏" },
         { value: "male", text: "男" },
         { value: "female", text: "女" }
       ],
-      address: ""
+      phone: "",
+      userAddress: ""
     };
   },
   methods: {
     auth_email: function(e) {
       fAuth
-        .createUserWithEmailAndPassword(this.email, this.password)
+        .createUserWithEmailAndPassword(this.Email, this.password)
         .then(userCredential => {
           var user = userCredential.user;
           fStore
             .collection("users")
             .doc(user.uid)
             .set({
-              name: this.username,
-              email: this.email,
+              userName: this.userName,
+              name: this.name,
+              Email: this.Email,
               password: this.password,
-              gender: this.gender,
-              birth: this.birth,
-              birth_year: this.birth.getUTCFullYear(),
-              birth_month: this.birth.getMonth() + 1,
-              birth_date: this.birth.getDate(),
+              userGender: this.userGender,
+              userBirth: this.userBirth.toISOString().slice(0, 10),
+              birth_year: this.userBirth.getUTCFullYear(),
+              birth_month: this.userBirth.getMonth() + 1,
+              birth_date: this.userBirth.getDate(),
               address: this.address,
+              phone: this.phone,
               photoURL: ""
             })
             .then(() => {
@@ -257,7 +201,7 @@ export default {
           alert(error.message);
         })
         .finally(() => {
-          console.log("恭喜註冊成功了!");
+          alert("歡迎加入iPets的大家庭~!");
         });
       e.preventDefault();
     },
@@ -297,7 +241,7 @@ export default {
   width: 24px;
   top: 30%;
   right: 140px;
-  margin-top: -22px;
+  margin-top: 3px;
   z-index: 1;
   cursor: pointer;
 }
@@ -307,7 +251,7 @@ export default {
   height: 24px;
   width: 24px;
   top: 40%;
-  margin-top: -20px;
+  margin-top: -8px;
   right: 140px;
   z-index: 1;
   cursor: pointer;
