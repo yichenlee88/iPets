@@ -59,6 +59,9 @@ public class EditPetsinfoActivity extends AppCompatActivity implements AdapterVi
     private DisplayMetrics mPhone;
     private static final String FILE_PATH = "/sdcard/ipets/jpeg";
     private ImageView img;
+    int petBirth_year;
+    int petBirth_month;
+    int petBirth_date;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -151,9 +154,9 @@ public class EditPetsinfoActivity extends AppCompatActivity implements AdapterVi
                     StringBuilder fields = new StringBuilder("");
                     StringBuilder fields2 = new StringBuilder("");
                     StringBuilder fields3 = new StringBuilder("");
-                    fields.append(doc.get("Petsname")).toString();
-                    String Petsgender = fields2.append(doc.get("Petsgender")).toString();
-                    fields3.append(doc.get("Petsbirth")).toString();
+                    fields.append(doc.get("petName")).toString();
+                    String Petsgender = fields2.append(doc.get("petGender")).toString();
+                    fields3.append(doc.get("petBirth")).toString();
                     edmypetName.setText(fields);
                     edpetsbirth.setText(fields3);
                     if(Petsgender.equals("母的")) {
@@ -196,10 +199,13 @@ public class EditPetsinfoActivity extends AppCompatActivity implements AdapterVi
         FirebaseFirestore db;
         db = FirebaseFirestore.getInstance();
         Map<String, Object> userInfo = new HashMap<>();
-        userInfo.put("Petsimage", petsimage);
-        userInfo.put("Petsname", mypetName);
-        userInfo.put("Petsbirth", petsbirth);
-        userInfo.put("Petsgender", sex);
+        userInfo.put("petImage", petsimage);
+        userInfo.put("petName", mypetName);
+        userInfo.put("petBirth", petsbirth);
+        userInfo.put("petGender", sex);
+        userInfo.put("petBirth_year", petBirth_year);
+        userInfo.put("petBirth_month", petBirth_month);
+        userInfo.put("petBirth_date",petBirth_date);
         db.collection("userInformation").document(userUID).collection("pets").document(mypetName).set(userInfo);
         AlertDialog.Builder finishsignup = new AlertDialog.Builder(EditPetsinfoActivity.this);
         finishsignup.setMessage("修改成功");
@@ -230,7 +236,10 @@ public class EditPetsinfoActivity extends AppCompatActivity implements AdapterVi
                         @Override
                         public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
                             // TODO Auto-generated method stub
-                            edmypetBirth.setText(year+"/"+(monthOfYear+1)+"/"+dayOfMonth);
+                            edmypetBirth.setText(year+"-"+(monthOfYear+1)+"-"+dayOfMonth);
+                            petBirth_year = year;
+                            petBirth_month = monthOfYear+1;
+                            petBirth_date = dayOfMonth;
                         }
                     }, c.get(Calendar.YEAR), c.get(Calendar.MONTH), c.get(Calendar.DAY_OF_MONTH));
                     DatePicker datePicker = datePickerDialog.getDatePicker();

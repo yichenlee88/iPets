@@ -244,7 +244,7 @@ public class homeFragment extends Fragment {
     private int countdowndate(String count) throws ParseException {
         Calendar optiondate = Calendar.getInstance();
         Calendar now = Calendar.getInstance();
-        SimpleDateFormat df = new SimpleDateFormat("yyyy/MM/dd");
+        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
         Date specialdate = df.parse(count);
         optiondate.setTime(specialdate); //真實的日期為+1個月
         int showercountdownday = (int) Math.ceil(((optiondate.getTimeInMillis() - now.getTimeInMillis()) / (24 * 60 * 60 * 1000.0)));
@@ -252,7 +252,7 @@ public class homeFragment extends Fragment {
     }
     private int dueDay(String start,String end) throws ParseException {
         String startday=start;
-        SimpleDateFormat sdf= new SimpleDateFormat("yyyy/MM/dd");
+        SimpleDateFormat sdf= new SimpleDateFormat("yyyy-MM-dd");
         Date date =sdf.parse(startday);
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(date);
@@ -285,7 +285,7 @@ public class homeFragment extends Fragment {
                         text_petsSex.setText(fields);
                         text_petsBirth.setText(fields2);
                         text_route.setText(fields3);
-                        SimpleDateFormat df = new SimpleDateFormat("yyyy/MM/dd");
+                        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
                         String petsBirth = fields2.toString();
                         try {
                             Date Birth = df.parse(petsBirth);
@@ -350,7 +350,7 @@ public class homeFragment extends Fragment {
                 Calendar now = Calendar.getInstance();
                 optiondate.set(year, monthOfYear, dayOfMonth); //真實的日期為+1個月
                 monthOfYear = monthOfYear+1;
-                SimpleDateFormat formatter = new SimpleDateFormat("yyyy/MM/dd");
+                SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
                 Date curDate = new Date(System.currentTimeMillis()) ; // 獲取當前時間
                 String showercountdownday = formatter.format(curDate);
                 String showerday = year+"/"+monthOfYear+"/"+dayOfMonth;

@@ -4,18 +4,17 @@ package com.example.ipets;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
-
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.EditText;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -105,10 +104,10 @@ public class signupFragment extends Fragment {
                                     FirebaseFirestore db;
                                     db = FirebaseFirestore.getInstance();
                                     Map<String, Object> userInfo = new HashMap<>();
-                                    userInfo.put("Username", username);
+                                    userInfo.put("userName", username);
                                     userInfo.put("Email", email);
-                                    userInfo.put("Password", password);
-                                    db.collection("userInformation").document(userUID).set(userInfo);
+                                    userInfo.put("password", password);
+                                    db.collection("users").document(userUID).set(userInfo);
                                     NavController controller = Navigation.findNavController(getView());
                                     controller.navigate(R.id.action_signupFragment_to_userinfoFragment);
                                 }else{

@@ -31,8 +31,12 @@ import java.util.Map;
  * A simple {@link Fragment} subclass.
  */
 public class userinfoFragment extends Fragment {
+    int userBirth_year;
+    int userBirth_month;
+    int userBirth_date;
     public userinfoFragment() {
         // Required empty public constructor
+
     }
 
 
@@ -79,13 +83,17 @@ public class userinfoFragment extends Fragment {
                 FirebaseFirestore db;
                 db = FirebaseFirestore.getInstance();
                 Map<String, Object> userInfo = new HashMap<>();
-                userInfo.put("Myname", myname);
-                userInfo.put("Mybirth", mybirth);
-                userInfo.put("Mygender", mygender);
-                userInfo.put("Myaddress", myaddress);
-                db.collection("userInformation").document(userUID).update(userInfo);
+                userInfo.put("name", myname);
+                userInfo.put("userBirth", mybirth);
+                userInfo.put("userGender", mygender);
+                //phone 電話
+                userInfo.put("address", myaddress);
+                userInfo.put("userBirth_year", userBirth_year);
+                userInfo.put("userBirth_month", userBirth_month);
+                userInfo.put("userBirth_date",userBirth_date);
+                db.collection("users").document(userUID).update(userInfo);
                 AlertDialog.Builder finishsignup = new AlertDialog.Builder(getActivity());
-                finishsignup.setMessage("註冊成功");
+                finishsignup.setMessage("歡迎加入iPets的大家庭~!");
                 finishsignup.setNegativeButton("確認", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface arg0, int arg1) {
@@ -114,7 +122,10 @@ public class userinfoFragment extends Fragment {
                         @Override
                         public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
                             // TODO Auto-generated method stub
-                            mybirth.setText(year+"/"+(monthOfYear+1)+"/"+dayOfMonth);
+                            mybirth.setText(year+"-"+(monthOfYear+1)+"-"+dayOfMonth);
+                            userBirth_year = year;
+                            userBirth_month = monthOfYear+1;
+                            userBirth_date = dayOfMonth;
                         }
                     }, c.get(Calendar.YEAR), c.get(Calendar.MONTH), c.get(Calendar.DAY_OF_MONTH));
                     DatePicker datePicker = datePickerDialog.getDatePicker();

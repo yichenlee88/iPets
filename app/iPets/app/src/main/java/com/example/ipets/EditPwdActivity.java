@@ -81,8 +81,8 @@ public class EditPwdActivity extends AppCompatActivity {
                         }
                     });
             Map<String, Object> userInfo = new HashMap<>();
-            userInfo.put("Password", checkPWD);
-            db.collection("userInformation").document(userUID).update(userInfo);
+            userInfo.put("password", checkPWD);
+            db.collection("users").document(userUID).update(userInfo);
             AlertDialog.Builder finishsignup = new AlertDialog.Builder(EditPwdActivity.this);
             finishsignup.setMessage("修改成功");
             finishsignup.setNegativeButton("確認", new DialogInterface.OnClickListener() {

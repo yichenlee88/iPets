@@ -39,6 +39,9 @@ public class EditMasterinfoActivity extends AppCompatActivity{
     LinearLayout btn_editAcct;
     Button btn_editPWD;
     String email;
+    int userBirth_year;
+    int userBirth_month;
+    int userBirth_date;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -107,13 +110,16 @@ public class EditMasterinfoActivity extends AppCompatActivity{
         int idsex=sexSpinner.getSelectedItemPosition();
         String sex = Spinner_sex[idsex];
         Map<String, Object> userInfo = new HashMap<>();
-        userInfo.put("Myname",masterName);
-        userInfo.put("Username",userName);
-        userInfo.put("Mybirth", masterBirth);
-        userInfo.put("Myphone", phoneNum);
-        userInfo.put("Myaddress", masterAddress);
-        userInfo.put("Mygender", sex);
-        db.collection("userInformation").document(userUID).update(userInfo);
+        userInfo.put("name",masterName);
+        userInfo.put("userName",userName);
+        userInfo.put("userBirth", masterBirth);
+        userInfo.put("phone", phoneNum);
+        userInfo.put("address", masterAddress);
+        userInfo.put("userGender", sex);
+        userInfo.put("userBirth_year", userBirth_year);
+        userInfo.put("userBirth_month", userBirth_month);
+        userInfo.put("userBirth_date",userBirth_date);
+        db.collection("users").document(userUID).update(userInfo);
         AlertDialog.Builder finishsignup = new AlertDialog.Builder(EditMasterinfoActivity.this);
         finishsignup.setMessage("修改成功");
         finishsignup.setNegativeButton("確認", new DialogInterface.OnClickListener() {
@@ -143,7 +149,10 @@ public class EditMasterinfoActivity extends AppCompatActivity{
                         @Override
                         public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
                             // TODO Auto-generated method stub
-                            edmasterBirth.setText(year+"/"+(monthOfYear+1)+"/"+dayOfMonth);
+                            edmasterBirth.setText(year+"-"+(monthOfYear+1)+"-"+dayOfMonth);
+                            userBirth_year = year;
+                            userBirth_month = monthOfYear+1;
+                            userBirth_date = dayOfMonth;
                         }
                     }, c.get(Calendar.YEAR), c.get(Calendar.MONTH), c.get(Calendar.DAY_OF_MONTH));
                     DatePicker datePicker = datePickerDialog.getDatePicker();
@@ -166,7 +175,7 @@ public class EditMasterinfoActivity extends AppCompatActivity{
         String userUID = currentUser.getUid();
         FirebaseFirestore db;
         db = FirebaseFirestore.getInstance();
-        db.collection("userInformation").document(userUID)
+        db.collection("users").document(userUID)
                 .get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
@@ -179,12 +188,12 @@ public class EditMasterinfoActivity extends AppCompatActivity{
                     StringBuilder fields5 = new StringBuilder("");
                     StringBuilder fields6 = new StringBuilder("");
                     StringBuilder fields7 = new StringBuilder("");
-                    fields.append(doc.get("Myname")).toString();
-                    fields2.append(doc.get("Username")).toString();
-                    fields3.append(doc.get("Mybirth")).toString();
-                    fields4.append(doc.get("Myphone")).toString();
-                    fields5.append(doc.get("Myaddress")).toString();
-                    String gender = fields6.append(doc.get("Mygender")).toString();
+                    fields.append(doc.get("name")).toString();
+                    fields2.append(doc.get("userName")).toString();
+                    fields3.append(doc.get("userBirth")).toString();
+                    fields4.append(doc.get("phone")).toString();
+                    fields5.append(doc.get("address")).toString();
+                    String gender = fields6.append(doc.get("userGender")).toString();
                     email = fields7.append(doc.get("Email")).toString();
                     edmasterName.setText(fields);
                     eduserName.setText(fields2);

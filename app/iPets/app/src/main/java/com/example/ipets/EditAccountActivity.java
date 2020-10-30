@@ -61,7 +61,7 @@ public class EditAccountActivity extends AppCompatActivity {
         currentUser.updateEmail(email);
         Map<String, Object> userInfo = new HashMap<>();
         userInfo.put("Email",email);
-        db.collection("userInformation").document(userUID).update(userInfo);
+        db.collection("users").document(userUID).update(userInfo);
         AlertDialog.Builder finishsignup = new AlertDialog.Builder(EditAccountActivity.this);
         finishsignup.setMessage("修改成功");
         finishsignup.setNegativeButton("確認", new DialogInterface.OnClickListener() {

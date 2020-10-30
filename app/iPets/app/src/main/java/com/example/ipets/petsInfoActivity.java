@@ -1,13 +1,5 @@
 package com.example.ipets;
 
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
-import androidx.core.content.FileProvider;
-import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
-
 import android.Manifest;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
@@ -32,6 +24,12 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.RadioGroup;
 
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
+import androidx.core.content.FileProvider;
+
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -42,6 +40,7 @@ import com.google.firebase.storage.UploadTask;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
@@ -58,7 +57,9 @@ public class petsInfoActivity extends AppCompatActivity {
     FirebaseAuth auth = FirebaseAuth.getInstance();
     FirebaseUser currentUser = auth.getCurrentUser();
     String userUID = currentUser.getUid();
-
+    int petBirth_year;
+    int petBirth_month;
+    int petBirth_date;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -113,7 +114,10 @@ public class petsInfoActivity extends AppCompatActivity {
                         @Override
                         public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
                             // TODO Auto-generated method stub
-                            edpetsbirth.setText(year+"/"+(monthOfYear+1)+"/"+dayOfMonth);
+                            edpetsbirth.setText(year+"-"+(monthOfYear+1)+"-"+dayOfMonth);
+                            petBirth_year = year;
+                            petBirth_month = monthOfYear+1;
+                            petBirth_date = dayOfMonth;
                         }
                     }, c.get(Calendar.YEAR), c.get(Calendar.MONTH), c.get(Calendar.DAY_OF_MONTH));
                     DatePicker datePicker = datePickerDialog.getDatePicker();
@@ -164,17 +168,25 @@ public class petsInfoActivity extends AppCompatActivity {
                 petsgender = "母的";
                 break;
         }
+        Calendar now = Calendar.getInstance();
+        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+        String nowstr = df.format(now.getTime());
         FirebaseFirestore db;
         db = FirebaseFirestore.getInstance();
         Map<String, Object> userInfo = new HashMap<>();
-        userInfo.put("Petsimage", petsimage);
-        userInfo.put("Petsname", petsname);
-        userInfo.put("Petsbirth", petsbirth);
-        userInfo.put("Petsgender", petsgender);
-        userInfo.put("Petsvariety", petsvariety);
-        userInfo.put("Petslikes", petslikes);
-        userInfo.put("Petsnotes", petsnotes);
-        db.collection("userInformation").document(userUID).collection("pets").document(petsname).set(userInfo);
+        userInfo.put("petName", petsname);
+        userInfo.put("petGender", petsgender);
+        userInfo.put("petBirth", petsbirth);
+        userInfo.put("breed", petsvariety);
+        userInfo.put("petHobby", petslikes);
+        userInfo.put("petNote", petsnotes);
+        userInfo.put("petImage", petsimage);
+        userInfo.put("uid", userUID);
+        userInfo.put("timestamp", nowstr);
+        userInfo.put("petBirth_year", petBirth_year);
+        userInfo.put("petBirth_month", petBirth_month);
+        userInfo.put("petBirth_date",petBirth_date);
+        db.collection("pets").document().set(userInfo);
         AlertDialog.Builder finishsignup = new AlertDialog.Builder(petsInfoActivity.this);
         finishsignup.setMessage("新增成功");
         finishsignup.setNegativeButton("確認", new DialogInterface.OnClickListener() {
