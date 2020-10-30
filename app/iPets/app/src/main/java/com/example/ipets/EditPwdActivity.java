@@ -71,7 +71,7 @@ public class EditPwdActivity extends AppCompatActivity {
         String email =  currentUser.getEmail();
         if(newPWD.equals(checkPWD)) {
             AuthCredential credential = EmailAuthProvider
-                    .getCredential( email, checkPWD);
+                    .getCredential( email, oldPWD);
 // Prompt the user to re-provide their sign-in credentials
             currentUser.reauthenticate(credential)
                     .addOnCompleteListener(new OnCompleteListener<Void>() {
