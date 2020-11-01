@@ -58,7 +58,7 @@
     </fragment>
     <fragment
         android:id="@+id/signupFragment"
-        android:name="com.example.ipets.signupFragment"
+        android:name="com.example.ipets.signUpFragment"
         android:label="fragment_signup"
         tools:layout="@layout/fragment_signup" >
         <action
@@ -84,7 +84,7 @@
         tools:layout="@layout/fragment_maps" />
     <fragment
         android:id="@+id/userinfoFragment"
-        android:name="com.example.ipets.userinfoFragment"
+        android:name="com.example.ipets.userInfoFragment"
         android:label="fragment_userinfo"
         tools:layout="@layout/fragment_userinfo" >
         <action
@@ -116,17 +116,17 @@
         tools:layout="@layout/activity_home" />
     <activity
         android:id="@+id/settingActivity"
-        android:name="com.example.ipets.SettingActivity"
+        android:name="com.example.ipets.settingActivity"
         android:label="activity_setting"
         tools:layout="@layout/activity_setting" />
     <activity
         android:id="@+id/editMasterinfoActivity"
-        android:name="com.example.ipets.EditMasterinfoActivity"
+        android:name="com.example.ipets.editUserInfoActivity"
         android:label="activity_edit_masterinfo"
         tools:layout="@layout/activity_edit_masterinfo" />
     <activity
         android:id="@+id/editAccountActivity"
-        android:name="com.example.ipets.EditAccountActivity"
+        android:name="com.example.ipets.editAccountActivity"
         android:label="activity_edit_account"
         tools:layout="@layout/activity_edit_account" />
 </navigation>

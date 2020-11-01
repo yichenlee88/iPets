@@ -47,7 +47,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class petsInfoActivity extends AppCompatActivity {
+public class petInfoActivity extends AppCompatActivity {
 
     private ImageView img;
     private DisplayMetrics mPhone;
@@ -64,7 +64,7 @@ public class petsInfoActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pets_info);
-        getrequest_permissions();
+        getPermission();
         ImageButton camera = findViewById(R.id.camera1);
         ImageButton photo = findViewById(R.id.album);
         camera.setOnClickListener(new View.OnClickListener() {
@@ -76,7 +76,7 @@ public class petsInfoActivity extends AppCompatActivity {
                 Intent takePhotoIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
                 Uri uri = FileProvider.getUriForFile(
                         v.getContext(),
-                        petsInfoActivity.this.getPackageName() + ".provider",
+                        petInfoActivity.this.getPackageName() + ".provider",
                         file);
                 takePhotoIntent.putExtra(MediaStore.EXTRA_OUTPUT, uri);
                 startActivityForResult(intent, CAMERA);
@@ -97,7 +97,7 @@ public class petsInfoActivity extends AppCompatActivity {
         finish.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                uploadimage();
+                addImage();
             }
         });
         final EditText edpetsbirth = findViewById(R.id.petsbirth);
@@ -128,7 +128,7 @@ public class petsInfoActivity extends AppCompatActivity {
         });
     }
 
-    private void uploadimage() {
+    private void addImage() {
         EditText edpetsname = findViewById(R.id.petsname);
         final String petsname = edpetsname.getText().toString();
         FirebaseStorage storage = FirebaseStorage.getInstance("gs://ipets-app.appspot.com");
@@ -142,11 +142,11 @@ public class petsInfoActivity extends AppCompatActivity {
         UploadTask uploadTask = mountainsRef.putBytes(data);
         //取得照片網址
         String petsimage = String.valueOf(mountainsRef.getDownloadUrl());
-        petsinfo(petsimage);
+        addPetInfo(petsimage);
 
     }
 
-    private void petsinfo(String petsimage) {
+    private void addPetInfo(String petsimage) {
         EditText edpetsname = findViewById(R.id.petsname);
         final EditText edpetsbirth = findViewById(R.id.petsbirth);
         final EditText edvariety = findViewById(R.id.variety);
@@ -193,14 +193,14 @@ public class petsInfoActivity extends AppCompatActivity {
         countdowndate.put("endDay", "");
         countdowndate.put("countdownEvent","");
         db.collection("pets").document(id).collection("countdown").document(petsname+"洗澡").set(countdowndate);
-        AlertDialog.Builder finishsignup = new AlertDialog.Builder(petsInfoActivity.this);
+        AlertDialog.Builder finishsignup = new AlertDialog.Builder(petInfoActivity.this);
         finishsignup.setMessage("新增成功");
         finishsignup.setNegativeButton("確認", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface arg0, int arg1) {
                 Intent intent=new Intent();
                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
-                intent.setClass(petsInfoActivity.this,HomeActivity.class);
+                intent.setClass(petInfoActivity.this,HomeActivity.class);
                 startActivity(intent);
             }
         });
@@ -208,28 +208,28 @@ public class petsInfoActivity extends AppCompatActivity {
         finishsignup.show();
     }
 
-    private void getrequest_permissions() {
+    private void getPermission() {
         List<String> permissionList = new ArrayList<>();
 
         // 判断有無權限,如果沒有就加入列表
-        if (ContextCompat.checkSelfPermission(petsInfoActivity.this, Manifest.permission.CAMERA)
+        if (ContextCompat.checkSelfPermission(petInfoActivity.this, Manifest.permission.CAMERA)
                 != PackageManager.PERMISSION_GRANTED) {
             permissionList.add(Manifest.permission.CAMERA);
         }
 
-        if (ContextCompat.checkSelfPermission(petsInfoActivity.this, Manifest.permission.WRITE_EXTERNAL_STORAGE)
+        if (ContextCompat.checkSelfPermission(petInfoActivity.this, Manifest.permission.WRITE_EXTERNAL_STORAGE)
                 != PackageManager.PERMISSION_GRANTED) {
             permissionList.add(Manifest.permission.WRITE_EXTERNAL_STORAGE);
         }
 
-        if (ContextCompat.checkSelfPermission(petsInfoActivity.this, Manifest.permission.READ_EXTERNAL_STORAGE)
+        if (ContextCompat.checkSelfPermission(petInfoActivity.this, Manifest.permission.READ_EXTERNAL_STORAGE)
                 != PackageManager.PERMISSION_GRANTED) {
             permissionList.add(Manifest.permission.READ_EXTERNAL_STORAGE);
         }
 
         // 列表為空及權限都有了
         if (!permissionList.isEmpty()) {
-            ActivityCompat.requestPermissions(petsInfoActivity.this,
+            ActivityCompat.requestPermissions(petInfoActivity.this,
                     permissionList.toArray(new String[permissionList.size()]), 1002);
         }
     }
@@ -239,18 +239,18 @@ public class petsInfoActivity extends AppCompatActivity {
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         //讀取手機解析度
         mPhone = new DisplayMetrics();
-        petsInfoActivity.this.getWindowManager().getDefaultDisplay().getMetrics(mPhone);
+        petInfoActivity.this.getWindowManager().getDefaultDisplay().getMetrics(mPhone);
         if (requestCode == PHOTO && data != null) {
             //取得照片路徑uri
             Uri uri = data.getData();
-            ContentResolver cr = petsInfoActivity.this.getContentResolver();
+            ContentResolver cr = petInfoActivity.this.getContentResolver();
             try {
                 //讀取照片，型態為Bitmap
                 Bitmap bitmap = BitmapFactory.decodeStream(cr.openInputStream(uri));
                 //判斷照片為橫向或者為直向，並進入ScalePic判斷圖片是否要進行縮放
-                if (bitmap.getWidth() > bitmap.getHeight()) ScalePic(bitmap,
+                if (bitmap.getWidth() > bitmap.getHeight()) scaleImage(bitmap,
                         mPhone.heightPixels);
-                else ScalePic(bitmap, mPhone.widthPixels);
+                else scaleImage(bitmap, mPhone.widthPixels);
             } catch (FileNotFoundException e) {
             }
         }
@@ -268,15 +268,15 @@ public class petsInfoActivity extends AppCompatActivity {
                     }
                 }
                 //判斷照片為橫向或者為直向，並進入ScalePic判斷圖片是否要進行縮放
-                if (photo.getWidth() > photo.getHeight()) ScalePic(photo,
+                if (photo.getWidth() > photo.getHeight()) scaleImage(photo,
                         mPhone.heightPixels);
-                else ScalePic(photo, mPhone.widthPixels);
+                else scaleImage(photo, mPhone.widthPixels);
             }
         }
         super.onActivityResult(requestCode, resultCode, data);
     }
 
-    private void ScalePic(Bitmap bitmap, int phone) {
+    private void scaleImage(Bitmap bitmap, int phone) {
         //縮放比例預設為1
         float mScale = 1;
         img = findViewById(R.id.img);

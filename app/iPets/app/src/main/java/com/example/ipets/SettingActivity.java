@@ -13,7 +13,7 @@ import androidx.appcompat.widget.Toolbar;
 
 import com.google.firebase.auth.FirebaseAuth;
 
-public class SettingActivity extends AppCompatActivity {
+public class settingActivity extends AppCompatActivity {
     Button btn_info;
     Button btn_editPets;
     Button btn_question;
@@ -34,7 +34,7 @@ public class SettingActivity extends AppCompatActivity {
         btn_info.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intentInfo = new Intent(SettingActivity.this,EditMasterinfoActivity.class);
+                Intent intentInfo = new Intent(settingActivity.this, editUserInfoActivity.class);
                 startActivity(intentInfo);
             }
         });
@@ -44,7 +44,7 @@ public class SettingActivity extends AppCompatActivity {
         btn_question.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intentQuestion = new Intent(SettingActivity.this,EditQuestionActivity.class);
+                Intent intentQuestion = new Intent(settingActivity.this,EditQuestionActivity.class);
                 startActivity(intentQuestion);
             }
         });
@@ -53,7 +53,7 @@ public class SettingActivity extends AppCompatActivity {
         btn_communicate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intentCommunicate = new Intent(SettingActivity.this,EditContactusActivity.class);
+                Intent intentCommunicate = new Intent(settingActivity.this,EditContactusActivity.class);
                 startActivity(intentCommunicate);
             }
         });
@@ -62,7 +62,7 @@ public class SettingActivity extends AppCompatActivity {
         Version.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(SettingActivity.this, "9.10.13 為目前最新版本", Toast.LENGTH_LONG).show();
+                Toast.makeText(settingActivity.this, "9.10.13 為目前最新版本", Toast.LENGTH_LONG).show();
             }
         });
 
@@ -74,7 +74,7 @@ public class SettingActivity extends AppCompatActivity {
                 auth.signOut();
                 Intent intent=new Intent();
                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
-                intent.setClass(SettingActivity.this,MainActivity.class);
+                intent.setClass(settingActivity.this,MainActivity.class);
                 startActivity(intent);
             }
         });

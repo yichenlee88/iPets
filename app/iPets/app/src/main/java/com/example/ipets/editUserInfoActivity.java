@@ -35,7 +35,7 @@ import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 
-public class EditMasterinfoActivity extends AppCompatActivity{
+public class editUserInfoActivity extends AppCompatActivity{
     LinearLayout btn_editAcct;
     Button btn_editPWD;
     String email;
@@ -63,7 +63,7 @@ public class EditMasterinfoActivity extends AppCompatActivity{
         btn_editAcct.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(EditMasterinfoActivity.this,EditAccountActivity.class);
+                Intent intent = new Intent(editUserInfoActivity.this, editAccountActivity.class);
                 intent.putExtra("email",email);
                 intent.putExtra("password",password);
                 startActivity(intent);
@@ -73,7 +73,7 @@ public class EditMasterinfoActivity extends AppCompatActivity{
         btn_editPWD.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intentPWD = new Intent(EditMasterinfoActivity.this,EditPwdActivity.class);
+                Intent intentPWD = new Intent(editUserInfoActivity.this, editPwdActivity.class);
                 startActivity(intentPWD);
             }
         });
@@ -82,16 +82,16 @@ public class EditMasterinfoActivity extends AppCompatActivity{
             public boolean onMenuItemClick(MenuItem item) {
                 switch (item.getItemId()) {
                     case R.id.check:
-                        setmasterinfo();
+                        setUserInfo();
                         break;
                 }
                 return false;
             }
         });
-        seteditText();
-        getMasterInfo();
+        setEditText();
+        getUserInfo();
     }
-    public void setmasterinfo(){
+    public void setUserInfo(){
         FirebaseAuth auth = FirebaseAuth.getInstance();
         FirebaseUser currentUser = auth.getCurrentUser();
         String userUID = currentUser.getUid();
@@ -122,21 +122,21 @@ public class EditMasterinfoActivity extends AppCompatActivity{
         userInfo.put("userBirth_month", userBirth_month);
         userInfo.put("userBirth_date",userBirth_date);
         db.collection("users").document(userUID).update(userInfo);
-        AlertDialog.Builder finishsignup = new AlertDialog.Builder(EditMasterinfoActivity.this);
+        AlertDialog.Builder finishsignup = new AlertDialog.Builder(editUserInfoActivity.this);
         finishsignup.setMessage("修改成功");
         finishsignup.setNegativeButton("確認", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface arg0, int arg1) {
                 Intent intent=new Intent();
                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
-                intent.setClass(EditMasterinfoActivity.this,HomeActivity.class);
+                intent.setClass(editUserInfoActivity.this,HomeActivity.class);
                 startActivity(intent);
             }
         });
         finishsignup.setCancelable(false);
         finishsignup.show();
     }
-    public void seteditText(){
+    public void setEditText(){
         EditText edmasterBirth = findViewById(R.id.masterBirth);
         edmasterBirth.setInputType(InputType.TYPE_NULL); //不顯示系統輸入鍵盤
         edmasterBirth.setOnFocusChangeListener(new View.OnFocusChangeListener() {
@@ -165,7 +165,7 @@ public class EditMasterinfoActivity extends AppCompatActivity{
             }
         });
     }
-    public void getMasterInfo(){
+    public void getUserInfo(){
         EditText edmasterName = findViewById(R.id.masterName);
         final EditText eduserName = findViewById(R.id.userName);
         final EditText edmasterBirth = findViewById(R.id.masterBirth);

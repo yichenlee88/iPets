@@ -22,31 +22,31 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".petsInfoActivity"></activity>
+        <activity android:name=".petInfoActivity"></activity>
         <activity android:name=".PhotoGalleryActivity" />
         <activity android:name=".NotePreviewActivity" />
         <activity android:name=".AddNoteActivity" />
         <activity android:name=".CalendarActivity" />
         <activity
             android:name=".EditPetsinfoActivity"
-            android:parentActivityName=".SettingActivity" />
+            android:parentActivityName=".settingActivity" />
         <activity
-            android:name=".EditPwdActivity"
-            android:parentActivityName=".EditMasterinfoActivity" />
+            android:name=".editPwdActivity"
+            android:parentActivityName=".editUserInfoActivity" />
         <activity
-            android:name=".EditAccountActivity"
-            android:parentActivityName=".EditMasterinfoActivity" />
+            android:name=".editAccountActivity"
+            android:parentActivityName=".editUserInfoActivity" />
         <activity
-            android:name=".EditMasterinfoActivity"
-            android:parentActivityName=".SettingActivity" />
+            android:name=".editUserInfoActivity"
+            android:parentActivityName=".settingActivity" />
         <activity
             android:name=".EditQuestionActivity"
-            android:parentActivityName=".SettingActivity" />
+            android:parentActivityName=".settingActivity" />
         <activity
             android:name=".EditContactusActivity"
-            android:parentActivityName=".SettingActivity" />
+            android:parentActivityName=".settingActivity" />
         <activity
-            android:name=".SettingActivity"
+            android:name=".settingActivity"
             android:parentActivityName=".HomeActivity" />
         <activity android:name=".HomeActivity" />
 

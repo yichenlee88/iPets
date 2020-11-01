@@ -29,10 +29,10 @@ import java.util.Map;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class signupFragment extends Fragment {
+public class signUpFragment extends Fragment {
     private String userUID;
     private FirebaseAuth auth = FirebaseAuth.getInstance();
-    public signupFragment() {
+    public signUpFragment() {
         // Required empty public constructor
     }
 
@@ -51,11 +51,11 @@ public class signupFragment extends Fragment {
         next1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                register();
+                checkPassword();
             }
         });
     }
-    private void register() {
+    private void checkPassword() {
         EditText edemail = getView().findViewById(R.id.email);
         final EditText edpassword = getView().findViewById(R.id.addpw);
         final EditText edconfirmpw = getView().findViewById(R.id.confirmpw);
@@ -86,10 +86,10 @@ public class signupFragment extends Fragment {
             });
             confirmpwerror.show();
         }else {
-            createUser(email, password);
+            addUser(email, password);
         }
     }
-    private void createUser(final String email, final String password) {
+    private void addUser(final String email, final String password) {
        // 呼叫FirebaseAuth類別所提供建立帳號的方法createUserWithEmailAndPassword，傳入email與password字串。
         auth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(

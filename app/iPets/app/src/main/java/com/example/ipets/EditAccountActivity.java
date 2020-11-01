@@ -25,7 +25,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import java.util.HashMap;
 import java.util.Map;
 
-public class EditAccountActivity extends AppCompatActivity {
+public class editAccountActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,7 +41,7 @@ public class EditAccountActivity extends AppCompatActivity {
             public boolean onMenuItemClick(MenuItem item) {
                 switch (item.getItemId()) {
                     case R.id.check:
-                        setaccount();
+                        setAccount();
                         break;
                 }
                 return false;
@@ -55,7 +55,7 @@ public class EditAccountActivity extends AppCompatActivity {
         inflater.inflate(R.menu.toolbar_menu,menu);
         return true;
     }
-    public void setaccount(){
+    public void setAccount(){
         FirebaseAuth auth = FirebaseAuth.getInstance();
         FirebaseUser currentUser = auth.getCurrentUser();
         String userUID = currentUser.getUid();
@@ -80,14 +80,14 @@ public class EditAccountActivity extends AppCompatActivity {
         Map<String, Object> userInfo = new HashMap<>();
         userInfo.put("Email",email);
         db.collection("users").document(userUID).update(userInfo);
-        AlertDialog.Builder finishsignup = new AlertDialog.Builder(EditAccountActivity.this);
+        AlertDialog.Builder finishsignup = new AlertDialog.Builder(editAccountActivity.this);
         finishsignup.setMessage("修改成功");
         finishsignup.setNegativeButton("確認", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface arg0, int arg1) {
                 Intent intent=new Intent();
                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
-                intent.setClass(EditAccountActivity.this,HomeActivity.class);
+                intent.setClass(editAccountActivity.this,HomeActivity.class);
                 startActivity(intent);
             }
         });
