@@ -18,6 +18,7 @@ import Post from "@/components/Post";
 import Identify from "@/components/Identify";
 import Tunit from "@/components/Tunit";
 import Album from "@/components/Album";
+import albumView from "@/components/albumView";
 import Setting from "@/components/Setting";
 import EditProfile from "@/components/EditProfile";
 import EditPetProfile from "@/components/EditPetProfile";
@@ -158,6 +159,14 @@ let router = new Router({
       path: "/album",
       name: "Album",
       component: Album,
+      meta: {
+        requiresAuth: true
+      }
+    },
+    {
+      path: "/albumView/:name",
+      name: "albumView",
+      component: albumView,
       meta: {
         requiresAuth: true
       }
