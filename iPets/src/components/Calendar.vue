@@ -243,9 +243,9 @@ const fStore = db.firestore();
 export default {
   data() {
     return {
-      today: new Date().toISOString().slice(0, 10),
-      start: new Date().toISOString().slice(0, 10),
-      focus: new Date(),
+      today: new Date(),
+      focus: new Date().toISOString().slice(0, 10),
+      start: new Date(),
       date: new Date(),
       type: "month",
       typeToLabel: {
@@ -266,7 +266,8 @@ export default {
       frequency: 0,
       name: null,
       details: null,
-      end: new Date().toISOString().slice(0, 10),
+      // end: new Date().toISOString().slice(0, 10),
+      end: new Date(),
       color: "red", // default event color
       currentlyEditing: null,
       selectedEvent: {},
@@ -286,10 +287,12 @@ export default {
       if (!start || !end) {
         return "";
       }
-      const startMonth = start.month;
+      const startMonth =
+        typeof start === "string" ? start.slice(5, 7) : start.month;
       const endMonth = end.month;
       const suffixMonth = startMonth === endMonth ? startMonth : endMonth;
-      const startYear = start.year;
+      const startYear =
+        typeof start === "string" ? start.slice(0, 4) : start.year;
       const endYear = end.year;
       const suffixYear = startYear === endYear ? startYear : endYear;
       const startDay = start.day;
@@ -341,8 +344,8 @@ export default {
     setDialogDate({ date }) {
       this.dialogDate = true;
       this.focus = date;
-      this.start = date;
-      this.end = date;
+      // this.start = date;
+      // this.end = date;
     },
     closeDialog() {
       this.dialogDate = false;
@@ -400,6 +403,8 @@ export default {
       }
       this.name = "";
       this.details = "";
+      this.start = this.start.toISOString().slice(0, 10);
+      this.end = this.end.toISOString().slice(0, 10);
     },
     editEvent(ev) {
       this.currentlyEditing = ev.id;
