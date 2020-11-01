@@ -4,27 +4,27 @@
     <b-col col="8" sm="8" md="8">
       <b-form-input
         class="InputClass"
-        name="name"
+        name="oldPassword"
         v-model="text"
-        placeholder="Name"
+        placeholder="舊密碼"
       ></b-form-input>
     </b-col>
     <b-col class="coltitle" col="4" sm="4" md="4"> <p>新密碼：</p></b-col>
     <b-col col="8" sm="8" md="8">
       <b-form-input
         class="InputClass"
-        name="username"
+        name="newPassword"
         v-model="text"
-        placeholder="UserName"
+        placeholder="新密碼"
       ></b-form-input>
     </b-col>
     <b-col class="coltitle" col="4" sm="4" md="4"> <p>確認新密碼：</p></b-col>
     <b-col col="8" sm="8" md="8">
       <b-form-input
         class="InputClass"
-        name="birth"
+        name="confirmNewPassword"
         v-model="text"
-        placeholder="Birth"
+        placeholder="確認新密碼"
       ></b-form-input>
     </b-col>
     <b-col col="4" sm="4" md="4"></b-col>
