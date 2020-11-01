@@ -9,10 +9,15 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputEditText;
+import com.google.firebase.auth.AuthCredential;
+import com.google.firebase.auth.EmailAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -56,9 +61,22 @@ public class EditAccountActivity extends AppCompatActivity {
         String userUID = currentUser.getUid();
         FirebaseFirestore db;
         db = FirebaseFirestore.getInstance();
+        Intent intent = this.getIntent();
+        //取得傳遞過來的資料
+        String oldemail = intent.getStringExtra("email");
+        String oldpassword = intent.getStringExtra("password");
         TextInputEditText editAcct = findViewById(R.id.editAcct);
         String email = editAcct.getText().toString();
-        currentUser.updateEmail(email);
+        AuthCredential credential = EmailAuthProvider
+                .getCredential(oldemail, oldpassword);
+// Prompt the user to re-provide their sign-in credentials
+        currentUser.reauthenticate(credential)
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        currentUser.updateEmail(email);
+                    }
+                });
         Map<String, Object> userInfo = new HashMap<>();
         userInfo.put("Email",email);
         db.collection("users").document(userUID).update(userInfo);

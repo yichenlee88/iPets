@@ -42,6 +42,7 @@ public class EditMasterinfoActivity extends AppCompatActivity{
     int userBirth_year;
     int userBirth_month;
     int userBirth_date;
+    String password;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -64,6 +65,7 @@ public class EditMasterinfoActivity extends AppCompatActivity{
             public void onClick(View v) {
                 Intent intent = new Intent(EditMasterinfoActivity.this,EditAccountActivity.class);
                 intent.putExtra("email",email);
+                intent.putExtra("password",password);
                 startActivity(intent);
             }
         });
@@ -188,6 +190,7 @@ public class EditMasterinfoActivity extends AppCompatActivity{
                     StringBuilder fields5 = new StringBuilder("");
                     StringBuilder fields6 = new StringBuilder("");
                     StringBuilder fields7 = new StringBuilder("");
+                    StringBuilder fields8= new StringBuilder("");
                     fields.append(doc.get("name")).toString();
                     fields2.append(doc.get("userName")).toString();
                     fields3.append(doc.get("userBirth")).toString();
@@ -195,6 +198,7 @@ public class EditMasterinfoActivity extends AppCompatActivity{
                     fields5.append(doc.get("address")).toString();
                     String gender = fields6.append(doc.get("userGender")).toString();
                     email = fields7.append(doc.get("Email")).toString();
+                    password = fields8.append(doc.get("password")).toString();
                     edmasterName.setText(fields);
                     eduserName.setText(fields2);
                     edmasterBirth.setText(fields3);
