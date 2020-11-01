@@ -185,7 +185,14 @@ public class petsInfoActivity extends AppCompatActivity {
         userInfo.put("petBirth_year", petBirth_year);
         userInfo.put("petBirth_month", petBirth_month);
         userInfo.put("petBirth_date",petBirth_date);
-        db.collection("pets").document().set(userInfo);
+        String id = db.collection("pets").document().getId();
+        db.collection("pets").document(id).set(userInfo);
+
+        Map<String, Object> countdowndate = new HashMap<>();
+        countdowndate.put("startDay", "");
+        countdowndate.put("endDay", "");
+        countdowndate.put("countdownEvent","");
+        db.collection("pets").document(id).collection("countdown").document(petsname+"洗澡").set(countdowndate);
         AlertDialog.Builder finishsignup = new AlertDialog.Builder(petsInfoActivity.this);
         finishsignup.setMessage("新增成功");
         finishsignup.setNegativeButton("確認", new DialogInterface.OnClickListener() {

@@ -388,195 +388,198 @@ public class homeFragment extends Fragment {
         datePickerDialog.show();
     }
     public void countdown(){
-        final FirebaseFirestore db = FirebaseFirestore.getInstance();
-        ProgressBar showerBar = getView().findViewById(R.id.showerBar);
-        ProgressBar hairCutBar = getView().findViewById(R.id.hairCutBar);
-        ProgressBar fleaInBar = getView().findViewById(R.id.fleaInBar);
-        ProgressBar fleaOutBar = getView().findViewById(R.id.fleaOutBar);
-        ProgressBar injectionBar = getView().findViewById(R.id.injectionBar);
-        ProgressBar teethBar = getView().findViewById(R.id.teethBar);
-        ProgressBar bloodBar = getView().findViewById(R.id.bloodBar);
-        db.collection("pets").document(documentname).collection("countdown")
-                .get()
-                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        if (task.isSuccessful()) {
-                            for (QueryDocumentSnapshot document : task.getResult()) {
-                                DocumentSnapshot doc = document;
-                                StringBuilder field = new StringBuilder("");
-                                StringBuilder field1 = new StringBuilder("");
-                                StringBuilder field2 = new StringBuilder("");
-                                String startDay =field.append(doc.get("startDay")).toString();
-                                String endDay = field1.append(doc.get("endDay")).toString();
-                                String countdownEvent = field2.append(doc.get("countdownEvent")).toString();
+        if(!pet_query.equals("尚未擁有寵物")) {
+            final FirebaseFirestore db = FirebaseFirestore.getInstance();
+            ProgressBar showerBar = getView().findViewById(R.id.showerBar);
+            ProgressBar hairCutBar = getView().findViewById(R.id.hairCutBar);
+            ProgressBar fleaInBar = getView().findViewById(R.id.fleaInBar);
+            ProgressBar fleaOutBar = getView().findViewById(R.id.fleaOutBar);
+            ProgressBar injectionBar = getView().findViewById(R.id.injectionBar);
+            ProgressBar teethBar = getView().findViewById(R.id.teethBar);
+            ProgressBar bloodBar = getView().findViewById(R.id.bloodBar);
+            db.collection("pets").document(documentname).collection("countdown")
+                    .get()
+                    .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                        @Override
+                        public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                            if (task.isSuccessful()) {
+                                for (QueryDocumentSnapshot document : task.getResult()) {
+                                    DocumentSnapshot doc = document;
+                                    StringBuilder field = new StringBuilder("");
+                                    StringBuilder field1 = new StringBuilder("");
+                                    StringBuilder field2 = new StringBuilder("");
+                                    String startDay = field.append(doc.get("startDay")).toString();
+                                    String endDay = field1.append(doc.get("endDay")).toString();
+                                    String countdownEvent = field2.append(doc.get("countdownEvent")).toString();
 
-                                if(countdownEvent.equals(pet_query+"洗澡")){
-                                    try {
-                                        int countdownday = dueDay(startDay,endDay);
-                                        showerBar.setMax(countdownday);
-                                        showerBar.setProgress(countdownday-countdowndate(endDay));
-                                        Drawable progressDrawable1 = showerBar.getProgressDrawable().mutate();
-                                        progressDrawable1.setColorFilter(0xFF0071BC, android.graphics.PorterDuff.Mode.SRC_IN);
-                                        showerBar.setProgressDrawable(progressDrawable1);
-                                        if (countdowndate(endDay) <= 0){
-                                            notification();
-                                            Drawable progressDrawable = showerBar.getProgressDrawable().mutate();
-                                            progressDrawable.setColorFilter(0xFFFF0000, android.graphics.PorterDuff.Mode.SRC_IN);
-                                            showerBar.setProgressDrawable(progressDrawable);
+                                    if (countdownEvent.equals(pet_query + "洗澡")) {
+                                        try {
+                                            int countdownday = dueDay(startDay, endDay);
+                                            showerBar.setMax(countdownday);
+                                            showerBar.setProgress(countdownday - countdowndate(endDay));
+                                            Drawable progressDrawable1 = showerBar.getProgressDrawable().mutate();
+                                            progressDrawable1.setColorFilter(0xFF0071BC, android.graphics.PorterDuff.Mode.SRC_IN);
+                                            showerBar.setProgressDrawable(progressDrawable1);
+                                            if (countdowndate(endDay) <= 0) {
+                                                notification();
+                                                Drawable progressDrawable = showerBar.getProgressDrawable().mutate();
+                                                progressDrawable.setColorFilter(0xFFFF0000, android.graphics.PorterDuff.Mode.SRC_IN);
+                                                showerBar.setProgressDrawable(progressDrawable);
+                                            }
+                                            if (countdowndate(endDay) <= countdownday * 0.5 && countdowndate(endDay) > 0) {
+                                                Drawable progressDrawable = showerBar.getProgressDrawable().mutate();
+                                                progressDrawable.setColorFilter(0xFFFF6600, android.graphics.PorterDuff.Mode.SRC_IN);
+                                                showerBar.setProgressDrawable(progressDrawable);
+                                            }
+                                        } catch (ParseException e) {
+                                            e.printStackTrace();
                                         }
-                                        if(countdowndate(endDay)<=countdownday*0.5 && countdowndate(endDay)>0){
-                                            Drawable progressDrawable = showerBar.getProgressDrawable().mutate();
-                                            progressDrawable.setColorFilter(0xFFFF6600, android.graphics.PorterDuff.Mode.SRC_IN);
-                                            showerBar.setProgressDrawable(progressDrawable);
+                                    }
+                                    if (countdownEvent.equals(pet_query + "修剪毛髮")) {
+                                        try {
+                                            int haircutcountdownday = dueDay(startDay, endDay);
+                                            hairCutBar.setMax(haircutcountdownday);
+                                            hairCutBar.setProgress(haircutcountdownday - countdowndate(endDay));
+                                            Drawable progressDrawable1 = hairCutBar.getProgressDrawable().mutate();
+                                            progressDrawable1.setColorFilter(0xFF0071BC, android.graphics.PorterDuff.Mode.SRC_IN);
+                                            hairCutBar.setProgressDrawable(progressDrawable1);
+                                            if (countdowndate(endDay) <= 0) {
+                                                notification();
+                                                Drawable progressDrawable = hairCutBar.getProgressDrawable().mutate();
+                                                progressDrawable.setColorFilter(Color.RED, android.graphics.PorterDuff.Mode.SRC_IN);
+                                                hairCutBar.setProgressDrawable(progressDrawable);
+                                            }
+                                            if (countdowndate(endDay) <= haircutcountdownday * 0.5 && countdowndate(endDay) > 0) {
+                                                Drawable progressDrawable = hairCutBar.getProgressDrawable().mutate();
+                                                progressDrawable.setColorFilter(0xFFFF6600, android.graphics.PorterDuff.Mode.SRC_IN);
+                                                hairCutBar.setProgressDrawable(progressDrawable);
+                                            }
+                                        } catch (ParseException e) {
+                                            e.printStackTrace();
                                         }
-                                    } catch (ParseException e) {
-                                        e.printStackTrace();
+                                    }
+                                    if (countdownEvent.equals(pet_query + "體內除蟲")) {
+                                        try {
+                                            int fleaincountdownday = dueDay(startDay, endDay);
+                                            fleaInBar.setMax(fleaincountdownday);
+                                            fleaInBar.setProgress(fleaincountdownday - countdowndate(endDay));
+                                            Drawable progressDrawable1 = fleaInBar.getProgressDrawable().mutate();
+                                            progressDrawable1.setColorFilter(0xFF0071BC, android.graphics.PorterDuff.Mode.SRC_IN);
+                                            fleaInBar.setProgressDrawable(progressDrawable1);
+                                            if (countdowndate(endDay) <= 0) {
+                                                notification();
+                                                Drawable progressDrawable = fleaInBar.getProgressDrawable().mutate();
+                                                progressDrawable.setColorFilter(Color.RED, android.graphics.PorterDuff.Mode.SRC_IN);
+                                                fleaInBar.setProgressDrawable(progressDrawable);
+                                            }
+                                            if (countdowndate(endDay) <= fleaincountdownday * 0.5 && countdowndate(endDay) > 0) {
+                                                Drawable progressDrawable = fleaInBar.getProgressDrawable().mutate();
+                                                progressDrawable.setColorFilter(0xFFFF6600, android.graphics.PorterDuff.Mode.SRC_IN);
+                                                fleaInBar.setProgressDrawable(progressDrawable);
+                                            }
+                                        } catch (ParseException e) {
+                                            e.printStackTrace();
+                                        }
+                                    }
+                                    if (countdownEvent.equals(pet_query + "體外除蟲")) {
+                                        try {
+                                            int fleaoutcountdownday = dueDay(startDay, endDay);
+                                            fleaOutBar.setMax(fleaoutcountdownday);
+                                            fleaOutBar.setProgress(fleaoutcountdownday - countdowndate(endDay));
+                                            Drawable progressDrawable1 = fleaOutBar.getProgressDrawable().mutate();
+                                            progressDrawable1.setColorFilter(0xFF0071BC, android.graphics.PorterDuff.Mode.SRC_IN);
+                                            fleaOutBar.setProgressDrawable(progressDrawable1);
+                                            if (countdowndate(endDay) <= 0) {
+                                                notification();
+                                                Drawable progressDrawable = fleaOutBar.getProgressDrawable().mutate();
+                                                progressDrawable.setColorFilter(Color.RED, android.graphics.PorterDuff.Mode.SRC_IN);
+                                                fleaOutBar.setProgressDrawable(progressDrawable);
+                                            }
+                                            if (countdowndate(endDay) <= fleaoutcountdownday * 0.5 && countdowndate(endDay) > 0) {
+                                                Drawable progressDrawable = fleaOutBar.getProgressDrawable().mutate();
+                                                progressDrawable.setColorFilter(0xFFFF6600, android.graphics.PorterDuff.Mode.SRC_IN);
+                                                fleaOutBar.setProgressDrawable(progressDrawable);
+                                            }
+                                        } catch (ParseException e) {
+                                            e.printStackTrace();
+                                        }
+                                    }
+                                    if (countdownEvent.equals(pet_query + "注射")) {
+                                        try {
+                                            int injectioncountdownday = dueDay(startDay, endDay);
+                                            injectionBar.setMax(injectioncountdownday);
+                                            injectionBar.setProgress(injectioncountdownday - countdowndate(endDay));
+                                            Drawable progressDrawable1 = injectionBar.getProgressDrawable().mutate();
+                                            progressDrawable1.setColorFilter(0xFF0071BC, android.graphics.PorterDuff.Mode.SRC_IN);
+                                            injectionBar.setProgressDrawable(progressDrawable1);
+                                            if (countdowndate(endDay) <= 0) {
+                                                notification();
+                                                Drawable progressDrawable = injectionBar.getProgressDrawable().mutate();
+                                                progressDrawable.setColorFilter(Color.RED, android.graphics.PorterDuff.Mode.SRC_IN);
+                                                injectionBar.setProgressDrawable(progressDrawable);
+                                            }
+                                            if (countdowndate(endDay) <= injectioncountdownday * 0.5 && countdowndate(endDay) > 0) {
+                                                Drawable progressDrawable = injectionBar.getProgressDrawable().mutate();
+                                                progressDrawable.setColorFilter(0xFFFF6600, android.graphics.PorterDuff.Mode.SRC_IN);
+                                                injectionBar.setProgressDrawable(progressDrawable);
+                                            }
+                                        } catch (ParseException e) {
+                                            e.printStackTrace();
+                                        }
+                                    }
+                                    if (countdownEvent.equals(pet_query + "看牙醫")) {
+                                        try {
+                                            int teethcountdownday = dueDay(startDay, endDay);
+                                            teethBar.setMax(teethcountdownday);
+                                            teethBar.setProgress(teethcountdownday - countdowndate(endDay));
+                                            Drawable progressDrawable1 = teethBar.getProgressDrawable().mutate();
+                                            progressDrawable1.setColorFilter(0xFF0071BC, android.graphics.PorterDuff.Mode.SRC_IN);
+                                            teethBar.setProgressDrawable(progressDrawable1);
+                                            if (countdowndate(endDay) <= 0) {
+                                                notification();
+                                                Drawable progressDrawable = teethBar.getProgressDrawable().mutate();
+                                                progressDrawable.setColorFilter(Color.RED, android.graphics.PorterDuff.Mode.SRC_IN);
+                                                teethBar.setProgressDrawable(progressDrawable);
+                                            }
+                                            if (countdowndate(endDay) <= teethcountdownday * 0.5 && countdowndate(endDay) > 0) {
+                                                Drawable progressDrawable = teethBar.getProgressDrawable().mutate();
+                                                progressDrawable.setColorFilter(0xFFFF6600, android.graphics.PorterDuff.Mode.SRC_IN);
+                                                teethBar.setProgressDrawable(progressDrawable);
+                                            }
+                                        } catch (ParseException e) {
+                                            e.printStackTrace();
+                                        }
+                                    }
+                                    if (countdownEvent.equals(pet_query + "經期")) {
+                                        try {
+                                            int bloodcountdownday = dueDay(startDay, endDay);
+                                            bloodBar.setMax(bloodcountdownday);
+                                            bloodBar.setProgress(bloodcountdownday - countdowndate(endDay));
+                                            Drawable progressDrawable1 = bloodBar.getProgressDrawable().mutate();
+                                            progressDrawable1.setColorFilter(0xFF0071BC, android.graphics.PorterDuff.Mode.SRC_IN);
+                                            bloodBar.setProgressDrawable(progressDrawable1);
+                                            if (countdowndate(endDay) <= 0) {
+                                                notification();
+                                                Drawable progressDrawable = bloodBar.getProgressDrawable().mutate();
+                                                progressDrawable.setColorFilter(Color.RED, android.graphics.PorterDuff.Mode.SRC_IN);
+                                                bloodBar.setProgressDrawable(progressDrawable);
+                                            }
+                                            if (countdowndate(endDay) <= bloodcountdownday * 0.5 && countdowndate(endDay) > 0) {
+                                                Drawable progressDrawable = bloodBar.getProgressDrawable().mutate();
+                                                progressDrawable.setColorFilter(0xFFFF6600, android.graphics.PorterDuff.Mode.SRC_IN);
+                                                bloodBar.setProgressDrawable(progressDrawable);
+                                            }
+                                        } catch (ParseException e) {
+                                            e.printStackTrace();
+                                        }
                                     }
                                 }
-                                if(countdownEvent.equals(pet_query+"修剪毛髮")){
-                                    try {
-                                        int haircutcountdownday = dueDay(startDay,endDay);
-                                        hairCutBar.setMax(haircutcountdownday);
-                                        hairCutBar.setProgress(haircutcountdownday-countdowndate(endDay));
-                                        Drawable progressDrawable1 = hairCutBar.getProgressDrawable().mutate();
-                                        progressDrawable1.setColorFilter(0xFF0071BC, android.graphics.PorterDuff.Mode.SRC_IN);
-                                        hairCutBar.setProgressDrawable(progressDrawable1);
-                                        if (countdowndate(endDay) <= 0){
-                                            notification();
-                                            Drawable progressDrawable = hairCutBar.getProgressDrawable().mutate();
-                                            progressDrawable.setColorFilter(Color.RED, android.graphics.PorterDuff.Mode.SRC_IN);
-                                            hairCutBar.setProgressDrawable(progressDrawable);
-                                        }
-                                        if(countdowndate(endDay)<=haircutcountdownday*0.5 && countdowndate(endDay)> 0){
-                                            Drawable progressDrawable = hairCutBar.getProgressDrawable().mutate();
-                                            progressDrawable.setColorFilter( 0xFFFF6600, android.graphics.PorterDuff.Mode.SRC_IN);
-                                            hairCutBar.setProgressDrawable(progressDrawable);
-                                        }
-                                    } catch (ParseException e) {
-                                        e.printStackTrace();
-                                    }
-                                }
-                                if(countdownEvent.equals(pet_query+"體內除蟲")){
-                                    try {
-                                        int fleaincountdownday = dueDay(startDay,endDay);
-                                        fleaInBar.setMax(fleaincountdownday);
-                                        fleaInBar.setProgress(fleaincountdownday-countdowndate(endDay));
-                                        Drawable progressDrawable1 = fleaInBar.getProgressDrawable().mutate();
-                                        progressDrawable1.setColorFilter(0xFF0071BC, android.graphics.PorterDuff.Mode.SRC_IN);
-                                        fleaInBar.setProgressDrawable(progressDrawable1);
-                                        if (countdowndate(endDay) <= 0){
-                                            notification();
-                                            Drawable progressDrawable = fleaInBar.getProgressDrawable().mutate();
-                                            progressDrawable.setColorFilter(Color.RED, android.graphics.PorterDuff.Mode.SRC_IN);
-                                            fleaInBar.setProgressDrawable(progressDrawable);
-                                        }
-                                        if(countdowndate(endDay)<=fleaincountdownday*0.5 && countdowndate(endDay)>0){
-                                            Drawable progressDrawable = fleaInBar.getProgressDrawable().mutate();
-                                            progressDrawable.setColorFilter(0xFFFF6600, android.graphics.PorterDuff.Mode.SRC_IN);
-                                            fleaInBar.setProgressDrawable(progressDrawable);
-                                        }
-                                    } catch (ParseException e) {
-                                        e.printStackTrace();
-                                    }
-                                }
-                                if(countdownEvent.equals(pet_query+"體外除蟲")){
-                                    try {
-                                        int fleaoutcountdownday = dueDay(startDay,endDay);
-                                        fleaOutBar.setMax(fleaoutcountdownday);
-                                        fleaOutBar.setProgress(fleaoutcountdownday-countdowndate(endDay));
-                                        Drawable progressDrawable1 = fleaOutBar.getProgressDrawable().mutate();
-                                        progressDrawable1.setColorFilter(0xFF0071BC, android.graphics.PorterDuff.Mode.SRC_IN);
-                                        fleaOutBar.setProgressDrawable(progressDrawable1);
-                                        if (countdowndate(endDay) <= 0){
-                                            notification();
-                                            Drawable progressDrawable =  fleaOutBar.getProgressDrawable().mutate();
-                                            progressDrawable.setColorFilter(Color.RED, android.graphics.PorterDuff.Mode.SRC_IN);
-                                            fleaOutBar.setProgressDrawable(progressDrawable);
-                                        }
-                                        if(countdowndate(endDay)<=fleaoutcountdownday*0.5 && countdowndate(endDay)>0){
-                                            Drawable progressDrawable =  fleaOutBar.getProgressDrawable().mutate();
-                                            progressDrawable.setColorFilter(0xFFFF6600, android.graphics.PorterDuff.Mode.SRC_IN);
-                                            fleaOutBar.setProgressDrawable(progressDrawable);
-                                        }
-                                    } catch (ParseException e) {
-                                        e.printStackTrace();
-                                    }
-                                }
-                                if(countdownEvent.equals(pet_query+"注射")){
-                                    try {
-                                        int injectioncountdownday = dueDay(startDay,endDay);
-                                        injectionBar.setMax(injectioncountdownday);
-                                        injectionBar.setProgress(injectioncountdownday-countdowndate(endDay));
-                                        Drawable progressDrawable1 = injectionBar.getProgressDrawable().mutate();
-                                        progressDrawable1.setColorFilter(0xFF0071BC, android.graphics.PorterDuff.Mode.SRC_IN);
-                                        injectionBar.setProgressDrawable(progressDrawable1);
-                                        if (countdowndate(endDay) <= 0){
-                                            notification();
-                                            Drawable progressDrawable =  injectionBar.getProgressDrawable().mutate();
-                                            progressDrawable.setColorFilter(Color.RED, android.graphics.PorterDuff.Mode.SRC_IN);
-                                            injectionBar.setProgressDrawable(progressDrawable);
-                                        }
-                                        if(countdowndate(endDay)<=injectioncountdownday*0.5 && countdowndate(endDay)> 0){
-                                            Drawable progressDrawable =  injectionBar.getProgressDrawable().mutate();
-                                            progressDrawable.setColorFilter(0xFFFF6600, android.graphics.PorterDuff.Mode.SRC_IN);
-                                            injectionBar.setProgressDrawable(progressDrawable);
-                                        }
-                                    } catch (ParseException e) {
-                                        e.printStackTrace();
-                                    }
-                                }
-                                if(countdownEvent.equals(pet_query+"看牙醫")){
-                                    try {
-                                        int teethcountdownday = dueDay(startDay,endDay);
-                                        teethBar.setMax(teethcountdownday);
-                                        teethBar.setProgress(teethcountdownday-countdowndate(endDay));
-                                        Drawable progressDrawable1 = teethBar.getProgressDrawable().mutate();
-                                        progressDrawable1.setColorFilter(0xFF0071BC, android.graphics.PorterDuff.Mode.SRC_IN);
-                                        teethBar.setProgressDrawable(progressDrawable1);
-                                        if (countdowndate(endDay) <= 0){
-                                            notification();
-                                            Drawable progressDrawable = teethBar.getProgressDrawable().mutate();
-                                            progressDrawable.setColorFilter(Color.RED, android.graphics.PorterDuff.Mode.SRC_IN);
-                                            teethBar.setProgressDrawable(progressDrawable);
-                                        }
-                                        if(countdowndate(endDay)<=teethcountdownday*0.5 && countdowndate(endDay)> 0){
-                                            Drawable progressDrawable =  teethBar.getProgressDrawable().mutate();
-                                            progressDrawable.setColorFilter(0xFFFF6600, android.graphics.PorterDuff.Mode.SRC_IN);
-                                            teethBar.setProgressDrawable(progressDrawable);
-                                        }
-                                    } catch (ParseException e) {
-                                        e.printStackTrace();
-                                    }
-                                }
-                                if(countdownEvent.equals(pet_query+"經期")){
-                                    try {
-                                        int bloodcountdownday = dueDay(startDay,endDay);
-                                        bloodBar.setMax(bloodcountdownday);
-                                        bloodBar.setProgress(bloodcountdownday-countdowndate(endDay));
-                                        Drawable progressDrawable1 = bloodBar.getProgressDrawable().mutate();
-                                        progressDrawable1.setColorFilter(0xFF0071BC, android.graphics.PorterDuff.Mode.SRC_IN);
-                                        bloodBar.setProgressDrawable(progressDrawable1);
-                                        if (countdowndate(endDay) <= 0){
-                                            notification();
-                                            Drawable progressDrawable = bloodBar.getProgressDrawable().mutate();
-                                            progressDrawable.setColorFilter(Color.RED, android.graphics.PorterDuff.Mode.SRC_IN);
-                                            bloodBar.setProgressDrawable(progressDrawable);
-                                        }
-                                        if(countdowndate(endDay)<=bloodcountdownday*0.5 && countdowndate(endDay)> 0){
-                                            Drawable progressDrawable =  bloodBar.getProgressDrawable().mutate();
-                                            progressDrawable.setColorFilter(0xFFFF6600, android.graphics.PorterDuff.Mode.SRC_IN);
-                                            bloodBar.setProgressDrawable(progressDrawable);
-                                        }
-                                    } catch (ParseException e) {
-                                        e.printStackTrace();
-                                    }
-                                }
+                            } else {
+
                             }
-                        } else {
 
                         }
-                    }
-                });
+                    });
+        }
     }
 }
