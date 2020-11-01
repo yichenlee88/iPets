@@ -57,12 +57,12 @@
                     label="描述"
                   ></v-text-field>
                   <v-text-field
-                    v-model="start"
+                    v-model="startTitle"
                     type="date"
                     label="開始日期 (必須)"
                   ></v-text-field>
                   <v-text-field
-                    v-model="end"
+                    v-model="endTitle"
                     type="date"
                     label="結束日期 (必須)"
                   ></v-text-field
@@ -107,12 +107,12 @@
                     label="描述"
                   ></v-text-field>
                   <v-text-field
-                    v-model="start"
+                    v-model="startTitle"
                     type="date"
                     label="開始日期 (必須)"
                   ></v-text-field>
                   <v-text-field
-                    v-model="end"
+                    v-model="endTitle"
                     type="date"
                     label="結束日期 (必須)"
                   ></v-text-field
@@ -241,6 +241,8 @@ export default {
       start: new Date().toISOString().slice(0, 10),
       focus: new Date(),
       date: new Date(),
+      startTitle: null,
+      endTitle: null,
       type: "month",
       typeToLabel: {
         month: "月",
@@ -280,6 +282,8 @@ export default {
       if (!start || !end) {
         return "";
       }
+      console.log(start);
+      console.log(end);
       const startMonth = start.month;
       const endMonth = end.month;
       const suffixMonth = startMonth === endMonth ? startMonth : endMonth;
@@ -304,7 +308,7 @@ export default {
   },
   methods: {
     add: function(newdate) {
-      console.log(".");
+      console.log("add.");
       fStore
         .collection("pets")
         .doc("3heOY1mUC6wCbo2jdE9M")
@@ -336,8 +340,8 @@ export default {
     setDialogDate({ date }) {
       this.dialogDate = true;
       this.focus = date;
-      this.start = date;
-      this.end = date;
+      this.startTitle = date;
+      this.endTitle = date;
     },
     viewDay({ date }) {
       this.focus = date;
