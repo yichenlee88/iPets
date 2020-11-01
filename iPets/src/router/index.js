@@ -210,6 +210,23 @@ let router = new Router({
       ]
     },
     {
+      path: "/post",
+      name: "Post",
+      component: Post,
+      redirect: "dogScience",
+      meta: {
+        requiresGuest: true
+      }
+    },
+    {
+      path: "/albumView",
+      name: "albumView",
+      redirect: "album",
+      meta: {
+        requiresAuth: true
+      }
+    },
+    {
       path: "*",
       name: "pageNotFound",
       component: pageNotFound
