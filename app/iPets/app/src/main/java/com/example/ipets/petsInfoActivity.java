@@ -40,9 +40,9 @@ import com.google.firebase.storage.UploadTask;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -169,8 +169,7 @@ public class petsInfoActivity extends AppCompatActivity {
                 break;
         }
         Calendar now = Calendar.getInstance();
-        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
-        String nowstr = df.format(now.getTime());
+        Date nowdate =  now.getTime();
         FirebaseFirestore db;
         db = FirebaseFirestore.getInstance();
         Map<String, Object> userInfo = new HashMap<>();
@@ -182,7 +181,7 @@ public class petsInfoActivity extends AppCompatActivity {
         userInfo.put("petNote", petsnotes);
         userInfo.put("petImage", petsimage);
         userInfo.put("uid", userUID);
-        userInfo.put("timestamp", nowstr);
+        userInfo.put("timestamp", nowdate);
         userInfo.put("petBirth_year", petBirth_year);
         userInfo.put("petBirth_month", petBirth_month);
         userInfo.put("petBirth_date",petBirth_date);

@@ -1,8 +1,8 @@
 package com.example.ipets;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
@@ -11,11 +11,16 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -73,20 +78,32 @@ public class EditContactusActivity extends AppCompatActivity implements AdapterV
         String Contactemail = edemail.getText().toString();
         eddescription = findViewById(R.id.description);
         String description = eddescription.getText().toString();
-
         problemSpinner = findViewById(R.id.problemSpinner);
         String problemtype = problemSpinner.getSelectedItem().toString();
-
+        Calendar now = Calendar.getInstance();
+        Date NOW = now.getTime();
         FirebaseFirestore db;
         db = FirebaseFirestore.getInstance();
         Map<String, Object> newContact = new HashMap<>();
-        newContact.put("MasterName", masterName);
-        newContact.put("Contactemail", Contactemail);
-        newContact.put("Description", description);
-        newContact.put("Problemtype", problemtype);
-
-        db.collection("userInformation").document(userUID).collection("ContactUs").document("Contactinfo").set(newContact);
-
+        newContact.put("userName", masterName);
+        newContact.put("email", Contactemail);
+        newContact.put("description", description);
+        newContact.put("problemType", problemtype);
+        newContact.put("timestamp", NOW);
+        db.collection("contact").document().set(newContact);
+        AlertDialog.Builder finishsignup = new AlertDialog.Builder(EditContactusActivity.this);
+        finishsignup.setMessage("傳送成功");
+        finishsignup.setNegativeButton("確認", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface arg0, int arg1) {
+                Intent intent=new Intent();
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
+                intent.setClass(EditContactusActivity.this,HomeActivity.class);
+                startActivity(intent);
+            }
+        });
+        finishsignup.setCancelable(false);
+        finishsignup.show();
     }
 }
 
