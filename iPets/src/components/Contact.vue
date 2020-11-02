@@ -16,14 +16,14 @@
           <b-form @submit="onSubmit">
             <b-form-input
               class="InputClass"
-              name="username"
-              v-model="username"
+              name="userName"
+              v-model="userName"
               placeholder="使用者名稱"
             ></b-form-input>
             <b-form-select
               class="InputClass center"
-              name="prombleType"
-              v-model="prombleType"
+              name="problemType"
+              v-model="problemType"
               :options="options"
             ></b-form-select
             ><b-form-input
@@ -90,8 +90,8 @@ export default {
   name: "Contact",
   data() {
     return {
-      prombleType: null,
-      username: "",
+      problemType: null,
+      userName: "",
       email: "",
       description: "",
       options: [
@@ -103,7 +103,8 @@ export default {
         { value: "關於辨識功能", text: "關於辨識功能" },
         { value: "關於風格轉換", text: "關於風格轉換" },
         { value: "給iPets的建議", text: "給iPets的建議" }
-      ]
+      ],
+      timestamp: ""
     };
   },
   methods: {
@@ -112,10 +113,11 @@ export default {
       var docRef = fStore.collection("contact").doc();
       docRef
         .set({
-          username: this.username,
+          userName: this.userName,
           email: this.email,
-          prombleType: this.prombleType,
-          description: this.description
+          problemType: this.problemType,
+          description: this.description,
+          timestamp: new Date()
         })
         .then(() => {
           this.$router.go({ path: this.$router.path });
