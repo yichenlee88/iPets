@@ -34,7 +34,7 @@
     <string name="RadioButton_gender1">男</string>
     <string name="TextView_gender">性別</string>
     <string name="TextView_name">姓名</string>
-    <string name="TextView_birth">生日</string>
+    <string name="TextView_birth">用戶生日</string>
     <string name="RadioButton_gender2">女</string>
     <string name="RadioButton_gender3">不願透露</string>
     <string name="TextView_address">地址</string>
