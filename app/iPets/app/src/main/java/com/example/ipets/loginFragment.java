@@ -69,7 +69,7 @@ public class loginFragment extends Fragment {
         if(currentUser!=null) {
             Intent intent=new Intent();
             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
-            intent.setClass(getActivity(),HomeActivity.class);
+            intent.setClass(getActivity(), homeActivity.class);
             startActivity(intent);
         }
 
@@ -115,7 +115,7 @@ public class loginFragment extends Fragment {
                 }else{
                     Intent intent=new Intent();
                     intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
-                    intent.setClass(getActivity(),HomeActivity.class);
+                    intent.setClass(getActivity(), homeActivity.class);
                     startActivity(intent);
                 }
             }
