@@ -13,9 +13,9 @@
     <b-col col="8" sm="8" md="8">
       <b-form-input
         class="InputClass"
-        name="username"
+        name="userName"
         v-model="text"
-        placeholder="UserName"
+        placeholder="userName"
       ></b-form-input>
     </b-col>
     <b-col class="coltitle" col="4" sm="4" md="4"> <p>生日：</p></b-col>

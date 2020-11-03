@@ -5,8 +5,10 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -29,6 +31,11 @@ public class AddNoteActivity extends AppCompatActivity {
         final CalendarView datePicker = findViewById(R.id.datePicker);
         Button button = (Button) findViewById(R.id.addNoteButton);
         final EditText noteEditText = findViewById(R.id.noteEditText);
+
+        Spinner sexSpinner = findViewById(R.id.repeatSpinner);
+        ArrayAdapter adapter = ArrayAdapter.createFromResource(this, R.array.Spinner_repeat, R.layout.myspinner_layout);
+        adapter.setDropDownViewResource(R.layout.myspinner_dropdown_layout);
+        sexSpinner.setAdapter(adapter);
 
         button.setOnClickListener(new View.OnClickListener() {
             @Override
