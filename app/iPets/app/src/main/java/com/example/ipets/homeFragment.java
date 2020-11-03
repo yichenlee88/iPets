@@ -397,7 +397,7 @@ public class homeFragment extends Fragment {
                                 progressDrawable.setColorFilter(0xFFFF0000, android.graphics.PorterDuff.Mode.SRC_IN);
                                 showerBar.setProgressDrawable(progressDrawable);
                             }
-                            if(countdowndate(showerday)<=countdownday*0.5 && countdowndate(showerday)>=0){
+                            if(countdowndate(showerday)<=countdownday*0.5 && countdowndate(showerday)>0){
                                 Drawable progressDrawable = showerBar.getProgressDrawable().mutate();
                                 progressDrawable.setColorFilter(0xFFFF6600, android.graphics.PorterDuff.Mode.SRC_IN);
                                 showerBar.setProgressDrawable(progressDrawable);

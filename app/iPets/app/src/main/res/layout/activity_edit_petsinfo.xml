@@ -74,7 +74,9 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:entries="@array/Spinner_petSex"
-        android:paddingHorizontal="15dp"
+        android:background="@drawable/spinner_style"
+        android:layout_marginStart="17dp"
+        android:layout_marginEnd="17dp"
         android:spinnerMode="dialog" />
 
     <EditText
