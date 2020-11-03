@@ -164,14 +164,6 @@ let router = new Router({
       }
     },
     {
-      path: "/albumView/:name",
-      name: "albumView",
-      component: albumView,
-      meta: {
-        requiresAuth: true
-      }
-    },
-    {
       path: "/setting",
       name: "Setting",
       component: Setting,
@@ -210,18 +202,9 @@ let router = new Router({
       ]
     },
     {
-      path: "/post",
-      name: "Post",
-      component: Post,
-      redirect: "dogScience",
-      meta: {
-        requiresGuest: true
-      }
-    },
-    {
-      path: "/albumView",
+      path: "/albumView/:name",
       name: "albumView",
-      redirect: "album",
+      component: albumView,
       meta: {
         requiresAuth: true
       }
