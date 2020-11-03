@@ -128,7 +128,7 @@ public class userInfoFragment extends Fragment {
             public void onClick(DialogInterface arg0, int arg1) {
                 Intent intent=new Intent();
                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
-                intent.setClass(getActivity(),HomeActivity.class);
+                intent.setClass(getActivity(), homeActivity.class);
                 startActivity(intent);
             }
         });

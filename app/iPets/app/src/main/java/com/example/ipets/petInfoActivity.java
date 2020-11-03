@@ -200,7 +200,7 @@ public class petInfoActivity extends AppCompatActivity {
             public void onClick(DialogInterface arg0, int arg1) {
                 Intent intent=new Intent();
                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
-                intent.setClass(petInfoActivity.this,HomeActivity.class);
+                intent.setClass(petInfoActivity.this, homeActivity.class);
                 startActivity(intent);
             }
         });

@@ -44,7 +44,7 @@ public class settingActivity extends AppCompatActivity {
         btn_question.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intentQuestion = new Intent(settingActivity.this,EditQuestionActivity.class);
+                Intent intentQuestion = new Intent(settingActivity.this, editQuestionActivity.class);
                 startActivity(intentQuestion);
             }
         });

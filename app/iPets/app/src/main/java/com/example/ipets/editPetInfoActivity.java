@@ -218,7 +218,7 @@ public class editPetInfoActivity extends AppCompatActivity implements AdapterVie
             public void onClick(DialogInterface arg0, int arg1) {
                 Intent intent=new Intent();
                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
-                intent.setClass(editPetInfoActivity.this,HomeActivity.class);
+                intent.setClass(editPetInfoActivity.this, homeActivity.class);
                 startActivity(intent);
             }
         });

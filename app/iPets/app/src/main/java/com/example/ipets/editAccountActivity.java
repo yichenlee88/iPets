@@ -87,7 +87,7 @@ public class editAccountActivity extends AppCompatActivity {
             public void onClick(DialogInterface arg0, int arg1) {
                 Intent intent=new Intent();
                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
-                intent.setClass(editAccountActivity.this,HomeActivity.class);
+                intent.setClass(editAccountActivity.this, homeActivity.class);
                 startActivity(intent);
             }
         });

@@ -247,7 +247,7 @@ public class homeFragment extends Fragment {
         channel.enableLights(true);
         NotificationManager manager = (NotificationManager)getActivity().getSystemService(getActivity().NOTIFICATION_SERVICE);
         manager.createNotificationChannel(channel);//添加channel
-        Intent it = new Intent(getActivity(), HomeActivity.class);
+        Intent it = new Intent(getActivity(), homeActivity.class);
         it.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         PendingIntent pit = PendingIntent.getActivity(getActivity(), 0, it,PendingIntent.FLAG_ONE_SHOT);
         Notification notification = new Notification.Builder(getActivity(),id)

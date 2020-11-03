@@ -14,7 +14,7 @@ import android.view.MenuItem;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-public class HomeActivity extends AppCompatActivity {
+public class homeActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,19 +45,19 @@ public class HomeActivity extends AppCompatActivity {
                         return true;
 
                     case R.id.calendar:
-                        Intent intentCalendar = new Intent(HomeActivity.this,CalendarActivity.class);
+                        Intent intentCalendar = new Intent(homeActivity.this,CalendarActivity.class);
                         intentCalendar.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                         startActivity(intentCalendar);
                         return true;
 
                     case R.id.photoGallery:
-                        Intent intentGallery = new Intent(HomeActivity.this,PhotoGalleryActivity.class);
+                        Intent intentGallery = new Intent(homeActivity.this,PhotoGalleryActivity.class);
                         intentGallery.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                         startActivity(intentGallery);
                         return true;
 
                     case R.id.locate:
-                        Intent intentMap = new Intent(HomeActivity.this,MapsActivity.class);
+                        Intent intentMap = new Intent(homeActivity.this,MapsActivity.class);
                         intentMap.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                         startActivity(intentMap);
                         return true;
@@ -69,7 +69,7 @@ public class HomeActivity extends AppCompatActivity {
 
                          */
                     case R.id.setting:
-                        Intent intentSet = new Intent(HomeActivity.this, settingActivity.class);
+                        Intent intentSet = new Intent(homeActivity.this, settingActivity.class);
                         intentSet.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                         startActivity(intentSet);
                         return true;
