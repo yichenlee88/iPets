@@ -13,12 +13,12 @@
         <b-modal size="lg" id="my-modal" hide-footer title="新增相簿">
           <b-form>
             <b-col>
-              <b-input v-model="albumName" placeholder="請輸入相簿名稱"></b-input>
+              <b-input v-model="albumName" placeholder="請輸入相簿名稱，並選取一張照片"></b-input>
             </b-col>
             <b-col>
               <b-input-group class="my-3 px-2 py-2 bg-white shadow-sm">
                 <input
-                  multiple
+                  @change="handleFileUpload"
                   id="fileButton"
                   type="file"
                   accept="image/jpeg, image/png"
@@ -37,28 +37,32 @@
                 class="ml-auto mt-auto"
                 style="height: 45px;float:right"
                 variant="outline-primary"
-                @click="createAlbum"
+                @click="createAlbum();$bvModal.hide('my-modal')"
               >確認新增</b-button>
             </b-col>
           </b-form>
         </b-modal>
       </div>
     </div>
-    <b-row cols-md="3" style="margin:20px 20px">
-      <div v-for="(item, index) in url" :key="index">
-        <b-card style="margin:20px">
-          <b-col>
-            <b-col>
-              <img style="max-width: 100%" :src="item">
-            </b-col>
-          </b-col>
-        </b-card>
-        <!-- if there is no any album -->
-        <div v-if="!album">
-          <b-img class="banner_png center" src="../static/img/gray.png" style="width:468px;"></b-img>
-        </div>
-      </div>
+
+    <b-row lg="4" style="margin:20px 20px">
+      <b-col cols="6" md="4" v-for="(item, index) in album" :key="index">
+        <a :href="'#/albumView/' + item.name">
+          <b-card
+            v-if="album"
+            overlay
+            style="margin:20px"
+            text-variant="white"
+            :img-src="url[index]"
+            :title="item.name"
+          ></b-card>
+        </a>
+      </b-col>
     </b-row>
+    <!-- if there is no any album -->
+    <div v-if=" !album ">
+      <b-img class="banner_png center" src="../static/img/gray.png" style="width:468px;"></b-img>
+    </div>
   </b-container>
 </template>
 
@@ -72,6 +76,7 @@ export default {
   data() {
     return {
       albumName: "",
+      imageData: null,
       file: [],
       album: [],
       url: []
@@ -80,6 +85,7 @@ export default {
   mounted() {
     let album = this.album;
     let imageUrl = this.url;
+    fStore.collection("user").get();
     fStore
       .collection("user")
       .get()
@@ -89,18 +95,22 @@ export default {
           console.log(doc.id, doc.data());
         });
       });
-    var storageRef = firebase.storage().ref("user1/albumTest/");
+    var storageRef = firebase.storage().ref("user1/");
+    let folderName = [];
     storageRef
       .listAll()
       .then(function(res) {
         res.prefixes.forEach(function(folderRef) {
-          alert(folderRef);
-          console.log(folderRef);
-        });
-        res.items.forEach(function(itemRef) {
-          album.push(itemRef);
-          itemRef.getDownloadURL().then(function(url) {
-            imageUrl.push(url);
+          folderName.push(folderRef.name);
+          album.push(folderRef);
+          console.log(folderRef, folderRef.name, folderName);
+          var imageRef = firebase.storage().ref("user1/" + folderRef.name);
+          imageRef.listAll().then(function(res) {
+            res.items.forEach(function(itemRef) {
+              itemRef.getDownloadURL().then(function(url) {
+                imageUrl.push(url);
+              });
+            });
           });
         });
       })
@@ -109,21 +119,16 @@ export default {
       });
   },
   methods: {
+    handleFileUpload(e) {
+      this.imageData = e.target.files[0];
+    },
     createAlbum() {
-      var fileButton = document.getElementById("fileButton");
-      fileButton.addEventListener("change", function(e) {
-        var file = e.target.files[0];
-        var storageRef = firebase
-          .storage()
-          .ref("user1/" + "albumTest/" + this.albumName);
-        storageRef.put(file).then(function(snapshot) {
-          console.log("Uploaded files!");
-          console.log(e);
-          console.log(file, this.albumName);
-        });
+      var storageRef = firebase
+        .storage()
+        .ref("user1/" + this.albumName + "/" + this.imageData.name);
+      storageRef.put(this.imageData).then(function(snapshot) {
+        console.log("Uploaded files!");
       });
-      console.log(this.e);
-      console.log(this.file, this.albumName);
     }
   }
 };
@@ -144,5 +149,18 @@ export default {
 .border-bottom {
   height: 90px;
   border-bottom: 2px solid #888888 !important;
+}
+
+.albumTitle {
+  background-color: #ffd382;
+}
+
+.albumTitle:hover {
+  background-color: rgb(248, 168, 20);
+}
+
+#uploader {
+  width: 50%;
+  margin-bottom: 10px;
 }
 </style>
