@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".EditMasterinfoActivity">
+    tools:context=".editUserInfoActivity">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar3"
@@ -52,6 +52,7 @@
         android:layout_marginTop="10dp"
         android:paddingHorizontal="15dp"
         android:spinnerMode="dialog"
+        android:background="@drawable/spinner_style"
         android:entries="@array/Spinner_sex" />
 
     <EditText
