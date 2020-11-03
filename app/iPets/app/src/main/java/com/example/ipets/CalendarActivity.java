@@ -3,6 +3,7 @@ package com.example.ipets;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.LinearLayout;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -12,6 +13,8 @@ import com.applandeo.materialcalendarview.EventDay;
 import com.applandeo.materialcalendarview.listeners.OnDayClickListener;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.bottomsheet.BottomSheetBehavior;
+import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -49,6 +52,8 @@ public class CalendarActivity extends AppCompatActivity {
             mCalendarView.setOnDayClickListener(new OnDayClickListener() {
                 @Override
                 public void onDayClick(EventDay eventDay) {
+                    bottomSheetNotePreview bottomSheetDialog = new bottomSheetNotePreview();
+                    bottomSheetDialog.show(getSupportFragmentManager(), "bottomSheetNotePreview");
                     previewNote(eventDay);
                 }
             });
@@ -65,9 +70,6 @@ public class CalendarActivity extends AppCompatActivity {
             Date date=clickedDayCalendar.getTime();
             SimpleDateFormat sdf= new SimpleDateFormat("yyyy-MM-dd");
             String dateStr=sdf.format(date);
-            Intent intent = new Intent(this, NotePreviewActivity.class);
-            intent.putExtra("dateStr",dateStr);
-            startActivity(intent);
         }
 
     protected void onStart() {

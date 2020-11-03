@@ -116,6 +116,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:spinnerMode="dialog"
+            android:background="@drawable/spinner_style"
             app:layout_constraintBottom_toTopOf="@+id/guideline81"
             app:layout_constraintEnd_toStartOf="@+id/guideline83"
             app:layout_constraintStart_toStartOf="@+id/guideline77"
