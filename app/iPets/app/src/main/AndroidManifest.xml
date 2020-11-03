@@ -22,31 +22,38 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".petInfoActivity"></activity>
+        <activity android:name=".petsInfoActivity"></activity>
         <activity android:name=".PhotoGalleryActivity" />
         <activity android:name=".NotePreviewActivity" />
-        <activity android:name=".AddNoteActivity" />
+        <activity
+            android:name=".AddNoteActivity"
+            android:windowSoftInputMode="adjustPan" />
         <activity android:name=".CalendarActivity" />
         <activity
-            android:name=".editPetInfoActivity"
-            android:parentActivityName=".settingActivity" />
+            android:name=".EditPetsinfoActivity"
+            android:parentActivityName=".SettingActivity"
+            android:windowSoftInputMode="adjustPan" />
         <activity
-            android:name=".editPwdActivity"
-            android:parentActivityName=".editUserInfoActivity" />
+            android:name=".EditPwdActivity"
+            android:parentActivityName=".EditMasterinfoActivity"
+            android:windowSoftInputMode="adjustPan" />
         <activity
-            android:name=".editAccountActivity"
-            android:parentActivityName=".editUserInfoActivity" />
+            android:name=".EditAccountActivity"
+            android:parentActivityName=".EditMasterinfoActivity"
+            android:windowSoftInputMode="adjustPan" />
         <activity
-            android:name=".editUserInfoActivity"
-            android:parentActivityName=".settingActivity" />
+            android:name=".EditMasterinfoActivity"
+            android:parentActivityName=".SettingActivity"
+            android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".EditQuestionActivity"
-            android:parentActivityName=".settingActivity" />
+            android:parentActivityName=".SettingActivity" />
         <activity
-            android:name=".editContactusActivity"
-            android:parentActivityName=".settingActivity" />
+            android:name=".EditContactusActivity"
+            android:parentActivityName=".SettingActivity"
+            android:windowSoftInputMode="adjustPan" />
         <activity
-            android:name=".settingActivity"
+            android:name=".SettingActivity"
             android:parentActivityName=".HomeActivity" />
         <activity android:name=".HomeActivity" />
 

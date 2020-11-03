@@ -52,6 +52,7 @@
         android:layout_marginTop="10dp"
         android:paddingHorizontal="15dp"
         android:spinnerMode="dialog"
+        android:background="@drawable/spinner_style"
         android:entries="@array/Spinner_sex" />
 
     <EditText
