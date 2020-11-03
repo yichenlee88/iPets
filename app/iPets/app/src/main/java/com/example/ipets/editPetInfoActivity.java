@@ -40,6 +40,8 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
@@ -50,7 +52,7 @@ import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 
-public class EditPetsinfoActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
+public class editPetInfoActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
     FirebaseAuth auth = FirebaseAuth.getInstance();
     FirebaseUser currentUser = auth.getCurrentUser();
     String userUID = currentUser.getUid();
@@ -59,6 +61,10 @@ public class EditPetsinfoActivity extends AppCompatActivity implements AdapterVi
     private DisplayMetrics mPhone;
     private static final String FILE_PATH = "/sdcard/ipets/jpeg";
     private ImageView img;
+    int petBirth_year;
+    int petBirth_month;
+    int petBirth_date;
+    String documentname;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -136,36 +142,36 @@ public class EditPetsinfoActivity extends AppCompatActivity implements AdapterVi
     private void getPetInfo() {
         EditText edmypetName = findViewById(R.id.mypetName);
         final EditText edpetsbirth = findViewById(R.id.mypetBirth);
-        String[] petSex =getResources().getStringArray(R.array.Spinner_petSex);
         Spinner petSexSpinner = findViewById(R.id.petSexSpinner);
         Intent intent = this.getIntent();
         //取得傳遞過來的資料
         String pet = intent.getStringExtra("date");
         FirebaseFirestore db;
         db = FirebaseFirestore.getInstance();
-        db.collection("userInformation").document(userUID).collection("pets").document(pet)
-                .get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                if (task.isSuccessful()) {
-                    DocumentSnapshot doc = task.getResult();
-                    StringBuilder fields = new StringBuilder("");
-                    StringBuilder fields2 = new StringBuilder("");
-                    StringBuilder fields3 = new StringBuilder("");
-                    fields.append(doc.get("Petsname")).toString();
-                    String Petsgender = fields2.append(doc.get("Petsgender")).toString();
-                    fields3.append(doc.get("Petsbirth")).toString();
-                    edmypetName.setText(fields);
-                    edpetsbirth.setText(fields3);
-                    if(Petsgender.equals("母的")) {
-                        petSexSpinner.setSelection(1);
-                    }
-                }
-            }
-        })
-                .addOnFailureListener(new OnFailureListener() {
+        db.collection("pets").whereEqualTo("petName", pet)
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
-                    public void onFailure(@NonNull Exception e) {
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                documentname = document.getId();
+                                DocumentSnapshot doc = document;
+                                StringBuilder fields = new StringBuilder("");
+                                StringBuilder fields2 = new StringBuilder("");
+                                StringBuilder fields3 = new StringBuilder("");
+                                fields.append(doc.get("petName")).toString();
+                                String Petsgender = fields2.append(doc.get("petGender")).toString();
+                                fields3.append(doc.get("petBirth")).toString();
+                                edmypetName.setText(fields);
+                                edpetsbirth.setText(fields3);
+                                if(Petsgender.equals("母的")) {
+                                    petSexSpinner.setSelection(1);
+                                }
+                            }
+                        } else {
+
+                        }
                     }
                 });
     }
@@ -197,19 +203,22 @@ public class EditPetsinfoActivity extends AppCompatActivity implements AdapterVi
         FirebaseFirestore db;
         db = FirebaseFirestore.getInstance();
         Map<String, Object> userInfo = new HashMap<>();
-        userInfo.put("Petsimage", petsimage);
-        userInfo.put("Petsname", mypetName);
-        userInfo.put("Petsbirth", petsbirth);
-        userInfo.put("Petsgender", sex);
-        db.collection("userInformation").document(userUID).collection("pets").document(mypetName).set(userInfo);
-        AlertDialog.Builder finishsignup = new AlertDialog.Builder(EditPetsinfoActivity.this);
+        userInfo.put("petImage", petsimage);
+        userInfo.put("petName", mypetName);
+        userInfo.put("petBirth", petsbirth);
+        userInfo.put("petGender", sex);
+        userInfo.put("petBirth_year", petBirth_year);
+        userInfo.put("petBirth_month", petBirth_month);
+        userInfo.put("petBirth_date",petBirth_date);
+        db.collection("pets").document(documentname).update(userInfo);
+        AlertDialog.Builder finishsignup = new AlertDialog.Builder(editPetInfoActivity.this);
         finishsignup.setMessage("修改成功");
         finishsignup.setNegativeButton("確認", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface arg0, int arg1) {
                 Intent intent=new Intent();
                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
-                intent.setClass(EditPetsinfoActivity.this,HomeActivity.class);
+                intent.setClass(editPetInfoActivity.this, homeActivity.class);
                 startActivity(intent);
             }
         });
@@ -231,7 +240,10 @@ public class EditPetsinfoActivity extends AppCompatActivity implements AdapterVi
                         @Override
                         public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
                             // TODO Auto-generated method stub
-                            edmypetBirth.setText(year+"/"+(monthOfYear+1)+"/"+dayOfMonth);
+                            edmypetBirth.setText(year+"-"+(monthOfYear+1)+"-"+dayOfMonth);
+                            petBirth_year = year;
+                            petBirth_month = monthOfYear+1;
+                            petBirth_date = dayOfMonth;
                         }
                     }, c.get(Calendar.YEAR), c.get(Calendar.MONTH), c.get(Calendar.DAY_OF_MONTH));
                     DatePicker datePicker = datePickerDialog.getDatePicker();
@@ -246,11 +258,11 @@ public class EditPetsinfoActivity extends AppCompatActivity implements AdapterVi
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         //讀取手機解析度
         mPhone = new DisplayMetrics();
-        EditPetsinfoActivity.this.getWindowManager().getDefaultDisplay().getMetrics(mPhone);
+        editPetInfoActivity.this.getWindowManager().getDefaultDisplay().getMetrics(mPhone);
         if (requestCode == PHOTO && data != null) {
             //取得照片路徑uri
             Uri uri = data.getData();
-            ContentResolver cr = EditPetsinfoActivity.this.getContentResolver();
+            ContentResolver cr = editPetInfoActivity.this.getContentResolver();
             try {
                 //讀取照片，型態為Bitmap
                 Bitmap bitmap = BitmapFactory.decodeStream(cr.openInputStream(uri));

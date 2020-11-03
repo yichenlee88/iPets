@@ -1,7 +1,6 @@
 package com.example.ipets;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
@@ -9,18 +8,13 @@ import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.Button;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.google.firebase.auth.FirebaseAuth;
 
-public class HomeActivity extends AppCompatActivity {
+public class homeActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,19 +45,19 @@ public class HomeActivity extends AppCompatActivity {
                         return true;
 
                     case R.id.calendar:
-                        Intent intentCalendar = new Intent(HomeActivity.this,CalendarActivity.class);
+                        Intent intentCalendar = new Intent(homeActivity.this,CalendarActivity.class);
                         intentCalendar.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                         startActivity(intentCalendar);
                         return true;
 
                     case R.id.photoGallery:
-                        Intent intentGallery = new Intent(HomeActivity.this,PhotoGalleryActivity.class);
+                        Intent intentGallery = new Intent(homeActivity.this,PhotoGalleryActivity.class);
                         intentGallery.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                         startActivity(intentGallery);
                         return true;
 
                     case R.id.locate:
-                        Intent intentMap = new Intent(HomeActivity.this,MapsActivity.class);
+                        Intent intentMap = new Intent(homeActivity.this,MapsActivity.class);
                         intentMap.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                         startActivity(intentMap);
                         return true;
@@ -75,7 +69,7 @@ public class HomeActivity extends AppCompatActivity {
 
                          */
                     case R.id.setting:
-                        Intent intentSet = new Intent(HomeActivity.this,SettingActivity.class);
+                        Intent intentSet = new Intent(homeActivity.this, settingActivity.class);
                         intentSet.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                         startActivity(intentSet);
                         return true;

@@ -25,7 +25,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import java.util.HashMap;
 import java.util.Map;
 
-public class EditPwdActivity extends AppCompatActivity {
+public class editPwdActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,7 +42,7 @@ public class EditPwdActivity extends AppCompatActivity {
             public boolean onMenuItemClick(MenuItem item) {
                 switch (item.getItemId()) {
                     case R.id.check:
-                        setpwd();
+                        setPwd();
                         break;
                 }
                 return false;
@@ -56,7 +56,7 @@ public class EditPwdActivity extends AppCompatActivity {
         inflater.inflate(R.menu.toolbar_menu,menu);
         return true;
     }
-    public void setpwd(){
+    public void setPwd(){
         FirebaseAuth auth = FirebaseAuth.getInstance();
         FirebaseUser currentUser = auth.getCurrentUser();
         String userUID = currentUser.getUid();
@@ -71,7 +71,7 @@ public class EditPwdActivity extends AppCompatActivity {
         String email =  currentUser.getEmail();
         if(newPWD.equals(checkPWD)) {
             AuthCredential credential = EmailAuthProvider
-                    .getCredential( email, checkPWD);
+                    .getCredential( email, oldPWD);
 // Prompt the user to re-provide their sign-in credentials
             currentUser.reauthenticate(credential)
                     .addOnCompleteListener(new OnCompleteListener<Void>() {
@@ -81,16 +81,16 @@ public class EditPwdActivity extends AppCompatActivity {
                         }
                     });
             Map<String, Object> userInfo = new HashMap<>();
-            userInfo.put("Password", checkPWD);
-            db.collection("userInformation").document(userUID).update(userInfo);
-            AlertDialog.Builder finishsignup = new AlertDialog.Builder(EditPwdActivity.this);
+            userInfo.put("password", checkPWD);
+            db.collection("users").document(userUID).update(userInfo);
+            AlertDialog.Builder finishsignup = new AlertDialog.Builder(editPwdActivity.this);
             finishsignup.setMessage("修改成功");
             finishsignup.setNegativeButton("確認", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface arg0, int arg1) {
                     Intent intent = new Intent();
                     intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-                    intent.setClass(EditPwdActivity.this, HomeActivity.class);
+                    intent.setClass(editPwdActivity.this, homeActivity.class);
                     startActivity(intent);
                 }
             });

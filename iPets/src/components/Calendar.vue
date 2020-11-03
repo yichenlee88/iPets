@@ -57,12 +57,12 @@
                     label="描述"
                   ></v-text-field>
                   <v-text-field
-                    v-model="startTitle"
+                    v-model="start"
                     type="date"
                     label="開始日期 (必須)"
                   ></v-text-field>
                   <v-text-field
-                    v-model="endTitle"
+                    v-model="end"
                     type="date"
                     label="結束日期 (必須)"
                   ></v-text-field
@@ -83,7 +83,10 @@
                     type="submit"
                     color="primary"
                     class="mr-4"
-                    @click.stop="dialog = false"
+                    @click.stop="
+                      dialog = false;
+                      closeDialog();
+                    "
                     >建立事件</v-btn
                   >
                 </v-form>
@@ -107,12 +110,12 @@
                     label="描述"
                   ></v-text-field>
                   <v-text-field
-                    v-model="startTitle"
+                    v-model="start"
                     type="date"
                     label="開始日期 (必須)"
                   ></v-text-field>
                   <v-text-field
-                    v-model="endTitle"
+                    v-model="end"
                     type="date"
                     label="結束日期 (必須)"
                   ></v-text-field
@@ -133,7 +136,10 @@
                     type="submit"
                     color="primary"
                     class="mr-4"
-                    @click.stop="dialog = false"
+                    @click.stop="
+                      dialog = false;
+                      closeDialog();
+                    "
                     >建立事件</v-btn
                   >
                 </v-form>
@@ -237,12 +243,10 @@ const fStore = db.firestore();
 export default {
   data() {
     return {
-      today: new Date().toISOString().slice(0, 10),
-      start: new Date().toISOString().slice(0, 10),
-      focus: new Date(),
+      today: new Date(),
+      focus: new Date().toISOString().slice(0, 10),
+      start: new Date(),
       date: new Date(),
-      startTitle: null,
-      endTitle: null,
       type: "month",
       typeToLabel: {
         month: "月",
@@ -262,7 +266,8 @@ export default {
       frequency: 0,
       name: null,
       details: null,
-      end: new Date().toISOString().slice(0, 10),
+      // end: new Date().toISOString().slice(0, 10),
+      end: new Date(),
       color: "red", // default event color
       currentlyEditing: null,
       selectedEvent: {},
@@ -282,12 +287,12 @@ export default {
       if (!start || !end) {
         return "";
       }
-      console.log(start);
-      console.log(end);
-      const startMonth = start.month;
+      const startMonth =
+        typeof start === "string" ? start.slice(5, 7) : start.month;
       const endMonth = end.month;
       const suffixMonth = startMonth === endMonth ? startMonth : endMonth;
-      const startYear = start.year;
+      const startYear =
+        typeof start === "string" ? start.slice(0, 4) : start.year;
       const endYear = end.year;
       const suffixYear = startYear === endYear ? startYear : endYear;
       const startDay = start.day;
@@ -308,7 +313,6 @@ export default {
   },
   methods: {
     add: function(newdate) {
-      console.log("add.");
       fStore
         .collection("pets")
         .doc("3heOY1mUC6wCbo2jdE9M")
@@ -340,8 +344,11 @@ export default {
     setDialogDate({ date }) {
       this.dialogDate = true;
       this.focus = date;
-      this.startTitle = date;
-      this.endTitle = date;
+      // this.start = date;
+      // this.end = date;
+    },
+    closeDialog() {
+      this.dialogDate = false;
     },
     viewDay({ date }) {
       this.focus = date;
@@ -389,8 +396,15 @@ export default {
             newdate.setFullYear(this.start.getFullYear() + i);
             this.add(newdate.toISOString().slice(0, 10));
           }
+        } else if (this.frequency === 0) {
+          let newdate = new Date(this.start);
+          this.add(newdate.toISOString().slice(0, 10));
         }
       }
+      this.name = "";
+      this.details = "";
+      this.start = this.start.toISOString().slice(0, 10);
+      this.end = this.end.toISOString().slice(0, 10);
     },
     editEvent(ev) {
       this.currentlyEditing = ev.id;
@@ -463,11 +477,6 @@ export default {
       this.start = start;
       this.end = end;
     }
-    // nth(d) {
-    //   return d > 3 && d < 21
-    //     ? "th"
-    //     : ["th", "st", "nd", "rd", "th", "th", "th", "th", "th", "th"][d % 10];
-    // }
   }
 };
 </script>
