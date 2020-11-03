@@ -52,7 +52,7 @@ import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 
-public class EditPetsinfoActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
+public class editPetInfoActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
     FirebaseAuth auth = FirebaseAuth.getInstance();
     FirebaseUser currentUser = auth.getCurrentUser();
     String userUID = currentUser.getUid();
@@ -211,14 +211,14 @@ public class EditPetsinfoActivity extends AppCompatActivity implements AdapterVi
         userInfo.put("petBirth_month", petBirth_month);
         userInfo.put("petBirth_date",petBirth_date);
         db.collection("pets").document(documentname).update(userInfo);
-        AlertDialog.Builder finishsignup = new AlertDialog.Builder(EditPetsinfoActivity.this);
+        AlertDialog.Builder finishsignup = new AlertDialog.Builder(editPetInfoActivity.this);
         finishsignup.setMessage("修改成功");
         finishsignup.setNegativeButton("確認", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface arg0, int arg1) {
                 Intent intent=new Intent();
                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
-                intent.setClass(EditPetsinfoActivity.this,HomeActivity.class);
+                intent.setClass(editPetInfoActivity.this,HomeActivity.class);
                 startActivity(intent);
             }
         });
@@ -258,11 +258,11 @@ public class EditPetsinfoActivity extends AppCompatActivity implements AdapterVi
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         //讀取手機解析度
         mPhone = new DisplayMetrics();
-        EditPetsinfoActivity.this.getWindowManager().getDefaultDisplay().getMetrics(mPhone);
+        editPetInfoActivity.this.getWindowManager().getDefaultDisplay().getMetrics(mPhone);
         if (requestCode == PHOTO && data != null) {
             //取得照片路徑uri
             Uri uri = data.getData();
-            ContentResolver cr = EditPetsinfoActivity.this.getContentResolver();
+            ContentResolver cr = editPetInfoActivity.this.getContentResolver();
             try {
                 //讀取照片，型態為Bitmap
                 Bitmap bitmap = BitmapFactory.decodeStream(cr.openInputStream(uri));

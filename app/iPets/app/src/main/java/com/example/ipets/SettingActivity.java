@@ -53,7 +53,7 @@ public class settingActivity extends AppCompatActivity {
         btn_communicate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intentCommunicate = new Intent(settingActivity.this,EditContactusActivity.class);
+                Intent intentCommunicate = new Intent(settingActivity.this, editContactusActivity.class);
                 startActivity(intentCommunicate);
             }
         });

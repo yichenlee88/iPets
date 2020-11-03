@@ -28,7 +28,7 @@
         <activity android:name=".AddNoteActivity" />
         <activity android:name=".CalendarActivity" />
         <activity
-            android:name=".EditPetsinfoActivity"
+            android:name=".editPetInfoActivity"
             android:parentActivityName=".settingActivity" />
         <activity
             android:name=".editPwdActivity"
@@ -43,7 +43,7 @@
             android:name=".EditQuestionActivity"
             android:parentActivityName=".settingActivity" />
         <activity
-            android:name=".EditContactusActivity"
+            android:name=".editContactusActivity"
             android:parentActivityName=".settingActivity" />
         <activity
             android:name=".settingActivity"

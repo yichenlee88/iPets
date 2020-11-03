@@ -24,7 +24,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
-public class EditContactusActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
+public class editContactusActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
     FirebaseAuth auth = FirebaseAuth.getInstance();
     FirebaseUser currentUser = auth.getCurrentUser();
@@ -91,14 +91,14 @@ public class EditContactusActivity extends AppCompatActivity implements AdapterV
         newContact.put("problemType", problemtype);
         newContact.put("timestamp", NOW);
         db.collection("contact").document().set(newContact);
-        AlertDialog.Builder finishsignup = new AlertDialog.Builder(EditContactusActivity.this);
+        AlertDialog.Builder finishsignup = new AlertDialog.Builder(editContactusActivity.this);
         finishsignup.setMessage("傳送成功");
         finishsignup.setNegativeButton("確認", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface arg0, int arg1) {
                 Intent intent=new Intent();
                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
-                intent.setClass(EditContactusActivity.this,HomeActivity.class);
+                intent.setClass(editContactusActivity.this,HomeActivity.class);
                 startActivity(intent);
             }
         });

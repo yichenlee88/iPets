@@ -214,7 +214,7 @@ public class homeFragment extends Fragment {
         btn_editPets.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intentPets = new Intent(getActivity(),EditPetsinfoActivity.class);
+                Intent intentPets = new Intent(getActivity(), editPetInfoActivity.class);
                 intentPets.putExtra("date",pet_query);
                 startActivity(intentPets);
             }
