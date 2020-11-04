@@ -15,14 +15,14 @@
           <!-- petImage -->
           <v-row no-gutters justify="center" align="center">
             <v-col>
-              <v-file-input
+              <input
                 type="file"
-                @change="selectFile($image)"
+                @change="handleFileUpload"
                 accept="image/jpeg, image/png"
                 placeholder="選擇寵物相片"
                 name="petImage"
-                v-model="petImage"
-              ></v-file-input>
+                :v-model="petImage"
+              />
             </v-col>
           </v-row>
           <!-- petName -->
@@ -78,7 +78,9 @@
             maxlength
           ></b-form-textarea>
           <div class="d-flex flex-row-reverse">
-            <b-button type="submit" variant="dark">建立</b-button>
+            <b-button onclick="createAlbum" type="submit" variant="dark"
+              >建立</b-button
+            >
           </div>
         </b-form>
       </b-card-body>
@@ -271,6 +273,7 @@ import "bootstrap/dist/css/bootstrap.css";
 
 // Import date picker css
 import "pc-bootstrap4-datetimepicker/build/css/bootstrap-datetimepicker.css";
+import firebase from "firebase";
 import { Info } from "../firebase/pet";
 import { db } from "../db";
 const fStore = db.firestore();
@@ -281,8 +284,9 @@ export default {
     return {
       modalShow: false,
       date: new Date(),
-      petImage: "",
+      petImage: null,
       petName: "",
+      file: [],
       petGender: "null",
       petGenderOptions: [
         { value: "null", text: "寵物性別" },
@@ -388,10 +392,14 @@ export default {
       var docRef = fStore.collection("pets").doc();
       docRef
         .set({
-          petImage: this.petImage,
           petName: this.petName,
           petGender: this.petGender,
-          petBirth: this.petBirth.toISOString().slice(0, 10),
+          petBirth:
+            this.petBirth.getUTCFullYear() +
+            "-" +
+            (this.petBirth.getMonth() + 1) +
+            "-" +
+            this.petBirth.getDate(),
           petBirth_year: this.petBirth.getUTCFullYear(),
           petBirth_month: this.petBirth.getMonth() + 1,
           petBirth_date: this.petBirth.getDate(),
@@ -408,7 +416,6 @@ export default {
             new Info("除蟲", 2, "week"),
             new Info("指甲", 1, "month")
           ];
-
           infoList.forEach(function(item) {
             infoRef.doc(item.eventName).set({
               next_time: item.getNext(),
@@ -417,8 +424,21 @@ export default {
               done: false
             });
           });
+          alert("成功新增Info");
           this.$router.go({ path: this.$router.path });
         });
+    },
+    handleFileUpload(e) {
+      this.petImage = e.target.files[0];
+    },
+    createAlbum() {
+      var storageRef = firebase
+        .storage()
+        .ref("user1/" + this.albumName + "/" + this.imageData.name);
+      storageRef.put(this.imageData).then(function(snapshot) {
+        alert("成功新增相片");
+        console.log("Uploaded files!");
+      });
     },
     convert_timestamp(unixTimestamp) {
       var date = unixTimestamp.toDate();
