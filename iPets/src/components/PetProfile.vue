@@ -16,6 +16,7 @@
           <v-row no-gutters justify="center" align="center">
             <v-col>
               <input
+                class="inputPic"
                 type="file"
                 @change="handleFileUpload"
                 accept="image/jpeg, image/png"
@@ -78,7 +79,7 @@
             maxlength
           ></b-form-textarea>
           <div class="d-flex flex-row-reverse">
-            <b-button onclick="createAlbum" type="submit" variant="dark"
+            <b-button @click="createAlbum" type="submit" variant="dark"
               >建立</b-button
             >
           </div>
@@ -306,7 +307,7 @@ export default {
         { value: "拉布拉多", text: "拉布拉多" },
         { value: "哈士奇", text: "哈士奇" },
         { value: "藏獒", text: "藏獒" },
-        { value: "貴賓犬", text: "貴賓犬," },
+        { value: "貴賓犬", text: "貴賓犬" },
         { value: "薩摩耶", text: "薩摩耶" },
         { value: "博美", text: "博美" },
         { value: "迷你雪納瑞", text: "迷你雪納瑞" },
@@ -387,6 +388,18 @@ export default {
     // datePicker
   },
   methods: {
+    handleFileUpload(e) {
+      this.petImage = e.target.files[0];
+    },
+    createAlbum() {
+      var storageRef = firebase
+        .storage()
+        .ref(this.uid + "/" + this.petImage.name);
+      storageRef.put(this.petImage).then(function(snapshot) {
+        alert("成功新增相片");
+        console.log("Uploaded files!");
+      });
+    },
     onSubmit(e) {
       e.preventDefault();
       var docRef = fStore.collection("pets").doc();
@@ -427,18 +440,6 @@ export default {
           alert("成功新增Info");
           this.$router.go({ path: this.$router.path });
         });
-    },
-    handleFileUpload(e) {
-      this.petImage = e.target.files[0];
-    },
-    createAlbum() {
-      var storageRef = firebase
-        .storage()
-        .ref("user1/" + this.albumName + "/" + this.imageData.name);
-      storageRef.put(this.imageData).then(function(snapshot) {
-        alert("成功新增相片");
-        console.log("Uploaded files!");
-      });
     },
     convert_timestamp(unixTimestamp) {
       var date = unixTimestamp.toDate();
@@ -523,6 +524,12 @@ export default {
   display: block;
   margin-left: auto;
   margin-right: auto;
+}
+
+.inputPic {
+  max-width: auto;
+  height: 48px;
+  margin-left: 5px;
 }
 
 .InputClass {
