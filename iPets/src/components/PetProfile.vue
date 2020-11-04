@@ -91,7 +91,7 @@
     <!-- Start -- 寵物簡介 -->
     <b-card-group class="PetProfile" deck v-if="show">
       <b-card
-        v-bind:img-src="pet.image"
+        :img-src="url"
         class="mb-3"
         style="max-width:300px;border:0"
         img-top
@@ -168,17 +168,18 @@
       </b-modal>
 
       <b-card style="max-height:365px">
-        <b-card-body :title="pet.name">
-          <b-card-text>性別：{{ pet.gender }}</b-card-text>
-          <b-card-text>生日：{{ pet.gender }}</b-card-text>
+        <b-card-body :title="pet.petName">
+          <b-card-text>性別：{{ pet.petGender }}</b-card-text>
+          <b-card-text>生日：{{ pet.petBirth }}</b-card-text>
           <b-card-text>年齡：{{ pet.age }}</b-card-text>
           <b-card-text>品種：{{ pet.breed }}</b-card-text>
-          <b-card-text>本日行程：{{ pet.today }}</b-card-text>
+          <b-card-text>喜好：{{ pet.petHobby }}</b-card-text>
+          <b-card-text>備註：{{ pet.petNote }}</b-card-text>
         </b-card-body>
       </b-card>
     </b-card-group>
-    <!--
-    <b-card
+
+    <!-- <b-card
       v-if="show"
       v-bind:img-src="pet.image"
       class="mb-3"
@@ -286,14 +287,16 @@ export default {
       modalShow: false,
       date: new Date(),
       petImage: null,
+      url: "",
+      imageUrl: "",
       petName: "",
       file: [],
       petGender: "null",
       petGenderOptions: [
         { value: "null", text: "寵物性別" },
-        { value: "I prefer not to say", text: "不透漏" },
-        { value: "boy", text: "男孩" },
-        { value: "gril", text: "女孩" }
+        { value: "不透漏", text: "不透漏" },
+        { value: "男孩", text: "男孩" },
+        { value: "女孩", text: "女孩" }
       ],
       petBirth: "",
       petHobby: "",
@@ -394,9 +397,8 @@ export default {
     createAlbum() {
       var storageRef = firebase
         .storage()
-        .ref(this.uid + "/" + this.petImage.name);
+        .ref(this.uid + "/" + this.pet.petName);
       storageRef.put(this.petImage).then(function(snapshot) {
-        alert("成功新增相片");
         console.log("Uploaded files!");
       });
     },
@@ -441,7 +443,6 @@ export default {
               done: false
             });
           });
-          alert("成功新增Info");
           this.$router.go({ path: this.$router.path });
         });
     },
@@ -483,6 +484,25 @@ export default {
       //   this.period_form.selected
       // );
     }
+  },
+  mounted() {
+    let uid = firebase.auth().currentUser.uid;
+    // let uid = this.uid;
+    let imageUrl = this.url;
+    // var imageRef = firebase
+    //   .storage()
+    //   .ref()
+    //   .child(this.uid + "/" + this.petName);
+    // imageRef.getDownloadURL().then(function(url) {
+    //   imageUrl.push(url);
+    // });
+    var storageRef = firebase.storage();
+    storageRef
+      .ref(uid + "/" + "毛毛")
+      .getDownloadURL()
+      .then(function(url) {
+        this.url = url;
+      });
   },
   computed: {
     uid() {

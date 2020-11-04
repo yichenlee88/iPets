@@ -3,9 +3,11 @@ import { db } from "../db";
 const fStore = db.firestore();
 
 async function updatePetInfo(store, uid) {
-  var petsRef = fStore.collection("pets");
-  var query = petsRef.where("master_uid", "==", uid);
-  await query.get().then(function(querySnapshot) {
+  var petsRef = fStore
+    .collection("users")
+    .doc(uid)
+    .collection("pets");
+  petsRef.get().then(function(querySnapshot) {
     querySnapshot.forEach(function(doc) {
       store.commit("updatePetInfo", {
         pet: doc.data(),
@@ -13,14 +15,11 @@ async function updatePetInfo(store, uid) {
       });
     });
   });
-  updateInfo(store);
+  updateInfo(store, petsRef);
 }
 
-function updateInfo(store) {
-  var infoRef = fStore
-    .collection("pets")
-    .doc(store.state.pet_doc_id)
-    .collection("info");
+function updateInfo(store, petsRef) {
+  var infoRef = petsRef.doc(store.state.pet_doc_id).collection("info");
   var listInfo = [];
   infoRef.get().then(function(querySnapshot) {
     querySnapshot.forEach(function(doc) {
