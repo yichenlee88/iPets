@@ -11,6 +11,7 @@ import android.widget.EditText;
 import android.widget.Spinner;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import com.applandeo.materialcalendarview.CalendarView;
 import com.google.firebase.auth.FirebaseAuth;
@@ -28,7 +29,9 @@ public class AddNoteActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_note);
-        final CalendarView datePicker = findViewById(R.id.datePicker);
+        Toolbar toolbar11 = findViewById(R.id.toolbar11);
+        setSupportActionBar(toolbar11);
+        getSupportActionBar().setTitle("新增行程");
         Button button = (Button) findViewById(R.id.addNoteButton);
         final EditText noteEditText = findViewById(R.id.noteEditText);
 
@@ -44,7 +47,6 @@ public class AddNoteActivity extends AppCompatActivity {
                 FirebaseUser currentUser = auth.getCurrentUser();
                 String userUID = currentUser.getUid();
                 Calendar cal=Calendar.getInstance();
-                cal = datePicker.getFirstSelectedDate();
                 Date date = cal.getTime();
                 SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
                 String selectedDate = simpleDateFormat.format(date);
