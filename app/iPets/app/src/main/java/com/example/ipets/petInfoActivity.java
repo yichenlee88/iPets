@@ -17,12 +17,14 @@ import android.provider.MediaStore;
 import android.text.InputType;
 import android.util.DisplayMetrics;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.RadioGroup;
+import android.widget.Spinner;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -65,6 +67,12 @@ public class petInfoActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pets_info);
         getPermission();
+
+        Spinner petVarietySpinner = findViewById(R.id.variety);
+        ArrayAdapter adapter = ArrayAdapter.createFromResource(petInfoActivity.this, R.array.Spinner_variety, R.layout.myspinner_layout);
+        adapter.setDropDownViewResource(R.layout.myspinner_dropdown_layout);
+        petVarietySpinner.setAdapter(adapter);
+
         ImageButton camera = findViewById(R.id.camera1);
         ImageButton photo = findViewById(R.id.album);
         camera.setOnClickListener(new View.OnClickListener() {
@@ -149,12 +157,14 @@ public class petInfoActivity extends AppCompatActivity {
     private void addPetInfo(String petsimage) {
         EditText edpetsname = findViewById(R.id.petsname);
         final EditText edpetsbirth = findViewById(R.id.petsbirth);
-        final EditText edvariety = findViewById(R.id.variety);
+        Spinner variety = findViewById(R.id.variety);
+        int idsex = variety.getSelectedItemPosition();
+        String[] Spinner_repeat = getResources().getStringArray(R.array.Spinner_variety);
+        String breed = Spinner_repeat[idsex];
         final EditText edlikes = findViewById(R.id.likes);
         final EditText ednotes = findViewById(R.id.notes);
         String petsbirth = edpetsbirth.getText().toString();
         final String petsname = edpetsname.getText().toString();
-        String petsvariety = edvariety.getText().toString();
         String petslikes = edlikes.getText().toString();
         String petsnotes = ednotes.getText().toString();
         String petsgender = null;
@@ -176,7 +186,7 @@ public class petInfoActivity extends AppCompatActivity {
         userInfo.put("petName", petsname);
         userInfo.put("petGender", petsgender);
         userInfo.put("petBirth", petsbirth);
-        userInfo.put("breed", petsvariety);
+        userInfo.put("breed", breed);
         userInfo.put("petHobby", petslikes);
         userInfo.put("petNote", petsnotes);
         userInfo.put("petImage", petsimage);
@@ -185,14 +195,14 @@ public class petInfoActivity extends AppCompatActivity {
         userInfo.put("petBirth_year", petBirth_year);
         userInfo.put("petBirth_month", petBirth_month);
         userInfo.put("petBirth_date",petBirth_date);
-        String id = db.collection("pets").document().getId();
-        db.collection("pets").document(id).set(userInfo);
+        String id = db.collection("users").document(userUID).collection("pets").document().getId();
+        db.collection("users").document(userUID).collection("pets").document(id).set(userInfo);
 
         Map<String, Object> countdowndate = new HashMap<>();
         countdowndate.put("startDay", "");
         countdowndate.put("endDay", "");
         countdowndate.put("countdownEvent","");
-        db.collection("pets").document(id).collection("countdown").document(petsname+"洗澡").set(countdowndate);
+        db.collection("users").document(userUID).collection("pets").document(id).collection("countdown").document(petsname+"洗澡").set(countdowndate);
         AlertDialog.Builder finishsignup = new AlertDialog.Builder(petInfoActivity.this);
         finishsignup.setMessage("新增成功");
         finishsignup.setNegativeButton("確認", new DialogInterface.OnClickListener() {

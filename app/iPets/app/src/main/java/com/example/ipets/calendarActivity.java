@@ -6,7 +6,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -18,9 +18,6 @@ import com.applandeo.materialcalendarview.EventDay;
 import com.applandeo.materialcalendarview.listeners.OnDayClickListener;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import com.google.android.material.bottomsheet.BottomSheetBehavior;
-import com.google.android.material.bottomsheet.BottomSheetDialog;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -34,7 +31,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
-public class CalendarActivity extends AppCompatActivity {
+public class calendarActivity extends AppCompatActivity {
     FirebaseAuth auth = FirebaseAuth.getInstance();
     FirebaseUser currentUser = auth.getCurrentUser();
     String userUID = currentUser.getUid();
@@ -48,6 +45,8 @@ public class CalendarActivity extends AppCompatActivity {
             Toolbar toolbar10 = findViewById(R.id.toolbar10);
             setSupportActionBar(toolbar10);
             getSupportActionBar().setTitle("行事曆");
+            TextView editNote = findViewById(R.id.editNote);
+            editNote.setClickable(true);
             mCalendarView = findViewById(R.id.calendarView);
             toolbar10.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
                 @Override
@@ -70,6 +69,13 @@ public class CalendarActivity extends AppCompatActivity {
                 }
             });
 
+            editNote.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    bottomSheetNotePreview bottomSheetDialog = new bottomSheetNotePreview();
+                    bottomSheetDialog.show(getSupportFragmentManager(), "bottomSheetNotePreview");
+                }
+            });
         }
 
     @Override
@@ -80,7 +86,7 @@ public class CalendarActivity extends AppCompatActivity {
     }
 
     private void addNote() {
-            Intent intent = new Intent(this, AddNoteActivity.class);
+            Intent intent = new Intent(this, addNoteActivity.class);
             startActivityForResult(intent, ADD_NOTE);
         }
 

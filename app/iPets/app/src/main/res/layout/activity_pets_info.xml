@@ -201,7 +201,7 @@
             android:id="@+id/malepet"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="66dp"
+            android:layout_marginStart="55dp"
             android:text="@string/RadioButton_sex1"
             android:textSize="20sp" />
 
@@ -209,7 +209,7 @@
             android:id="@+id/femalepet"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="53dp"
+            android:layout_marginHorizontal="40dp"
             android:text="@string/RadioButton_sex2"
             android:textSize="20sp" />
     </RadioGroup>
@@ -252,28 +252,15 @@
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.66" />
 
-    <TextView
-        android:id="@+id/kind"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/TextView_species"
-        android:textSize="18sp"
-        app:layout_constraintBottom_toTopOf="@+id/guideline74"
-        app:layout_constraintStart_toStartOf="@+id/guideline68"
-        app:layout_constraintTop_toTopOf="@+id/guideline72" />
-
-    <EditText
+    <Spinner
         android:id="@+id/variety"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:backgroundTint="#0071BC"
-        android:ems="10"
-        android:hint="@string/variety_hint"
-        android:importantForAutofill="no"
-        android:inputType="textPersonName"
+        android:spinnerMode="dialog"
+        android:background="@drawable/spinner_style"
         app:layout_constraintBottom_toTopOf="@+id/guideline74"
         app:layout_constraintEnd_toStartOf="@+id/guideline69"
-        app:layout_constraintStart_toEndOf="@+id/kind"
+        app:layout_constraintStart_toStartOf="@+id/guideline68"
         app:layout_constraintTop_toTopOf="@+id/guideline72" />
 
     <androidx.constraintlayout.widget.Guideline

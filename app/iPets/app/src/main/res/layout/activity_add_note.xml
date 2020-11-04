@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:scrollbars="vertical"
-    tools:context=".AddNoteActivity"
+    tools:context=".addNoteActivity"
     android:orientation="vertical">
 
     <androidx.appcompat.widget.Toolbar
@@ -74,45 +74,46 @@
         android:inputType="date"
         android:textSize="20sp" />
 
-            <RadioGroup
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
-                android:orientation="horizontal" >
+    <RadioGroup
+        android:id="@+id/eventColor"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:orientation="horizontal">
 
-                <RadioButton
-                    android:id="@+id/redCircle"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="55dp"
-                    android:buttonTint="#0071BC"
-                    android:drawableEnd="@drawable/ic_red" />
+        <RadioButton
+            android:id="@+id/redCircle1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="53dp"
+            android:buttonTint="#0071BC"
+            android:drawableEnd="@drawable/ic_red" />
 
-                <RadioButton
-                    android:id="@+id/orangeCircle"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="20dp"
-                    android:buttonTint="#0071BC"
-                    android:drawableEnd="@drawable/ic_orange" />
+        <RadioButton
+            android:id="@+id/orangeCircle1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:buttonTint="#0071BC"
+            android:drawableEnd="@drawable/ic_orange" />
 
-                <RadioButton
-                    android:id="@+id/yellowCircle"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="20dp"
-                    android:buttonTint="#0071BC"
-                    android:drawableEnd="@drawable/ic_yellow" />
+        <RadioButton
+            android:id="@+id/yellowCircle1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:buttonTint="#0071BC"
+            android:drawableEnd="@drawable/ic_yellow" />
 
-                <RadioButton
-                    android:id="@+id/greenCircle"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="20dp"
-                    android:layout_marginEnd="17dp"
-                    android:buttonTint="#0071BC"
-                    android:drawableEnd="@drawable/ic_green" />
-            </RadioGroup>
+        <RadioButton
+            android:id="@+id/greenCircle1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="17dp"
+            android:buttonTint="#0071BC"
+            android:drawableEnd="@drawable/ic_green" />
+    </RadioGroup>
 
             <Spinner
                 android:id="@+id/repeatSpinner"
