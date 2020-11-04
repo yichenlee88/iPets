@@ -46,8 +46,8 @@
                 <v-form @submit.prevent="addEvent">
                   <v-text-field v-model="name" type="text" label="事件名稱"></v-text-field>
                   <v-text-field v-model="details" type="text" label="描述"></v-text-field>
-                  <v-text-field v-model="start" type="date" label="開始日期 (必須)"></v-text-field>
-                  <v-text-field v-model="end" type="date" label="結束日期 (必須)"></v-text-field>選擇顏色
+                  <v-text-field v-model="startTitle" type="date" label="開始日期 (必須)"></v-text-field>
+                  <v-text-field v-model="endTitle" type="date" label="結束日期 (必須)"></v-text-field>選擇顏色
                   <v-select v-model="color" :v-for="color in colors" :items="colors"></v-select>
                   <v-radio-group v-model="frequency">
                     <v-radio label="不重複"></v-radio>
