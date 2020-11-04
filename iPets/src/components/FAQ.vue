@@ -2,7 +2,9 @@
   <div class="accordion" role="tablist" v-b-scrollspy:listgroup-ex>
     <b-card no-body class="mb-1">
       <b-card-header header-tag="header" class="p-1" role="tab">
-        <b-button block v-b-toggle.accordion-1 variant="info">錯誤404</b-button>
+        <b-button class="buttonColor" block v-b-toggle.accordion-1
+          >iPets是什麼</b-button
+        >
       </b-card-header>
       <b-collapse id="accordion-1" accordion="my-accordion" role="tabpanel">
         <b-card-body>
@@ -10,7 +12,7 @@
         </b-card-body>
       </b-collapse>
     </b-card>
-    <b-card no-body class="mb-1">
+    <!-- <b-card no-body class="mb-1">
       <b-card-header header-tag="header" class="p-1" role="tab">
         <b-button block v-b-toggle.accordion-2 variant="info"
           >個人資訊</b-button
@@ -106,7 +108,7 @@
           <b-card-text>{{ text }}</b-card-text>
         </b-card-body>
       </b-collapse>
-    </b-card>
+    </b-card> -->
   </div>
 </template>
 
@@ -129,3 +131,10 @@ export default {
   }
 };
 </script>
+
+<style scoped>
+.buttonColor {
+  background: #c4e1ff;
+  border: 0;
+}
+</style>

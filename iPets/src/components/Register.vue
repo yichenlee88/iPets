@@ -184,7 +184,12 @@ export default {
               Email: this.Email,
               password: this.password,
               userGender: this.userGender,
-              userBirth: this.userBirth.toISOString().slice(0, 10),
+              userBirth:
+                this.userBirth.getUTCFullYear() +
+                "-" +
+                (this.userBirth.getMonth() + 1) +
+                "-" +
+                this.userBirth.getDate(),
               userBirth_year: this.userBirth.getUTCFullYear(),
               userBirth_month: this.userBirth.getMonth() + 1,
               userBirth_date: this.userBirth.getDate(),
