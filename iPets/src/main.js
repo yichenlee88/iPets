@@ -9,6 +9,7 @@ import { db } from "./db";
 import Vuetify from "vuetify";
 import "vuetify/dist/vuetify.min.css";
 import VueTextareaAutosize from "vue-textarea-autosize";
+import "material-design-icons-iconfont/dist/material-design-icons.css";
 
 // Vuex
 import store from "./_store/index";
