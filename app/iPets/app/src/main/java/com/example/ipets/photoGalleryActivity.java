@@ -12,7 +12,6 @@ import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
-import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.view.View;
@@ -26,14 +25,14 @@ import com.google.firebase.auth.FirebaseUser;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PhotoGalleryActivity extends AppCompatActivity {
+public class photoGalleryActivity extends AppCompatActivity {
 
     private GridView gridView;
     private ImageView imageView;
     FloatingActionButton bUploadImage; //上傳按鈕
     private List<String> thumbs;  //存放縮圖的id
     private List<String> imagePaths;  //存放圖片的路徑
-    private ImageAdapter imageAdapter;  //用來顯示縮圖
+    private com.example.ipets.imageAdapter imageAdapter;  //用來顯示縮圖
 
     private static final int PICK_IMAGE = 100;
 
@@ -56,11 +55,11 @@ public class PhotoGalleryActivity extends AppCompatActivity {
         bUploadImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (ActivityCompat.checkSelfPermission(PhotoGalleryActivity.this,
+                if (ActivityCompat.checkSelfPermission(photoGalleryActivity.this,
                         Manifest.permission.READ_EXTERNAL_STORAGE)
                         != PackageManager.PERMISSION_GRANTED) {
 
-                    ActivityCompat.requestPermissions(PhotoGalleryActivity.this,
+                    ActivityCompat.requestPermissions(photoGalleryActivity.this,
                             new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},
                             100);
 
@@ -98,7 +97,7 @@ public class PhotoGalleryActivity extends AppCompatActivity {
 
         cursor.close();
 
-        imageAdapter = new ImageAdapter(PhotoGalleryActivity.this, thumbs);
+        imageAdapter = new imageAdapter(photoGalleryActivity.this, thumbs);
         gridView.setAdapter(imageAdapter);
         imageAdapter.notifyDataSetChanged();
 

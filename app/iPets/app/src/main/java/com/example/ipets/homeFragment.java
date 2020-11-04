@@ -103,7 +103,7 @@ public class homeFragment extends Fragment {
         final Spinner petnamespinner = getView().findViewById(R.id.nameSpinner);
         final FirebaseFirestore db = FirebaseFirestore.getInstance();
         final List<String> petname = new ArrayList<>();
-        db.collection("pets").whereEqualTo("uid", userUID).get()
+        db.collection("users").document(userUID).collection("pets").whereEqualTo("uid", userUID).get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
@@ -222,7 +222,7 @@ public class homeFragment extends Fragment {
     }
     public void getDocumentName(){
         final FirebaseFirestore db = FirebaseFirestore.getInstance();
-        db.collection("pets").whereEqualTo("petName", pet_query)
+        db.collection("users").document(userUID).collection("pets").whereEqualTo("petName", pet_query)
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
@@ -292,7 +292,7 @@ public class homeFragment extends Fragment {
         final TextView text_petsBirth = getView().findViewById(R.id.text_petsBirth);
         final TextView text_petsAge = getView().findViewById(R.id.text_petsAge);
         final TextView text_route = getView().findViewById(R.id.text_route);
-        db.collection("pets").whereEqualTo("petName", query)
+        db.collection("users").document(userUID).collection("pets").whereEqualTo("petName", query)
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
@@ -379,7 +379,7 @@ public class homeFragment extends Fragment {
                 countdowndate.put("startDay", showercountdownday);
                 countdowndate.put("endDay", showerday);
                 countdowndate.put("countdownEvent",countdownEvent);
-                db.collection("pets").document(documentname).collection("countdown").document(countdownEvent).set(countdowndate);
+                db.collection("users").document(userUID).collection("pets").document(documentname).collection("countdown").document(countdownEvent).set(countdowndate);
                 setCountdownColor();
             }
         }, c.get(Calendar.YEAR), c.get(Calendar.MONTH), c.get(Calendar.DAY_OF_MONTH));
@@ -397,7 +397,7 @@ public class homeFragment extends Fragment {
             ProgressBar injectionBar = getView().findViewById(R.id.injectionBar);
             ProgressBar teethBar = getView().findViewById(R.id.teethBar);
             ProgressBar bloodBar = getView().findViewById(R.id.bloodBar);
-            db.collection("pets").document(documentname).collection("countdown")
+            db.collection("users").document(userUID).collection("pets").document(documentname).collection("countdown")
                     .get()
                     .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                         @Override

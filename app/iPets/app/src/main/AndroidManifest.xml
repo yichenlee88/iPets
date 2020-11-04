@@ -23,12 +23,12 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".petInfoActivity"></activity>
-        <activity android:name=".PhotoGalleryActivity" />
+        <activity android:name=".photoGalleryActivity" />
         <activity android:name=".NotePreviewActivity" />
         <activity
-            android:name=".AddNoteActivity"
+            android:name=".addNoteActivity"
             android:windowSoftInputMode="adjustPan" />
-        <activity android:name=".CalendarActivity" />
+        <activity android:name=".calendarActivity" />
         <activity
             android:name=".editPetInfoActivity"
             android:parentActivityName=".settingActivity"
