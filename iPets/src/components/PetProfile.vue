@@ -402,7 +402,11 @@ export default {
     },
     onSubmit(e) {
       e.preventDefault();
-      var docRef = fStore.collection("pets").doc();
+      var docRef = fStore
+        .collection("users")
+        .doc(this.uid)
+        .collection("pets")
+        .doc();
       docRef
         .set({
           petName: this.petName,
