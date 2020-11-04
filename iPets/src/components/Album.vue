@@ -45,12 +45,14 @@
       </div>
     </div>
 
+    <!-- if there have albums -->
     <b-row lg="4" style="margin:20px 20px">
       <b-col cols="6" md="4" v-for="(item, index) in album" :key="index">
         <a :href="'#/albumView/' + item.name">
           <b-card
-            v-if="album"
+            class="change"
             overlay
+            v-if="album"
             style="margin:20px"
             text-variant="white"
             :img-src="url[index]"
@@ -60,7 +62,7 @@
       </b-col>
     </b-row>
     <!-- if there is no any album -->
-    <div v-if=" !album ">
+    <div v-if="!album">
       <b-img class="banner_png center" src="../static/img/gray.png" style="width:468px;"></b-img>
     </div>
   </b-container>
@@ -68,14 +70,15 @@
 
 <script>
 import firebase from "firebase";
-import { db } from "../db";
-const fStore = db.firestore();
+// import { db } from "../db";
+// const fStore = db.firestore();
 
 export default {
   name: "Album",
   data() {
     return {
       albumName: "",
+      user: [],
       imageData: null,
       file: [],
       album: [],
@@ -83,32 +86,25 @@ export default {
     };
   },
   mounted() {
+    let uid = this.uid;
     let album = this.album;
     let imageUrl = this.url;
-    fStore.collection("user").get();
-    fStore
-      .collection("user")
-      .get()
-      .then(querySnapshot => {
-        querySnapshot.forEach(doc => {
-          this.user.push(doc.data());
-          console.log(doc.id, doc.data());
-        });
-      });
-    var storageRef = firebase.storage().ref("user1/");
+    var storageRef = firebase.storage().ref(uid + "/");
     let folderName = [];
+    console.log(uid, storageRef);
     storageRef
       .listAll()
       .then(function(res) {
         res.prefixes.forEach(function(folderRef) {
           folderName.push(folderRef.name);
           album.push(folderRef);
-          console.log(folderRef, folderRef.name, folderName);
-          var imageRef = firebase.storage().ref("user1/" + folderRef.name);
+          var imageRef = firebase.storage().ref(uid + "/" + folderRef.name);
+          console.log(imageRef);
           imageRef.listAll().then(function(res) {
             res.items.forEach(function(itemRef) {
               itemRef.getDownloadURL().then(function(url) {
                 imageUrl.push(url);
+                console.log(imageUrl);
               });
             });
           });
@@ -118,6 +114,11 @@ export default {
         console.log(error);
       });
   },
+  computed: {
+    uid() {
+      return this.$store.state.uid;
+    }
+  },
   methods: {
     handleFileUpload(e) {
       this.imageData = e.target.files[0];
@@ -125,9 +126,10 @@ export default {
     createAlbum() {
       var storageRef = firebase
         .storage()
-        .ref("user1/" + this.albumName + "/" + this.imageData.name);
+        .ref(this.uid + "/" + this.albumName + "/" + this.imageData.name);
       storageRef.put(this.imageData).then(function(snapshot) {
         console.log("Uploaded files!");
+        location.reload();
       });
     }
   }
@@ -151,16 +153,7 @@ export default {
   border-bottom: 2px solid #888888 !important;
 }
 
-.albumTitle {
-  background-color: #ffd382;
-}
-
-.albumTitle:hover {
-  background-color: rgb(248, 168, 20);
-}
-
-#uploader {
-  width: 50%;
-  margin-bottom: 10px;
+.change:hover {
+  filter: brightness(0.8);
 }
 </style>
