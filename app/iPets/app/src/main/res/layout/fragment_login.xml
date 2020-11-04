@@ -162,7 +162,7 @@
 
         <Button
             android:id="@+id/signup"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="0dp"
             android:background="#00FFFFFF"
             android:gravity="center_horizontal|center_vertical"
@@ -171,7 +171,6 @@
             android:textColor="#009688"
             android:textSize="18sp"
             app:layout_constraintBottom_toTopOf="@+id/guideline"
-            app:layout_constraintEnd_toStartOf="@+id/guideline13"
             app:layout_constraintStart_toEndOf="@+id/firstTime"
             app:layout_constraintTop_toTopOf="@+id/guideline14" />
 
@@ -180,7 +179,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            app:layout_constraintGuide_percent="0.3" />
+            app:layout_constraintGuide_percent="0.25" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline13"
