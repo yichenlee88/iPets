@@ -2,11 +2,16 @@ package com.example.ipets;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.LinearLayout;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+
 
 import com.applandeo.materialcalendarview.CalendarView;
 import com.applandeo.materialcalendarview.EventDay;
@@ -40,12 +45,19 @@ public class CalendarActivity extends AppCompatActivity {
         protected void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
             setContentView(R.layout.activity_calendar);
+            Toolbar toolbar10 = findViewById(R.id.toolbar10);
+            setSupportActionBar(toolbar10);
+            getSupportActionBar().setTitle("行事曆");
             mCalendarView = findViewById(R.id.calendarView);
-            FloatingActionButton floatingActionButton = (FloatingActionButton) findViewById(R.id.Add);
-            floatingActionButton.setOnClickListener(new View.OnClickListener() {
+            toolbar10.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
                 @Override
-                public void onClick(View v) {
-                    addNote();
+                public boolean onMenuItemClick(MenuItem item) {
+                    switch (item.getItemId()) {
+                        case R.id.addNote:
+                            addNote();
+                            break;
+                    }
+                    return false;
                 }
             });
 
@@ -60,7 +72,14 @@ public class CalendarActivity extends AppCompatActivity {
 
         }
 
-        private void addNote() {
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.toolbar_menu_add, menu);
+        return true;
+    }
+
+    private void addNote() {
             Intent intent = new Intent(this, AddNoteActivity.class);
             startActivityForResult(intent, ADD_NOTE);
         }
