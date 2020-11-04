@@ -14,13 +14,13 @@ import android.widget.Toast;
 
 import java.util.List;
 
-public class ImageAdapter extends BaseAdapter {
+public class imageAdapter extends BaseAdapter {
 
     private ViewGroup layout;
     private Context context;
     private List coll;
 
-    public ImageAdapter(Context context, List coll) {
+    public imageAdapter(Context context, List coll) {
 
         super();
         this.context = context;
@@ -60,7 +60,7 @@ public class ImageAdapter extends BaseAdapter {
                 Toast.makeText(context, "index:" + position, Toast.LENGTH_SHORT)
                         .show();
 
-                ((PhotoGalleryActivity)context).setImageView(position);
+                ((photoGalleryActivity)context).setImageView(position);
             }
 
         });

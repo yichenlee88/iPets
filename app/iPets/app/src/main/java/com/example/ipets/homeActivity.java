@@ -45,13 +45,13 @@ public class homeActivity extends AppCompatActivity {
                         return true;
 
                     case R.id.calendar:
-                        Intent intentCalendar = new Intent(homeActivity.this,CalendarActivity.class);
+                        Intent intentCalendar = new Intent(homeActivity.this, calendarActivity.class);
                         intentCalendar.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                         startActivity(intentCalendar);
                         return true;
 
                     case R.id.photoGallery:
-                        Intent intentGallery = new Intent(homeActivity.this,PhotoGalleryActivity.class);
+                        Intent intentGallery = new Intent(homeActivity.this, photoGalleryActivity.class);
                         intentGallery.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                         startActivity(intentGallery);
                         return true;

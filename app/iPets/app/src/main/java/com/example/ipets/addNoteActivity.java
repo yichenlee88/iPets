@@ -29,7 +29,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
-public class AddNoteActivity extends AppCompatActivity {
+public class addNoteActivity extends AppCompatActivity {
 Calendar endCalendar,startCalendar;
 
     @Override
@@ -163,14 +163,14 @@ Calendar endCalendar,startCalendar;
         userInfo.put("color", colorselect);
         db.collection("users").document(userUID).collection("calEvent").document().set(userInfo);
         if(repeat.equals("不重複")){
-            AlertDialog.Builder finishsignup = new AlertDialog.Builder(AddNoteActivity.this);
+            AlertDialog.Builder finishsignup = new AlertDialog.Builder(addNoteActivity.this);
             finishsignup.setMessage("新增成功");
             finishsignup.setNegativeButton("確認", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface arg0, int arg1) {
                     Intent intent = new Intent();
                     intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-                    intent.setClass(AddNoteActivity.this, CalendarActivity.class);
+                    intent.setClass(addNoteActivity.this, calendarActivity.class);
                     startActivity(intent);
                 }
             });
@@ -192,14 +192,14 @@ Calendar endCalendar,startCalendar;
                 userInfo.put("color", colorselect);
                 db.collection("users").document(userUID).collection("calEvent").document().set(userInfo);
             }
-            AlertDialog.Builder finishsignup = new AlertDialog.Builder(AddNoteActivity.this);
+            AlertDialog.Builder finishsignup = new AlertDialog.Builder(addNoteActivity.this);
             finishsignup.setMessage("新增成功");
             finishsignup.setNegativeButton("確認", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface arg0, int arg1) {
                     Intent intent = new Intent();
                     intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-                    intent.setClass(AddNoteActivity.this, CalendarActivity.class);
+                    intent.setClass(addNoteActivity.this, calendarActivity.class);
                     startActivity(intent);
                 }
             });
@@ -221,14 +221,14 @@ Calendar endCalendar,startCalendar;
                 userInfo.put("color", colorselect);
                 db.collection("users").document(userUID).collection("calEvent").document().set(userInfo);
             }
-            AlertDialog.Builder finishsignup = new AlertDialog.Builder(AddNoteActivity.this);
+            AlertDialog.Builder finishsignup = new AlertDialog.Builder(addNoteActivity.this);
             finishsignup.setMessage("新增成功");
             finishsignup.setNegativeButton("確認", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface arg0, int arg1) {
                     Intent intent = new Intent();
                     intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-                    intent.setClass(AddNoteActivity.this, CalendarActivity.class);
+                    intent.setClass(addNoteActivity.this, calendarActivity.class);
                     startActivity(intent);
                 }
             });
@@ -250,14 +250,14 @@ Calendar endCalendar,startCalendar;
                 userInfo.put("color", colorselect);
                 db.collection("users").document(userUID).collection("calEvent").document().set(userInfo);
             }
-            AlertDialog.Builder finishsignup = new AlertDialog.Builder(AddNoteActivity.this);
+            AlertDialog.Builder finishsignup = new AlertDialog.Builder(addNoteActivity.this);
             finishsignup.setMessage("新增成功");
             finishsignup.setNegativeButton("確認", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface arg0, int arg1) {
                     Intent intent = new Intent();
                     intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-                    intent.setClass(AddNoteActivity.this, CalendarActivity.class);
+                    intent.setClass(addNoteActivity.this, calendarActivity.class);
                     startActivity(intent);
                 }
             });
@@ -279,14 +279,14 @@ Calendar endCalendar,startCalendar;
                 userInfo.put("color", colorselect);
                 db.collection("users").document(userUID).collection("calEvent").document().set(userInfo);
             }
-            AlertDialog.Builder finishsignup = new AlertDialog.Builder(AddNoteActivity.this);
+            AlertDialog.Builder finishsignup = new AlertDialog.Builder(addNoteActivity.this);
             finishsignup.setMessage("新增成功");
             finishsignup.setNegativeButton("確認", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface arg0, int arg1) {
                     Intent intent = new Intent();
                     intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-                    intent.setClass(AddNoteActivity.this, CalendarActivity.class);
+                    intent.setClass(addNoteActivity.this, calendarActivity.class);
                     startActivity(intent);
                 }
             });
