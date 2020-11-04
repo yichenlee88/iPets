@@ -165,10 +165,10 @@
     <string name="endDate_hint">到期日</string>
     <string name="TextView_Title">標題</string>
     <string name="TextView_content">目前沒有行程</string>
-    <string name="Button_delete">刪除</string>
-    <string name="Button_edit">編輯</string>
     <string name="title_hint">標題</string>
     <string name="title_add">新增</string>
+    <string name="Title_hint">標題</string>
+    <string name="Content_hint">內容</string>
     <array name="material_calendar_months_array">
         <item>一月</item>
         <item>二月</item>
@@ -190,4 +190,6 @@
         <item>每月</item>
         <item>每年</item>
     </string-array>
+    <string name="Button_close">關閉</string>
+    <string name="Button_save">儲存</string>
 </resources>
