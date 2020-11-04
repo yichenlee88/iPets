@@ -157,12 +157,14 @@ public class petInfoActivity extends AppCompatActivity {
     private void addPetInfo(String petsimage) {
         EditText edpetsname = findViewById(R.id.petsname);
         final EditText edpetsbirth = findViewById(R.id.petsbirth);
-        final EditText edvariety = findViewById(R.id.variety);
+        Spinner variety = findViewById(R.id.variety);
+        int idsex = variety.getSelectedItemPosition();
+        String[] Spinner_repeat = getResources().getStringArray(R.array.Spinner_variety);
+        String breed = Spinner_repeat[idsex];
         final EditText edlikes = findViewById(R.id.likes);
         final EditText ednotes = findViewById(R.id.notes);
         String petsbirth = edpetsbirth.getText().toString();
         final String petsname = edpetsname.getText().toString();
-        String petsvariety = edvariety.getText().toString();
         String petslikes = edlikes.getText().toString();
         String petsnotes = ednotes.getText().toString();
         String petsgender = null;
@@ -184,7 +186,7 @@ public class petInfoActivity extends AppCompatActivity {
         userInfo.put("petName", petsname);
         userInfo.put("petGender", petsgender);
         userInfo.put("petBirth", petsbirth);
-        userInfo.put("breed", petsvariety);
+        userInfo.put("breed", breed);
         userInfo.put("petHobby", petslikes);
         userInfo.put("petNote", petsnotes);
         userInfo.put("petImage", petsimage);
