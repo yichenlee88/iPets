@@ -17,12 +17,14 @@ import android.provider.MediaStore;
 import android.text.InputType;
 import android.util.DisplayMetrics;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.RadioGroup;
+import android.widget.Spinner;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -65,6 +67,12 @@ public class petInfoActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pets_info);
         getPermission();
+
+        Spinner petVarietySpinner = findViewById(R.id.variety);
+        ArrayAdapter adapter = ArrayAdapter.createFromResource(petInfoActivity.this, R.array.Spinner_variety, R.layout.myspinner_layout);
+        adapter.setDropDownViewResource(R.layout.myspinner_dropdown_layout);
+        petVarietySpinner.setAdapter(adapter);
+
         ImageButton camera = findViewById(R.id.camera1);
         ImageButton photo = findViewById(R.id.album);
         camera.setOnClickListener(new View.OnClickListener() {
