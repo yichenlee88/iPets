@@ -70,8 +70,8 @@
 
 <script>
 import firebase from "firebase";
-import { db } from "../db";
-const fStore = db.firestore();
+// import { db } from "../db";
+// const fStore = db.firestore();
 
 export default {
   name: "Album",
@@ -86,22 +86,25 @@ export default {
     };
   },
   mounted() {
-    this.getUser();
+    let uid = this.uid;
     let album = this.album;
     let imageUrl = this.url;
-    var storageRef = firebase.storage().ref("user1/");
+    var storageRef = firebase.storage().ref(uid + "/");
     let folderName = [];
+    console.log(uid, storageRef);
     storageRef
       .listAll()
       .then(function(res) {
         res.prefixes.forEach(function(folderRef) {
           folderName.push(folderRef.name);
           album.push(folderRef);
-          var imageRef = firebase.storage().ref("user1/" + folderRef.name);
+          var imageRef = firebase.storage().ref(uid + "/" + folderRef.name);
+          console.log(imageRef);
           imageRef.listAll().then(function(res) {
             res.items.forEach(function(itemRef) {
               itemRef.getDownloadURL().then(function(url) {
                 imageUrl.push(url);
+                console.log(imageUrl);
               });
             });
           });
@@ -111,6 +114,11 @@ export default {
         console.log(error);
       });
   },
+  computed: {
+    uid() {
+      return this.$store.state.uid;
+    }
+  },
   methods: {
     handleFileUpload(e) {
       this.imageData = e.target.files[0];
@@ -118,20 +126,11 @@ export default {
     createAlbum() {
       var storageRef = firebase
         .storage()
-        .ref("user1/" + this.albumName + "/" + this.imageData.name);
+        .ref(this.uid + "/" + this.albumName + "/" + this.imageData.name);
       storageRef.put(this.imageData).then(function(snapshot) {
         console.log("Uploaded files!");
+        location.reload();
       });
-    },
-    async getUser() {
-      let snapshot = await fStore.collection("users").get();
-      const user = [];
-      snapshot.forEach(doc => {
-        let appData = doc.data();
-        appData.id = doc.id;
-        user.push(appData);
-      });
-      this.user = user;
     }
   }
 };
@@ -155,6 +154,6 @@ export default {
 }
 
 .change:hover {
-  filter: brightness(.8);
+  filter: brightness(0.8);
 }
 </style>
