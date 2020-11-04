@@ -77,12 +77,8 @@ export default {
       url: []
     };
   },
-  computed: {
-    uid() {
-      return this.$store.state.uid;
-    }
-  },
   mounted() {
+    let uid = firebase.auth().currentUser.uid;
     let name = this.$route.params.name;
     this.name = name;
     let album = this.album;
@@ -96,7 +92,7 @@ export default {
           console.log(doc.id, doc.data());
         });
       });
-    var storageRef = firebase.storage().ref(this.uid + "/" + this.name);
+    var storageRef = firebase.storage().ref(uid + "/" + this.name);
     storageRef
       .listAll()
       .then(function(res) {
@@ -120,20 +116,22 @@ export default {
       this.imageData = e.target.files[0];
     },
     createPhoto() {
+      let uid = firebase.auth().currentUser.uid;
       var storageRef = firebase
         .storage()
-        .ref(this.uid + "/" + this.name + "/" + this.imageData.name);
+        .ref(uid + "/" + this.name + "/" + this.imageData.name);
       storageRef.put(this.imageData).then(function(snapshot) {
         console.log("Uploaded files!");
         this.$router.go({ path: this.$router.path });
       });
     },
     deleteImage(index) {
+      let uid = firebase.auth().currentUser.uid;
       let target = this.album[index];
       if (confirm(`是否刪除 ${target.name} ?`)) {
         var storageRef = firebase
           .storage()
-          .ref(this.uid + "/" + this.name + "/" + target.name);
+          .ref(uid + "/" + this.name + "/" + target.name);
         storageRef
           .delete()
           .then(function() {

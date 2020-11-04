@@ -86,7 +86,7 @@ export default {
     };
   },
   mounted() {
-    let uid = this.uid;
+    let uid = firebase.auth().currentUser.uid;
     let album = this.album;
     let imageUrl = this.url;
     var storageRef = firebase.storage().ref(uid + "/");
@@ -113,11 +113,6 @@ export default {
       .catch(function(error) {
         console.log(error);
       });
-  },
-  computed: {
-    uid() {
-      return this.$store.state.uid;
-    }
   },
   methods: {
     handleFileUpload(e) {
