@@ -84,7 +84,7 @@
                     android:id="@+id/redCircle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="55dp"
+                    android:layout_marginStart="53dp"
                     android:buttonTint="#0071BC"
                     android:drawableEnd="@drawable/ic_red" />
 
