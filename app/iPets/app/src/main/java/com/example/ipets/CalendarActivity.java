@@ -7,6 +7,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -48,6 +49,8 @@ public class CalendarActivity extends AppCompatActivity {
             Toolbar toolbar10 = findViewById(R.id.toolbar10);
             setSupportActionBar(toolbar10);
             getSupportActionBar().setTitle("行事曆");
+            TextView editNote = findViewById(R.id.editNote);
+            editNote.setClickable(true);
             mCalendarView = findViewById(R.id.calendarView);
             toolbar10.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
                 @Override
@@ -70,6 +73,13 @@ public class CalendarActivity extends AppCompatActivity {
                 }
             });
 
+            editNote.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    bottomSheetNotePreview bottomSheetDialog = new bottomSheetNotePreview();
+                    bottomSheetDialog.show(getSupportFragmentManager(), "bottomSheetNotePreview");
+                }
+            });
         }
 
     @Override
