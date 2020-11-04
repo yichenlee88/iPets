@@ -15,14 +15,15 @@
           <!-- petImage -->
           <v-row no-gutters justify="center" align="center">
             <v-col>
-              <v-file-input
+              <input
+                class="inputPic"
                 type="file"
-                @change="selectFile($image)"
+                @change="handleFileUpload"
                 accept="image/jpeg, image/png"
                 placeholder="選擇寵物相片"
                 name="petImage"
-                v-model="petImage"
-              ></v-file-input>
+                :v-model="petImage"
+              />
             </v-col>
           </v-row>
           <!-- petName -->
@@ -78,7 +79,9 @@
             maxlength
           ></b-form-textarea>
           <div class="d-flex flex-row-reverse">
-            <b-button type="submit" variant="dark">建立</b-button>
+            <b-button @click="createAlbum" type="submit" variant="dark"
+              >建立</b-button
+            >
           </div>
         </b-form>
       </b-card-body>
@@ -88,7 +91,7 @@
     <!-- Start -- 寵物簡介 -->
     <b-card-group class="PetProfile" deck v-if="show">
       <b-card
-        v-bind:img-src="pet.image"
+        :img-src="url"
         class="mb-3"
         style="max-width:300px;border:0"
         img-top
@@ -165,17 +168,18 @@
       </b-modal>
 
       <b-card style="max-height:365px">
-        <b-card-body :title="pet.name">
-          <b-card-text>性別：{{ pet.gender }}</b-card-text>
-          <b-card-text>生日：{{ pet.gender }}</b-card-text>
+        <b-card-body :title="pet.petName">
+          <b-card-text>性別：{{ pet.petGender }}</b-card-text>
+          <b-card-text>生日：{{ pet.petBirth }}</b-card-text>
           <b-card-text>年齡：{{ pet.age }}</b-card-text>
           <b-card-text>品種：{{ pet.breed }}</b-card-text>
-          <b-card-text>本日行程：{{ pet.today }}</b-card-text>
+          <b-card-text>喜好：{{ pet.petHobby }}</b-card-text>
+          <b-card-text>備註：{{ pet.petNote }}</b-card-text>
         </b-card-body>
       </b-card>
     </b-card-group>
-    <!--
-    <b-card
+
+    <!-- <b-card
       v-if="show"
       v-bind:img-src="pet.image"
       class="mb-3"
@@ -271,6 +275,7 @@ import "bootstrap/dist/css/bootstrap.css";
 
 // Import date picker css
 import "pc-bootstrap4-datetimepicker/build/css/bootstrap-datetimepicker.css";
+import firebase from "firebase";
 import { Info } from "../firebase/pet";
 import { db } from "../db";
 const fStore = db.firestore();
@@ -281,14 +286,17 @@ export default {
     return {
       modalShow: false,
       date: new Date(),
-      petImage: "",
+      petImage: null,
+      url: "",
+      imageUrl: "",
       petName: "",
+      file: [],
       petGender: "null",
       petGenderOptions: [
         { value: "null", text: "寵物性別" },
-        { value: "I prefer not to say", text: "不透漏" },
-        { value: "boy", text: "男孩" },
-        { value: "gril", text: "女孩" }
+        { value: "不透漏", text: "不透漏" },
+        { value: "男孩", text: "男孩" },
+        { value: "女孩", text: "女孩" }
       ],
       petBirth: "",
       petHobby: "",
@@ -302,7 +310,7 @@ export default {
         { value: "拉布拉多", text: "拉布拉多" },
         { value: "哈士奇", text: "哈士奇" },
         { value: "藏獒", text: "藏獒" },
-        { value: "貴賓犬", text: "貴賓犬," },
+        { value: "貴賓犬", text: "貴賓犬" },
         { value: "薩摩耶", text: "薩摩耶" },
         { value: "博美", text: "博美" },
         { value: "迷你雪納瑞", text: "迷你雪納瑞" },
@@ -383,15 +391,34 @@ export default {
     // datePicker
   },
   methods: {
+    handleFileUpload(e) {
+      this.petImage = e.target.files[0];
+    },
+    createAlbum() {
+      var storageRef = firebase
+        .storage()
+        .ref(this.uid + "/" + this.pet.petName);
+      storageRef.put(this.petImage).then(function(snapshot) {
+        console.log("Uploaded files!");
+      });
+    },
     onSubmit(e) {
       e.preventDefault();
-      var docRef = fStore.collection("pets").doc();
+      var docRef = fStore
+        .collection("users")
+        .doc(this.uid)
+        .collection("pets")
+        .doc();
       docRef
         .set({
-          petImage: this.petImage,
           petName: this.petName,
           petGender: this.petGender,
-          petBirth: this.petBirth.toISOString().slice(0, 10),
+          petBirth:
+            this.petBirth.getUTCFullYear() +
+            "-" +
+            (this.petBirth.getMonth() + 1) +
+            "-" +
+            this.petBirth.getDate(),
           petBirth_year: this.petBirth.getUTCFullYear(),
           petBirth_month: this.petBirth.getMonth() + 1,
           petBirth_date: this.petBirth.getDate(),
@@ -408,7 +435,6 @@ export default {
             new Info("除蟲", 2, "week"),
             new Info("指甲", 1, "month")
           ];
-
           infoList.forEach(function(item) {
             infoRef.doc(item.eventName).set({
               next_time: item.getNext(),
@@ -459,6 +485,25 @@ export default {
       // );
     }
   },
+  mounted() {
+    let uid = firebase.auth().currentUser.uid;
+    // let uid = this.uid;
+    let imageUrl = this.url;
+    // var imageRef = firebase
+    //   .storage()
+    //   .ref()
+    //   .child(this.uid + "/" + this.petName);
+    // imageRef.getDownloadURL().then(function(url) {
+    //   imageUrl.push(url);
+    // });
+    var storageRef = firebase.storage();
+    storageRef
+      .ref(uid + "/" + "毛毛")
+      .getDownloadURL()
+      .then(function(url) {
+        this.url = url;
+      });
+  },
   computed: {
     uid() {
       return this.$store.state.uid;
@@ -503,6 +548,12 @@ export default {
   display: block;
   margin-left: auto;
   margin-right: auto;
+}
+
+.inputPic {
+  max-width: auto;
+  height: 48px;
+  margin-left: 5px;
 }
 
 .InputClass {

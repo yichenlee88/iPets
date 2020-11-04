@@ -9,7 +9,7 @@
     <string name="button_login">登入</string>
     <string name="button_forgot">忘記密碼？</string>
     <string name="TextView_first">第一次使用？</string>
-    <string name="button_signup">註冊。</string>
+    <string name="button_signup">註冊</string>
     <string name="menu_home">home</string>
     <string name="menu_calendar">calendar</string>
     <string name="menu_analyze">analyze</string>
@@ -165,9 +165,10 @@
     <string name="endDate_hint">到期日</string>
     <string name="TextView_Title">標題</string>
     <string name="TextView_content">目前沒有行程</string>
-    <string name="Button_delete">刪除</string>
-    <string name="Button_edit">編輯</string>
     <string name="title_hint">標題</string>
+    <string name="title_add">新增</string>
+    <string name="Title_hint">標題</string>
+    <string name="Content_hint">內容</string>
     <array name="material_calendar_months_array">
         <item>一月</item>
         <item>二月</item>
@@ -188,5 +189,58 @@
         <item>每週</item>
         <item>每月</item>
         <item>每年</item>
+    </string-array>
+    <string name="Button_close">關閉</string>
+    <string name="Button_save">儲存</string>
+    <string-array name="Spinner_variety">
+        <item>台灣土狗</item>
+        <item>柴犬</item>
+        <item>黃金獵犬</item>
+        <item>拉布拉多</item>
+        <item>哈士奇</item>
+        <item>藏獒</item>
+        <item>貴賓犬</item>
+        <item>薩摩耶</item>
+        <item>博美</item>
+        <item>迷你雪納瑞</item>
+        <item>蘇格蘭牧羊犬</item>
+        <item>松獅</item>
+        <item>獅子犬</item>
+        <item>吉娃娃</item>
+        <item>阿拉斯加雪橇犬</item>
+        <item>喜樂蒂牧羊犬</item>
+        <item>美國可卡犬</item>
+        <item>英國古代牧羊犬</item>
+        <item>捲毛比熊犬</item>
+        <item>義大利靈緹</item>
+        <item>蝴蝶犬</item>
+        <item>雪納瑞</item>
+        <item>邊境牧羊犬</item>
+        <item>德國牧羊犬</item>
+        <item>阿富汗獵犬</item>
+        <item>大麥町</item>
+        <item>西施犬</item>
+        <item>英國可卡犬</item>
+        <item>臘腸犬</item>
+        <item>巴哥犬</item>
+        <item>約克夏</item>
+        <item>柯基</item>
+        <item>日本銀狐</item>
+        <item>迷你杜賓犬</item>
+        <item>大白熊犬</item>
+        <item>米格魯</item>
+        <item>羅威納犬</item>
+        <item>中國沙皮犬</item>
+        <item>西部高地白梗</item>
+        <item>愛斯基摩犬</item>
+        <item>聖伯納犬</item>
+        <item>鬥牛犬</item>
+        <item>拉薩犬</item>
+        <item>馬爾濟斯犬</item>
+        <item>萬能梗</item>
+        <item>狼狗</item>
+        <item>德國杜賓犬</item>
+        <item>牛頭梗</item>
+        <item>日本柴犬</item>
     </string-array>
 </resources>

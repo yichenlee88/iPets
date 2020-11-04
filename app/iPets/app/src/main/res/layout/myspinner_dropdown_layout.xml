@@ -6,6 +6,6 @@
     android:paddingTop="10dp"
     android:paddingBottom="10dp"
     android:text="test123"
-    android:textSize="22sp">
+    android:textSize="18sp">
 
 </TextView>

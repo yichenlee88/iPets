@@ -2,7 +2,7 @@
   <div class="screen" style="background-color:#F5F5F5">
     <div class="center">
       <b-row>
-        <b-col col="6" sm="4" md="4">
+        <b-col cols="6" sm="4" md="4">
           <b-list-group>
             <b-list-group-item
               ><router-link to="/setting/editProfile"
@@ -42,10 +42,10 @@
           </b-list-group>
         </b-col>
         <b-col
-          col="6"
+          cols="6"
           sm="8"
           md="8"
-          style="height: 75vh; margin-top:15px; background-color:#FFFFFF; border: 1px solid; border-color: #ADADAD;"
+          style="overflow: scroll; height: 75vh; margin-top:15px; background-color:#FFFFFF; border: 1px solid; border-color: #ADADAD;"
         >
           <router-view></router-view>
         </b-col>

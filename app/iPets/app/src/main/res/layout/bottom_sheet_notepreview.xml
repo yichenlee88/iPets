@@ -4,56 +4,115 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:id="@+id/bottom_sheet"
-    android:padding="10dp"
+    android:padding="5dp"
     android:background="@drawable/bottomsheet_bgstyle">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/TextView_Title"
-        android:textColor="#888888"
-        android:textSize="18sp"
-        android:layout_marginStart="17dp"
-        android:layout_marginEnd="17dp"
-        android:layout_marginTop="15dp" />
-
-    <TextView
-        android:id="@+id/contentTextView"
+    <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
-        android:layout_height="150dp"
-        android:layout_marginStart="17dp"
+        android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
+        android:paddingHorizontal="17dp"
+        android:theme="@style/AppTheme">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/editNoteText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="#0071BC"
+            android:hint="@string/Title_hint"
+            android:textColorLink="#0071BC"
+            android:textSize="18sp" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <EditText
+        android:id="@+id/noteContentText"
+        android:layout_width="match_parent"
+        android:layout_height="145dp"
+        android:layout_marginStart="17dp"
+        android:layout_marginTop="15dp"
         android:layout_marginEnd="17dp"
-        android:text="@string/TextView_content"
-        android:textColor="#000000"
-        android:textSize="24sp" />
+        android:autofillHints=""
+        android:background="@drawable/layout_bgstyle"
+        android:gravity="start"
+        android:hint="@string/Content_hint"
+        android:imeOptions="actionDone"
+        android:inputType="textLongMessage|textMultiLine"
+        android:paddingStart="10dp"
+        android:paddingTop="10dp"
+        android:paddingEnd="10dp"
+        android:paddingBottom="10dp"
+        android:textSize="18sp"
+        android:theme="@style/AppTheme" />
+
+    <RadioGroup
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:orientation="horizontal" >
+
+        <RadioButton
+            android:id="@+id/redCircle2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="47dp"
+            android:buttonTint="#0071BC"
+            android:drawableEnd="@drawable/ic_red" />
+
+        <RadioButton
+            android:id="@+id/orangeCircle2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:buttonTint="#0071BC"
+            android:drawableEnd="@drawable/ic_orange" />
+
+        <RadioButton
+            android:id="@+id/yellowCircle2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:buttonTint="#0071BC"
+            android:drawableEnd="@drawable/ic_yellow" />
+
+        <RadioButton
+            android:id="@+id/greenCircle2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="17dp"
+            android:buttonTint="#0071BC"
+            android:drawableEnd="@drawable/ic_green" />
+    </RadioGroup>
 
     <LinearLayout
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="25dp"
+        android:layout_marginStart="150dp"
         android:orientation="horizontal">
 
         <Button
             android:id="@+id/deleteButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="17dp"
-            android:text="@string/Button_delete"
+            android:layout_marginStart="15dp"
+            android:layout_marginEnd="15dp"
             android:background="#00FFFFFF"
+            android:stateListAnimator="@null"
+            android:text="@string/Button_close"
             android:textColor="#0071BC"
-            android:textSize="20sp"
-            android:stateListAnimator="@null" />
+            android:textSize="16sp" />
 
         <Button
             android:id="@+id/editButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginEnd="15dp"
             android:background="#00FFFFFF"
             android:stateListAnimator="@null"
-            android:text="@string/Button_edit"
+            android:text="@string/Button_save"
             android:textColor="#0071BC"
-            android:textSize="20sp" />
+            android:textSize="16sp" />
 
     </LinearLayout>
 

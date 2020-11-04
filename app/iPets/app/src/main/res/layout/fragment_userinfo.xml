@@ -159,6 +159,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center_horizontal|center_vertical"
+                android:buttonTint="#0071BC"
                 android:text="@string/RadioButton_gender1"
                 android:textSize="20sp" />
 
@@ -166,8 +167,9 @@
                 android:id="@+id/female"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginHorizontal="56dp"
+                android:layout_marginHorizontal="40dp"
                 android:gravity="center_horizontal|center_vertical"
+                android:buttonTint="#0071BC"
                 android:text="@string/RadioButton_gender2"
                 android:textSize="20sp" />
 
@@ -175,6 +177,7 @@
                 android:id="@+id/unwilling"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:buttonTint="#0071BC"
                 android:text="@string/RadioButton_gender3"
                 android:textSize="20sp" />
         </RadioGroup>
