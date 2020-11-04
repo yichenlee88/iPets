@@ -1,30 +1,35 @@
 package com.example.ipets;
 
 import android.app.AlertDialog;
+import android.app.DatePickerDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.InputType;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.RadioGroup;
 import android.widget.Spinner;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
-import com.applandeo.materialcalendarview.CalendarView;
+import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
 
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
 public class AddNoteActivity extends AppCompatActivity {
+    int startyear, startmonthOfYear, startdayOfMonth;
+    int endyear, endmonthOfYear, enddayOfMonth;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,44 +37,136 @@ public class AddNoteActivity extends AppCompatActivity {
         Toolbar toolbar11 = findViewById(R.id.toolbar11);
         setSupportActionBar(toolbar11);
         getSupportActionBar().setTitle("新增行程");
-        Button button = (Button) findViewById(R.id.addNoteButton);
-        final EditText noteEditText = findViewById(R.id.noteEditText);
 
         Spinner sexSpinner = findViewById(R.id.repeatSpinner);
         ArrayAdapter adapter = ArrayAdapter.createFromResource(this, R.array.Spinner_repeat, R.layout.myspinner_layout);
         adapter.setDropDownViewResource(R.layout.myspinner_dropdown_layout);
         sexSpinner.setAdapter(adapter);
-
-        button.setOnClickListener(new View.OnClickListener() {
+        EditText startDate = findViewById(R.id.startDate);
+        EditText endDate = findViewById(R.id.endDate);
+        startDate.setInputType(InputType.TYPE_NULL); //不顯示系統輸入鍵盤
+        startDate.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                // TODO Auto-generated method stub
+                if (hasFocus) {
+                    Calendar c = Calendar.getInstance();
+                    DatePickerDialog datePickerDialog = new DatePickerDialog(v.getContext(), R.style.MyDatePickerDialogTheme, new DatePickerDialog.OnDateSetListener() {
+                        @Override
+                        public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+                            // TODO Auto-generated method stub
+                            startDate.setText(year + "-" + (monthOfYear + 1) + "-" + dayOfMonth);
+                            startyear = year;
+                            startmonthOfYear = monthOfYear;
+                            startdayOfMonth = dayOfMonth;
+                        }
+                    }, c.get(Calendar.YEAR), c.get(Calendar.MONTH), c.get(Calendar.DAY_OF_MONTH));
+                    DatePicker datePicker = datePickerDialog.getDatePicker();
+                    datePicker.setMinDate(System.currentTimeMillis());
+                    datePickerDialog.show();
+                }
+            }
+        });
+        endDate.setInputType(InputType.TYPE_NULL); //不顯示系統輸入鍵盤
+        endDate.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                // TODO Auto-generated method stub
+                if (hasFocus) {
+                    Calendar c = Calendar.getInstance();
+                    DatePickerDialog datePickerDialog = new DatePickerDialog(v.getContext(), R.style.MyDatePickerDialogTheme, new DatePickerDialog.OnDateSetListener() {
+                        @Override
+                        public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+                            // TODO Auto-generated method stub
+                            endDate.setText(year + "-" + (monthOfYear + 1) + "-" + dayOfMonth);
+                            endyear = year;
+                            endmonthOfYear = monthOfYear;
+                            enddayOfMonth = dayOfMonth;
+                        }
+                    }, c.get(Calendar.YEAR), c.get(Calendar.MONTH), c.get(Calendar.DAY_OF_MONTH));
+                    DatePicker datePicker = datePickerDialog.getDatePicker();
+                    datePicker.setMinDate(System.currentTimeMillis());
+                    datePickerDialog.show();
+                }
+            }
+        });
+        Button addNote = findViewById(R.id.addNoteButton);
+        addNote.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                FirebaseAuth auth = FirebaseAuth.getInstance();
-                FirebaseUser currentUser = auth.getCurrentUser();
-                String userUID = currentUser.getUid();
-                Calendar cal=Calendar.getInstance();
-                Date date = cal.getTime();
-                SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
-                String selectedDate = simpleDateFormat.format(date);
-                String eventNote = noteEditText.getText().toString();
+                addEvent();
+            }
+        });
+
+
+    }
+
+    private void addEvent() {
+        FirebaseAuth auth = FirebaseAuth.getInstance();
+        FirebaseUser currentUser = auth.getCurrentUser();
+        String userUID = currentUser.getUid();
+        TextInputEditText ednote = findViewById(R.id.noteEditText);
+        String note = ednote.getText().toString();
+        TextInputEditText detailEditText = findViewById(R.id.detailEditText);
+        String detail = detailEditText.getText().toString();
+        //EditText startDate = findViewById(R.id.startDate);
+        //String start = startDate.getText().toString();
+        //EditText endDate = findViewById(R.id.endDate);
+        // String end = endDate.getText().toString();
+        String colorselect = null;
+        RadioGroup genderselect = findViewById(R.id.eventColor);
+        switch (genderselect.getCheckedRadioButtonId()) {
+            case R.id.redCircle:
+                colorselect = "red";
+                break;
+            case R.id.orangeCircle:
+                colorselect = "orange";
+                break;
+            case R.id.yellowCircle:
+                colorselect = "yellow";
+                break;
+            case R.id.greenCircle:
+                colorselect = "green";
+                break;
+        }
+        Spinner repeatSpinner = findViewById(R.id.repeatSpinner);
+        int idsex = repeatSpinner.getSelectedItemPosition();
+        String[] Spinner_repeat = getResources().getStringArray(R.array.Spinner_repeat);
+        String repeat = Spinner_repeat[idsex];
+        startmonthOfYear = startmonthOfYear+1;
+        endmonthOfYear = endmonthOfYear+1;
+        startdayOfMonth = startdayOfMonth -1;
+        enddayOfMonth = enddayOfMonth - 1;
+        if (repeat.equals("每日")) {
+            for (int i = 0; i < 3; i++) {
+                startdayOfMonth = startdayOfMonth + 1;
+                String start = startyear + "-" + startmonthOfYear + "-" + startdayOfMonth;
+                enddayOfMonth = enddayOfMonth + 1;
+                String end = endyear + "-" + endmonthOfYear + "-" + enddayOfMonth;
                 FirebaseFirestore db;
                 db = FirebaseFirestore.getInstance();
                 Map<String, Object> userInfo = new HashMap<>();
-                userInfo.put("Eventnote", eventNote);
-                db.collection("userInformation").document(userUID).collection("calendar").document(selectedDate).set(userInfo);
-                AlertDialog.Builder finishsignup = new AlertDialog.Builder(AddNoteActivity.this);
-                finishsignup.setMessage("新增成功");
-                finishsignup.setNegativeButton("確認", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface arg0, int arg1) {
-                        Intent intent = new Intent();
-                        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
-                        intent.setClass(AddNoteActivity.this, CalendarActivity.class);
-                        startActivity(intent);
-                    }
-                });
-                finishsignup.setCancelable(false);
-                finishsignup.show();
+                userInfo.put("eventName", note);
+                userInfo.put("startDate", start);
+                userInfo.put("endDate", end);
+                userInfo.put("frequency", repeat);
+                userInfo.put("details", detail);
+                userInfo.put("color", colorselect);
+                db.collection("users").document(userUID).collection("calEvent").document().set(userInfo);
             }
-        });
+            AlertDialog.Builder finishsignup = new AlertDialog.Builder(AddNoteActivity.this);
+            finishsignup.setMessage("新增成功");
+            finishsignup.setNegativeButton("確認", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface arg0, int arg1) {
+                    Intent intent = new Intent();
+                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                    intent.setClass(AddNoteActivity.this, CalendarActivity.class);
+                    startActivity(intent);
+                }
+            });
+            finishsignup.setCancelable(false);
+            finishsignup.show();
+        }
     }
 }
