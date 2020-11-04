@@ -132,16 +132,16 @@ Calendar endCalendar,startCalendar;
         String colorselect = null;
         RadioGroup genderselect = findViewById(R.id.eventColor);
         switch (genderselect.getCheckedRadioButtonId()) {
-            case R.id.redCircle:
+            case R.id.redCircle1:
                 colorselect = "red";
                 break;
-            case R.id.orangeCircle:
+            case R.id.orangeCircle1:
                 colorselect = "orange";
                 break;
-            case R.id.yellowCircle:
+            case R.id.yellowCircle1:
                 colorselect = "yellow";
                 break;
-            case R.id.greenCircle:
+            case R.id.greenCircle1:
                 colorselect = "green";
                 break;
         }
