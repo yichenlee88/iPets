@@ -390,7 +390,6 @@ export default {
   methods: {
     handleFileUpload(e) {
       this.petImage = e.target.files[0];
-      console.log(this.petImage);
     },
     createAlbum() {
       var storageRef = firebase
@@ -400,14 +399,13 @@ export default {
         console.log("Uploaded files!");
       });
     },
-    write_pet_profile(url) {
-      var docRef = fStore
+    async save_pet_profile(file) {
+      // reference:https://codelabs.developers.google.com/codelabs/firebase-web/#9
+      await fStore
         .collection("users")
         .doc(this.uid)
         .collection("pets")
-        .doc();
-      docRef
-        .set({
+        .add({
           petName: this.petName,
           petGender: this.petGender,
           petBirth:
@@ -424,10 +422,10 @@ export default {
           petNote: this.petNote,
           uid: this.uid,
           timestamp: new Date(),
-          profile_picture: this.url
+          profile_picture: ""
         })
-        .then(() => {
-          var infoRef = docRef.collection("info");
+        .then(function(ref) {
+          var infoRef = ref.collection("info");
           var infoList = [
             new Info("洗澡", 0, "day"),
             new Info("除蟲", 2, "week"),
@@ -441,40 +439,29 @@ export default {
               done: false
             });
           });
-          this.$router.go({ path: this.$router.path });
+          return firebase
+            .storage()
+            .ref(firebase.auth().currentUser.uid + "/" + ref.id)
+            .put(file)
+            .then(function(fileSnapshot) {
+              return fileSnapshot.ref.getDownloadURL().then(function(url) {
+                return ref.update({
+                  profile_picture: url
+                });
+              });
+            });
+        })
+        .catch(function(error) {
+          console.error(
+            "There was an error uploading a file to Cloud Storage:",
+            error
+          );
         });
+      this.$router.go({ path: this.$router.path });
     },
     onSubmit(e) {
       e.preventDefault();
-
-      var uploadTask = firebase
-        .storage()
-        .ref(this.uid + "/" + this.petName)
-        .put(this.petImage);
-
-      uploadTask.then(function(snapshot) {
-        snapshot.ref.getDownloadURL().then(function(url) {
-          console.log(url);
-        });
-      });
-
-      // uploadTask.on(
-      //   firebase.storage.TaskEvent.STATE_CHANGED,
-      //   function(snapshot) {
-      //     var progress =
-      //       (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-      //     console.log("Upload is " + progress + "% done");
-      //   },
-      //   function(error) {
-      //     console.log(error);
-      //   },
-      //   function() {
-      //     uploadTask.snapshot.ref.getDownloadURL().then(function(downloadURL) {
-      //       console.log("File available at", downloadURL);
-      //       this.write_pet_profile(downloadURL);
-      //     });
-      //   }
-      // );
+      this.save_pet_profile(this.petImage);
     },
     convert_timestamp(unixTimestamp) {
       var date = unixTimestamp.toDate();
