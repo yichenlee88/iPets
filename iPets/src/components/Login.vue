@@ -81,7 +81,7 @@ export default {
       type: String
     }
   },
-  name: "Login",
+  name: "login",
   data() {
     return {
       email: "",
