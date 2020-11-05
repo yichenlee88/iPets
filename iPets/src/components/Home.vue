@@ -15,29 +15,17 @@
     >
       <b-carousel-slide>
         <template v-slot:img>
-          <img
-            class="d-block img-fluid"
-            src="../assets/carousel-01.jpg"
-            alt="image slot"
-          />
+          <img class="d-block img-fluid" src="../assets/carousel-01.jpg" alt="image slot">
         </template>
       </b-carousel-slide>
       <b-carousel-slide>
         <template v-slot:img>
-          <img
-            class="d-block img-fluid"
-            src="../assets/carousel-02.jpg"
-            alt="image slot"
-          />
+          <img class="d-block img-fluid" src="../assets/carousel-02.jpg" alt="image slot">
         </template>
       </b-carousel-slide>
       <b-carousel-slide>
         <template v-slot:img>
-          <img
-            class="d-block img-fluid"
-            src="../assets/carousel-03.jpg"
-            alt="image slot"
-          />
+          <img class="d-block img-fluid" src="../assets/carousel-03.jpg" alt="image slot">
         </template>
       </b-carousel-slide>
     </b-carousel>
@@ -65,22 +53,27 @@
                     $bvModal.show(`${i}`);
                     convertCenter();
                   "
-                  >了解更多</b-button
-                >
+                >了解更多</b-button>
                 <b-modal :id="`${i}`" v-bind:title="item.name">
                   <b-container>
                     <b-card v-bind:img-src="item.src" img-alt="Image" img-top>
                       <b-card-text>
                         <b-row>
-                          <b-col cols="4"> <strong>地址</strong>： </b-col>
+                          <b-col cols="4">
+                            <strong>地址</strong>：
+                          </b-col>
                           <b-col>{{ item.address }}</b-col>
                         </b-row>
                         <b-row>
-                          <b-col cols="4"> <strong>連絡電話</strong>： </b-col>
+                          <b-col cols="4">
+                            <strong>連絡電話</strong>：
+                          </b-col>
                           <b-col>{{ item.phone }}</b-col>
                         </b-row>
                         <b-row>
-                          <b-col cols="4"> <strong>簡介</strong>: </b-col>
+                          <b-col cols="4">
+                            <strong>簡介</strong>:
+                          </b-col>
                           <b-col>{{ item.content }}</b-col>
                         </b-row>
                       </b-card-text>
@@ -106,7 +99,7 @@
 <script>
 import axios from "axios";
 export default {
-  name: "Home",
+  name: "home",
   data() {
     return {
       center: { lat: 25.0325917, lng: 121.5624999 },
@@ -116,10 +109,7 @@ export default {
   },
 
   mounted() {
-    axios.get("http://localhost:4000/comments").then(res => {
-      console.log(res);
-      this.comments = res.data;
-    });
+    this.getAdoption();
   },
 
   methods: {
@@ -137,6 +127,12 @@ export default {
         lat: parseFloat(target.center.lat),
         lng: parseFloat(target.center.lng)
       };
+    },
+    getAdoption() {
+      axios.get("http://localhost:4000/comments").then(res => {
+        console.log(res);
+        this.comments = res.data;
+      });
     }
   }
 };
