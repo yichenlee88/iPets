@@ -22,22 +22,22 @@ export default {
         {
           text: "寵物資訊不能修改",
           content:
-            "若您遇到此相關問題，請於「聯絡我們」頁面給予我們回應，我們將盡快為您解答，謝謝您。(http://localhost:8080/#/setting/feedback )"
+            "若您遇到此相關問題，請於「聯絡我們」頁面提供給我們異常問題，我們將盡快為排除並為您解答，謝謝您。(http://localhost:8080/#/setting/feedback )"
         },
         {
           text: "寵物不能正常新增",
           content:
-            "若您遇到此相關問題，請於「聯絡我們」頁面給予我們回應，我們將盡快為您解答，謝謝您。(http://localhost:8080/#/setting/feedback )"
+            "若您遇到此相關問題，請於「聯絡我們」頁面提供給我們異常問題，我們將盡快為排除並為您解答，謝謝您。(http://localhost:8080/#/setting/feedback )"
         },
         {
           text: "行事曆事件異常",
           content:
-            "若您遇到此相關問題，請於「聯絡我們」頁面給予我們回應，我們將盡快為您解答，謝謝您。(http://localhost:8080/#/setting/feedback )"
+            "若您遇到此相關問題，請於「聯絡我們」頁面提供給我們異常問題，我們將盡快為排除並為您解答，謝謝您。(http://localhost:8080/#/setting/feedback )"
         },
         {
           text: "相簿異常",
           content:
-            "若您遇到此相關問題，請於「聯絡我們」頁面給予我們回應，我們將盡快為您解答，謝謝您。(http://localhost:8080/#/setting/feedback )"
+            "若您遇到此相關問題，請於「聯絡我們」頁面提供給我們異常問題，我們將盡快為排除疑難雜症並為您解答，謝謝您。(http://localhost:8080/#/setting/feedback )"
         },
         {
           text: "如何刪除使用帳號/寵物",
