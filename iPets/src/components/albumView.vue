@@ -64,8 +64,8 @@
 
 <script>
 import firebase from "firebase";
-import { db } from "../db";
-const fStore = db.firestore();
+// import { db } from "../db";
+// const fStore = db.firestore();
 
 export default {
   name: "albumView",
@@ -78,38 +78,7 @@ export default {
     };
   },
   mounted() {
-    let uid = firebase.auth().currentUser.uid;
-    let name = this.$route.params.name;
-    this.name = name;
-    let album = this.album;
-    let imageUrl = this.url;
-    fStore
-      .collection("user")
-      .get()
-      .then(querySnapshot => {
-        querySnapshot.forEach(doc => {
-          this.user.push(doc.data());
-          console.log(doc.id, doc.data());
-        });
-      });
-    var storageRef = firebase.storage().ref(uid + "/" + this.name);
-    storageRef
-      .listAll()
-      .then(function(res) {
-        res.prefixes.forEach(function(folderRef) {
-          alert(folderRef);
-          console.log(folderRef);
-        });
-        res.items.forEach(function(itemRef) {
-          album.push(itemRef);
-          itemRef.getDownloadURL().then(function(url) {
-            imageUrl.push(url);
-          });
-        });
-      })
-      .catch(function(error) {
-        console.log(error);
-      });
+    this.getPhoto();
   },
   methods: {
     handleFileUpload(e) {
@@ -140,8 +109,33 @@ export default {
           .catch(function(error) {
             console.log(error);
           });
+        this.$router.go({ path: this.$router.path });
       }
-      this.$router.go({ path: this.$router.path });
+    },
+    getPhoto() {
+      let uid = firebase.auth().currentUser.uid;
+      let name = this.$route.params.name;
+      this.name = name;
+      let album = this.album;
+      let imageUrl = this.url;
+      var storageRef = firebase.storage().ref(uid + "/" + this.name);
+      storageRef
+        .listAll()
+        .then(function(res) {
+          res.prefixes.forEach(function(folderRef) {
+            alert(folderRef);
+            console.log(folderRef);
+          });
+          res.items.forEach(function(itemRef) {
+            album.push(itemRef);
+            itemRef.getDownloadURL().then(function(url) {
+              imageUrl.push(url);
+            });
+          });
+        })
+        .catch(function(error) {
+          console.log(error);
+        });
     }
   }
 };

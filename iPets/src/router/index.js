@@ -6,27 +6,27 @@ import dogInfo from "@/components/dogInfo";
 import contact from "@/components/contact";
 import login from "@/components/login";
 import register from "@/components/register";
-import PetProfile from "@/components/PetProfile";
-import Calendar from "@/components/Calendar";
-import ManageArticle from "@/components/ManageArticle";
-import ManageAdoption from "@/components/ManageAdoption";
+import petProfile from "@/components/petProfile";
+import calendar from "@/components/calendar";
+import manageArticle from "@/components/manageArticle";
+import manageAdoption from "@/components/manageAdoption";
 import manageContact from "@/components/manageContact";
-import manage from "@/components/Manage";
+import manage from "@/components/manage";
 import { db } from "../db";
 import dogScience from "@/components/dogScience";
-import Post from "@/components/Post";
-import Identify from "@/components/Identify";
-import Tunit from "@/components/Tunit";
-import Album from "@/components/Album";
+import post from "@/components/post";
+import identify from "@/components/identify";
+import tunit from "@/components/tunit";
+import album from "@/components/album";
 import albumView from "@/components/albumView";
-import Setting from "@/components/Setting";
-import EditProfile from "@/components/EditProfile";
-import EditPetProfile from "@/components/EditPetProfile";
-import Password from "@/components/Password";
-import Mail from "@/components/Mail";
-import LoginActivity from "@/components/LoginActivity";
+import setting from "@/components/setting";
+import editProfile from "@/components/editProfile";
+import editPetProfile from "@/components/editPetProfile";
+import password from "@/components/password";
+import mail from "@/components/mail";
+import loginActivity from "@/components/loginActivity";
 import FAQ from "@/components/FAQ";
-import Feedback from "@/components/Feedback";
+import feedback from "@/components/feedback";
 import pageNotFound from "@/components/pageNotFound";
 
 // import { component } from "vue/types/umd";
@@ -87,32 +87,32 @@ let router = new Router({
     },
     {
       path: "/petProfile",
-      name: "PetProfile",
-      component: PetProfile,
+      name: "petProfile",
+      component: petProfile,
       meta: {
         requiresAuth: true
       }
     },
     {
       path: "/calendar",
-      name: "Calendar",
-      component: Calendar,
+      name: "calendar",
+      component: calendar,
       meta: {
         requiresAuth: true
       }
     },
     {
       path: "/identify",
-      name: "Identify",
-      component: Identify,
+      name: "identify",
+      component: identify,
       meta: {
         requiresAuth: true
       }
     },
     {
       path: "/tunit",
-      name: "Tunit",
-      component: Tunit,
+      name: "tunit",
+      component: tunit,
       meta: {
         requiresAuth: true
       }
@@ -135,7 +135,7 @@ let router = new Router({
       children: [
         {
           path: "manageArticle",
-          component: ManageArticle
+          component: manageArticle
         },
         {
           path: "manageContact",
@@ -143,53 +143,53 @@ let router = new Router({
         },
         {
           path: "manageAdoption",
-          component: ManageAdoption
+          component: manageAdoption
         }
       ]
     },
     {
       path: "/post/:id",
-      name: "Post",
-      component: Post,
+      name: "post",
+      component: post,
       meta: {
         requiresGuest: true
       }
     },
     {
       path: "/album",
-      name: "Album",
-      component: Album,
+      name: "album",
+      component: album,
       meta: {
         requiresAuth: true
       }
     },
     {
       path: "/setting",
-      name: "Setting",
-      component: Setting,
+      name: "setting",
+      component: setting,
       meta: {
         requiresAuth: true
       },
       children: [
         {
           path: "editProfile",
-          component: EditProfile
+          component: editProfile
         },
         {
           path: "editPetProfile",
-          component: EditPetProfile
+          component: editPetProfile
         },
         {
           path: "password",
-          component: Password
+          component: password
         },
         {
           path: "mail",
-          component: Mail
+          component: mail
         },
         {
           path: "loginActivity",
-          component: LoginActivity
+          component: loginActivity
         },
         {
           path: "FAQ",
@@ -197,7 +197,7 @@ let router = new Router({
         },
         {
           path: "feedback",
-          component: Feedback
+          component: feedback
         }
       ]
     },
