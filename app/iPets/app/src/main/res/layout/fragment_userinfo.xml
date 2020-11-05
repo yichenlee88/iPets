@@ -44,7 +44,7 @@
             android:layout_height="wrap_content"
             android:gravity="center_horizontal|center_vertical"
             android:text="@string/TextView_info"
-            android:textSize="24sp"
+            android:textSize="22sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toTopOf="@+id/guideline50"
             app:layout_constraintEnd_toStartOf="@+id/guideline45"
@@ -56,7 +56,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/TextView_name"
-            android:textSize="18sp"
+            android:textSize="16sp"
             app:layout_constraintBottom_toTopOf="@+id/myname"
             app:layout_constraintStart_toStartOf="@+id/guideline47"
             app:layout_constraintTop_toTopOf="@+id/guideline49" />
@@ -70,7 +70,7 @@
             android:ems="10"
             android:hint="@string/name_hint"
             android:inputType="textPersonName"
-            android:textSize="20sp"
+            android:textSize="18sp"
             app:layout_constraintBottom_toTopOf="@+id/guideline52"
             app:layout_constraintEnd_toStartOf="@+id/guideline48"
             app:layout_constraintStart_toStartOf="@+id/guideline47" />
@@ -108,7 +108,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/TextView_birth"
-            android:textSize="18sp"
+            android:textSize="16sp"
             app:layout_constraintBottom_toTopOf="@+id/mybirth"
             app:layout_constraintStart_toStartOf="@+id/guideline47"
             app:layout_constraintTop_toTopOf="@+id/guideline52" />
@@ -122,7 +122,7 @@
             android:ems="10"
             android:hint="@string/birth_hint"
             android:inputType="none"
-            android:textSize="20sp"
+            android:textSize="18sp"
             app:layout_constraintBottom_toTopOf="@+id/guideline53"
             app:layout_constraintEnd_toStartOf="@+id/guideline48"
             app:layout_constraintStart_toStartOf="@+id/guideline47" />
@@ -140,7 +140,7 @@
             android:layout_height="wrap_content"
             android:gravity="center_horizontal|center_vertical"
             android:text="@string/TextView_gender"
-            android:textSize="18sp"
+            android:textSize="16sp"
             app:layout_constraintBottom_toTopOf="@+id/genderselect"
             app:layout_constraintStart_toStartOf="@+id/guideline47"
             app:layout_constraintTop_toTopOf="@+id/guideline53" />
@@ -161,17 +161,17 @@
                 android:gravity="center_horizontal|center_vertical"
                 android:buttonTint="#0071BC"
                 android:text="@string/RadioButton_gender1"
-                android:textSize="20sp" />
+                android:textSize="18sp" />
 
             <RadioButton
                 android:id="@+id/female"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginHorizontal="40dp"
+                android:layout_marginHorizontal="45dp"
                 android:gravity="center_horizontal|center_vertical"
                 android:buttonTint="#0071BC"
                 android:text="@string/RadioButton_gender2"
-                android:textSize="20sp" />
+                android:textSize="18sp" />
 
             <RadioButton
                 android:id="@+id/unwilling"
@@ -179,7 +179,7 @@
                 android:layout_height="wrap_content"
                 android:buttonTint="#0071BC"
                 android:text="@string/RadioButton_gender3"
-                android:textSize="20sp" />
+                android:textSize="18sp" />
         </RadioGroup>
 
         <androidx.constraintlayout.widget.Guideline
@@ -201,7 +201,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/TextView_address"
-            android:textSize="18sp"
+            android:textSize="16sp"
             app:layout_constraintBottom_toTopOf="@+id/myaddress"
             app:layout_constraintStart_toStartOf="@+id/guideline47"
             app:layout_constraintTop_toTopOf="@+id/guideline55" />
@@ -215,7 +215,7 @@
             android:ems="10"
             android:hint="@string/address_hint"
             android:inputType="textPostalAddress"
-            android:textSize="20sp"
+            android:textSize="18sp"
             app:layout_constraintBottom_toTopOf="@+id/guideline51"
             app:layout_constraintEnd_toStartOf="@+id/guideline48"
             app:layout_constraintStart_toStartOf="@+id/guideline47" />
@@ -227,6 +227,29 @@
             android:orientation="horizontal"
             app:layout_constraintGuide_percent="0.73" />
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/TextView_phoneNum"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toTopOf="@+id/myNum"
+            app:layout_constraintStart_toStartOf="@+id/guideline47"
+            app:layout_constraintTop_toTopOf="@+id/guideline51" />
+
+        <EditText
+            android:id="@+id/myNum"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:autofillHints=""
+            android:backgroundTint="#0071BC"
+            android:ems="10"
+            android:hint="@string/phoneNum_hint"
+            android:inputType="number"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toTopOf="@+id/guideline56"
+            app:layout_constraintEnd_toStartOf="@+id/guideline48"
+            app:layout_constraintStart_toStartOf="@+id/guideline47" />
+
         <Button
             android:id="@+id/next2"
             android:layout_width="0dp"
@@ -235,19 +258,26 @@
             android:gravity="center_horizontal|center_vertical"
             android:text="@string/button_next"
             android:textColor="#FFFFFF"
-            android:textSize="20sp"
-            app:layout_constraintBottom_toTopOf="@+id/guideline56"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toTopOf="@+id/guideline96"
             app:layout_constraintEnd_toStartOf="@+id/guideline48"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="@+id/guideline47"
-            app:layout_constraintTop_toTopOf="@+id/guideline51" />
+            app:layout_constraintTop_toTopOf="@+id/guideline56" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline56"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.83" />
+            app:layout_constraintGuide_percent="0.86" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline96"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.96" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
