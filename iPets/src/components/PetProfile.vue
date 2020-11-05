@@ -488,7 +488,7 @@ export default {
   mounted() {
     let uid = firebase.auth().currentUser.uid;
     // let uid = this.uid;
-    let imageUrl = this.url;
+    // let imageUrl = this.url;
     // var imageRef = firebase
     //   .storage()
     //   .ref()
