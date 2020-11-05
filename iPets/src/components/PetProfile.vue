@@ -1,8 +1,6 @@
 <template>
   <b-container>
     <!-- Start -- 新增寵物 -->
-    <!-- <p v-if="!show">123</p> -->
-    <!-- <p v-if="show">666</p> -->
     <b-card id="card-create-pet" v-if="!show">
       <b-card-header header-bg-variant="dark" header-text-variant="white">
         <div>
@@ -79,9 +77,7 @@
             maxlength
           ></b-form-textarea>
           <div class="d-flex flex-row-reverse">
-            <b-button @click="createAlbum" type="submit" variant="dark"
-              >建立</b-button
-            >
+            <b-button type="submit" variant="dark">建立</b-button>
           </div>
         </b-form>
       </b-card-body>
@@ -91,7 +87,7 @@
     <!-- Start -- 寵物簡介 -->
     <b-card-group class="PetProfile" deck v-if="show">
       <b-card
-        :img-src="url"
+        :img-src="pet.profile_picture"
         class="mb-3"
         style="max-width:300px;border:0"
         img-top
@@ -285,6 +281,7 @@ export default {
   data() {
     return {
       modalShow: false,
+      pet_profile_picture: null,
       date: new Date(),
       petImage: null,
       url: "",
@@ -393,6 +390,7 @@ export default {
   methods: {
     handleFileUpload(e) {
       this.petImage = e.target.files[0];
+      console.log(this.petImage);
     },
     createAlbum() {
       var storageRef = firebase
@@ -402,8 +400,7 @@ export default {
         console.log("Uploaded files!");
       });
     },
-    onSubmit(e) {
-      e.preventDefault();
+    write_pet_profile(url) {
       var docRef = fStore
         .collection("users")
         .doc(this.uid)
@@ -426,7 +423,8 @@ export default {
           petHobby: this.petHobby,
           petNote: this.petNote,
           uid: this.uid,
-          timestamp: new Date()
+          timestamp: new Date(),
+          profile_picture: this.url
         })
         .then(() => {
           var infoRef = docRef.collection("info");
@@ -445,6 +443,38 @@ export default {
           });
           this.$router.go({ path: this.$router.path });
         });
+    },
+    onSubmit(e) {
+      e.preventDefault();
+
+      var uploadTask = firebase
+        .storage()
+        .ref(this.uid + "/" + this.petName)
+        .put(this.petImage);
+
+      uploadTask.then(function(snapshot) {
+        snapshot.ref.getDownloadURL().then(function(url) {
+          console.log(url);
+        });
+      });
+
+      // uploadTask.on(
+      //   firebase.storage.TaskEvent.STATE_CHANGED,
+      //   function(snapshot) {
+      //     var progress =
+      //       (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+      //     console.log("Upload is " + progress + "% done");
+      //   },
+      //   function(error) {
+      //     console.log(error);
+      //   },
+      //   function() {
+      //     uploadTask.snapshot.ref.getDownloadURL().then(function(downloadURL) {
+      //       console.log("File available at", downloadURL);
+      //       this.write_pet_profile(downloadURL);
+      //     });
+      //   }
+      // );
     },
     convert_timestamp(unixTimestamp) {
       var date = unixTimestamp.toDate();
@@ -484,26 +514,36 @@ export default {
       //   this.period_form.selected
       // );
     }
+    // convert_storage_url(url) {
+    //   return require(url);
+    // }
   },
-  mounted() {
-    let uid = firebase.auth().currentUser.uid;
-    // let uid = this.uid;
-    // let imageUrl = this.url;
-    // var imageRef = firebase
-    //   .storage()
-    //   .ref()
-    //   .child(this.uid + "/" + this.petName);
-    // imageRef.getDownloadURL().then(function(url) {
-    //   imageUrl.push(url);
-    // });
-    var storageRef = firebase.storage();
-    storageRef
-      .ref(uid + "/" + "毛毛")
-      .getDownloadURL()
-      .then(function(url) {
-        this.url = url;
-      });
-  },
+  // mounted() {
+  //   let uid = firebase.auth().currentUser.uid;
+  //   console.log(uid);
+  //   // let uid = this.uid;
+  //   // let imageUrl = this.url;
+  //   // var imageRef = firebase
+  //   //   .storage()
+  //   //   .ref()
+  //   //   .child(this.uid + "/" + this.petName);
+  //   // imageRef.getDownloadURL().then(function(url) {
+  //   //   imageUrl.push(url);
+  //   // });
+  //   var storageRef = firebase.storage();
+  //   storageRef
+  //     .ref(uid + "/" + "毛毛")
+  //     .getDownloadURL()
+  //     .then(function(url) {
+  //       console.log(url);
+  //       console.log(this.petGenderOptions);
+  //       // this.url = url;
+  //     })
+  //     .catch(function(error) {
+  //       // Handle any errors
+  //       console.log(error);
+  //     });
+  // },
   computed: {
     uid() {
       return this.$store.state.uid;
@@ -517,6 +557,9 @@ export default {
     pet_info() {
       return this.$store.state.pet_info;
     },
+    // pet_profile_picture() {
+    //   return this.$store.state.pet_profile_picture;
+    // },
     show() {
       if (this.$store.state.pet === null) {
         return false;
