@@ -5,9 +5,7 @@
         <v-col>
           <v-sheet height="64">
             <v-toolbar flat color="white">
-              <v-btn color="primary" dark @click="dialog = true"
-                >新增事件</v-btn
-              >
+              <v-btn color="primary" dark @click="dialog = true">新增事件</v-btn>
               <v-btn outlined class="mr-4" @click="setToday">今天</v-btn>
               <v-btn fab text small @click="prev">
                 <v-icon small>mdi-chevron-left</v-icon>
@@ -46,32 +44,11 @@
             <v-card>
               <v-container>
                 <v-form @submit.prevent="addEvent">
-                  <v-text-field
-                    v-model="name"
-                    type="text"
-                    label="事件名稱"
-                  ></v-text-field>
-                  <v-text-field
-                    v-model="details"
-                    type="text"
-                    label="描述"
-                  ></v-text-field>
-                  <v-text-field
-                    v-model="startTitle"
-                    type="date"
-                    label="開始日期 (必須)"
-                  ></v-text-field>
-                  <v-text-field
-                    v-model="endTitle"
-                    type="date"
-                    label="結束日期 (必須)"
-                  ></v-text-field
-                  >選擇顏色
-                  <v-select
-                    v-model="color"
-                    :v-for="color in colors"
-                    :items="colors"
-                  ></v-select>
+                  <v-text-field v-model="name" type="text" label="事件名稱"></v-text-field>
+                  <v-text-field v-model="details" type="text" label="描述"></v-text-field>
+                  <v-text-field v-model="startTitle" type="date" label="開始日期 (必須)"></v-text-field>
+                  <v-text-field v-model="endTitle" type="date" label="結束日期 (必須)"></v-text-field>選擇顏色
+                  <v-select v-model="color" :v-for="color in colors" :items="colors"></v-select>
                   <v-radio-group v-model="frequency">
                     <v-radio label="不重複"></v-radio>
                     <v-radio label="每日"></v-radio>
@@ -87,8 +64,7 @@
                       dialog = false;
                       closeDialog();
                     "
-                    >建立事件</v-btn
-                  >
+                  >建立事件</v-btn>
                 </v-form>
               </v-container>
             </v-card>
@@ -99,32 +75,11 @@
               <v-container>
                 <v-form @submit.prevent="addEvent">
                   <h4 style="text-align: center">新增事件</h4>
-                  <v-text-field
-                    v-model="name"
-                    type="text"
-                    label="事件名稱"
-                  ></v-text-field>
-                  <v-text-field
-                    v-model="details"
-                    type="text"
-                    label="描述"
-                  ></v-text-field>
-                  <v-text-field
-                    v-model="startTitle"
-                    type="date"
-                    label="開始日期 (必須)"
-                  ></v-text-field>
-                  <v-text-field
-                    v-model="endTitle"
-                    type="date"
-                    label="結束日期 (必須)"
-                  ></v-text-field
-                  >選擇顏色
-                  <v-select
-                    v-model="color"
-                    :v-for="color in colors"
-                    :items="colors"
-                  ></v-select>
+                  <v-text-field v-model="name" type="text" label="事件名稱"></v-text-field>
+                  <v-text-field v-model="details" type="text" label="描述"></v-text-field>
+                  <v-text-field v-model="startTitle" type="date" label="開始日期 (必須)"></v-text-field>
+                  <v-text-field v-model="endTitle" type="date" label="結束日期 (必須)"></v-text-field>選擇顏色
+                  <v-select v-model="color" :v-for="color in colors" :items="colors"></v-select>
                   <v-radio-group v-model="frequency">
                     <v-radio label="不重複"></v-radio>
                     <v-radio label="每日"></v-radio>
@@ -140,8 +95,7 @@
                       dialog = false;
                       closeDialog();
                     "
-                    >建立事件</v-btn
-                  >
+                  >建立事件</v-btn>
                 </v-form>
               </v-container>
             </v-card>
@@ -175,16 +129,12 @@
                   <v-btn @click="deleteEvent(selectedEvent.id)" icon>
                     <v-icon>mdi-delete</v-icon>
                   </v-btn>
-                  <v-toolbar-title
-                    v-html="selectedEvent.name"
-                  ></v-toolbar-title>
+                  <v-toolbar-title v-html="selectedEvent.name"></v-toolbar-title>
                   <div class="flex-grow-1"></div>
                 </v-toolbar>
 
                 <v-card-text>
-                  <form v-if="currentlyEditing !== selectedEvent.id">
-                    {{ selectedEvent.details }}
-                  </form>
+                  <form v-if="currentlyEditing !== selectedEvent.id">{{ selectedEvent.details }}</form>
                   <form v-else>
                     <p>title</p>
                     <textarea-autosize
@@ -200,31 +150,18 @@
                       :min-height="50"
                       placeholder="描述"
                     ></textarea-autosize>
-                    <v-select
-                      v-model="color"
-                      :v-for="color in colors"
-                      :items="colors"
-                    ></v-select>
+                    <v-select v-model="color" :v-for="color in colors" :items="colors"></v-select>
                   </form>
                 </v-card-text>
 
                 <v-card-actions>
-                  <v-btn text color="secondary" @click="selectedOpen = false"
-                    >關閉</v-btn
-                  >
+                  <v-btn text color="secondary" @click="selectedOpen = false">關閉</v-btn>
                   <v-btn
                     v-if="currentlyEditing !== selectedEvent.id"
                     text
                     @click.prevent="editEvent(selectedEvent)"
-                    >編輯</v-btn
-                  >
-                  <v-btn
-                    text
-                    v-else
-                    type="submit"
-                    @click.prevent="updateEvent(selectedEvent.id)"
-                    >儲存</v-btn
-                  >
+                  >編輯</v-btn>
+                  <v-btn text v-else type="submit" @click.prevent="updateEvent(selectedEvent.id)">儲存</v-btn>
                 </v-card-actions>
               </v-card>
             </v-menu>
@@ -237,6 +174,7 @@
 
 <script>
 import { db } from "../db";
+import firebase from "firebase";
 
 const fStore = db.firestore();
 
@@ -287,9 +225,6 @@ export default {
     uid() {
       return this.$store.state.uid;
     },
-    pet() {
-      return this.$store.state.pet;
-    },
     title() {
       const { start, end } = this;
       if (!start || !end) {
@@ -321,9 +256,10 @@ export default {
   },
   methods: {
     add: function(newdate, endDate) {
+      let uid = firebase.auth().currentUser.uid;
       fStore
         .collection("users")
-        .doc(this.uid)
+        .doc(uid)
         .collection("calEvent")
         .add({
           name: this.name,
@@ -336,9 +272,10 @@ export default {
       this.getEvents();
     },
     async getEvents() {
+      let uid = firebase.auth().currentUser.uid;
       let snapshot = await fStore
         .collection("users")
-        .doc(this.uid)
+        .doc(uid)
         .collection("calEvent")
         .get();
       const events = [];
@@ -446,10 +383,11 @@ export default {
       this.color = ev.color;
     },
     async updateEvent(ev) {
+      let uid = firebase.auth().currentUser.uid;
       let selectedEvent = this.selectedEvent;
       await fStore
         .collection("users")
-        .doc(this.uid)
+        .doc(uid)
         .collection("calEvent")
         .doc(ev)
         .update({
@@ -469,14 +407,15 @@ export default {
       this.selectedOpen = false;
       this.currentlyEditing = null;
       console.log(ev);
-      location.reload();
+      this.$router.go({ path: this.$router.path });
     },
     async deleteEvent(ev) {
       let selectedEvent = this.selectedEvent.name;
+      let uid = firebase.auth().currentUser.uid;
       if (confirm(`確定是否刪除 ${selectedEvent} ?`)) {
         await fStore
           .collection("users")
-          .doc(this.uid)
+          .doc(uid)
           .collection("calEvent")
           .doc(ev)
           .delete()
