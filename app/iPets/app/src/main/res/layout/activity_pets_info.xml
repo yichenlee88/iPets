@@ -39,7 +39,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/TextView_petsinfo"
-        android:textSize="24sp"
+        android:textSize="22sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/guideline58"
         app:layout_constraintEnd_toStartOf="@+id/guideline60"
@@ -136,7 +136,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/TextView_petsname"
-        android:textSize="18sp"
+        android:textSize="16sp"
         app:layout_constraintBottom_toTopOf="@+id/petsname"
         app:layout_constraintStart_toStartOf="@+id/guideline68"
         app:layout_constraintTop_toTopOf="@+id/guideline67" />
@@ -164,7 +164,7 @@
         android:ems="10"
         android:hint="@string/petsname_hint"
         android:inputType="textPersonName"
-        android:textSize="20sp"
+        android:textSize="18sp"
         app:layout_constraintBottom_toTopOf="@+id/guideline73"
         app:layout_constraintEnd_toStartOf="@+id/guideline69"
         app:layout_constraintHorizontal_bias="0.0"
@@ -182,10 +182,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/TextView_petssex"
-        android:textSize="18sp"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toTopOf="@+id/sexselect"
         app:layout_constraintStart_toStartOf="@+id/guideline68"
-        app:layout_constraintTop_toTopOf="@+id/guideline73"
-        app:layout_constraintBottom_toTopOf="@+id/sexselect"/>
+        app:layout_constraintTop_toTopOf="@+id/guideline73" />
 
 
     <RadioGroup
@@ -203,7 +203,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="55dp"
             android:text="@string/RadioButton_sex1"
-            android:textSize="20sp" />
+            android:textSize="18sp" />
 
         <RadioButton
             android:id="@+id/femalepet"
@@ -211,7 +211,7 @@
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="40dp"
             android:text="@string/RadioButton_sex2"
-            android:textSize="20sp" />
+            android:textSize="18sp" />
     </RadioGroup>
 
     <androidx.constraintlayout.widget.Guideline
@@ -226,7 +226,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/TextView_petsbirth"
-        android:textSize="18sp"
+        android:textSize="16sp"
         app:layout_constraintBottom_toTopOf="@+id/petsbirth"
         app:layout_constraintStart_toStartOf="@+id/guideline68"
         app:layout_constraintTop_toTopOf="@+id/guideline71" />
@@ -240,7 +240,7 @@
         android:ems="10"
         android:hint="@string/petsbirth_hint"
         android:inputType="none"
-        android:textSize="20sp"
+        android:textSize="18sp"
         app:layout_constraintBottom_toTopOf="@+id/guideline72"
         app:layout_constraintEnd_toStartOf="@+id/guideline69"
         app:layout_constraintStart_toStartOf="@+id/guideline68" />
@@ -275,7 +275,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/TextView_like"
-        android:textSize="18sp"
+        android:textSize="16sp"
         app:layout_constraintBottom_toTopOf="@+id/guideline75"
         app:layout_constraintStart_toStartOf="@+id/guideline68"
         app:layout_constraintTop_toTopOf="@+id/guideline74" />
@@ -306,7 +306,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/TextView_remark"
-        android:textSize="18sp"
+        android:textSize="16sp"
         app:layout_constraintBottom_toTopOf="@+id/guideline76"
         app:layout_constraintStart_toStartOf="@+id/guideline68"
         app:layout_constraintTop_toTopOf="@+id/guideline75" />
