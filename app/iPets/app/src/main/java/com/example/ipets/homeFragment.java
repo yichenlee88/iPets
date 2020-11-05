@@ -101,6 +101,7 @@ public class homeFragment extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         final Spinner petnamespinner = getView().findViewById(R.id.nameSpinner);
+
         final FirebaseFirestore db = FirebaseFirestore.getInstance();
         final List<String> petname = new ArrayList<>();
         db.collection("users").document(userUID).collection("pets").whereEqualTo("uid", userUID).get()
@@ -117,8 +118,8 @@ public class homeFragment extends Fragment {
                                 petname.add("尚未擁有寵物");
                             }
                             petname.add("新增寵物");
-                            ArrayAdapter adapter = new ArrayAdapter<>(getContext(),android.R.layout.simple_spinner_item , petname);
-                            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                            ArrayAdapter adapter = new ArrayAdapter<>(getContext(),R.layout.myspinner_layout , petname);
+                            adapter.setDropDownViewResource(R.layout.myspinner_dropdown_layout);
                             petnamespinner.setAdapter(adapter);
                             petnamespinner.setSelection(0, true);
                             String query = petname.get(0);
