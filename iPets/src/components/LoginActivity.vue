@@ -4,6 +4,6 @@
 
 <script>
 export default {
-  name: "LoginActivity"
+  name: "loginActivity"
 };
 </script>

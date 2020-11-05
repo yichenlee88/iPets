@@ -13,17 +13,12 @@
     <b-container style="padding:20px 120px;">
       <p class="content">{{this.comments.introduction}}</p>
       <div v-for="(item, index) in comments.contents" :key="index">
-      <div style="text-align: center">
-        <span class="content-title" v-if="item.title">{{item.title}}</span>
-        <br>
-        <img
-          class="rounded"
-          v-if="item.img"
-          :src="item.img"
-          style="max-width: 30%"
-        >
-      </div>
-      <p class="content">{{item.content}}</p>
+        <div style="text-align: center">
+          <span class="content-title" v-if="item.title">{{item.title}}</span>
+          <br>
+          <img class="rounded" v-if="item.img" :src="item.img" style="max-width: 30%">
+        </div>
+        <p class="content">{{item.content}}</p>
       </div>
       <p class="content-end">{{this.comments.ending}}</p>
     </b-container>
@@ -34,7 +29,7 @@
 import axios from "axios";
 
 export default {
-  name: "Post",
+  name: "post",
   data() {
     return {
       id: this.$route.params.id,
@@ -42,12 +37,7 @@ export default {
     };
   },
   mounted() {
-    let id = this.$route.params.id;
-    this.id = id;
-    axios.get("http://localhost:3000/comments/" + this.id).then(res => {
-      console.log(res.data);
-      this.comments = res.data;
-    });
+    this.getArticleData();
   },
   watch: {
     $route(now) {
@@ -55,6 +45,14 @@ export default {
       this.id = id;
       axios.get("http://localhost:3000/comments/" + this.id).then(res => {
         console.log(now);
+        this.comments = res.data;
+      });
+    },
+    getArticleData() {
+      let id = this.$route.params.id;
+      this.id = id;
+      axios.get("http://localhost:3000/comments/" + this.id).then(res => {
+        console.log(res.data);
         this.comments = res.data;
       });
     }
