@@ -1,11 +1,11 @@
 import Vue from "vue";
 import Router from "vue-router";
-import Home from "@/components/Home";
-import About from "@/components/About";
-import DogInfo from "@/components/DogInfo";
-import Contact from "@/components/Contact";
-import Login from "@/components/Login";
-import Register from "@/components/Register";
+import home from "@/components/home";
+import about from "@/components/about";
+import dogInfo from "@/components/dogInfo";
+import contact from "@/components/contact";
+import login from "@/components/login";
+import register from "@/components/register";
 import PetProfile from "@/components/PetProfile";
 import Calendar from "@/components/Calendar";
 import ManageArticle from "@/components/ManageArticle";
@@ -13,7 +13,7 @@ import ManageAdoption from "@/components/ManageAdoption";
 import manageContact from "@/components/manageContact";
 import manage from "@/components/Manage";
 import { db } from "../db";
-import DogScience from "@/components/DogScience";
+import dogScience from "@/components/dogScience";
 import Post from "@/components/Post";
 import Identify from "@/components/Identify";
 import Tunit from "@/components/Tunit";
@@ -39,48 +39,48 @@ let router = new Router({
   routes: [
     {
       path: "/",
-      name: "Home",
-      component: Home,
+      name: "home",
+      component: home,
       meta: {
         requiresGuest: true
       }
     },
     {
       path: "/about",
-      name: "About",
-      component: About,
+      name: "about",
+      component: about,
       meta: {
         requiresGuest: true
       }
     },
     {
       path: "/dogInfo",
-      name: "DogInfo",
-      component: DogInfo,
+      name: "dogInfo",
+      component: dogInfo,
       meta: {
         requiresGuest: true
       }
     },
     {
       path: "/contact",
-      name: "Contact",
-      component: Contact,
+      name: "contact",
+      component: contact,
       meta: {
         requiresGuest: true
       }
     },
     {
       path: "/login",
-      name: "Login",
-      component: Login,
+      name: "login",
+      component: login,
       meta: {
         requiresGuest: true
       }
     },
     {
       path: "/register",
-      name: "Register",
-      component: Register,
+      name: "register",
+      component: register,
       meta: {
         requiresGuest: true
       }
@@ -119,8 +119,8 @@ let router = new Router({
     },
     {
       path: "/dogScience",
-      name: "DogScience",
-      component: DogScience,
+      name: "dogScience",
+      component: dogScience,
       meta: {
         requiresGuest: true
       }
