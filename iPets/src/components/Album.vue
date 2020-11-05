@@ -74,7 +74,7 @@ import firebase from "firebase";
 // const fStore = db.firestore();
 
 export default {
-  name: "Album",
+  name: "album",
   data() {
     return {
       albumName: "",
@@ -86,38 +86,7 @@ export default {
     };
   },
   mounted() {
-    let uid = this.uid;
-    let album = this.album;
-    let imageUrl = this.url;
-    var storageRef = firebase.storage().ref(uid + "/");
-    let folderName = [];
-    console.log(uid, storageRef);
-    storageRef
-      .listAll()
-      .then(function(res) {
-        res.prefixes.forEach(function(folderRef) {
-          folderName.push(folderRef.name);
-          album.push(folderRef);
-          var imageRef = firebase.storage().ref(uid + "/" + folderRef.name);
-          console.log(imageRef);
-          imageRef.listAll().then(function(res) {
-            res.items.forEach(function(itemRef) {
-              itemRef.getDownloadURL().then(function(url) {
-                imageUrl.push(url);
-                console.log(imageUrl);
-              });
-            });
-          });
-        });
-      })
-      .catch(function(error) {
-        console.log(error);
-      });
-  },
-  computed: {
-    uid() {
-      return this.$store.state.uid;
-    }
+    this.getAlbumData();
   },
   methods: {
     handleFileUpload(e) {
@@ -131,6 +100,35 @@ export default {
         console.log("Uploaded files!");
         location.reload();
       });
+    },
+    getAlbumData() {
+      let uid = firebase.auth().currentUser.uid;
+      let album = this.album;
+      let imageUrl = this.url;
+      var storageRef = firebase.storage().ref(uid + "/");
+      let folderName = [];
+      console.log(uid, storageRef);
+      storageRef
+        .listAll()
+        .then(function(res) {
+          res.prefixes.forEach(function(folderRef) {
+            folderName.push(folderRef.name);
+            album.push(folderRef);
+            var imageRef = firebase.storage().ref(uid + "/" + folderRef.name);
+            console.log(imageRef);
+            imageRef.listAll().then(function(res) {
+              res.items.forEach(function(itemRef) {
+                itemRef.getDownloadURL().then(function(url) {
+                  imageUrl.push(url);
+                  console.log(imageUrl);
+                });
+              });
+            });
+          });
+        })
+        .catch(function(error) {
+          console.log(error);
+        });
     }
   }
 };
