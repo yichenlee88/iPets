@@ -13,7 +13,7 @@
       /></b-col>
       <b-col class="col col-12 col-sm-6 col-md-6">
         <div style="margin-top: 20%">
-          <b-form @submit="onSubmit">
+          <b-form @submit="addContact">
             <b-form-input
               class="InputClass"
               name="userName"
@@ -87,7 +87,7 @@ import { db } from "../db";
 const fStore = db.firestore();
 
 export default {
-  name: "Contact",
+  name: "contact",
   data() {
     return {
       problemType: null,
@@ -108,7 +108,7 @@ export default {
     };
   },
   methods: {
-    onSubmit(e) {
+    addContact(e) {
       e.preventDefault();
       var docRef = fStore.collection("contact").doc();
       docRef
