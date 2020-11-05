@@ -55,7 +55,7 @@
             android:layout_height="wrap_content"
             android:gravity="center_horizontal"
             android:text="@string/TextView_signup"
-            android:textSize="24sp"
+            android:textSize="22sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toTopOf="@+id/guideline32"
             app:layout_constraintEnd_toStartOf="@+id/guideline31"
@@ -92,7 +92,7 @@
             android:ems="10"
             android:hint="@string/username_hint"
             android:inputType="textPersonName"
-            android:textSize="20sp"
+            android:textSize="18sp"
             app:layout_constraintBottom_toTopOf="@+id/guideline33"
             app:layout_constraintEnd_toStartOf="@+id/guideline28"
             app:layout_constraintStart_toStartOf="@+id/guideline27"
@@ -114,7 +114,7 @@
             android:ems="10"
             android:hint="@string/email_hint"
             android:inputType="textEmailAddress"
-            android:textSize="20sp"
+            android:textSize="18sp"
             app:layout_constraintBottom_toTopOf="@+id/guideline34"
             app:layout_constraintEnd_toStartOf="@+id/guideline28"
             app:layout_constraintStart_toStartOf="@+id/guideline27"
@@ -143,7 +143,7 @@
             android:ems="10"
             android:hint="@string/password_hint"
             android:inputType="textPassword"
-            android:textSize="20sp"
+            android:textSize="18sp"
             app:layout_constraintBottom_toTopOf="@+id/guideline35"
             app:layout_constraintEnd_toStartOf="@+id/guideline28"
             app:layout_constraintStart_toStartOf="@+id/guideline27"
@@ -158,7 +158,7 @@
             android:ems="10"
             android:hint="@string/confirmpassword_hint"
             android:inputType="textPassword"
-            android:textSize="20sp"
+            android:textSize="18sp"
             app:layout_constraintBottom_toTopOf="@+id/guideline36"
             app:layout_constraintEnd_toStartOf="@+id/guideline28"
             app:layout_constraintStart_toStartOf="@+id/guideline27"
@@ -186,7 +186,7 @@
             android:gravity="center_horizontal|center_vertical"
             android:text="@string/button_next"
             android:textColor="#FFFFFF"
-            android:textSize="20sp"
+            android:textSize="18sp"
             app:layout_constraintBottom_toTopOf="@+id/guideline37"
             app:layout_constraintEnd_toStartOf="@+id/guideline28"
             app:layout_constraintStart_toStartOf="@+id/guideline27"
@@ -250,14 +250,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.86" />
+            app:layout_constraintGuide_percent="0.85" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline43"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.94" />
+            app:layout_constraintGuide_percent="0.93" />
 
         <Button
             android:id="@+id/btnFacebook"
