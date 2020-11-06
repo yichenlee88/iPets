@@ -25,9 +25,9 @@
         android:gravity="start|center_horizontal|center_vertical"
         android:paddingHorizontal="17dp"
         android:stateListAnimator="@null"
-        android:text="▼  BUG通知"
+        android:text="@string/buton_bug"
         android:textColor="#000000"
-        android:textSize="20sp"/>
+        android:textSize="18sp"/>
 
     <Button
         android:id="@+id/button_q2"
@@ -39,8 +39,8 @@
         android:paddingHorizontal="17dp"
         android:stateListAnimator="@null"
         android:textColor="#000000"
-        android:textSize="20sp"
-        android:text="▼  錯誤403" />
+        android:textSize="18sp"
+        android:text="@string/button_403" />
 
     <Button
         android:id="@+id/button_q3"
@@ -52,8 +52,8 @@
         android:paddingHorizontal="17dp"
         android:stateListAnimator="@null"
         android:textColor="#000000"
-        android:textSize="20sp"
-        android:text="▼  註冊帳號" />
+        android:textSize="18sp"
+        android:text="@string/button_register" />
 
     <Button
     android:id="@+id/button_q4"
@@ -65,8 +65,8 @@
     android:paddingHorizontal="17dp"
     android:stateListAnimator="@null"
     android:textColor="#000000"
-    android:textSize="20sp"
-    android:text="▼  如何重新登入?" />
+    android:textSize="18sp"
+    android:text="@string/button_how" />
 
     <Button
         android:id="@+id/button_q5"
@@ -78,8 +78,8 @@
         android:paddingHorizontal="17dp"
         android:stateListAnimator="@null"
         android:textColor="#000000"
-        android:textSize="20sp"
-        android:text="▼  定位無法啟用?" />
+        android:textSize="18sp"
+        android:text="@string/button_why" />
 
     <Button
         android:id="@+id/button_q6"
@@ -91,8 +91,8 @@
         android:paddingHorizontal="17dp"
         android:stateListAnimator="@null"
         android:textColor="#000000"
-        android:textSize="20sp"
-        android:text="▼  能在無網路環境使用嗎?" />
+        android:textSize="18sp"
+        android:text="@string/button_whether" />
 
     <Button
         android:id="@+id/button_q7"
@@ -104,8 +104,8 @@
         android:paddingHorizontal="17dp"
         android:stateListAnimator="@null"
         android:textColor="#000000"
-        android:textSize="20sp"
-        android:text="▼  iPets行事曆能和其他行事曆同步嗎?" />
+        android:textSize="18sp"
+        android:text="@string/button_can" />
 
 
 </LinearLayout>

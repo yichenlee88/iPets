@@ -18,7 +18,7 @@
 
 <script>
 export default {
-  name: "Manage",
+  name: "manage",
   data() {
     return {};
   }
