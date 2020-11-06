@@ -44,7 +44,7 @@
             <v-card>
               <v-container>
                 <v-form @submit.prevent="addEvent">
-                  <v-text-field v-model="name" type="text" label="事件名稱"></v-text-field>
+                  <v-text-field v-model="eventName" type="text" label="事件名稱"></v-text-field>
                   <v-text-field v-model="details" type="text" label="描述"></v-text-field>
                   <v-text-field v-model="startTitle" type="date" label="開始日期 (必須)"></v-text-field>
                   <v-text-field v-model="endTitle" type="date" label="結束日期 (必須)"></v-text-field>選擇顏色
@@ -75,7 +75,7 @@
               <v-container>
                 <v-form @submit.prevent="addEvent">
                   <h4 style="text-align: center">新增事件</h4>
-                  <v-text-field v-model="name" type="text" label="事件名稱"></v-text-field>
+                  <v-text-field v-model="eventName" type="text" label="事件名稱"></v-text-field>
                   <v-text-field v-model="details" type="text" label="描述"></v-text-field>
                   <v-text-field v-model="startTitle" type="date" label="開始日期 (必須)"></v-text-field>
                   <v-text-field v-model="endTitle" type="date" label="結束日期 (必須)"></v-text-field>選擇顏色
@@ -129,7 +129,7 @@
                   <v-btn @click="deleteEvent(selectedEvent.id)" icon>
                     <v-icon>mdi-delete</v-icon>
                   </v-btn>
-                  <v-toolbar-title v-html="selectedEvent.name"></v-toolbar-title>
+                  <v-toolbar-title v-html="selectedEvent.eventName"></v-toolbar-title>
                   <div class="flex-grow-1"></div>
                 </v-toolbar>
 
@@ -138,7 +138,7 @@
                   <form v-else>
                     <p>title</p>
                     <textarea-autosize
-                      v-model="selectedEvent.name"
+                      v-model="selectedEvent.eventName"
                       type="text"
                       style="width: 100%"
                       placeholder="標題"
@@ -206,7 +206,7 @@ export default {
         { text: "brown" }
       ],
       frequency: 0,
-      name: null,
+      eventName: null,
       details: null,
       color: "red", // default event color
       currentlyEditing: null,
@@ -262,7 +262,7 @@ export default {
         .doc(uid)
         .collection("calEvent")
         .add({
-          name: this.name,
+          eventName: this.eventName,
           details: this.details,
           frequency: this.frequency,
           start: newdate,
@@ -312,7 +312,7 @@ export default {
       this.$refs.calendar.next();
     },
     async addEvent() {
-      if (this.name && this.startTitle && this.endTitle) {
+      if (this.eventName && this.startTitle && this.endTitle) {
         if (this.frequency === 1) {
           this.startTitle = new Date(this.startTitle);
           this.endTitle = new Date(this.endTitle);
@@ -369,14 +369,14 @@ export default {
           this.add(newdate, endDate);
         }
       }
-      this.name = "";
+      this.eventName = "";
       this.details = "";
       this.startTitle = "";
       this.endTitle = "";
     },
     editEvent(ev) {
       this.currentlyEditing = ev.id;
-      this.name = ev.name;
+      this.eventName = ev.eventName;
       this.start = ev.start;
       this.frequency = ev.frequency;
       this.end = ev.end;
@@ -392,7 +392,7 @@ export default {
         .doc(ev)
         .update({
           details: selectedEvent.details,
-          name: selectedEvent.name,
+          eventName: selectedEvent.eventName,
           color: this.color,
           frequency: this.frequency,
           start: this.start,
@@ -410,7 +410,7 @@ export default {
       this.$router.go({ path: this.$router.path });
     },
     async deleteEvent(ev) {
-      let selectedEvent = this.selectedEvent.name;
+      let selectedEvent = this.selectedEvent.eventName;
       let uid = firebase.auth().currentUser.uid;
       if (confirm(`確定是否刪除 ${selectedEvent} ?`)) {
         await fStore
