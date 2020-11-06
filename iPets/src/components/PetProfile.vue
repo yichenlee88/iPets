@@ -167,7 +167,7 @@
         <b-card-body :title="pet.petName">
           <b-card-text>性別：{{ pet.petGender }}</b-card-text>
           <b-card-text>生日：{{ pet.petBirth }}</b-card-text>
-          <b-card-text>年齡：{{ pet.age }}</b-card-text>
+          <b-card-text>年齡：{{ calculateAge(pet.petBirth) }}</b-card-text>
           <b-card-text>品種：{{ pet.breed }}</b-card-text>
           <b-card-text>喜好：{{ pet.petHobby }}</b-card-text>
           <b-card-text>備註：{{ pet.petNote }}</b-card-text>
@@ -285,6 +285,7 @@ export default {
       date: new Date(),
       petImage: null,
       url: "",
+      age: "",
       imageUrl: "",
       petName: "",
       file: [],
@@ -500,12 +501,32 @@ export default {
       //   this.period_form.period,
       //   this.period_form.selected
       // );
+    },
+    calculateAge(birth) {
+      var ageDiff = new Date(Date.now() - new Date(birth).getTime());
+      return Math.abs(ageDiff.getUTCFullYear() - 1970);
+      // var currentDate = new Date().toISOString().slice(0, 10);
+      // var deffirence = currentDate - this.petBirth.toISOString().slice(0, 10);
+      // let age = Math.floor(deffirence / 31557600000);
+      // this.age = age;
+      // console.log(currentDate);
+      // console.log(deffirence);
+      // console.log(age);
     }
-    // convert_storage_url(url) {
-    //   return require(url);
-    // }
   },
+  // convert_storage_url(url) {
+  //   return require(url);
+  // }
   // mounted() {
+  //   var currentDate = new Date().toISOString().slice(0, 10);
+  //   var deffirence = currentDate - this.petBirth.toISOString().slice(0, 10);
+  //   let age = Math.floor(deffirence / 31557600000);
+  //   this.age = age;
+  //   console.log(currentDate);
+  //   console.log(deffirence);
+  //   console.log(age);
+  // return age;
+  //   this.calculateAge();
   //   let uid = firebase.auth().currentUser.uid;
   //   console.log(uid);
   //   // let uid = this.uid;
