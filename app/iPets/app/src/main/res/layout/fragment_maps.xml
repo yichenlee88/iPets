@@ -236,6 +236,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
             android:text="@string/TextView_ntub"
+            android:visibility= "gone"
             app:layout_constraintEnd_toStartOf="@+id/guideline84"
             app:layout_constraintTop_toTopOf="@+id/bt_track" />
 
