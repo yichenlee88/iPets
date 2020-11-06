@@ -93,9 +93,11 @@ export default {
       this.imageData = e.target.files[0];
     },
     createAlbum() {
+      let uid = firebase.auth().currentUser.uid;
+      console.log(uid);
       var storageRef = firebase
         .storage()
-        .ref(this.uid + "/" + this.albumName + "/" + this.imageData.name);
+        .ref(uid + "/" + this.albumName + "/" + this.imageData.name);
       storageRef.put(this.imageData).then(function(snapshot) {
         console.log("Uploaded files!");
         location.reload();
@@ -107,7 +109,6 @@ export default {
       let imageUrl = this.url;
       var storageRef = firebase.storage().ref(uid + "/");
       let folderName = [];
-      console.log(uid, storageRef);
       storageRef
         .listAll()
         .then(function(res) {
@@ -115,12 +116,10 @@ export default {
             folderName.push(folderRef.name);
             album.push(folderRef);
             var imageRef = firebase.storage().ref(uid + "/" + folderRef.name);
-            console.log(imageRef);
             imageRef.listAll().then(function(res) {
               res.items.forEach(function(itemRef) {
                 itemRef.getDownloadURL().then(function(url) {
                   imageUrl.push(url);
-                  console.log(imageUrl);
                 });
               });
             });
