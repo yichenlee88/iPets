@@ -39,7 +39,7 @@
 <script>
 import axios from "axios";
 export default {
-  name: "Tunit",
+  name: "tunit",
   data() {
     return {
       processing: false,

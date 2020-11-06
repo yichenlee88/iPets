@@ -4,6 +4,6 @@
 
 <script>
 export default {
-  name: "EditPetProfile"
+  name: "editPetProfile"
 };
 </script>
