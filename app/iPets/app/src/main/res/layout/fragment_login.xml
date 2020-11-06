@@ -29,14 +29,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.375" />
+            app:layout_constraintGuide_percent="0.42" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.5" />
+            app:layout_constraintGuide_percent="0.52" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline5"
@@ -75,11 +75,11 @@
             android:ems="10"
             android:hint="@string/account_hint"
             android:inputType="textPersonName"
-            android:textSize="20sp"
+            android:textSize="18sp"
             app:layout_constraintBottom_toTopOf="@+id/guideline3"
             app:layout_constraintEnd_toStartOf="@+id/guideline8"
             app:layout_constraintStart_toStartOf="@+id/guideline7"
-            app:layout_constraintTop_toTopOf="@+id/guideline2" />
+            app:layout_constraintTop_toTopOf="@+id/guideline99" />
 
         <EditText
             android:id="@+id/password"
@@ -90,7 +90,7 @@
             android:ems="10"
             android:hint="@string/password_hint"
             android:inputType="textPassword"
-            android:textSize="20sp"
+            android:textSize="18sp"
             app:layout_constraintBottom_toTopOf="@+id/guideline4"
             app:layout_constraintEnd_toStartOf="@+id/guideline8"
             app:layout_constraintStart_toStartOf="@+id/guideline7"
@@ -104,7 +104,7 @@
             android:gravity="center_horizontal|center_vertical"
             android:text="@string/button_login"
             android:textColor="#FFFFFF"
-            android:textSize="20sp"
+            android:textSize="18sp"
             app:layout_constraintBottom_toTopOf="@+id/guideline6"
             app:layout_constraintEnd_toStartOf="@+id/guideline8"
             app:layout_constraintStart_toStartOf="@+id/guideline7"
@@ -154,7 +154,7 @@
             android:layout_marginEnd="1dp"
             android:text="@string/TextView_first"
             android:textColor="#000000"
-            android:textSize="18sp"
+            android:textSize="16sp"
             app:layout_constraintBottom_toTopOf="@+id/guideline"
             app:layout_constraintEnd_toStartOf="@+id/signup"
             app:layout_constraintStart_toStartOf="@+id/guideline12"
@@ -169,7 +169,7 @@
             android:stateListAnimator="@null"
             android:text="@string/button_signup"
             android:textColor="#009688"
-            android:textSize="18sp"
+            android:textSize="16sp"
             app:layout_constraintBottom_toTopOf="@+id/guideline"
             app:layout_constraintStart_toEndOf="@+id/firstTime"
             app:layout_constraintTop_toTopOf="@+id/guideline14" />
@@ -205,6 +205,13 @@
             app:layout_constraintEnd_toStartOf="@+id/guideline8"
             app:layout_constraintStart_toStartOf="@+id/guideline7"
             app:layout_constraintTop_toTopOf="@+id/guideline1" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline99"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.3" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

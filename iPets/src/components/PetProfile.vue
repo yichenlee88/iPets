@@ -296,7 +296,7 @@ import { db } from "../db";
 const fStore = db.firestore();
 
 export default {
-  name: "PetProfile",
+  name: "petProfile",
   data() {
     return {
       modalShow: false,

@@ -39,7 +39,8 @@ Calendar endCalendar,startCalendar;
         Toolbar toolbar11 = findViewById(R.id.toolbar11);
         setSupportActionBar(toolbar11);
         getSupportActionBar().setTitle("新增行程");
-
+        RadioGroup eventColor = findViewById(R.id.eventColor);
+        eventColor.check(R.id.redCircle1);
         Spinner sexSpinner = findViewById(R.id.repeatSpinner);
         ArrayAdapter adapter = ArrayAdapter.createFromResource(this, R.array.Spinner_repeat, R.layout.myspinner_layout);
         adapter.setDropDownViewResource(R.layout.myspinner_dropdown_layout);
@@ -125,13 +126,9 @@ Calendar endCalendar,startCalendar;
         String note = ednote.getText().toString();
         TextInputEditText detailEditText = findViewById(R.id.detailEditText);
         String detail = detailEditText.getText().toString();
-        //EditText startDate = findViewById(R.id.startDate);
-        //String start = startDate.getText().toString();
-        //EditText endDate = findViewById(R.id.endDate);
-        // String end = endDate.getText().toString();
         String colorselect = null;
-        RadioGroup genderselect = findViewById(R.id.eventColor);
-        switch (genderselect.getCheckedRadioButtonId()) {
+        RadioGroup eventColor = findViewById(R.id.eventColor);
+        switch (eventColor.getCheckedRadioButtonId()) {
             case R.id.redCircle1:
                 colorselect = "red";
                 break;

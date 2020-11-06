@@ -190,8 +190,23 @@
         <item>每月</item>
         <item>每年</item>
     </string-array>
-    <string name="Button_close">關閉</string>
     <string name="Button_save">儲存</string>
+    <string name="TextView_phoneNum">聯絡電話</string>
+    <string name="TextView_depiction">請提供您的用戶名稱，並簡述您所面臨到的問題，iPets客服團隊很樂意為您服務</string>
+    <string name="TextView_question">*請問您遇到什麼問題?</string>
+    <string name="TextView_describe">*描述</string>
+    <string name="button_sent">確認送出</string>
+    <string name="buton_bug">▼ BUG通知</string>
+    <string name="button_403">▼ 錯誤403</string>
+    <string name="button_register">▼ 註冊帳號</string>
+    <string name="button_how">▼ 如何重新登入?</string>
+    <string name="button_why">▼ 定位無法啟用?</string>
+    <string name="button_whether">▼ 能在無網路環境使用嗎?</string>
+    <string name="button_can">▼ iPets行事曆能和其他行事曆同步嗎?</string>
+    <string name="button_nav">導航</string>
+    <string name="TextView_ntub">ntub</string>
+    <string name="hobby_hint">喜好</string>
+    <string name="remark_hint">備註</string>
     <string-array name="Spinner_variety">
         <item>台灣土狗</item>
         <item>柴犬</item>
@@ -243,4 +258,5 @@
         <item>牛頭梗</item>
         <item>日本柴犬</item>
     </string-array>
+    <string name="Button_delete">刪除</string>
 </resources>

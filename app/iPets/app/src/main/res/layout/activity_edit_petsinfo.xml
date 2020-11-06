@@ -34,7 +34,7 @@
             android:layout_width="100dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:layout_marginStart="80dp"
+            android:layout_marginStart="79dp"
             android:backgroundTint="#0071BC"
             android:contentDescription="@string/imgbutton_album"
             android:scaleType="fitCenter"
@@ -65,7 +65,7 @@
             android:layout_height="wrap_content"
             android:backgroundTint="#0071BC"
             android:hint="@string/Name_hint"
-            android:textSize="20sp" />
+            android:textSize="18sp" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <Spinner
@@ -91,10 +91,38 @@
         android:ems="10"
         android:hint="@string/petBirth_hint"
         android:inputType="date"
-        android:textSize="20sp" />
+        android:textSize="18sp" />
 
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingHorizontal="17dp"
+        android:layout_marginTop="10dp"
+        >
 
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/hobbyText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="#0071BC"
+            android:hint="@string/hobby_hint"
+            android:textSize="18sp" />
+    </com.google.android.material.textfield.TextInputLayout>
 
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingHorizontal="17dp"
+        android:layout_marginTop="10dp"
+        >
 
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/remarkText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="#0071BC"
+            android:hint="@string/remark_hint"
+            android:textSize="18sp" />
+    </com.google.android.material.textfield.TextInputLayout>
 
 </LinearLayout>
