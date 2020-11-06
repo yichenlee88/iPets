@@ -39,8 +39,8 @@ public class calendarActivity extends AppCompatActivity {
     List<EventDay> events = new ArrayList();
     private static final int ADD_NOTE = 44;
     private CalendarView mCalendarView;
-
-
+    String id1;
+    String id2;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -67,6 +67,7 @@ public class calendarActivity extends AppCompatActivity {
                 final FirebaseFirestore db = FirebaseFirestore.getInstance();
                 List details = new ArrayList<>();
                 List eventnames = new ArrayList<>();
+                List ids = new ArrayList<>();
                 TextView noteTitle = findViewById(R.id.noteTitle);
                 TextView noteContent = findViewById(R.id.noteContent);
                 TextView noteTitle2 = findViewById(R.id.noteTitle2);
@@ -92,6 +93,7 @@ public class calendarActivity extends AppCompatActivity {
                                                     StringBuilder fields1 = new StringBuilder("");
                                                     StringBuilder fields2 = new StringBuilder("");
                                                     StringBuilder fields4 = new StringBuilder("");
+                                                    StringBuilder fields5= new StringBuilder("");
                                                     String start = fields.append(doc.get("startDate")).toString();
                                                     String end = fields1.append(doc.get("endDate")).toString();
                                                     String detail = fields2.append(doc.get("details")).toString();
@@ -105,8 +107,18 @@ public class calendarActivity extends AppCompatActivity {
 
                                                         do {
                                                            if (strday.equals(eventday)) {
-                                                                details.add(detail);
-                                                                eventnames.add(eventname);
+                                                               String eventid = document.getId();
+                                                               ids.add(eventid);
+                                                               details.add(detail);
+                                                               eventnames.add(eventname);
+                                                               for (int i = 0; i < ids.size(); i++) {
+                                                                   if (i == 0) {
+                                                                       id1 = (String) ids.get(i);
+                                                                   }
+                                                                   if (i == 1) {
+                                                                       id2 = (String) ids.get(i);
+                                                                   }
+                                                               }
                                                                for (int i = 0; i < eventnames.size(); i++) {
                                                                    if (i == 0) {
                                                                        noteTitle.setText((String) eventnames.get(i));
@@ -151,7 +163,7 @@ public class calendarActivity extends AppCompatActivity {
             public void onClick(View v) {
                 TextView noteContent = findViewById(R.id.noteContent);
                 TextView noteTitle = findViewById(R.id.noteTitle);
-                bottomSheetNotePreview bottomSheetDialog = new bottomSheetNotePreview(noteTitle.getText().toString() , noteContent.getText().toString());
+                bottomSheetNotePreview bottomSheetDialog = new bottomSheetNotePreview(noteTitle.getText().toString() , noteContent.getText().toString() , id1);
                 bottomSheetDialog.show(getSupportFragmentManager(), "bottomSheetNotePreview");
             }
         });
@@ -161,7 +173,7 @@ public class calendarActivity extends AppCompatActivity {
             public void onClick(View v) {
                 TextView noteContent2 = findViewById(R.id.noteContent2);
                 TextView noteTitle2 = findViewById(R.id.noteTitle2);
-                bottomSheetNotePreview bottomSheetDialog = new bottomSheetNotePreview(noteTitle2.getText().toString() , noteContent2.getText().toString());
+                bottomSheetNotePreview bottomSheetDialog = new bottomSheetNotePreview(noteTitle2.getText().toString() , noteContent2.getText().toString() , id2);
                 bottomSheetDialog.show(getSupportFragmentManager(), "bottomSheetNotePreview");
             }
         });
