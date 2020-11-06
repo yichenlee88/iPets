@@ -270,7 +270,10 @@
                 </b-row>
                 <b-button class="left" v-on:click="addRow">新增內容</b-button>
                 <b-button class="left2" v-on:click="deleteRow">刪除內容</b-button>
-                <b-button class="right" v-on:click="$bvModal.hide(`createPost`); createArticle()">確認新增文章</b-button>
+                <b-button
+                  class="right"
+                  v-on:click="$bvModal.hide(`createPost`); createArticle()"
+                >確認新增文章</b-button>
               </b-card>
             </b-col>
           </b-row>
@@ -283,7 +286,7 @@
 <script>
 import axios from "axios";
 export default {
-  name: "ManageArticle",
+  name: "manageArticle",
   data() {
     return {
       title: "",
@@ -295,10 +298,7 @@ export default {
     };
   },
   mounted() {
-    axios.get("http://localhost:3000/comments").then(res => {
-      console.log(res);
-      this.comments = res.data;
-    });
+    this.getArticle();
   },
   methods: {
     deletePost(index) {
@@ -394,6 +394,12 @@ export default {
         .then(res => {
           console.log(res);
         });
+    },
+    getArticle() {
+      axios.get("http://localhost:3000/comments").then(res => {
+        console.log(res);
+        this.comments = res.data;
+      });
     }
   }
 };
