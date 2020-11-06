@@ -48,7 +48,7 @@
 
 <script>
 export default {
-  name: "Mail",
+  name: "mail",
   data() {
     return {
       status: "accepted"
