@@ -215,78 +215,31 @@
         </b-card-body>
       </b-card>
     </b-card-group>
+    <!-- End -- 寵物簡介 -->
 
-    <!-- Start -- 進行中 -->
-    <b-list-group v-if="show">
-      <h1>進行中</h1>
+    <!-- Start -- 當月事件 -->
+    <b-list-group>
       <b-list-group-item
-        v-for="info in pet_info"
-        :key="info.event_name"
-        class="d-flex align-items-center"
+        v-for="(event, idx) in month_calendar"
+        :key="idx"
+        href="#"
+        disabled
+        class="flex-column align-items-start"
       >
-        <input class="mr-3" type="checkbox" />
-        <div class="overview mr-auto">
-          <span class="title mb-0">{{ info.event_name }}</span>
-          <div>
-            <b-badge
-              v-if="badge_today(info.next_time)"
-              variant="primary"
-              class="mr-1"
-              >今日</b-badge
-            >
-            <b-badge
-              v-if="badge_overdue(info.next_time)"
-              variant="danger"
-              class="mr-1"
-              >逾期</b-badge
-            >
-            <i class="far fa-calendar-alt"></i>
-            <span class="date mb-0">{{
-              convert_timestamp(info.next_time)
-            }}</span>
-          </div>
+        <div class="d-flex w-100 justify-content-between">
+          <h5 class="mb-1">{{ event.name }}</h5>
+          <small>3 days ago</small>
         </div>
-        <button
-          type="button"
-          class="close"
-          @click="$bvModal.show(`${info.event_name}`)"
-        >
-          <!-- <i class="arrow right"></i> -->
-          <i class="fas fa-cog"></i>
-        </button>
-        <b-modal
-          :id="`${info.event_name}`"
-          centered
-          title="編輯頁面"
-          ok-title="保存"
-          cancel-title="取消"
-          @ok="handleOk($event, info.event_name)"
-        >
-          <template v-slot:modal-chancel>取消</template>
-          <b-form>
-            <b-form-group id="group-frequence" label="重複頻率" label-cols="3">
-              <b-form-input v-model="info.period"></b-form-input>
-              <b-form-select
-                v-model="info.periodUnit"
-                :options="periodUnitOptions"
-                value-field="item"
-                text-field="name"
-              ></b-form-select>
-            </b-form-group>
-          </b-form>
-        </b-modal>
+        <small>{{ event.start }} ~ {{ event.end }}</small>
       </b-list-group-item>
     </b-list-group>
-    <!-- End -- 進行中 -->
+    <!-- End -- 當月事件 -->
   </b-container>
 </template>
 
 <script>
 // Import required dependencies
 import "bootstrap/dist/css/bootstrap.css";
-
-// Import this component
-// import datePicker from "vue-bootstrap-datetimepicker";
 
 // Import date picker css
 import "pc-bootstrap4-datetimepicker/build/css/bootstrap-datetimepicker.css";
@@ -372,36 +325,6 @@ export default {
         { value: "牛頭梗", text: "牛頭梗" },
         { value: "日本柴犬", text: "日本柴犬" }
       ]
-      // timerSelected: [],
-      // timers: [
-      //   { text: "洗澡", value: "bath" },
-      //   { text: "修剪毛髮", value: "trimming" },
-      //   { text: "體內驅蟲", value: "anthelmintic" },
-      //   { text: "體外驅蟲", value: "repellent" },
-      //   { text: "疫苗接種", value: "injection" },
-      //   { text: "生理期", value: "menstrual " }
-      // ],
-      // options: {
-      //   format: "DD/MM/YYYY",
-      //   useCurrent: false
-      // },
-      // gender_options: [
-      //   { value: null, text: "選擇性別", disabled: true },
-      //   { value: true, text: "男孩" },
-      //   { value: false, text: "女孩" }
-      // ],
-      // form: {
-      //   name: null,
-      //   breed: null,
-      //   gender: null,
-      //   image:
-      //     "http://icons.iconarchive.com/icons/google/noto-emoji-animals-nature/1024/22214-dog-face-icon.png"
-      // },
-      // periodUnitOptions: [
-      //   { item: "day", name: "天" },
-      //   { item: "week", name: "週" },
-      //   { item: "month", name: "個月" }
-      // ]
     };
   },
   methods: {
@@ -535,6 +458,9 @@ export default {
     },
     pet_info() {
       return this.$store.state.pet_info;
+    },
+    month_calendar() {
+      return this.$store.state.month_calendar;
     },
     show() {
       if (this.$store.state.pet === null) {
