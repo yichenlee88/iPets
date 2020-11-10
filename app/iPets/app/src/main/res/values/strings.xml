@@ -9,17 +9,17 @@
     <string name="button_login">登入</string>
     <string name="button_forgot">忘記密碼？</string>
     <string name="TextView_first">第一次使用？</string>
-    <string name="button_signup">註冊。</string>
+    <string name="button_signup">註冊</string>
     <string name="menu_home">home</string>
     <string name="menu_calendar">calendar</string>
     <string name="menu_analyze">analyze</string>
     <string name="menu_locate">locate</string>
     <string name="menu_setting">setting</string>
-    <string name="imageview_photo">photo</string>
-    <string name="imagebutton_gallery">gallery</string>
-    <string name="imagebutton_camera">camera</string>
+    <string name="imgview_photo">photo</string>
+    <string name="imgbutton_gallery">gallery</string>
+    <string name="imgbutton_camera">camera</string>
     <string name="title_activity_maps">Map</string>
-    <string name="imageview_logo">logo</string>
+    <string name="imgview_logo">logo</string>
     <string name="TextView_signup">註冊帳號</string>
     <string name="username_hint">用戶名稱</string>
     <string name="email_hint">電子郵件</string>
@@ -28,4 +28,235 @@
     <string name="TextView_or">或</string>
     <string name="button_google">透過 Google 登入</string>
     <string name="button_fb">透過 Facebook 登入</string>
+    <string name="TextView_info">個人基本資料</string>
+    <string name="name_hint">全名</string>
+    <string name="birth_hint">出生年月日</string>
+    <string name="RadioButton_gender1">男</string>
+    <string name="TextView_gender">性別</string>
+    <string name="TextView_name">姓名</string>
+    <string name="TextView_birth">用戶生日</string>
+    <string name="RadioButton_gender2">女</string>
+    <string name="RadioButton_gender3">不願透露</string>
+    <string name="TextView_address">地址</string>
+    <string name="address_hint">住家地址</string>
+    <string name="TextView_petsinfo">寵物基本資料</string>
+    <string name="imgbutton_album">album</string>
+    <string name="imgbutton_camera1">camera1</string>
+    <string name="TextView_petsname">寵物名稱</string>
+    <string name="petsname_hint">名字</string>
+    <string name="TextView_petssex">寵物性別</string>
+    <string name="RadioButton_sex1">公的</string>
+    <string name="RadioButton_sex2">母的</string>
+    <string name="TextView_petsbirth">生日</string>
+    <string name="petsbirth_hint">出生年月日</string>
+    <string name="TextView_species">寵物品種：</string>
+    <string name="variety_hint" />
+    <string name="TextView_like">喜好：</string>
+    <string name="likes_hint" />
+    <string name="TextView_remark">備註：</string>
+    <string name="notes_hint" />
+    <string name="button_finish">完成</string>
+    <string name="button_signout">登出</string>
+    <string name="TextView_sex">性別：</string>
+    <string name="TextView_Birth">生日：</string>
+    <string-array name="Spinner_name">
+        <item>奶凍捲</item>
+        <item>金碳</item>
+        <item>＋新增</item>
+    </string-array>
+    <string name="TextView_petsSex">？</string>
+    <string name="TextView_petsBirth">YYYY/MM/DD</string>
+    <string name="TextView_age">年齡：</string>
+    <string name="TextView_petsAge">？歲</string>
+    <string name="TextView_schedule">品種：</string>
+    <string name="TextView_route">？？</string>
+    <string name="img_shower" />
+    <string name="img_haircut" />
+    <string name="img_fleaIn" />
+    <string name="img_fleaOut" />
+    <string name="img_injection" />
+    <string name="img_teeth" />
+    <string name="img_blood" />
+    <string name="button_PetSuppliesStore">寵物用品</string>
+    <string name="button_PetGroomingShop">寵物美容</string>
+    <string name="button_Park">公園</string>
+    <string name="button_PetHospital">寵物醫院</string>
+    <string name="img_magnify" />
+    <string name="button_magnify" />
+    <string name="hint_search">輸入你想搜詢的地方</string>
+    <string name="button_search">搜尋</string>
+    <string name="img_gps" />
+    <string name="button_map">map</string>
+    <string name="title_activity_home">HomeActivity</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+    <string name="button_myinfo">主人基本資料</string>
+    <string name="Email_hint">E-mail</string>
+    <string name="Name_hint">名字</string>
+    <string name="TextView_notice">通知</string>
+    <string name="TextView_language">中/英</string>
+    <string name="TextView_CN">中文(TW)</string>
+    <string name="TextView_EN">English</string>
+    <string name="TextView_ON">開啟</string>
+    <string name="TextView_OFF">關閉</string>
+    <string name="button_editPet">編輯寵物資訊 (需刪除請聯絡客服)</string>
+    <string name="TextView_sysVer">系統版本</string>
+    <string name="TextView_Version">9.10.13</string>
+    <string name="button_question">常見問題</string>
+    <string name="TextView_communicate">聯絡我們</string>
+    <string name="masterBirth_hint">生日</string>
+    <string name="phoneNum_hint">電話號碼</string>
+    <string name="TextView_email">帳號 ( Email )</string>
+    <string name="TextView_Account">xxxxoooo@gmail.com</string>
+    <string name="button_PWD">密碼</string>
+    <string name="title_check">確認變更</string>
+    <string name="oldPWD_hint">目前密碼</string>
+    <string name="newPWD_hint">新密碼</string>
+    <string name="checkPWD">確認新密碼</string>
+    <string name="button_changeHead">更換寵物頭貼</string>
+    <string name="petBirth_hint">生日</string>
+    <string name="TextView_countdown">倒數計時</string>
+    <string name="CheckBox_shower">洗澡</string>
+    <string name="CheckBox_hair">毛髮</string>
+    <string name="CkeckBox_debugIn">體內除蟲</string>
+    <string name="CheckBox_debugOut">體外除蟲</string>
+    <string name="CheckBox_inject">疫苗</string>
+    <string name="CheckBox_teeth">牙齒</string>
+    <string name="CheckBox_period">月經</string>
+    <string name="material_calendar_monday">一</string>
+    <string name="material_calendar_tuesday">二</string>
+    <string name="material_calendar_wednesday">三</string>
+    <string name="material_calendar_thursday">四</string>
+    <string name="material_calendar_friday">五</string>
+    <string name="material_calendar_saturday">六</string>
+    <string name="material_calendar_sunday">日</string>
+    <string name="button_q1">▼  BUG通知</string>
+    <string name="button_q2">▼  錯誤403</string>
+    <string name="button_q3">▼  註冊帳號</string>
+    <string name="button_q4">▼  如何重新登入?</string>
+    <string name="button_q5">▼  定位無法啟用?</string>
+    <string name="button_q6">▼  能在無網路環境使用嗎?</string>
+    <string name="button_q7">▼  iPets行事曆能和其他行事曆同步嗎?</string>
+    <string-array name="Spinner_sex">
+        <item>男</item>
+        <item>女</item>
+        <item>不願透露</item>
+    </string-array>
+    <string-array name="Spinner_petSex">
+        <item>公的</item>
+        <item>母的</item>
+    </string-array>
+    <string-array name="Spinner_problem">
+        <item>帳號安全</item>
+        <item>關於計時器</item>
+        <item>關於行事曆</item>
+        <item>關於相簿</item>
+        <item>關於地圖</item>
+        <item>給iPets的建議</item>
+    </string-array>
+    <string name="TextView_description">描述</string>
+    <string name="save">儲存</string>
+    <string name="nonote">目前沒有事件喔!</string>
+    <string name="menu_photoGallery">gallery</string>
+    <string name="addNote_hint">輸入想要新增的事件</string>
+    <string name="addDetail_hint">輸入詳細內容</string>
+    <string name="startDate_hint">起始日</string>
+    <string name="endDate_hint">到期日</string>
+    <string name="TextView_Title">標題</string>
+    <string name="TextView_content">目前沒有行程</string>
+    <string name="title_hint">標題</string>
+    <string name="title_add">新增</string>
+    <string name="Title_hint">標題</string>
+    <string name="Content_hint">內容</string>
+    <array name="material_calendar_months_array">
+        <item>一月</item>
+        <item>二月</item>
+        <item>三月</item>
+        <item>四月</item>
+        <item>五月</item>
+        <item>六月</item>
+        <item>七月</item>
+        <item>八月</item>
+        <item>九月</item>
+        <item>十月</item>
+        <item>十一月</item>
+        <item>十二月</item>
+    </array>
+    <string-array name="Spinner_repeat">
+        <item>不重複</item>
+        <item>每日</item>
+        <item>每週</item>
+        <item>每月</item>
+        <item>每年</item>
+    </string-array>
+    <string name="Button_save">儲存</string>
+    <string name="TextView_phoneNum">聯絡電話</string>
+    <string name="TextView_depiction">請提供您的用戶名稱，並簡述您所面臨到的問題，iPets客服團隊很樂意為您服務</string>
+    <string name="TextView_question">*請問您遇到什麼問題?</string>
+    <string name="TextView_describe">*描述</string>
+    <string name="button_sent">確認送出</string>
+    <string name="buton_bug">▼ BUG通知</string>
+    <string name="button_403">▼ 錯誤403</string>
+    <string name="button_register">▼ 註冊帳號</string>
+    <string name="button_how">▼ 如何重新登入?</string>
+    <string name="button_why">▼ 定位無法啟用?</string>
+    <string name="button_whether">▼ 能在無網路環境使用嗎?</string>
+    <string name="button_can">▼ iPets行事曆能和其他行事曆同步嗎?</string>
+    <string name="button_nav">導航</string>
+    <string name="TextView_ntub">ntub</string>
+    <string name="hobby_hint">喜好</string>
+    <string name="remark_hint">備註</string>
+    <string-array name="Spinner_variety">
+        <item>台灣土狗</item>
+        <item>柴犬</item>
+        <item>黃金獵犬</item>
+        <item>拉布拉多</item>
+        <item>哈士奇</item>
+        <item>藏獒</item>
+        <item>貴賓犬</item>
+        <item>薩摩耶</item>
+        <item>博美</item>
+        <item>迷你雪納瑞</item>
+        <item>蘇格蘭牧羊犬</item>
+        <item>松獅</item>
+        <item>獅子犬</item>
+        <item>吉娃娃</item>
+        <item>阿拉斯加雪橇犬</item>
+        <item>喜樂蒂牧羊犬</item>
+        <item>美國可卡犬</item>
+        <item>英國古代牧羊犬</item>
+        <item>捲毛比熊犬</item>
+        <item>義大利靈緹</item>
+        <item>蝴蝶犬</item>
+        <item>雪納瑞</item>
+        <item>邊境牧羊犬</item>
+        <item>德國牧羊犬</item>
+        <item>阿富汗獵犬</item>
+        <item>大麥町</item>
+        <item>西施犬</item>
+        <item>英國可卡犬</item>
+        <item>臘腸犬</item>
+        <item>巴哥犬</item>
+        <item>約克夏</item>
+        <item>柯基</item>
+        <item>日本銀狐</item>
+        <item>迷你杜賓犬</item>
+        <item>大白熊犬</item>
+        <item>米格魯</item>
+        <item>羅威納犬</item>
+        <item>中國沙皮犬</item>
+        <item>西部高地白梗</item>
+        <item>愛斯基摩犬</item>
+        <item>聖伯納犬</item>
+        <item>鬥牛犬</item>
+        <item>拉薩犬</item>
+        <item>馬爾濟斯犬</item>
+        <item>萬能梗</item>
+        <item>狼狗</item>
+        <item>德國杜賓犬</item>
+        <item>牛頭梗</item>
+        <item>日本柴犬</item>
+    </string-array>
+    <string name="Button_delete">刪除</string>
 </resources>

@@ -1,14 +1,35 @@
 import Vue from "vue";
 import Router from "vue-router";
-import Home from "@/components/Home";
-import About from "@/components/About";
-import DogInfo from "@/components/DogInfo";
-import Contact from "@/components/Contact";
-import Login from "@/components/Login";
-import Register from "@/components/Register";
-import HomeLogin from "@/components/HomeLogin";
+import home from "@/components/home";
+import about from "@/components/about";
+import dogInfo from "@/components/dogInfo";
+import contact from "@/components/contact";
+import login from "@/components/login";
+import register from "@/components/register";
+import petProfile from "@/components/petProfile";
+import calendar from "@/components/calendar";
+import manageArticle from "@/components/manageArticle";
+import manageAdoption from "@/components/manageAdoption";
+import manageContact from "@/components/manageContact";
+import manage from "@/components/manage";
 import { db } from "../db";
-import DogScience from "@/components/DogScience";
+import dogScience from "@/components/dogScience";
+import post from "@/components/post";
+import identify from "@/components/identify";
+import tunit from "@/components/tunit";
+import album from "@/components/album";
+import albumView from "@/components/albumView";
+import setting from "@/components/setting";
+import editProfile from "@/components/editProfile";
+import editPetProfile from "@/components/editPetProfile";
+import password from "@/components/password";
+import mail from "@/components/mail";
+import loginActivity from "@/components/loginActivity";
+import FAQ from "@/components/FAQ";
+import feedback from "@/components/feedback";
+import pageNotFound from "@/components/pageNotFound";
+
+// import { component } from "vue/types/umd";
 
 const fAuth = db.auth();
 
@@ -18,67 +39,180 @@ let router = new Router({
   routes: [
     {
       path: "/",
-      name: "Home",
-      component: Home,
+      name: "home",
+      component: home,
       meta: {
         requiresGuest: true
       }
     },
     {
       path: "/about",
-      name: "About",
-      component: About,
+      name: "about",
+      component: about,
       meta: {
         requiresGuest: true
       }
     },
     {
       path: "/dogInfo",
-      name: "DogInfo",
-      component: DogInfo,
+      name: "dogInfo",
+      component: dogInfo,
       meta: {
         requiresGuest: true
       }
     },
     {
       path: "/contact",
-      name: "Contact",
-      component: Contact,
+      name: "contact",
+      component: contact,
       meta: {
         requiresGuest: true
       }
     },
     {
       path: "/login",
-      name: "Login",
-      component: Login,
+      name: "login",
+      component: login,
       meta: {
         requiresGuest: true
       }
     },
     {
       path: "/register",
-      name: "Register",
-      component: Register,
+      name: "register",
+      component: register,
       meta: {
         requiresGuest: true
       }
     },
     {
-      path: "/homeLogin",
-      name: "HomeLogin",
-      component: HomeLogin,
+      path: "/petProfile",
+      name: "petProfile",
+      component: petProfile,
+      meta: {
+        requiresAuth: true
+      }
+    },
+    {
+      path: "/calendar",
+      name: "calendar",
+      component: calendar,
+      meta: {
+        requiresAuth: true
+      }
+    },
+    {
+      path: "/identify",
+      name: "identify",
+      component: identify,
+      meta: {
+        requiresAuth: true
+      }
+    },
+    {
+      path: "/tunit",
+      name: "tunit",
+      component: tunit,
       meta: {
         requiresAuth: true
       }
     },
     {
       path: "/dogScience",
-      name: "DogScience",
-      component: DogScience,
+      name: "dogScience",
+      component: dogScience,
       meta: {
         requiresGuest: true
       }
+    },
+    {
+      path: "/manage",
+      name: "manage",
+      component: manage,
+      meta: {
+        requiresGuest: true
+      },
+      children: [
+        {
+          path: "manageArticle",
+          component: manageArticle
+        },
+        {
+          path: "manageContact",
+          component: manageContact
+        },
+        {
+          path: "manageAdoption",
+          component: manageAdoption
+        }
+      ]
+    },
+    {
+      path: "/post/:id",
+      name: "post",
+      component: post,
+      meta: {
+        requiresGuest: true
+      }
+    },
+    {
+      path: "/album",
+      name: "album",
+      component: album,
+      meta: {
+        requiresAuth: true
+      }
+    },
+    {
+      path: "/setting",
+      name: "setting",
+      component: setting,
+      meta: {
+        requiresAuth: true
+      },
+      children: [
+        {
+          path: "editProfile",
+          component: editProfile
+        },
+        {
+          path: "editPetProfile",
+          component: editPetProfile
+        },
+        {
+          path: "password",
+          component: password
+        },
+        {
+          path: "mail",
+          component: mail
+        },
+        {
+          path: "loginActivity",
+          component: loginActivity
+        },
+        {
+          path: "FAQ",
+          component: FAQ
+        },
+        {
+          path: "feedback",
+          component: feedback
+        }
+      ]
+    },
+    {
+      path: "/albumView/:name",
+      name: "albumView",
+      component: albumView,
+      meta: {
+        requiresAuth: true
+      }
+    },
+    {
+      path: "*",
+      name: "pageNotFound",
+      component: pageNotFound
     }
   ]
 });
@@ -96,7 +230,7 @@ router.beforeEach((to, from, next) => {
     // check if logged in
     if (fAuth.currentUser) {
       // Go to login
-      next("/HomeLogin");
+      next("/petProfile");
     } else {
       next();
     }

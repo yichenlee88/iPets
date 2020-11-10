@@ -2,7 +2,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="com.example.ipets">
-
     <!--
          The ACCESS_COARSE/FINE_LOCATION permissions are not required to use
          Google Maps Android API v2, but you must specify either coarse or fine
@@ -14,7 +13,7 @@
     <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.CAMERA"/>
+    <uses-permission android:name="android.permission.CAMERA" />
 
     <application
         android:allowBackup="true"
@@ -23,6 +22,43 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity
+            android:name=".petInfoActivity"
+            android:windowSoftInputMode="adjustPan" />
+        <activity android:name=".photoGalleryActivity" />
+        <activity android:name=".NotePreviewActivity" />
+        <activity
+            android:name=".addNoteActivity"
+            android:windowSoftInputMode="adjustPan" />
+        <activity android:name=".calendarActivity" />
+        <activity
+            android:name=".editPetInfoActivity"
+            android:parentActivityName=".settingActivity"
+            android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name=".editPwdActivity"
+            android:parentActivityName=".editUserInfoActivity"
+            android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name=".editAccountActivity"
+            android:parentActivityName=".editUserInfoActivity"
+            android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name=".editUserInfoActivity"
+            android:parentActivityName=".settingActivity"
+            android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name=".editQuestionActivity"
+            android:parentActivityName=".settingActivity" />
+        <activity
+            android:name=".editContactusActivity"
+            android:parentActivityName=".settingActivity"
+            android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name=".settingActivity"
+            android:parentActivityName=".homeActivity" />
+        <activity android:name=".homeActivity" />
+
         <meta-data
             android:name="com.google.android.actions"
             android:resource="@xml/provider_paths" />
@@ -60,7 +96,7 @@
             android:grantUriPermissions="true">
             <meta-data
                 android:name="android.support.FILE_PROVIDER_PATHS"
-                android:resource="@xml/provider_paths"/>
+                android:resource="@xml/provider_paths" />
         </provider>
     </application>
 

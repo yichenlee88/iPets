@@ -1,53 +1,12 @@
 <template>
-  <div class="container">
-    <div id="section1" class="row my-3">
-      <div class="col-lg-8 columnberight">
-        <div class="media">
-          <div class="media-body">
-            <h3>跟狗說或有助於增加感情</h3>
-            <a href="https://anntw.com/articles/20180311-Kqxi"></a>
-            <p>
-              飼主跟自家小狗「聊天」的行為並不會對牛彈琴，實際效果和人類與嬰兒講話有異曲同工之妙，只要妥善利用高頻且帶有情感的聲調向狗狗交談，就會對人犬關係有很大的改善。
-            </p>
-          </div>
-        </div>
-      </div>
-      <div class="col-lg-4">
-        <img src="../assets/7.jpg" width="300px" height="300px" />
-      </div>
-    </div>
-    <div id="section2" class="row my-3">
-      <div class="col-lg-4">
-        <img src="../assets/6.jpg" width="300px" height="300px" />
-      </div>
-      <div class="col-lg-8 columnberight">
-        <div class="media">
-          <div class="media-body">
-            <h3>跟狗說或有助於增加感情</h3>
-            <a href="https://anntw.com/articles/20180311-Kqxi"></a>
-            <p>
-              飼主跟自家小狗「聊天」的行為並不會對牛彈琴，實際效果和人類與嬰兒講話有異曲同工之妙，只要妥善利用高頻且帶有情感的聲調向狗狗交談，就會對人犬關係有很大的改善。
-            </p>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div id="section3" class="row my-3">
-      <div class="col-lg-8 columnberight">
-        <div class="media">
-          <div class="media-body">
-            <h3>跟狗說或有助於增加感情</h3>
-            <a href="https://anntw.com/articles/20180311-Kqxi"></a>
-            <p>
-              飼主跟自家小狗「聊天」的行為並不會對牛彈琴，實際效果和人類與嬰兒講話有異曲同工之妙，只要妥善利用高頻且帶有情感的聲調向狗狗交談，就會對人犬關係有很大的改善。
-            </p>
-          </div>
-        </div>
-      </div>
-      <div class="col-lg-4">
-        <img src="../assets/5.jpg" width="300px" height="300px" />
-      </div>
-    </div>
+  <!--https://www.hk01.com/%E5%AF%B5%E7%89%A9/202205/%E4%BA%86%E8%A7%A35%E5%80%8B%E7%8B%97%E7%8B%97%E5%B8%B8%E8%A6%8B%E5%BF%83%E7%90%86%E7%8B%80%E6%85%8B-%E8%AE%93%E4%BA%BA%E5%AF%B5%E9%97%9C%E4%BF%82%E6%9B%B4%E5%92%8C%E7%9D%A6-->
+  <div>
+    <h1 class="title top">人與狗的關係</h1>
+    <img
+      v-for="n in 5" :key="n"
+      class="d-block img-fluid"
+      :src="`../static/img/dogInfo-0${ n }.png`"
+    >
   </div>
 </template>
 
@@ -58,9 +17,16 @@ export default {
 </script>
 
 <style scoped>
-.columnberight {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+.top {
+  margin-top: 20px;
+}
+.img-shadow {
+  box-shadow:3px 3px 12px gray;
+}
+.title {
+  padding: 10px;
+  text-align: center;
+  margin: auto;
+  max-width: 300px;
 }
 </style>
