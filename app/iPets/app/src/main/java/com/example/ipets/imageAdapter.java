@@ -60,7 +60,7 @@ public class imageAdapter extends BaseAdapter {
                 Toast.makeText(context, "index:" + position, Toast.LENGTH_SHORT)
                         .show();
 
-                ((photoGalleryActivity)context).setImageView(position);
+                //((photoGalleryActivity)context).setImageView(position);
             }
 
         });
