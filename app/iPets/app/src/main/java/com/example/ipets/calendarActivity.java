@@ -212,6 +212,27 @@ public class calendarActivity extends AppCompatActivity {
                 bottomSheetDialog.show(getSupportFragmentManager(), "bottomSheetNotePreview");
             }
         });
+        LinearLayout btnedit3 = findViewById(R.id.btnedit3);
+        btnedit3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                TextView noteContent3 = findViewById(R.id.noteContent3);
+                TextView noteTitle3 = findViewById(R.id.noteTitle3);
+                bottomSheetNotePreview bottomSheetDialog = new bottomSheetNotePreview(noteTitle3.getText().toString() , noteContent3.getText().toString() , id3);
+                bottomSheetDialog.show(getSupportFragmentManager(), "bottomSheetNotePreview");
+            }
+        });
+        LinearLayout btnedit4 = findViewById(R.id.btnedit4);
+        btnedit4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                TextView noteContent4 = findViewById(R.id.noteContent4);
+                TextView noteTitle4 = findViewById(R.id.noteTitle4);
+                bottomSheetNotePreview bottomSheetDialog = new bottomSheetNotePreview(noteTitle4.getText().toString() , noteContent4.getText().toString() , id4);
+                bottomSheetDialog.show(getSupportFragmentManager(), "bottomSheetNotePreview");
+            }
+        });
+
     }
 
     @Override
