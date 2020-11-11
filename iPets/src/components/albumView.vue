@@ -54,6 +54,12 @@
               @click="deleteImage(index)"
               style="margin-top:20px"
             ></b-icon>
+            <b-icon
+              icon="cloud-download"
+              variant="secondary"
+              @click="downloadImage(item)"
+              style="margin-top:20px"
+            ></b-icon>
           </template>
           <img :src="item" style="max-width: 100%;">
         </b-modal>
@@ -136,6 +142,14 @@ export default {
         .catch(function(error) {
           console.log(error);
         });
+    },
+    downloadImage(item) {
+      let url = item;
+      let aLink = document.createElement("a");
+      aLink.setAttribute("target", "_blank");
+      aLink.href = url;
+      aLink.download = "picture.png";
+      aLink.click();
     }
   }
 };
