@@ -67,6 +67,7 @@ export default {
               .updatePassword(newPassword)
               .then(function() {
                 console.log(newPassword);
+                alert("更改成功！");
                 // Update successful.
               })
               .catch(function(error) {
@@ -75,11 +76,11 @@ export default {
           })
           .catch(function(error) {
             console.log(error);
+            alert("密碼輸入錯誤");
           });
         this.currentPassword = "";
         this.newPassword = "";
         this.againPassword = "";
-        alert("更改成功！");
       }
     },
     checkPassword(againPassword, newPassword) {
