@@ -79,6 +79,7 @@ export default {
         this.currentPassword = "";
         this.newPassword = "";
         this.againPassword = "";
+        alert("更改成功！");
       }
     },
     checkPassword(againPassword, newPassword) {
