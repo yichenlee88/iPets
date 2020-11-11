@@ -8,7 +8,7 @@
     <div>
       <b-form @submit="addContact">
         <b-form-input
-          class="InputClass"
+          class="InputClass center"
           name="userName"
           v-model="userName"
           placeholder="使用者名稱"
@@ -20,20 +20,22 @@
           :options="options"
         ></b-form-select
         ><b-form-input
-          class="InputClass"
+          class="InputClass center"
           name="email"
           v-model="email"
           placeholder="電子郵件"
         ></b-form-input>
         <b-form-textarea
-          class="TextareaClass"
+          class="TextareaClass center"
           name="description"
           id="description"
           v-model="description"
           placeholder="您遇到的問題是..."
           maxlength
         ></b-form-textarea
-        ><b-button type="submit" class="ButtonClass">送出</b-button></b-form
+        ><b-button type="submit" class="ButtonClass center"
+          >送出</b-button
+        ></b-form
       >
     </div>
   </b-container>
@@ -96,7 +98,7 @@ export default {
 
 .InputClass {
   height: 48px;
-  max-width: auto;
+  max-width: 75%;
   border-radius: 40px;
   margin-bottom: 20px;
   margin-top: 10px;
@@ -104,14 +106,14 @@ export default {
 
 .TextareaClass {
   height: 120px;
-  max-width: auto;
+  max-width: 75%;
   border-radius: 16px;
   margin-bottom: 20px;
 }
 
 .ButtonClass {
   height: 48px;
-  width: 100%;
+  width: 75%;
   border-radius: 40px;
   margin-bottom: 20px;
   background: -webkit-linear-gradient(
