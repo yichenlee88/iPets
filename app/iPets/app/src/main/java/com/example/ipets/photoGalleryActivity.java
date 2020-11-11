@@ -4,15 +4,10 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.core.app.ActivityCompat;
 
-import android.Manifest;
 import android.app.ProgressDialog;
-import android.content.ClipData;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
@@ -23,10 +18,8 @@ import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -35,9 +28,7 @@ import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -57,11 +48,14 @@ public class photoGalleryActivity extends AppCompatActivity {
     FirebaseUser currentUser = auth.getCurrentUser();
     String userUID = currentUser.getUid();
 
-
-
     // instance for firebase storage and StorageReference
     FirebaseStorage storage;
     StorageReference storageReference;
+
+    private GridView gridView;
+    private List<String> thumbs;  //存放縮圖的id
+    private List<String> imagePaths;  //存放圖片的路徑
+    private com.example.ipets.imageAdapter imageAdapter;  //用來顯示縮圖
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,6 +73,7 @@ public class photoGalleryActivity extends AppCompatActivity {
         btnChoose = findViewById(R.id.addPhoto);
         btnUpload = findViewById(R.id.button);
         imageView = findViewById(R.id.imageView1);
+
 
         btnChoose.setOnClickListener(new View.OnClickListener() {
             @Override
