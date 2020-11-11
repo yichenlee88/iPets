@@ -24,7 +24,16 @@
         app:type="one_day_picker"
         app:datePicker="true"
         app:eventsEnabled="true" />
-
+    <LinearLayout
+        android:id="@+id/btnedit"
+        android:layout_width="match_parent"
+        android:layout_height="75dp"
+        android:paddingHorizontal="17dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/btn_click"
+        android:clickable="true"
+        android:focusable="true"
+        android:orientation="vertical">
     <TextView
         android:id="@+id/noteTitle"
         android:layout_width="wrap_content"
@@ -39,42 +48,45 @@
     <TextView
         android:id="@+id/noteContent"
         android:layout_width="match_parent"
-        android:layout_height="145dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
         android:layout_marginTop="5dp"
         android:layout_marginEnd="20dp"
         android:text="目前沒有行程"
         android:textColor="#000000"
         android:textSize="18sp" />
-
+    </LinearLayout>
     <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="200dp"
-        android:layout_marginTop="10dp">
-
+        android:id="@+id/btnedit2"
+        android:layout_width="match_parent"
+        android:layout_height="75dp"
+        android:paddingHorizontal="17dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/btn_click"
+        android:clickable="true"
+        android:focusable="true"
+        android:orientation="vertical">
         <TextView
-            android:id="@+id/deleteNote"
-            android:layout_width="75dp"
-            android:layout_height="40dp"
-            android:layout_marginStart="15dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginEnd="10dp"
-            android:gravity="center"
-            android:text="刪除"
-            android:textColor="#0071BC"
-            android:textSize="16sp" />
-
-        <TextView
-            android:id="@+id/editNote"
-            android:layout_width="75dp"
-            android:layout_height="40dp"
-            android:layout_marginTop="10dp"
+            android:id="@+id/noteTitle2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
             android:layout_marginEnd="20dp"
-            android:gravity="center"
-            android:text="編輯"
-            android:textColor="#0071BC"
+            android:text="標題"
+            android:textColor="#888888"
             android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/noteContent2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="20dp"
+            android:text="目前沒有行程"
+            android:textColor="#000000"
+            android:textSize="18sp" />
     </LinearLayout>
 
 </LinearLayout>
