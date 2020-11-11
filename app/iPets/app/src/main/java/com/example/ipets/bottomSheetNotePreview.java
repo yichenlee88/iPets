@@ -54,7 +54,42 @@ public class bottomSheetNotePreview extends BottomSheetDialogFragment {
                 setEvent();
             }
         });
+        Button deleteButton = getView().findViewById(R.id.deleteButton);
+        deleteButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                deleteEvent();
+            }
+        });
+
     }
+
+    private void deleteEvent() {
+        FirebaseAuth auth = FirebaseAuth.getInstance();
+        FirebaseUser currentUser = auth.getCurrentUser();
+        String userUID = currentUser.getUid();
+        FirebaseFirestore db;
+        db = FirebaseFirestore.getInstance();
+        db.collection("users").document(userUID).collection("calEvent").document(id)
+                .delete();
+
+        AlertDialog.Builder finishdelete = new AlertDialog.Builder(getActivity());
+        finishdelete.setMessage("刪除成功");
+        finishdelete.setNegativeButton("確認", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface arg0, int arg1) {
+                Intent intent=new Intent();
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
+                intent.setClass(getActivity(),calendarActivity.class);
+                startActivity(intent);
+            }
+        });
+                        finishdelete.setCancelable(false);
+                        finishdelete.show();
+
+
+    }
+
     private void setEvent() {
         EditText editNoteText = getView().findViewById(R.id.editNoteText);
         EditText noteContentText = getView().findViewById(R.id.noteContentText);
