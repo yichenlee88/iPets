@@ -41,6 +41,8 @@ public class calendarActivity extends AppCompatActivity {
     private CalendarView mCalendarView;
     String id1;
     String id2;
+    String id3;
+    String id4;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -72,6 +74,18 @@ public class calendarActivity extends AppCompatActivity {
                 TextView noteContent = findViewById(R.id.noteContent);
                 TextView noteTitle2 = findViewById(R.id.noteTitle2);
                 TextView noteContent2 = findViewById(R.id.noteContent2);
+                TextView noteTitle3 = findViewById(R.id.noteTitle3);
+                TextView noteContent3 = findViewById(R.id.noteContent3);
+                TextView noteTitle4 = findViewById(R.id.noteTitle4);
+                TextView noteContent4 = findViewById(R.id.noteContent4);
+                noteTitle.setText("");
+                noteContent.setText("");
+                noteTitle2.setText("");
+                noteContent2.setText("");
+                noteTitle3.setText("");
+                noteContent3.setText("");
+                noteTitle4.setText("");
+                noteContent4.setText("");
                 Calendar clickedDayCalendar = eventDay.getCalendar();
                 Date date = clickedDayCalendar.getTime();
                 SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
@@ -104,7 +118,10 @@ public class calendarActivity extends AppCompatActivity {
                                                         Calendar startcal = Calendar.getInstance();
                                                         startcal.setTime(strday);
                                                         Date endday = sdf.parse(end);
-
+                                                        Calendar endcal = Calendar.getInstance();
+                                                        endcal.setTime(endday);
+                                                        endcal.add(Calendar.DATE, 1);
+                                                        endday = endcal.getTime();
                                                         do {
                                                            if (strday.equals(eventday)) {
                                                                String eventid = document.getId();
@@ -118,6 +135,12 @@ public class calendarActivity extends AppCompatActivity {
                                                                    if (i == 1) {
                                                                        id2 = (String) ids.get(i);
                                                                    }
+                                                                   if (i == 2) {
+                                                                       id3 = (String) ids.get(i);
+                                                                   }
+                                                                   if (i == 3) {
+                                                                       id4 = (String) ids.get(i);
+                                                                   }
                                                                }
                                                                for (int i = 0; i < eventnames.size(); i++) {
                                                                    if (i == 0) {
@@ -126,6 +149,12 @@ public class calendarActivity extends AppCompatActivity {
                                                                    if (i == 1) {
                                                                        noteTitle2.setText((String) eventnames.get(i));
                                                                    }
+                                                                   if (i == 2) {
+                                                                       noteTitle3.setText((String) eventnames.get(i));
+                                                                   }
+                                                                   if (i == 3) {
+                                                                       noteTitle4.setText((String) eventnames.get(i));
+                                                                   }
                                                                }
                                                                for (int i = 0; i < details.size(); i++) {
                                                                    if (i == 0) {
@@ -133,6 +162,12 @@ public class calendarActivity extends AppCompatActivity {
                                                                    }
                                                                    if (i == 1) {
                                                                        noteContent2.setText((String) details.get(i));
+                                                                   }
+                                                                   if (i == 2) {
+                                                                       noteContent3.setText((String) details.get(i));
+                                                                   }
+                                                                   if (i == 3) {
+                                                                       noteContent4.setText((String) details.get(i));
                                                                    }
                                                                }
                                                                 break;
