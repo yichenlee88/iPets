@@ -4,13 +4,18 @@
       <p>舊密碼：</p>
     </b-col>
     <b-col cols="8" sm="8" md="8">
-      <b-form-input class="InputClass" name="oldPassword" v-model="oldPassword" placeholder="舊密碼"></b-form-input>
+      <b-form-input
+        class="InputClass"
+        id="currentPassword"
+        v-model="currentPassword"
+        placeholder="舊密碼"
+      ></b-form-input>
     </b-col>
     <b-col class="coltitle" cols="4" sm="4" md="4">
       <p>新密碼：</p>
     </b-col>
     <b-col cols="8" sm="8" md="8">
-      <b-form-input class="InputClass" name="newPassword" v-model="password" placeholder="新密碼"></b-form-input>
+      <b-form-input class="InputClass" id="newPassword" v-model="newPassword" placeholder="新密碼"></b-form-input>
     </b-col>
     <b-col class="coltitle" cols="4" sm="4" md="4">
       <p>確認新密碼：</p>
@@ -18,69 +23,71 @@
     <b-col cols="8" sm="8" md="8">
       <b-form-input
         class="InputClass"
-        name="confirmNewPassword"
-        v-model="check"
+        id="confirmNewPassword"
+        v-model="againPassword"
         placeholder="確認新密碼"
       ></b-form-input>
     </b-col>
     <b-col cols="4" sm="4" md="4"></b-col>
     <b-col cols="8" sm="8" md="8">
-      <b-button class="ButtonClass" @click="updatePassword">送出</b-button>
+      <b-button
+        class="ButtonClass"
+        @click="checkPassword(againPassword, newPassword);updatePassword(currentPassword, newPassword)"
+      >送出</b-button>
     </b-col>
   </b-row>
 </template>
 
 <script>
-import { db } from "../db";
 import firebase from "firebase";
-// const fStore = db.firestore();
-const fAuth = db.auth();
 
 export default {
-  name: "password",
   data() {
     return {
       user: "",
-      oldPassword: "",
-      password: "",
-      check: ""
+      currentPassword: "",
+      firebasePassword: "",
+      newPassword: "",
+      againPassword: "",
+      check: false
     };
   },
-  mounted() {
-    this.getPassword();
-  },
   methods: {
-    updatePassword() {
-      if ((this.check = this.password)) {
-        var user = firebase.auth().currentUser;
-        var newPassword = fAuth.getASecureRandomPassword();
+    updatePassword(currentPassword, newPassword) {
+      var user = firebase.auth().currentUser;
+      const credential = firebase.auth.EmailAuthProvider.credential(
+        user.email,
+        currentPassword
+      );
+      if (this.check) {
         user
-          .updatePassword(newPassword)
+          .reauthenticateWithCredential(credential)
           .then(function() {
-            // Update successful.
+            user
+              .updatePassword(newPassword)
+              .then(function() {
+                console.log(newPassword);
+                // Update successful.
+              })
+              .catch(function(error) {
+                console.log(error);
+              });
           })
           .catch(function(error) {
-            alert(error);
+            console.log(error);
           });
+        this.currentPassword = "";
+        this.newPassword = "";
+        this.againPassword = "";
       }
     },
-    getPassword() {
-      var user = firebase.auth().currentUser;
-      this.password = user.password;
-      // let uid = firebase.auth().currentUser.uid;
-      // let snapshot = fStore
-      //   .collection("users")
-      //   .doc(uid)
-      //   .get();
-      // var newPassword = getASecureRandomPassword();
-      // console.log(newPassword);
-      // const events = [];
-      // snapshot.forEach(doc => {
-      //   let appData = doc.data();
-      //   appData.id = doc.id;
-      //   events.push(appData);
-      // });
-      // fStore.
+    checkPassword(againPassword, newPassword) {
+      if (againPassword === newPassword) {
+        this.check = true;
+      } else {
+        alert("兩次密碼不相等，請再次確認密碼");
+        this.check = false;
+      }
     }
   }
 };
