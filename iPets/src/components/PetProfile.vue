@@ -106,17 +106,19 @@
               <!-- 寵物照片 -->
               <b-img :src="pet.profile_picture" style="max-height:300px" class="center"></b-img>
               <!-- 開啟寵物照片-->
-              <input class="hidden" id="file1" type="file">
+              <input class="hidden" id="file1" @change="handleFileUpload" type="file">
               <label
                 name="petImage"
                 class="center btn btn-block mb-3"
                 for="file1"
                 style="max-width:300px;margin-top:10px"
-                @change="handleFileUpload"
                 accept="image/jpeg, image/png"
                 placeholder="選擇寵物相片"
                 :v-model="petImage"
-              ><b-icon icon="image"></b-icon>上傳照片</label>
+              >
+                <b-icon icon="image"></b-icon>上傳照片
+              </label>
+              <!-- <img id="previewImg" src="#"> -->
             </b-col>
             <b-col cols="7">
               <!-- 修改寵物姓名 -->
@@ -235,7 +237,7 @@ export default {
       modalShow: false,
       pet_profile_picture: null,
       date: new Date(),
-      petImage: null,
+      petImage: "",
       url: "",
       age: "",
       imageUrl: "",
@@ -310,6 +312,7 @@ export default {
   methods: {
     handleFileUpload(e) {
       this.petImage = e.target.files[0];
+      console.log(this.petImage);
     },
     createAlbum() {
       var storageRef = firebase
@@ -419,6 +422,8 @@ export default {
     },
     updatePetProfile() {
       let uid = firebase.auth().currentUser.uid;
+      this.getProfilePicture();
+      console.log(this.petImage);
       fStore
         .collection("users")
         .doc(uid)
@@ -430,15 +435,32 @@ export default {
           petHobby: this.pet.petHobby,
           petBirth: this.pet.petBirth,
           breed: this.pet.breed,
-          petNote: this.pet.petNote
-        })
-        .then(doc => {
-          alert("更新成功！");
+          petNote: this.pet.petNote,
+          profile_picture: this.petImage
         })
         .catch(function(err) {
-          alert(err);
+          console.log(err);
+        });
+    },
+    getProfilePicture() {
+      let uid = firebase.auth().currentUser.uid;
+      var storageRef = firebase.storage().ref(uid + "/" + this.petName);
+      storageRef
+        .listAll()
+        .then(res => {
+          res.items.forEach(itemRef => {
+            itemRef.getDownloadURL().then(url => {
+              this.petImage = url;
+            });
+          });
+        })
+        .catch(function(error) {
+          console.log(error);
         });
     }
+  },
+  mounted() {
+    this.getProfilePicture();
   },
   computed: {
     uid() {
