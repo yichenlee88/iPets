@@ -185,22 +185,21 @@
 
         <ImageView
             android:id="@+id/ic_gps"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
             android:layout_alignParentEnd="true"
             android:contentDescription="@string/img_gps"
             android:scaleType="centerCrop"
             android:src="@drawable/ic_gps"
             app:layout_constraintBottom_toTopOf="@+id/guideline9"
-            app:layout_constraintEnd_toStartOf="@+id/guideline84"
-            app:layout_constraintTop_toTopOf="@+id/guideline6" />
+            app:layout_constraintEnd_toStartOf="@+id/guideline84" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline9"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.25" />
+            app:layout_constraintGuide_percent="0.23" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline82"
@@ -214,7 +213,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            app:layout_constraintGuide_begin="399dp" />
+            app:layout_constraintGuide_percent="0.96" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline92"
@@ -236,6 +235,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
             android:text="@string/TextView_ntub"
+            android:visibility= "gone"
             app:layout_constraintEnd_toStartOf="@+id/guideline84"
             app:layout_constraintTop_toTopOf="@+id/bt_track" />
 
