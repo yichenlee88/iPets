@@ -26,8 +26,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity= "center"
-            android:visibility= "gone"
             tools:srcCompat="@tools:sample/avatars" />
+
+        <Button
+            android:id="@+id/button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Button" />
 
         <GridView
             android:id="@+id/photoView"
