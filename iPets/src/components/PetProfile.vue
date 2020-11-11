@@ -106,17 +106,17 @@
               <!-- 寵物照片 -->
               <b-img :src="pet.profile_picture" style="max-height:300px" class="center"></b-img>
               <!-- 開啟寵物照片-->
-              <b-button
-                type="file"
+              <input class="hidden" id="file1" type="file">
+              <label
                 name="petImage"
                 class="center btn btn-block mb-3"
-                variant="primary"
+                for="file1"
                 style="max-width:300px;margin-top:10px"
-                @click="handleFileUpload"
+                @change="handleFileUpload"
                 accept="image/jpeg, image/png"
                 placeholder="選擇寵物相片"
                 :v-model="petImage"
-              >上傳照片</b-button>
+              ><b-icon icon="image"></b-icon>上傳照片</label>
             </b-col>
             <b-col cols="7">
               <!-- 修改寵物姓名 -->
@@ -177,7 +177,7 @@
                 ></b-form-textarea>
               </b-form-group>
               <center>
-                <b-button class="ButtonClass" @click="updatePetProfile">送出</b-button>
+                <b-button class="ButtonClass" @click="updatePetProfile();createAlbum()">送出</b-button>
               </center>
             </b-col>
           </b-row>
@@ -430,8 +430,7 @@ export default {
           petHobby: this.pet.petHobby,
           petBirth: this.pet.petBirth,
           breed: this.pet.breed,
-          petNote: this.pet.petNote,
-          profile_picture: this.pet.profile_picture
+          petNote: this.pet.petNote
         })
         .then(doc => {
           alert("更新成功！");
@@ -479,6 +478,9 @@ export default {
 </script>
 
 <style scoped>
+.hidden {
+  visibility: hidden;
+}
 .PetProfile {
   padding-top: 20px;
 }
