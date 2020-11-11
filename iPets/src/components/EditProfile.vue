@@ -16,13 +16,19 @@
       <p>生日：</p>
     </b-col>
     <b-col cols="8" sm="8" md="8">
-      <b-form-input class="InputClass" name="birth" v-model="birth" placeholder="Birth"></b-form-input>
+      <b-form-input class="InputClass" type="date" name="birth" v-model="birth" placeholder="Birth"></b-form-input>
     </b-col>
     <b-col class="coltitle" cols="4" sm="4" md="4">
       <p>電子郵件：</p>
     </b-col>
     <b-col cols="8" sm="8" md="8">
       <b-form-input class="InputClass" name="email" v-model="email" placeholder="Email"></b-form-input>
+    </b-col>
+    <b-col class="coltitle" cols="4" sm="4" md="4">
+      <p>地址：</p>
+    </b-col>
+    <b-col cols="8" sm="8" md="8">
+      <b-form-input class="InputClass" name="address" v-model="address" placeholder="Address"></b-form-input>
     </b-col>
     <b-col class="coltitle" cols="4" sm="4" md="4">
       <p>電話：</p>
@@ -34,7 +40,13 @@
       <p>性別：</p>
     </b-col>
     <b-col cols="8" sm="8" md="8">
-      <b-form-input class="InputClass" name="gender" v-model="gender" placeholder="Gender"></b-form-input>
+      <b-form-select
+        class="InputClass"
+        name="gender"
+        v-model="gender"
+        placeholder="Gender"
+        :options="options"
+      ></b-form-select>
     </b-col>
     <b-col cols="4" sm="4" md="4"></b-col>
     <b-col cols="8" sm="8" md="8">
@@ -57,7 +69,14 @@ export default {
       birth: "",
       email: "",
       phone: "",
-      gender: ""
+      address: "",
+      gender: "",
+      options: [
+        { value: "null", text: "用戶性別" },
+        { value: "I prefer not to say", text: "不透漏" },
+        { value: "male", text: "男" },
+        { value: "female", text: "女" }
+      ]
     };
   },
   mounted() {
@@ -70,8 +89,15 @@ export default {
         .collection("users")
         .doc(uid)
         .get()
-        .then(function(doc) {
-          console.log(doc);
+        .then(doc => {
+          let user = doc.data();
+          this.name = user.name;
+          this.email = user.email;
+          this.userName = user.userName;
+          this.address = user.address;
+          this.phone = user.phone;
+          this.birth = user.userBirth;
+          this.gender = user.userGender;
         });
     },
     updateProfile() {
@@ -79,15 +105,16 @@ export default {
       fStore
         .collection("users")
         .doc(uid)
-        .add({
+        .update({
           name: this.name,
           email: this.email,
-          userName: this.userName,
           address: this.address,
+          userName: this.userName,
           userGender: this.gender,
           phone: this.phone,
           userBirth: this.birth
         });
+      alert("更新成功！");
     }
   }
 };
