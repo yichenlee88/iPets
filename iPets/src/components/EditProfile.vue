@@ -25,6 +25,12 @@
       <b-form-input class="InputClass" name="email" v-model="email" placeholder="Email"></b-form-input>
     </b-col>
     <b-col class="coltitle" cols="4" sm="4" md="4">
+      <p>地址：</p>
+    </b-col>
+    <b-col cols="8" sm="8" md="8">
+      <b-form-input class="InputClass" name="address" v-model="address" placeholder="Address"></b-form-input>
+    </b-col>
+    <b-col class="coltitle" cols="4" sm="4" md="4">
       <p>電話：</p>
     </b-col>
     <b-col cols="8" sm="8" md="8">
@@ -63,6 +69,7 @@ export default {
       birth: "",
       email: "",
       phone: "",
+      address: "",
       gender: "",
       options: [
         { value: "null", text: "用戶性別" },
@@ -87,6 +94,7 @@ export default {
           this.name = user.name;
           this.email = user.email;
           this.userName = user.userName;
+          this.address = user.address;
           this.phone = user.phone;
           this.birth = user.userBirth;
           this.gender = user.userGender;
@@ -100,6 +108,7 @@ export default {
         .update({
           name: this.name,
           email: this.email,
+          address: this.address,
           userName: this.userName,
           userGender: this.gender,
           phone: this.phone,
