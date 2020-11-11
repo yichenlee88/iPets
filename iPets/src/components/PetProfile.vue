@@ -98,176 +98,148 @@
             href="#"
             variant="primary"
             @click="modalShow = !modalShow"
-            >Edit profile</b-button
+            >編輯寵物資訊</b-button
           ></b-card-text
         >
       </b-card>
+
       <!-- 修改寵物資訊 -->
       <b-modal title="編輯寵物資訊" size="xl" v-model="modalShow">
         <div class="border-bottom">
+          <p>{{ petBirth }}</p>
           <b-row>
             <b-col>
+              <!-- 寵物照片 -->
               <b-img
-                src="../static/img/4.jpg"
+                :src="pet.profile_picture"
                 style="max-height:300px"
                 class="center"
               ></b-img>
+              <!-- 開啟寵物照片-->
               <b-button
+                type="file"
+                name="petImage"
                 class="center btn btn-block mb-3"
-                href="#"
                 variant="primary"
                 style="max-width:300px;margin-top:10px"
-                @click="modalShow = !modalShow"
+                :click="handleFileUpload"
+                accept="image/jpeg, image/png"
+                placeholder="選擇寵物相片"
+                :v-model="petImage"
                 >上傳照片</b-button
               >
             </b-col>
             <b-col>
-              <b-form-group
-                label-cols-sm="2"
-                label="寵物id："
-                label-for="petID"
-              >
-                <b-form-input id="petID"></b-form-input>
-              </b-form-group>
+              <!-- 修改寵物姓名 -->
               <b-form-group
                 label-cols-sm="2"
                 label="姓名："
                 label-for="petName"
               >
-                <b-form-input id="petName"></b-form-input>
+                <b-form-input
+                  v-model.trim="pet.petName"
+                  id="petName"
+                  style="margin-top:-5px"
+                ></b-form-input>
               </b-form-group>
-              <b-form-group label-cols-sm="2" label="性別：" label-for="gender">
-                <b-form-input id="gender"></b-form-input>
+              <!-- 修改寵物性別 -->
+              <b-form-group
+                label-cols-sm="2"
+                label="性別："
+                label-for="petGender"
+              >
+                <b-form-input
+                  v-model.trim="pet.petGender"
+                  id="petGender"
+                  style="margin-top:-5px"
+                ></b-form-input>
               </b-form-group>
-              <b-form-group label-cols-sm="2" label="生日：" label-for="birth">
-                <b-form-input id="birth"></b-form-input> </b-form-group
-              ><b-form-group label-cols-sm="2" label="年齡：" label-for="age">
-                <b-form-input id="age"></b-form-input> </b-form-group
-              ><b-form-group
+              <!-- 修改寵物生日 -->
+              <b-form-group
+                label-cols-sm="2"
+                label="生日："
+                label-for="petBirth"
+              >
+                <date-picker
+                  v-model="edit_profile_birth"
+                  name="petBirth"
+                  type="date"
+                  style="margin-top:-5px;"
+                ></date-picker>
+              </b-form-group>
+              <!-- 修改寵物喜好 -->
+              <b-form-group
+                label-cols-sm="2"
+                label="喜好："
+                label-for="petHobby"
+              >
+                <b-form-textarea
+                  v-model.trim="pet.petHobby"
+                  id="petHobby"
+                  style="margin-top:-10px"
+                ></b-form-textarea>
+              </b-form-group>
+              <!-- 修改寵物備註 -->
+              <b-form-group
                 label-cols-sm="2"
                 label="備註："
-                label-for="remarks"
+                label-for="petNote"
               >
-                <b-form-textarea id="remarks"></b-form-textarea>
+                <b-form-textarea
+                  v-model.trim="pet.petNote"
+                  id="petNote"
+                  style="margin-top:-10px"
+                ></b-form-textarea>
               </b-form-group>
             </b-col>
           </b-row>
         </div>
-        <h2 class="TimerTitle">時間計時器</h2>
+        <!-- <h2 class="TimerTitle">時間計時器</h2>
         <b-form-group>
           <b-form-checkbox-group
             v-model="timerSelected"
             :options="timers"
             switches
           ></b-form-checkbox-group>
-        </b-form-group>
+        </b-form-group> -->
       </b-modal>
 
       <b-card style="max-height:365px">
         <b-card-body :title="pet.petName">
           <b-card-text>性別：{{ pet.petGender }}</b-card-text>
           <b-card-text>生日：{{ pet.petBirth }}</b-card-text>
-          <b-card-text>年齡：{{ pet.age }}</b-card-text>
+          <b-card-text>年齡：{{ calculateAge(pet.petBirth) }}</b-card-text>
           <b-card-text>品種：{{ pet.breed }}</b-card-text>
           <b-card-text>喜好：{{ pet.petHobby }}</b-card-text>
           <b-card-text>備註：{{ pet.petNote }}</b-card-text>
         </b-card-body>
       </b-card>
     </b-card-group>
-
-    <!-- <b-card
-      v-if="show"
-      v-bind:img-src="pet.image"
-      class="mb-3"
-      img-left
-      img-width="250"
-    >
-      <b-card-body :title="pet.name">
-        <b-card-text v-if="pet.gender">
-          沒看過帥哥膩
-        </b-card-text>
-        <b-card-text v-else>
-          人家是女森
-        </b-card-text>
-        <b-card-text>
-          {{ pet.breed }}
-        </b-card-text>
-        <i class="fas fa-cog"></i>
-      </b-card-body>
-    </b-card> -->
     <!-- End -- 寵物簡介 -->
 
-    <!-- Start -- 進行中 -->
-    <b-list-group v-if="show">
-      <h1>進行中</h1>
+    <!-- Start -- 當月事件 -->
+    <b-list-group>
       <b-list-group-item
-        v-for="info in pet_info"
-        :key="info.event_name"
-        class="d-flex align-items-center"
+        v-for="(event, idx) in month_calendar"
+        :key="idx"
+        href="#"
+        disabled
+        class="flex-column align-items-start"
       >
-        <input class="mr-3" type="checkbox" />
-        <div class="overview mr-auto">
-          <span class="title mb-0">{{ info.event_name }}</span>
-          <div>
-            <b-badge
-              v-if="badge_today(info.next_time)"
-              variant="primary"
-              class="mr-1"
-              >今日</b-badge
-            >
-            <b-badge
-              v-if="badge_overdue(info.next_time)"
-              variant="danger"
-              class="mr-1"
-              >逾期</b-badge
-            >
-            <i class="far fa-calendar-alt"></i>
-            <span class="date mb-0">{{
-              convert_timestamp(info.next_time)
-            }}</span>
-          </div>
+        <div class="d-flex w-100 justify-content-between">
+          <h5 class="mb-1">{{ event.name }}</h5>
+          <small>3 days ago</small>
         </div>
-        <button
-          type="button"
-          class="close"
-          @click="$bvModal.show(`${info.event_name}`)"
-        >
-          <!-- <i class="arrow right"></i> -->
-          <i class="fas fa-cog"></i>
-        </button>
-        <b-modal
-          :id="`${info.event_name}`"
-          centered
-          title="編輯頁面"
-          ok-title="保存"
-          cancel-title="取消"
-          @ok="handleOk($event, info.event_name)"
-        >
-          <template v-slot:modal-chancel>取消</template>
-          <b-form>
-            <b-form-group id="group-frequence" label="重複頻率" label-cols="3">
-              <b-form-input v-model="info.period"></b-form-input>
-              <b-form-select
-                v-model="info.periodUnit"
-                :options="periodUnitOptions"
-                value-field="item"
-                text-field="name"
-              ></b-form-select>
-            </b-form-group>
-          </b-form>
-        </b-modal>
+        <small>{{ event.start }} ~ {{ event.end }}</small>
       </b-list-group-item>
     </b-list-group>
-    <!-- End -- 進行中 -->
+    <!-- End -- 當月事件 -->
   </b-container>
 </template>
 
 <script>
 // Import required dependencies
 import "bootstrap/dist/css/bootstrap.css";
-
-// Import this component
-// import datePicker from "vue-bootstrap-datetimepicker";
 
 // Import date picker css
 import "pc-bootstrap4-datetimepicker/build/css/bootstrap-datetimepicker.css";
@@ -285,6 +257,7 @@ export default {
       date: new Date(),
       petImage: null,
       url: "",
+      age: "",
       imageUrl: "",
       petName: "",
       file: [],
@@ -352,45 +325,11 @@ export default {
         { value: "牛頭梗", text: "牛頭梗" },
         { value: "日本柴犬", text: "日本柴犬" }
       ]
-      // timerSelected: [],
-      // timers: [
-      //   { text: "洗澡", value: "bath" },
-      //   { text: "修剪毛髮", value: "trimming" },
-      //   { text: "體內驅蟲", value: "anthelmintic" },
-      //   { text: "體外驅蟲", value: "repellent" },
-      //   { text: "疫苗接種", value: "injection" },
-      //   { text: "生理期", value: "menstrual " }
-      // ],
-      // options: {
-      //   format: "DD/MM/YYYY",
-      //   useCurrent: false
-      // },
-      // gender_options: [
-      //   { value: null, text: "選擇性別", disabled: true },
-      //   { value: true, text: "男孩" },
-      //   { value: false, text: "女孩" }
-      // ],
-      // form: {
-      //   name: null,
-      //   breed: null,
-      //   gender: null,
-      //   image:
-      //     "http://icons.iconarchive.com/icons/google/noto-emoji-animals-nature/1024/22214-dog-face-icon.png"
-      // },
-      // periodUnitOptions: [
-      //   { item: "day", name: "天" },
-      //   { item: "week", name: "週" },
-      //   { item: "month", name: "個月" }
-      // ]
     };
-  },
-  components: {
-    // datePicker
   },
   methods: {
     handleFileUpload(e) {
       this.petImage = e.target.files[0];
-      console.log(this.petImage);
     },
     createAlbum() {
       var storageRef = firebase
@@ -400,14 +339,13 @@ export default {
         console.log("Uploaded files!");
       });
     },
-    write_pet_profile(url) {
-      var docRef = fStore
+    async save_pet_profile(file) {
+      // reference:https://codelabs.developers.google.com/codelabs/firebase-web/#9
+      await fStore
         .collection("users")
         .doc(this.uid)
         .collection("pets")
-        .doc();
-      docRef
-        .set({
+        .add({
           petName: this.petName,
           petGender: this.petGender,
           petBirth:
@@ -424,10 +362,10 @@ export default {
           petNote: this.petNote,
           uid: this.uid,
           timestamp: new Date(),
-          profile_picture: this.url
+          profile_picture: ""
         })
-        .then(() => {
-          var infoRef = docRef.collection("info");
+        .then(function(ref) {
+          var infoRef = ref.collection("info");
           var infoList = [
             new Info("洗澡", 0, "day"),
             new Info("除蟲", 2, "week"),
@@ -441,40 +379,29 @@ export default {
               done: false
             });
           });
-          this.$router.go({ path: this.$router.path });
+          return firebase
+            .storage()
+            .ref(firebase.auth().currentUser.uid + "/" + ref.id)
+            .put(file)
+            .then(function(fileSnapshot) {
+              return fileSnapshot.ref.getDownloadURL().then(function(url) {
+                return ref.update({
+                  profile_picture: url
+                });
+              });
+            });
+        })
+        .catch(function(error) {
+          console.error(
+            "There was an error uploading a file to Cloud Storage:",
+            error
+          );
         });
+      this.$router.go({ path: this.$router.path });
     },
     onSubmit(e) {
       e.preventDefault();
-
-      var uploadTask = firebase
-        .storage()
-        .ref(this.uid + "/" + this.petName)
-        .put(this.petImage);
-
-      uploadTask.then(function(snapshot) {
-        snapshot.ref.getDownloadURL().then(function(url) {
-          console.log(url);
-        });
-      });
-
-      // uploadTask.on(
-      //   firebase.storage.TaskEvent.STATE_CHANGED,
-      //   function(snapshot) {
-      //     var progress =
-      //       (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-      //     console.log("Upload is " + progress + "% done");
-      //   },
-      //   function(error) {
-      //     console.log(error);
-      //   },
-      //   function() {
-      //     uploadTask.snapshot.ref.getDownloadURL().then(function(downloadURL) {
-      //       console.log("File available at", downloadURL);
-      //       this.write_pet_profile(downloadURL);
-      //     });
-      //   }
-      // );
+      this.save_pet_profile(this.petImage);
     },
     convert_timestamp(unixTimestamp) {
       var date = unixTimestamp.toDate();
@@ -513,37 +440,12 @@ export default {
       //   this.period_form.period,
       //   this.period_form.selected
       // );
+    },
+    calculateAge(birth) {
+      var ageDiff = new Date(Date.now() - new Date(birth).getTime());
+      return Math.abs(ageDiff.getUTCFullYear() - 1970);
     }
-    // convert_storage_url(url) {
-    //   return require(url);
-    // }
   },
-  // mounted() {
-  //   let uid = firebase.auth().currentUser.uid;
-  //   console.log(uid);
-  //   // let uid = this.uid;
-  //   // let imageUrl = this.url;
-  //   // var imageRef = firebase
-  //   //   .storage()
-  //   //   .ref()
-  //   //   .child(this.uid + "/" + this.petName);
-  //   // imageRef.getDownloadURL().then(function(url) {
-  //   //   imageUrl.push(url);
-  //   // });
-  //   var storageRef = firebase.storage();
-  //   storageRef
-  //     .ref(uid + "/" + "毛毛")
-  //     .getDownloadURL()
-  //     .then(function(url) {
-  //       console.log(url);
-  //       console.log(this.petGenderOptions);
-  //       // this.url = url;
-  //     })
-  //     .catch(function(error) {
-  //       // Handle any errors
-  //       console.log(error);
-  //     });
-  // },
   computed: {
     uid() {
       return this.$store.state.uid;
@@ -557,14 +459,24 @@ export default {
     pet_info() {
       return this.$store.state.pet_info;
     },
-    // pet_profile_picture() {
-    //   return this.$store.state.pet_profile_picture;
-    // },
+    month_calendar() {
+      return this.$store.state.month_calendar;
+    },
     show() {
       if (this.$store.state.pet === null) {
         return false;
       } else {
         return true;
+      }
+    },
+    edit_profile_birth: {
+      // support string format, not Date object
+      get() {
+        return new Date(this.pet.petBirth);
+      },
+      set(newDate) {
+        newDate.setDate(newDate.getDate() + 1);
+        this.pet.petBirth = newDate.toISOString().slice(0, 10);
       }
     }
   }
