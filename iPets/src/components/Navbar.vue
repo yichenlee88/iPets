@@ -6,13 +6,9 @@
 
       <b-collapse id="nav-collapse" is-nav>
         <b-navbar-nav>
-          <b-nav-item href="#/about" v-if="!isSignedIn">關於我們</b-nav-item>
-          <b-nav-item href="#/dogScience" v-if="!isSignedIn"
-            >狗狗科普</b-nav-item
-          >
-          <b-nav-item href="#/dogInfo" v-if="!isSignedIn"
-            >人與狗的關係</b-nav-item
-          >
+          <b-nav-item href="#/about">關於我們</b-nav-item>
+          <b-nav-item href="#/dogScience">狗狗科普</b-nav-item>
+          <b-nav-item href="#/dogInfo">人與狗的關係</b-nav-item>
           <b-nav-item href="#/contact" v-if="!isSignedIn">聯繫我們</b-nav-item>
           <b-nav-item href="#/calendar" v-if="isSignedIn">行事曆</b-nav-item>
           <b-nav-item href="#/album" v-if="isSignedIn">相簿</b-nav-item>
