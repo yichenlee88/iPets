@@ -30,7 +30,7 @@ export default {
     };
   },
   mounted() {
-    this.getData();
+    this.getContactData();
   },
   methods: {
     getContactData() {
