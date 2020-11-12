@@ -50,7 +50,8 @@ let router = new Router({
       name: "about",
       component: about,
       meta: {
-        requiresGuest: true
+        requiresGuest: true,
+        requiresAuth: true
       }
     },
     {
@@ -58,7 +59,8 @@ let router = new Router({
       name: "dogInfo",
       component: dogInfo,
       meta: {
-        requiresGuest: true
+        requiresGuest: true,
+        requiresAuth: true
       }
     },
     {
@@ -122,7 +124,8 @@ let router = new Router({
       name: "dogScience",
       component: dogScience,
       meta: {
-        requiresGuest: true
+        requiresGuest: true,
+        requiresAuth: true
       }
     },
     {
