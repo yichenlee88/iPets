@@ -21,7 +21,7 @@ import album from "@/components/album";
 import albumView from "@/components/albumView";
 import setting from "@/components/setting";
 import editProfile from "@/components/editProfile";
-import editPetProfile from "@/components/editPetProfile";
+import addPetProfile from "@/components/addPetProfile";
 import password from "@/components/password";
 import mail from "@/components/mail";
 import loginActivity from "@/components/loginActivity";
@@ -176,8 +176,8 @@ let router = new Router({
           component: editProfile
         },
         {
-          path: "editPetProfile",
-          component: editPetProfile
+          path: "addPetProfile",
+          component: addPetProfile
         },
         {
           path: "password",

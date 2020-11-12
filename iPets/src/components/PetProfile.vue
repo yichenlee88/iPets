@@ -86,6 +86,7 @@
 
     <!-- Start -- 寵物簡介 -->
     <b-card-group class="PetProfile" deck v-if="show">
+      <!-- Start -- 修改寵物資訊 -->
       <b-card
         :img-src="pet.profile_picture"
         class="mb-3"
@@ -97,113 +98,113 @@
             class="btn btn-block mb-3"
             href="#"
             variant="primary"
-            @click="modalShow = !modalShow"
+            v-b-modal.modal-prevent-closing
             >編輯寵物資訊</b-button
-          ></b-card-text
-        >
+          >
+          <b-modal
+            title="編輯寵物資訊"
+            size="xl"
+            id="modal-prevent-closing"
+            ref="modal"
+            @ok="edit_pet_ok"
+          >
+            <form ref="form" @submit.stop.prevent="handleSubmit">
+              <div class="border-bottom">
+                <b-row>
+                  <b-col>
+                    <!-- 寵物照片 -->
+                    <b-img
+                      :src="pet.profile_picture"
+                      style="max-height:300px"
+                      class="center"
+                    ></b-img>
+                    <!-- 開啟寵物照片-->
+                    <b-button
+                      type="file"
+                      name="petImage"
+                      class="center btn btn-block mb-3"
+                      variant="primary"
+                      style="max-width:300px;margin-top:10px"
+                      :click="handleFileUpload"
+                      accept="image/jpeg, image/png"
+                      placeholder="選擇寵物相片"
+                      :v-model="petImage"
+                      >上傳照片</b-button
+                    >
+                  </b-col>
+                  <b-col>
+                    <!-- 修改寵物姓名 -->
+                    <b-form-group
+                      label-cols-sm="2"
+                      label="姓名："
+                      label-for="petName"
+                    >
+                      <b-form-input
+                        v-model.trim="pet.petName"
+                        id="petName"
+                        style="margin-top:-5px"
+                      ></b-form-input>
+                    </b-form-group>
+                    <!-- 修改寵物性別 -->
+                    <b-form-group
+                      label-cols-sm="2"
+                      label="性別："
+                      label-for="petGender"
+                    >
+                      <b-form-select
+                        v-model="pet.petGender"
+                        :options="petGenderOptions"
+                        id="petGender"
+                        style="margin-top:-5px"
+                      ></b-form-select>
+                    </b-form-group>
+                    <!-- 修改寵物生日 -->
+                    <b-form-group
+                      label-cols-sm="2"
+                      label="生日："
+                      label-for="petBirth"
+                    >
+                      <date-picker
+                        v-model="edit_profile_birth"
+                        name="petBirth"
+                        type="date"
+                        style="margin-top:-5px;"
+                      ></date-picker>
+                    </b-form-group>
+                    <!-- 修改寵物喜好 -->
+                    <b-form-group
+                      label-cols-sm="2"
+                      label="喜好："
+                      label-for="petHobby"
+                    >
+                      <b-form-textarea
+                        v-model.trim="pet.petHobby"
+                        id="petHobby"
+                        style="margin-top:-10px"
+                      ></b-form-textarea>
+                    </b-form-group>
+                    <!-- 修改寵物備註 -->
+                    <b-form-group
+                      label-cols-sm="2"
+                      label="備註："
+                      label-for="petNote"
+                    >
+                      <b-form-textarea
+                        v-model.trim="pet.petNote"
+                        id="petNote"
+                        style="margin-top:-10px"
+                      ></b-form-textarea>
+                    </b-form-group>
+                  </b-col>
+                </b-row>
+              </div>
+            </form>
+          </b-modal>
+        </b-card-text>
       </b-card>
+      <!-- End -- 修改寵物資訊 -->
 
-      <!-- 修改寵物資訊 -->
-      <b-modal title="編輯寵物資訊" size="xl" v-model="modalShow">
-        <div class="border-bottom">
-          <p>{{ petBirth }}</p>
-          <b-row>
-            <b-col>
-              <!-- 寵物照片 -->
-              <b-img
-                :src="pet.profile_picture"
-                style="max-height:300px"
-                class="center"
-              ></b-img>
-              <!-- 開啟寵物照片-->
-              <b-button
-                type="file"
-                name="petImage"
-                class="center btn btn-block mb-3"
-                variant="primary"
-                style="max-width:300px;margin-top:10px"
-                :click="handleFileUpload"
-                accept="image/jpeg, image/png"
-                placeholder="選擇寵物相片"
-                :v-model="petImage"
-                >上傳照片</b-button
-              >
-            </b-col>
-            <b-col>
-              <!-- 修改寵物姓名 -->
-              <b-form-group
-                label-cols-sm="2"
-                label="姓名："
-                label-for="petName"
-              >
-                <b-form-input
-                  v-model.trim="pet.petName"
-                  id="petName"
-                  style="margin-top:-5px"
-                ></b-form-input>
-              </b-form-group>
-              <!-- 修改寵物性別 -->
-              <b-form-group
-                label-cols-sm="2"
-                label="性別："
-                label-for="petGender"
-              >
-                <b-form-input
-                  v-model.trim="pet.petGender"
-                  id="petGender"
-                  style="margin-top:-5px"
-                ></b-form-input>
-              </b-form-group>
-              <!-- 修改寵物生日 -->
-              <b-form-group
-                label-cols-sm="2"
-                label="生日："
-                label-for="petBirth"
-              >
-                <date-picker
-                  v-model="edit_profile_birth"
-                  name="petBirth"
-                  type="date"
-                  style="margin-top:-5px;"
-                ></date-picker>
-              </b-form-group>
-              <!-- 修改寵物喜好 -->
-              <b-form-group
-                label-cols-sm="2"
-                label="喜好："
-                label-for="petHobby"
-              >
-                <b-form-textarea
-                  v-model.trim="pet.petHobby"
-                  id="petHobby"
-                  style="margin-top:-10px"
-                ></b-form-textarea>
-              </b-form-group>
-              <!-- 修改寵物備註 -->
-              <b-form-group
-                label-cols-sm="2"
-                label="備註："
-                label-for="petNote"
-              >
-                <b-form-textarea
-                  v-model.trim="pet.petNote"
-                  id="petNote"
-                  style="margin-top:-10px"
-                ></b-form-textarea>
-              </b-form-group>
-            </b-col>
-          </b-row>
-        </div>
-        <!-- <h2 class="TimerTitle">時間計時器</h2>
-        <b-form-group>
-          <b-form-checkbox-group
-            v-model="timerSelected"
-            :options="timers"
-            switches
-          ></b-form-checkbox-group>
-        </b-form-group> -->
-      </b-modal>
-
+      <!-- Start -- 寵物資訊 -->
       <b-card style="max-height:365px">
         <b-card-body :title="pet.petName">
           <b-card-text>性別：{{ pet.petGender }}</b-card-text>
@@ -212,8 +213,12 @@
           <b-card-text>品種：{{ pet.breed }}</b-card-text>
           <b-card-text>喜好：{{ pet.petHobby }}</b-card-text>
           <b-card-text>備註：{{ pet.petNote }}</b-card-text>
+          <b-card-text class="small text-muted"
+            >最後更新 {{ convert_timestamp(pet.timestamp) }}</b-card-text
+          >
         </b-card-body>
       </b-card>
+      <!-- End -- 寵物資訊 -->
     </b-card-group>
     <!-- End -- 寵物簡介 -->
 
@@ -244,7 +249,6 @@ import "bootstrap/dist/css/bootstrap.css";
 // Import date picker css
 import "pc-bootstrap4-datetimepicker/build/css/bootstrap-datetimepicker.css";
 import firebase from "firebase";
-import { Info } from "../firebase/pet";
 import { db } from "../db";
 const fStore = db.firestore();
 
@@ -252,7 +256,6 @@ export default {
   name: "petProfile",
   data() {
     return {
-      modalShow: false,
       pet_profile_picture: null,
       date: new Date(),
       petImage: null,
@@ -328,6 +331,26 @@ export default {
     };
   },
   methods: {
+    edit_pet_ok(e) {
+      e.preventDefault();
+      fStore
+        .collection("users")
+        .doc(this.uid)
+        .collection("pets")
+        .doc(this.pet_doc_id)
+        .update({
+          petName: this.pet.petName,
+          petGender: this.pet.petGender,
+          petBirth: this.pet.petBirth,
+          petHobby: this.pet.petHobby,
+          petNote: this.pet.petNote,
+          timestamp: new Date()
+        });
+      this.$nextTick(() => {
+        this.$bvModal.hide("modal-prevent-closing");
+      });
+      this.$router.go({ path: this.$router.path });
+    },
     handleFileUpload(e) {
       this.petImage = e.target.files[0];
     },
@@ -365,20 +388,6 @@ export default {
           profile_picture: ""
         })
         .then(function(ref) {
-          var infoRef = ref.collection("info");
-          var infoList = [
-            new Info("洗澡", 0, "day"),
-            new Info("除蟲", 2, "week"),
-            new Info("指甲", 1, "month")
-          ];
-          infoList.forEach(function(item) {
-            infoRef.doc(item.eventName).set({
-              next_time: item.getNext(),
-              period: item.period,
-              periodUnit: item.periodUnit,
-              done: false
-            });
-          });
           return firebase
             .storage()
             .ref(firebase.auth().currentUser.uid + "/" + ref.id)
@@ -408,9 +417,16 @@ export default {
       var year = date.getFullYear();
       var month = date.getMonth() + 1;
       var day = date.getDate();
+      var hour = date.getHours();
+      var min = date.getMinutes();
+      var sec = date.getSeconds();
       if (month < 10) month = "0" + month;
       if (day < 10) day = "0" + day;
-      var formattedTime = [year, month, day].join("-");
+      if (hour < 10) hour = "0" + hour;
+      if (min < 10) min = "0" + min;
+      if (sec < 10) sec = "0" + sec;
+      var formattedTime =
+        [year, month, day].join("-") + " " + hour + ":" + min + ":" + sec;
       return formattedTime;
     },
     badge_today(unixTimestamp) {
@@ -435,11 +451,6 @@ export default {
     },
     handleOk(bvModalEvt, eventName) {
       bvModalEvt.preventDefault();
-      // var bathInfo = new Info(
-      //   eventName,
-      //   this.period_form.period,
-      //   this.period_form.selected
-      // );
     },
     calculateAge(birth) {
       var ageDiff = new Date(Date.now() - new Date(birth).getTime());

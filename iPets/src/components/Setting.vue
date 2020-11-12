@@ -10,8 +10,8 @@
               ></b-list-group-item
             >
             <b-list-group-item
-              ><router-link to="/setting/editPetProfile"
-                >編輯寵物資訊</router-link
+              ><router-link to="/setting/addPetProfile"
+                >新增毛小孩</router-link
               ></b-list-group-item
             >
             <b-list-group-item
