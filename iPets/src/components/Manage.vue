@@ -5,7 +5,7 @@
         <b-row class="justify-content-md-center">
           <b-col cols="6" sm="6" md="6">
             <p>驗證碼：</p>
-            <b-form-input class="InputClass" name="password" v-model="password"></b-form-input>
+            <b-form-input class="InputClassType" name="password" v-model="password"></b-form-input>
             <b-button class="ButtonClass" @click="checkPassword">送出</b-button>
           </b-col>
         </b-row>
@@ -59,7 +59,7 @@ export default {
   padding: 16px 0;
   text-align: right;
 }
-.InputClass {
+.InputClassType {
   max-width: 50%;
   border-radius: 40px;
 }
