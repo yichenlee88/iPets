@@ -238,6 +238,7 @@ export default {
       pet_profile_picture: null,
       date: new Date(),
       petImage: "",
+      getUrl: [],
       url: "",
       age: "",
       imageUrl: "",
@@ -436,7 +437,11 @@ export default {
           petBirth: this.pet.petBirth,
           breed: this.pet.breed,
           petNote: this.pet.petNote,
-          profile_picture: this.petImage
+          profile_picture: this.getUrl[0]
+        })
+        .then(res => {
+          alert("更新成功！");
+          this.$router.go({ path: this.$router.path });
         })
         .catch(function(err) {
           console.log(err);
@@ -450,7 +455,8 @@ export default {
         .then(res => {
           res.items.forEach(itemRef => {
             itemRef.getDownloadURL().then(url => {
-              this.petImage = url;
+              this.getUrl.push(url);
+              console.log(this.getUrl[0]);
             });
           });
         })
@@ -458,9 +464,6 @@ export default {
           console.log(error);
         });
     }
-  },
-  mounted() {
-    this.getProfilePicture();
   },
   computed: {
     uid() {
