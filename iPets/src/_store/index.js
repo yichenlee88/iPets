@@ -11,7 +11,8 @@ const store = new Vuex.Store({
     photoURL: null,
     pet: null,
     pet_doc_id: null,
-    pet_info: null
+    pet_info: null,
+    month_calendar: null
   },
   mutations: {
     updateUserProfile(state, payload) {
@@ -26,6 +27,9 @@ const store = new Vuex.Store({
     },
     updateInfo(state, payload) {
       state.pet_info = payload.pet_info;
+    },
+    updateMonthCalendar(state, payload) {
+      state.month_calendar = payload.month_calendar;
     }
   }
 });
