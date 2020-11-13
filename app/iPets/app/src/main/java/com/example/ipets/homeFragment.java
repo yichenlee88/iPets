@@ -260,15 +260,16 @@ public class homeFragment extends Fragment {
                                         }
                                         Calendar calendar = Calendar.getInstance();
                                         calendar.setTime(date);
-                                        calendar.set(Calendar.HOUR_OF_DAY, 03);
-                                        calendar.set(Calendar.MINUTE, 17);
+                                        calendar.set(Calendar.HOUR_OF_DAY, 00);
+                                        calendar.set(Calendar.MINUTE, 00);
                                         calendar.set(Calendar.SECOND, 00);
                                         calendar.set(Calendar.MILLISECOND, 00);
                                         long settime = calendar.getTimeInMillis();
+                                        int id = calendar.get(Calendar.MONTH)+calendar.get(Calendar.DAY_OF_MONTH);
                                         Log.i("LOVE", String.valueOf(settime));
                                         Intent intent = new Intent(getActivity(), alarmReceiver.class);
                                         //        PendingIntent.getBroadcast調用廣播
-                                        PendingIntent pendingIntent = PendingIntent.getBroadcast(getActivity(), 999, intent, 0);
+                                        PendingIntent pendingIntent = PendingIntent.getBroadcast(getActivity(), id, intent, 0);
                                         //        獲得AlarmManager物件
                                         AlarmManager alarmManager = (AlarmManager) getActivity().getSystemService(getContext().ALARM_SERVICE);
                                         //        設定單次提醒
