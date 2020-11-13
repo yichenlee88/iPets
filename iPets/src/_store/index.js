@@ -11,6 +11,7 @@ const store = new Vuex.Store({
     photoURL: null,
     pet: null,
     pet_doc_id: null,
+    pets_list: null,
     pet_info: null,
     month_calendar: null
   },
@@ -24,6 +25,9 @@ const store = new Vuex.Store({
     updatePetInfo(state, payload) {
       state.pet = payload.pet;
       state.pet_doc_id = payload.pet_doc_id;
+    },
+    getUserPetsList(state, payload) {
+      state.pets_list = payload.pets_list;
     },
     updateInfo(state, payload) {
       state.pet_info = payload.pet_info;

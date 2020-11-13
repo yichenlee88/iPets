@@ -17,6 +17,23 @@ async function updateUserProfile(store, uid) {
     });
 }
 
+async function getUserPetsList(store, uid) {
+  const petsList = [];
+  await fStore
+    .collection("users")
+    .doc(uid)
+    .collection("pets")
+    .get()
+    .then(function(snapshot) {
+      snapshot.forEach(function(doc) {
+        petsList.push({ id: doc.id, name: doc.data().petName });
+      });
+      store.commit("getUserPetsList", {
+        pets_list: petsList
+      });
+    });
+}
+
 async function updateMonthCalendar(store, uid) {
   await fStore
     .collection("users")
@@ -59,4 +76,4 @@ async function updateMonthCalendar(store, uid) {
     });
 }
 
-export { updateUserProfile, updateMonthCalendar };
+export { updateUserProfile, getUserPetsList, updateMonthCalendar };
