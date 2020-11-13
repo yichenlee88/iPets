@@ -247,13 +247,6 @@ public class calendarActivity extends AppCompatActivity {
         startActivityForResult(intent, ADD_NOTE);
     }
 
-    private void previewNote(EventDay eventDay) {
-        Calendar clickedDayCalendar = eventDay.getCalendar();
-        Date date = clickedDayCalendar.getTime();
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-        String dateStr = sdf.format(date);
-    }
-
     protected void onStart() {
         super.onStart();
 
