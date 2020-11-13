@@ -4,12 +4,22 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.app.ActivityCompat;
 
+import android.Manifest;
+import android.content.ContentResolver;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
+import android.util.Log;
 import android.view.View;
+import android.webkit.MimeTypeMap;
 import android.widget.Button;
 import android.widget.GridView;
 import android.widget.ImageView;
@@ -27,18 +37,25 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 public class photoGalleryActivity extends AppCompatActivity {
 
 
+    private static final String TAG = "photoGalleryActivity";
     FloatingActionButton btnChoose; //上傳按鈕
     private GridView mGridView; //顯示手機里的所有圖片的列表控件
-    private ImageView imageView;
-    private Uri ImageUri;
+    private ImageView imageView,imageView2;
+    private Uri ImageUri,ImagesUri;
     Button btnUpload;
     TextView alert;
+
+    private List<String> thumbs;  //存放縮圖的id
+    private List<String> imagePaths;  //存放圖片的路徑
+    private com.example.ipets.imageAdapter imageAdapter;  //用來顯示縮圖
 
     private int upload_count = 0;
     private final int PICK_IMAGE_REQUEST = 71;
@@ -69,16 +86,27 @@ public class photoGalleryActivity extends AppCompatActivity {
         btnChoose = findViewById(R.id.addPhoto);
         btnUpload = findViewById(R.id.btnupload);
         imageView = findViewById(R.id.photoGalleryImage1);
+        imageView2 = findViewById(R.id.photoGalleryImage2);
         alert = findViewById(R.id.alert);
-
 
         btnChoose.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (ActivityCompat.checkSelfPermission(photoGalleryActivity.this,
+                        Manifest.permission.READ_EXTERNAL_STORAGE)
+                        != PackageManager.PERMISSION_GRANTED) {
+
+                    ActivityCompat.requestPermissions(photoGalleryActivity.this,
+                            new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},
+                            100);
+
+                    return;
+                }
+                //使用Intent啟動文件供應程式
                 Intent addPhotoIntent = new Intent(Intent.ACTION_GET_CONTENT);
                 addPhotoIntent.setType("image/*");
-                addPhotoIntent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE,true);
-                startActivityForResult(addPhotoIntent,PICK_IMAGE_REQUEST);
+                addPhotoIntent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
+                startActivityForResult(addPhotoIntent, PICK_IMAGE_REQUEST);
             }
         });
 
@@ -89,7 +117,34 @@ public class photoGalleryActivity extends AppCompatActivity {
             }
         });
 
+
+        mGridView = findViewById(R.id.photoView);
+        thumbs = new ArrayList<String>(); //存放縮圖的id
+        imagePaths = new ArrayList<String>();//存放圖片的路徑
+
+        imageAdapter = new imageAdapter(photoGalleryActivity.this, thumbs);
+        mGridView.setAdapter(imageAdapter);
+        imageAdapter.notifyDataSetChanged();
+
+
+        imageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // TODO Auto-generated method stub
+                imageView.setVisibility(View.GONE);
+                mGridView.setVisibility(View.VISIBLE);
+            }
+        });
+        imageView.setVisibility(View.GONE);
+
     }
+
+    private String getFileExtension(Uri uri) {
+        ContentResolver cR = getContentResolver();
+        MimeTypeMap mime = MimeTypeMap.getSingleton();
+        return mime.getExtensionFromMimeType(cR.getType(uri));
+    }
+
 
     private void uploadImage() {
         StorageReference ImageFolder = storageReference.child(userUID + '/' + "Gallery/");
@@ -128,27 +183,55 @@ public class photoGalleryActivity extends AppCompatActivity {
     }
 
     @Override
+    //onActivityResult()處理回傳結果
     protected void onActivityResult ( int requestCode, int resultCode, @Nullable Intent data){
         super.onActivityResult(requestCode, resultCode, data);
-            if (requestCode == PICK_IMAGE_REQUEST) {
-                if (resultCode == RESULT_OK) {
-                    if (data.getClipData() != null) {
-                        int countClipData = data.getClipData().getItemCount();
-                        int currentImageSelect = 0;
-                        while (currentImageSelect < countClipData) {
-                            ImageUri = data.getClipData().getItemAt(currentImageSelect).getUri();
-                            ImageList.add(ImageUri);
-                            currentImageSelect = currentImageSelect + 1;
-                        }
-                        alert.setText("You have Selected" + ImageList.size() + "Images");
+            if (requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK) {
 
-                    } else {
-                        Toast.makeText(this, "Please Select Mutiple Image", Toast.LENGTH_SHORT).show();
+/*
+                //選一個得先不理它，上船不了也顯示不了
+                if (data.getData()!=null) {      // select one image //getData()處理選取1個檔案
+                    ImageUri  = data.getData();
+                    try {
+                        Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(),ImageUri);
+                        imageView.setImageBitmap(bitmap);
+                        Log.i(TAG, "Uri: " + ImageUri.toString());
+                    } catch (IOException e) {
+                        e.printStackTrace();
                     }
                 }
+
+ */
+
+                if (data.getClipData() != null) { // select 多個 image //getClipData()處理選取多個檔案
+                    int countClipData = data.getClipData().getItemCount();
+                    int currentImageSelect = 0;
+
+                    while (currentImageSelect < countClipData) {
+                        ImagesUri = data.getClipData().getItemAt(currentImageSelect).getUri();
+                        ImageList.add(ImagesUri);
+                        imageView2.setImageURI(ImagesUri);
+
+                        currentImageSelect = currentImageSelect + 1;
+                        Log.i(TAG, "Uri: " + ImagesUri .toString());
+                    }
+                    alert.setText("You have Selected" + ImageList.size() + "Images");
+                }
+                else {
+                    Toast.makeText(this, "Please Select Mutiple Image", Toast.LENGTH_SHORT).show();
+                }
             }
-        }
+
     }
+
+    public void setImageView(int position) {
+        Bitmap bm = BitmapFactory.decodeFile(imagePaths.get(position));
+        imageView.setImageBitmap(bm);
+        imageView.setVisibility(View.VISIBLE);
+        mGridView.setVisibility(View.GONE);
+    }
+
+}
 
 
 
