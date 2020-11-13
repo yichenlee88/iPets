@@ -10,7 +10,11 @@
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import { db } from "./db";
-import { updateUserProfile, updateMonthCalendar } from "./firebase/user";
+import {
+  updateUserProfile,
+  getUserPetsList,
+  updateMonthCalendar
+} from "./firebase/user";
 import { updatePetInfo } from "./firebase/pet";
 
 const fAuth = db.auth();
@@ -31,6 +35,7 @@ export default {
     if (fAuth.currentUser) {
       var uid = fAuth.currentUser.uid;
       updateUserProfile(this.$store, uid);
+      getUserPetsList(this.$store, uid);
       updatePetInfo(this.$store, uid);
       updateMonthCalendar(this.$store, uid);
       this.isLogIn = true;
