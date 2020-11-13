@@ -1,7 +1,8 @@
 <template>
   <b-container>
     <div class="intro">
-      <h1>What kind of dog?</h1>
+      <!-- <h1>What kind of dog?</h1> -->
+      <img src="../assets/辨識圖.png" style="width:75%">
       <p class="lead mb-0">
         上傳狗狗的萌照吧! &#128054;
       </p>

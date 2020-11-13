@@ -6,13 +6,9 @@
 
       <b-collapse id="nav-collapse" is-nav>
         <b-navbar-nav>
-          <b-nav-item href="#/about" v-if="!isSignedIn">關於我們</b-nav-item>
-          <b-nav-item href="#/dogScience" v-if="!isSignedIn"
-            >狗狗科普</b-nav-item
-          >
-          <b-nav-item href="#/dogInfo" v-if="!isSignedIn"
-            >人與狗的關係</b-nav-item
-          >
+          <b-nav-item href="#/about">關於我們</b-nav-item>
+          <b-nav-item href="#/dogScience">狗狗科普</b-nav-item>
+          <b-nav-item href="#/dogInfo">人與狗的關係</b-nav-item>
           <b-nav-item href="#/contact" v-if="!isSignedIn">聯繫我們</b-nav-item>
           <b-nav-item href="#/calendar" v-if="isSignedIn">行事曆</b-nav-item>
           <b-nav-item href="#/album" v-if="isSignedIn">相簿</b-nav-item>
@@ -25,6 +21,21 @@
 
         <!-- Right aligned nav items -->
         <b-navbar-nav class="ml-auto">
+          <div>
+            <b-dropdown
+              id="dropdown-divider"
+              variant="white"
+              text="asdasd"
+              right
+              class="m-2"
+            >
+              <b-dropdown-item-button v-for="item in pets_list" :key="item.id"
+                >{{ item.name }}
+              </b-dropdown-item-button>
+              <b-dropdown-divider></b-dropdown-divider>
+              <b-dropdown-item-button>新增寵物</b-dropdown-item-button>
+            </b-dropdown>
+          </div>
           <b-nav-form>
             <b-nav-item href="#/login" v-if="!isSignedIn"
               ><i class="fas fa-sign-in-alt" style="size:12px"></i
@@ -53,13 +64,15 @@ export default {
   name: "navbar",
   data() {
     return {
-      isSignedIn: false
+      isSignedIn: false,
+      selectedPet: ""
     };
   },
   created() {
     if (firebase.auth().currentUser) {
       this.isSignedIn = true;
     }
+    this.selectedPet = this.$store.state.name;
   },
   methods: {
     logout: function(e) {
@@ -69,20 +82,22 @@ export default {
         .then(() => {
           this.$router.go({ path: this.$router.path });
         });
+    },
+    changePet() {
+      console.log(this.selectedPet);
     }
   },
   computed: {
-    name() {
-      return this.$store.state.name;
+    pet() {
+      return this.$store.state.pet;
+    },
+    pets_list() {
+      return this.$store.state.pets_list;
     }
   }
 };
 </script>
 <style>
-/* .navbar-custom {
-  background-color: #d2e9ff;
-} */
-
 .navbar-brand,
 .form-input,
 .botton,
