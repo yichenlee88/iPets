@@ -48,7 +48,10 @@ import com.google.firebase.storage.UploadTask;
 
 import java.io.ByteArrayOutputStream;
 import java.io.FileNotFoundException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -143,6 +146,8 @@ public class editPetInfoActivity extends AppCompatActivity implements AdapterVie
         EditText edmypetName = findViewById(R.id.mypetName);
         final EditText edpetsbirth = findViewById(R.id.mypetBirth);
         Spinner petSexSpinner = findViewById(R.id.petSexSpinner);
+        EditText edhobbyText = findViewById(R.id.hobbyText);
+        final EditText edremarkText = findViewById(R.id.remarkText);
         Intent intent = this.getIntent();
         //取得傳遞過來的資料
         String pet = intent.getStringExtra("date");
@@ -160,12 +165,18 @@ public class editPetInfoActivity extends AppCompatActivity implements AdapterVie
                                 StringBuilder fields = new StringBuilder("");
                                 StringBuilder fields2 = new StringBuilder("");
                                 StringBuilder fields3 = new StringBuilder("");
+                                StringBuilder fields4 = new StringBuilder("");
+                                StringBuilder fields5 = new StringBuilder("");
                                 fields.append(doc.get("petName")).toString();
                                 String Petsgender = fields2.append(doc.get("petGender")).toString();
                                 fields3.append(doc.get("petBirth")).toString();
+                                fields4.append(doc.get("petHobby")).toString();
+                                fields5.append(doc.get("petNote")).toString();
                                 edmypetName.setText(fields);
                                 edpetsbirth.setText(fields3);
-                                if(Petsgender.equals("母的")) {
+                                edhobbyText.setText(fields4);
+                                edremarkText.setText(fields5);
+                                if(Petsgender.equals("女孩")) {
                                     petSexSpinner.setSelection(1);
                                 }
                             }
@@ -196,6 +207,24 @@ public class editPetInfoActivity extends AppCompatActivity implements AdapterVie
     private void addPetInfo(String petsimage, String mypetName) {
         final EditText edpetsbirth = findViewById(R.id.mypetBirth);
         String petsbirth = edpetsbirth.getText().toString();
+        SimpleDateFormat sdf= new SimpleDateFormat("yyyy-MM-dd");
+        Date date = null;
+        try {
+            date = sdf.parse(petsbirth);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(date);
+        if(petBirth_year == 0){
+        petBirth_year = calendar.get(Calendar.YEAR);
+        petBirth_month = calendar.get(Calendar.MONTH)+1;
+        petBirth_date = calendar.get(Calendar.DAY_OF_MONTH);
+        }
+        EditText edhobbyText = findViewById(R.id.hobbyText);
+        String hobbyText = edhobbyText.getText().toString();
+        final EditText edremarkText = findViewById(R.id.remarkText);
+        String remarkText = edremarkText.getText().toString();
         String[] petSex =getResources().getStringArray(R.array.Spinner_petSex);
         Spinner petSexSpinner = findViewById(R.id.petSexSpinner);
         int idsex=petSexSpinner.getSelectedItemPosition();
@@ -207,6 +236,8 @@ public class editPetInfoActivity extends AppCompatActivity implements AdapterVie
         userInfo.put("petName", mypetName);
         userInfo.put("petBirth", petsbirth);
         userInfo.put("petGender", sex);
+        userInfo.put("petHobby",  hobbyText);
+        userInfo.put("petNote", remarkText);
         userInfo.put("petBirth_year", petBirth_year);
         userInfo.put("petBirth_month", petBirth_month);
         userInfo.put("petBirth_date",petBirth_date);

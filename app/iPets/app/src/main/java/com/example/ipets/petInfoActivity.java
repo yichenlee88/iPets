@@ -162,10 +162,10 @@ public class petInfoActivity extends AppCompatActivity {
         RadioGroup sexselect = findViewById(R.id.sexselect);
         switch(sexselect.getCheckedRadioButtonId()){
             case R.id.malepet: //case mRadioButton0.getId():
-                petsgender = "公的";
+                petsgender = "男孩";
                 break;
             case R.id.femalepet: //case mRadioButton1.getId():
-                petsgender = "母的";
+                petsgender = "女孩";
                 break;
         }
         Calendar now = Calendar.getInstance();
