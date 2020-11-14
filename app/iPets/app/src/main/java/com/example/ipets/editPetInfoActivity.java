@@ -67,6 +67,7 @@ public class editPetInfoActivity extends AppCompatActivity implements AdapterVie
     int petBirth_year;
     int petBirth_month;
     int petBirth_date;
+    String oldpet;
     String documentname;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -167,7 +168,7 @@ public class editPetInfoActivity extends AppCompatActivity implements AdapterVie
                                 StringBuilder fields3 = new StringBuilder("");
                                 StringBuilder fields4 = new StringBuilder("");
                                 StringBuilder fields5 = new StringBuilder("");
-                                fields.append(doc.get("petName")).toString();
+                                oldpet = fields.append(doc.get("petName")).toString();
                                 String Petsgender = fields2.append(doc.get("petGender")).toString();
                                 fields3.append(doc.get("petBirth")).toString();
                                 fields4.append(doc.get("petHobby")).toString();
@@ -201,10 +202,10 @@ public class editPetInfoActivity extends AppCompatActivity implements AdapterVie
         UploadTask uploadTask = mountainsRef.putBytes(data);
         //取得照片網址
         String petsimage = String.valueOf(mountainsRef.getDownloadUrl());
-        addPetInfo(petsimage,mypetName);
+        setPetInfo(petsimage,mypetName);
     }
 
-    private void addPetInfo(String petsimage, String mypetName) {
+    private void setPetInfo(String petsimage, String mypetName) {
         final EditText edpetsbirth = findViewById(R.id.mypetBirth);
         String petsbirth = edpetsbirth.getText().toString();
         SimpleDateFormat sdf= new SimpleDateFormat("yyyy-MM-dd");
@@ -242,6 +243,54 @@ public class editPetInfoActivity extends AppCompatActivity implements AdapterVie
         userInfo.put("petBirth_month", petBirth_month);
         userInfo.put("petBirth_date",petBirth_date);
         db.collection("users").document(userUID).collection("pets").document(documentname).update(userInfo);
+        db.collection("users").document(userUID).collection("pets").document(documentname).collection("countdown")
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                String countdownid = document.getId();
+                                db.collection("users").document(userUID).collection("pets").document(documentname).collection("countdown").document(countdownid)
+                                        .get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                                        if (task.isSuccessful()) {
+                                            DocumentSnapshot doc = document;
+                                            StringBuilder fields = new StringBuilder("");
+                                            String countdownEvent = fields.append(doc.get("countdownEvent")).toString();
+                                            if (countdownEvent.equals(oldpet+"洗澡")){
+                                                countdownEvent = mypetName+"洗澡";
+                                            }
+                                            if (countdownEvent.equals(oldpet+"修剪毛髮")){
+                                                countdownEvent = mypetName+"修剪毛髮";
+                                            }
+                                            if (countdownEvent.equals(oldpet+"體內除蟲")){
+                                                countdownEvent = mypetName+"體內除蟲";
+                                            }
+                                            if (countdownEvent.equals(oldpet+"體外除蟲")){
+                                                countdownEvent = mypetName+"體外除蟲";
+                                            }
+                                            if (countdownEvent.equals(oldpet+"注射")){
+                                                countdownEvent = mypetName+"注射";
+                                            }
+                                            if (countdownEvent.equals(oldpet+"看牙醫")){
+                                                countdownEvent = mypetName+"看牙醫";
+                                            }
+                                            if (countdownEvent.equals(oldpet+"經期")){
+                                                countdownEvent = mypetName+"經期";
+                                            }
+                                            Map<String, Object> countdownInfo = new HashMap<>();
+                                            countdownInfo.put("countdownEvent", countdownEvent);
+                                            db.collection("users").document(userUID).collection("pets").document(documentname).collection("countdown").document(countdownid).update(countdownInfo);
+                                        }
+                                    }
+                                });
+                            }
+                        }
+
+                    }
+                });
         AlertDialog.Builder finishsignup = new AlertDialog.Builder(editPetInfoActivity.this);
         finishsignup.setMessage("修改成功");
         finishsignup.setNegativeButton("確認", new DialogInterface.OnClickListener() {
