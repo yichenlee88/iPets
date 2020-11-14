@@ -28,6 +28,6 @@
             android:backgroundTint="#0071BC"
             android:inputType="textEmailAddress"
             android:hint="@string/Email_hint"
-            android:textSize="20sp" />
+            android:textSize="18sp" />
     </com.google.android.material.textfield.TextInputLayout>
 </LinearLayout>

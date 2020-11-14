@@ -74,7 +74,7 @@
           <b-input-group-prepend class="mr-n2">
             <span
               class="display-eye-2 fa fa-eye-slash"
-              @click="hidePassword2"
+              @click="hideCheckPassword"
             ></span>
           </b-input-group-prepend>
         </div>
@@ -88,7 +88,7 @@
             required
           ></b-form-input>
           <b-input-group-prepend class="mr-n2">
-            <span class="display-eye-2 fa fa-eye" @click="showPassword2"></span>
+            <span class="display-eye-2 fa fa-eye" @click="showCheckPassword"></span>
           </b-input-group-prepend>
         </div>
         <!-- userBirth -->
@@ -147,7 +147,7 @@ const fAuth = db.auth();
 const fStore = db.firestore();
 
 export default {
-  name: "Register",
+  name: "register",
   data() {
     return {
       userName: "",
@@ -184,7 +184,12 @@ export default {
               Email: this.Email,
               password: this.password,
               userGender: this.userGender,
-              userBirth: this.userBirth.toISOString().slice(0, 10),
+              userBirth:
+                this.userBirth.getUTCFullYear() +
+                "-" +
+                (this.userBirth.getMonth() + 1) +
+                "-" +
+                this.userBirth.getDate(),
               userBirth_year: this.userBirth.getUTCFullYear(),
               userBirth_month: this.userBirth.getMonth() + 1,
               userBirth_date: this.userBirth.getDate(),
@@ -214,12 +219,12 @@ export default {
       this.passwordHidden = true;
       this.passwordFieldType = this.passwordFieldType;
     },
-    hidePassword2() {
+    hideCheckPassword() {
       this.passwordHidden2 = false;
       this.passwordFieldType =
         this.passwordFieldType === "password" ? "text" : "password";
     },
-    showPassword2() {
+    showCheckPassword() {
       this.passwordHidden2 = true;
       this.passwordFieldType = this.passwordFieldType;
     }

@@ -287,7 +287,7 @@
 <script>
 import axios from "axios";
 export default {
-  name: "ManageAdoption",
+  name: "manageAdoption",
   data() {
     return {
       name: "",
@@ -301,10 +301,7 @@ export default {
     };
   },
   mounted() {
-    axios.get("http://localhost:4000/comments").then(res => {
-      console.log(res);
-      this.comments = res.data;
-    });
+    this.getAdoption();
   },
   methods: {
     deleteAdoption(index) {
@@ -373,6 +370,12 @@ export default {
         .then(res => {
           console.log(res);
         });
+    },
+    getAdoption() {
+      axios.get("http://localhost:4000/comments").then(res => {
+        console.log(res);
+        this.comments = res.data;
+      });
     }
   }
 };

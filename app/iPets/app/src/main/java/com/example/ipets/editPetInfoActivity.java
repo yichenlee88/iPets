@@ -153,7 +153,7 @@ public class editPetInfoActivity extends AppCompatActivity implements AdapterVie
         String pet = intent.getStringExtra("date");
         FirebaseFirestore db;
         db = FirebaseFirestore.getInstance();
-        db.collection("pets").whereEqualTo("petName", pet)
+        db.collection("users").document(userUID).collection("pets").whereEqualTo("petName", pet)
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
@@ -241,7 +241,7 @@ public class editPetInfoActivity extends AppCompatActivity implements AdapterVie
         userInfo.put("petBirth_year", petBirth_year);
         userInfo.put("petBirth_month", petBirth_month);
         userInfo.put("petBirth_date",petBirth_date);
-        db.collection("pets").document(documentname).update(userInfo);
+        db.collection("users").document(userUID).collection("pets").document(documentname).update(userInfo);
         AlertDialog.Builder finishsignup = new AlertDialog.Builder(editPetInfoActivity.this);
         finishsignup.setMessage("修改成功");
         finishsignup.setNegativeButton("確認", new DialogInterface.OnClickListener() {

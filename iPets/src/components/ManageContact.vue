@@ -23,32 +23,29 @@ import "firebase/firestore";
 const fStore = db.firestore();
 
 export default {
-  name: "ManageContact",
+  name: "manageContact",
   data() {
     return {
       question: []
     };
   },
   mounted() {
-    this.getData();
-    fStore
-      .collection("contact")
-      .get()
-      .then(querySnapshot => {
-        querySnapshot.forEach(doc => {
-          this.question.push(doc.data());
-          console.log(doc.id, doc.data());
-        });
-        console.log(this.question);
-      });
+    this.getContactData();
   },
   methods: {
-    getData() {
+    getContactData() {
       fStore.collection("contact").get();
+      fStore
+        .collection("contact")
+        .get()
+        .then(querySnapshot => {
+          querySnapshot.forEach(doc => {
+            this.question.push(doc.data());
+            console.log(doc.id, doc.data());
+          });
+          console.log(this.question);
+        });
     }
-    // reverse() {
-    //   this.question.reverse();
-    // }
   }
 };
 </script>

@@ -2,7 +2,7 @@
   <div class="screen" style="background-color:#F5F5F5">
     <div class="center">
       <b-row>
-        <b-col col="6" sm="4" md="4">
+        <b-col cols="6" sm="4" md="4">
           <b-list-group>
             <b-list-group-item
               ><router-link to="/setting/editProfile"
@@ -10,8 +10,8 @@
               ></b-list-group-item
             >
             <b-list-group-item
-              ><router-link to="/setting/editPetProfile"
-                >編輯寵物資訊</router-link
+              ><router-link to="/setting/addPetProfile"
+                >新增毛小孩</router-link
               ></b-list-group-item
             >
             <b-list-group-item
@@ -24,11 +24,11 @@
                 >電子郵件與簡訊</router-link
               ></b-list-group-item
             >
-            <b-list-group-item
+            <!-- <b-list-group-item
               ><router-link to="/setting/loginActivity"
                 >登入活動</router-link
               ></b-list-group-item
-            >
+            > -->
             <b-list-group-item
               ><router-link to="/setting/FAQ"
                 >常見問題</router-link
@@ -42,10 +42,10 @@
           </b-list-group>
         </b-col>
         <b-col
-          col="6"
+          cols="6"
           sm="8"
           md="8"
-          style="height: 75vh; margin-top:15px; background-color:#FFFFFF; border: 1px solid; border-color: #ADADAD;"
+          style="overflow: scroll; height: 75vh; margin-top:15px; background-color:#FFFFFF; border: 1px solid; border-color: #ADADAD;"
         >
           <router-view></router-view>
         </b-col>
@@ -126,7 +126,7 @@
 
 <script>
 export default {
-  name: "Setting"
+  name: "setting"
 };
 </script>
 

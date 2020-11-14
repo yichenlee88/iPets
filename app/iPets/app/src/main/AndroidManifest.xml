@@ -2,6 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="com.example.ipets">
+
     <!--
          The ACCESS_COARSE/FINE_LOCATION permissions are not required to use
          Google Maps Android API v2, but you must specify either coarse or fine
@@ -22,13 +23,20 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".petInfoActivity"></activity>
-        <activity android:name=".PhotoGalleryActivity" />
+        <receiver
+            android:name=".alarmReceiver"
+            android:enabled="true"
+            android:exported="true"></receiver>
+
+        <activity
+            android:name=".petInfoActivity"
+            android:windowSoftInputMode="adjustPan" />
+        <activity android:name=".photoGalleryActivity" />
         <activity android:name=".NotePreviewActivity" />
         <activity
-            android:name=".AddNoteActivity"
+            android:name=".addNoteActivity"
             android:windowSoftInputMode="adjustPan" />
-        <activity android:name=".CalendarActivity" />
+        <activity android:name=".calendarActivity" />
         <activity
             android:name=".editPetInfoActivity"
             android:parentActivityName=".settingActivity"

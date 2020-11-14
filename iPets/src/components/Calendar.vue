@@ -5,9 +5,7 @@
         <v-col>
           <v-sheet height="64">
             <v-toolbar flat color="white">
-              <v-btn color="primary" dark @click="dialog = true"
-                >新增事件</v-btn
-              >
+              <v-btn color="primary" dark @click="dialog = true">新增事件</v-btn>
               <v-btn outlined class="mr-4" @click="setToday">今天</v-btn>
               <v-btn fab text small @click="prev">
                 <v-icon small>mdi-chevron-left</v-icon>
@@ -15,7 +13,7 @@
               <v-btn fab text small @click="next">
                 <v-icon small>mdi-chevron-right</v-icon>
               </v-btn>
-              <v-toolbar-title>{{ title }} </v-toolbar-title>
+              <v-toolbar-title>{{ title }}</v-toolbar-title>
               <div class="flex-grow-1"></div>
               <v-menu bottom right>
                 <template v-slot:activator="{ on }">
@@ -46,32 +44,11 @@
             <v-card>
               <v-container>
                 <v-form @submit.prevent="addEvent">
-                  <v-text-field
-                    v-model="name"
-                    type="text"
-                    label="事件名稱"
-                  ></v-text-field>
-                  <v-text-field
-                    v-model="details"
-                    type="text"
-                    label="描述"
-                  ></v-text-field>
-                  <v-text-field
-                    v-model="start"
-                    type="date"
-                    label="開始日期 (必須)"
-                  ></v-text-field>
-                  <v-text-field
-                    v-model="end"
-                    type="date"
-                    label="結束日期 (必須)"
-                  ></v-text-field
-                  >選擇顏色
-                  <v-select
-                    v-model="color"
-                    :v-for="color in colors"
-                    :items="colors"
-                  ></v-select>
+                  <v-text-field v-model="eventName" type="text" label="事件名稱"></v-text-field>
+                  <v-text-field v-model="details" type="text" label="描述"></v-text-field>
+                  <v-text-field v-model="startTitle" type="date" label="開始日期 (必須)"></v-text-field>
+                  <v-text-field v-model="endTitle" type="date" label="結束日期 (必須)"></v-text-field>選擇顏色
+                  <v-select v-model="color" :v-for="color in colors" :items="colors"></v-select>
                   <v-radio-group v-model="frequency">
                     <v-radio label="不重複"></v-radio>
                     <v-radio label="每日"></v-radio>
@@ -87,8 +64,7 @@
                       dialog = false;
                       closeDialog();
                     "
-                    >建立事件</v-btn
-                  >
+                  >建立事件</v-btn>
                 </v-form>
               </v-container>
             </v-card>
@@ -99,32 +75,11 @@
               <v-container>
                 <v-form @submit.prevent="addEvent">
                   <h4 style="text-align: center">新增事件</h4>
-                  <v-text-field
-                    v-model="name"
-                    type="text"
-                    label="事件名稱"
-                  ></v-text-field>
-                  <v-text-field
-                    v-model="details"
-                    type="text"
-                    label="描述"
-                  ></v-text-field>
-                  <v-text-field
-                    v-model="start"
-                    type="date"
-                    label="開始日期 (必須)"
-                  ></v-text-field>
-                  <v-text-field
-                    v-model="end"
-                    type="date"
-                    label="結束日期 (必須)"
-                  ></v-text-field
-                  >選擇顏色
-                  <v-select
-                    v-model="color"
-                    :v-for="color in colors"
-                    :items="colors"
-                  ></v-select>
+                  <v-text-field v-model="eventName" type="text" label="事件名稱"></v-text-field>
+                  <v-text-field v-model="details" type="text" label="描述"></v-text-field>
+                  <v-text-field v-model="startTitle" type="date" label="開始日期 (必須)"></v-text-field>
+                  <v-text-field v-model="endTitle" type="date" label="結束日期 (必須)"></v-text-field>選擇顏色
+                  <v-select v-model="color" :v-for="color in colors" :items="colors"></v-select>
                   <v-radio-group v-model="frequency">
                     <v-radio label="不重複"></v-radio>
                     <v-radio label="每日"></v-radio>
@@ -140,8 +95,7 @@
                       dialog = false;
                       closeDialog();
                     "
-                    >建立事件</v-btn
-                  >
+                  >建立事件</v-btn>
                 </v-form>
               </v-container>
             </v-card>
@@ -156,7 +110,7 @@
               :events="events"
               :event-color="getEventColor"
               :event-margin-bottom="3"
-              :now="today"
+              :now="focus"
               :type="type"
               @click:event="showEvent"
               @click:more="viewDay"
@@ -175,20 +129,16 @@
                   <v-btn @click="deleteEvent(selectedEvent.id)" icon>
                     <v-icon>mdi-delete</v-icon>
                   </v-btn>
-                  <v-toolbar-title
-                    v-html="selectedEvent.name"
-                  ></v-toolbar-title>
+                  <v-toolbar-title v-html="selectedEvent.eventName"></v-toolbar-title>
                   <div class="flex-grow-1"></div>
                 </v-toolbar>
 
                 <v-card-text>
-                  <form v-if="currentlyEditing !== selectedEvent.id">
-                    {{ selectedEvent.details }}
-                  </form>
+                  <form v-if="currentlyEditing !== selectedEvent.id">{{ selectedEvent.details }}</form>
                   <form v-else>
                     <p>title</p>
                     <textarea-autosize
-                      v-model="selectedEvent.name"
+                      v-model="selectedEvent.eventName"
                       type="text"
                       style="width: 100%"
                       placeholder="標題"
@@ -200,31 +150,18 @@
                       :min-height="50"
                       placeholder="描述"
                     ></textarea-autosize>
-                    <v-select
-                      v-model="color"
-                      :v-for="color in colors"
-                      :items="colors"
-                    ></v-select>
+                    <v-select v-model="color" :v-for="color in colors" :items="colors"></v-select>
                   </form>
                 </v-card-text>
 
                 <v-card-actions>
-                  <v-btn text color="secondary" @click="selectedOpen = false"
-                    >關閉</v-btn
-                  >
+                  <v-btn text color="secondary" @click="selectedOpen = false">關閉</v-btn>
                   <v-btn
                     v-if="currentlyEditing !== selectedEvent.id"
                     text
                     @click.prevent="editEvent(selectedEvent)"
-                    >編輯</v-btn
-                  >
-                  <v-btn
-                    text
-                    v-else
-                    type="submit"
-                    @click.prevent="updateEvent(selectedEvent.id)"
-                    >儲存</v-btn
-                  >
+                  >編輯</v-btn>
+                  <v-btn text v-else type="submit" @click.prevent="updateEvent(selectedEvent.id)">儲存</v-btn>
                 </v-card-actions>
               </v-card>
             </v-menu>
@@ -237,6 +174,7 @@
 
 <script>
 import { db } from "../db";
+import firebase from "firebase";
 
 const fStore = db.firestore();
 
@@ -246,6 +184,10 @@ export default {
       today: new Date(),
       focus: new Date().toISOString().slice(0, 10),
       start: new Date(),
+      // end: new Date().toISOString().slice(0, 10),
+      end: new Date(),
+      startTitle: null,
+      endTitle: null,
       date: new Date(),
       type: "month",
       typeToLabel: {
@@ -264,10 +206,8 @@ export default {
         { text: "brown" }
       ],
       frequency: 0,
-      name: null,
+      eventName: null,
       details: null,
-      // end: new Date().toISOString().slice(0, 10),
-      end: new Date(),
       color: "red", // default event color
       currentlyEditing: null,
       selectedEvent: {},
@@ -282,6 +222,9 @@ export default {
     this.getEvents();
   },
   computed: {
+    uid() {
+      return this.$store.state.uid;
+    },
     title() {
       const { start, end } = this;
       if (!start || !end) {
@@ -312,25 +255,27 @@ export default {
     }
   },
   methods: {
-    add: function(newdate) {
+    add: function(newdate, endDate) {
+      let uid = firebase.auth().currentUser.uid;
       fStore
-        .collection("pets")
-        .doc("3heOY1mUC6wCbo2jdE9M")
+        .collection("users")
+        .doc(uid)
         .collection("calEvent")
         .add({
-          name: this.name,
+          eventName: this.eventName,
           details: this.details,
           frequency: this.frequency,
           start: newdate,
-          end: newdate,
+          end: endDate,
           color: this.color
         });
       this.getEvents();
     },
     async getEvents() {
+      let uid = firebase.auth().currentUser.uid;
       let snapshot = await fStore
-        .collection("pets")
-        .doc("3heOY1mUC6wCbo2jdE9M")
+        .collection("users")
+        .doc(uid)
         .collection("calEvent")
         .get();
       const events = [];
@@ -344,8 +289,8 @@ export default {
     setDialogDate({ date }) {
       this.dialogDate = true;
       this.focus = date;
-      // this.start = date;
-      // this.end = date;
+      this.startTitle = date;
+      this.endTitle = date;
     },
     closeDialog() {
       this.dialogDate = false;
@@ -367,63 +312,87 @@ export default {
       this.$refs.calendar.next();
     },
     async addEvent() {
-      if (this.name && this.start && this.end) {
+      if (this.eventName && this.startTitle && this.endTitle) {
         if (this.frequency === 1) {
-          this.start = new Date(this.start);
+          this.startTitle = new Date(this.startTitle);
+          this.endTitle = new Date(this.endTitle);
           for (let i = 0; i < 5; i++) {
-            let newdate = new Date(this.start);
-            newdate.setDate(this.start.getDate() + i);
-            this.add(newdate.toISOString().slice(0, 10));
+            let newdate = new Date(this.startTitle);
+            let endDate = new Date(this.endTitle);
+            newdate.setDate(this.startTitle.getDate() + i);
+            endDate.setDate(this.endTitle.getDate() + i);
+            newdate = newdate.toISOString().slice(0, 10);
+            endDate = endDate.toISOString().slice(0, 10);
+            this.add(newdate, endDate);
           }
         } else if (this.frequency === 2) {
-          this.start = new Date(this.start);
+          this.startTitle = new Date(this.startTitle);
+          this.endTitle = new Date(this.endTitle);
           for (let i = 0; i < 5; i++) {
-            let newdate = new Date(this.start);
-            newdate.setDate(this.start.getDate() + i * 7);
-            this.add(newdate.toISOString().slice(0, 10));
+            let newdate = new Date(this.startTitle);
+            let endDate = new Date(this.endTitle);
+            newdate.setDate(this.startTitle.getDate() + i * 7);
+            endDate.setDate(this.endTitle.getDate() + i * 7);
+            newdate = newdate.toISOString().slice(0, 10);
+            endDate = endDate.toISOString().slice(0, 10);
+            this.add(newdate, endDate);
           }
         } else if (this.frequency === 3) {
-          this.start = new Date(this.start);
+          this.startTitle = new Date(this.startTitle);
+          this.endTitle = new Date(this.endTitle);
           for (let i = 0; i < 5; i++) {
-            let newdate = new Date(this.start);
-            newdate.setMonth(this.start.getMonth() + i);
-            this.add(newdate.toISOString().slice(0, 10));
+            let newdate = new Date(this.startTitle);
+            let endDate = new Date(this.endTitle);
+            newdate.setMonth(this.startTitle.getMonth() + i);
+            endDate.setMonth(this.endTitle.getMonth() + i);
+            newdate = newdate.toISOString().slice(0, 10);
+            endDate = endDate.toISOString().slice(0, 10);
+            this.add(newdate, endDate);
           }
         } else if (this.frequency === 4) {
-          this.start = new Date(this.start);
+          this.startTitle = new Date(this.startTitle);
+          this.endTitle = new Date(this.endTitle);
           for (let i = 0; i < 2; i++) {
-            let newdate = new Date(this.start);
-            newdate.setFullYear(this.start.getFullYear() + i);
-            this.add(newdate.toISOString().slice(0, 10));
+            let newdate = new Date(this.startTitle);
+            let endDate = new Date(this.endTitle);
+            newdate.setFullYear(this.startTitle.getFullYear() + i);
+            endDate.setFullYear(this.endTitle.getFullYear() + i);
+            newdate = newdate.toISOString().slice(0, 10);
+            endDate = endDate.toISOString().slice(0, 10);
+            this.add(newdate, endDate);
           }
         } else if (this.frequency === 0) {
-          let newdate = new Date(this.start);
-          this.add(newdate.toISOString().slice(0, 10));
+          let newdate = new Date(this.startTitle);
+          let endDate = new Date(this.endTitle);
+          newdate = newdate.toISOString().slice(0, 10);
+          endDate = endDate.toISOString().slice(0, 10);
+          this.add(newdate, endDate);
         }
       }
-      this.name = "";
+      this.eventName = "";
       this.details = "";
-      this.start = this.start.toISOString().slice(0, 10);
-      this.end = this.end.toISOString().slice(0, 10);
+      this.startTitle = "";
+      this.endTitle = "";
     },
     editEvent(ev) {
       this.currentlyEditing = ev.id;
-      this.name = ev.name;
+      this.eventName = ev.eventName;
       this.start = ev.start;
       this.frequency = ev.frequency;
       this.end = ev.end;
       this.color = ev.color;
     },
     async updateEvent(ev) {
+      let uid = firebase.auth().currentUser.uid;
       let selectedEvent = this.selectedEvent;
       await fStore
-        .collection("pets")
-        .doc("3heOY1mUC6wCbo2jdE9M")
+        .collection("users")
+        .doc(uid)
         .collection("calEvent")
         .doc(ev)
         .update({
           details: selectedEvent.details,
-          name: selectedEvent.name,
+          eventName: selectedEvent.eventName,
           color: this.color,
           frequency: this.frequency,
           start: this.start,
@@ -438,14 +407,15 @@ export default {
       this.selectedOpen = false;
       this.currentlyEditing = null;
       console.log(ev);
-      location.reload();
+      this.$router.go({ path: this.$router.path });
     },
     async deleteEvent(ev) {
-      let selectedEvent = this.selectedEvent.name;
+      let selectedEvent = this.selectedEvent.eventName;
+      let uid = firebase.auth().currentUser.uid;
       if (confirm(`確定是否刪除 ${selectedEvent} ?`)) {
         await fStore
-          .collection("pets")
-          .doc("3heOY1mUC6wCbo2jdE9M")
+          .collection("users")
+          .doc(uid)
           .collection("calEvent")
           .doc(ev)
           .delete()

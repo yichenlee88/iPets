@@ -55,7 +55,7 @@
             android:layout_height="wrap_content"
             android:gravity="center_horizontal"
             android:text="@string/TextView_signup"
-            android:textSize="24sp"
+            android:textSize="22sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toTopOf="@+id/guideline32"
             app:layout_constraintEnd_toStartOf="@+id/guideline31"
@@ -92,7 +92,7 @@
             android:ems="10"
             android:hint="@string/username_hint"
             android:inputType="textPersonName"
-            android:textSize="20sp"
+            android:textSize="18sp"
             app:layout_constraintBottom_toTopOf="@+id/guideline33"
             app:layout_constraintEnd_toStartOf="@+id/guideline28"
             app:layout_constraintStart_toStartOf="@+id/guideline27"
@@ -114,7 +114,7 @@
             android:ems="10"
             android:hint="@string/email_hint"
             android:inputType="textEmailAddress"
-            android:textSize="20sp"
+            android:textSize="18sp"
             app:layout_constraintBottom_toTopOf="@+id/guideline34"
             app:layout_constraintEnd_toStartOf="@+id/guideline28"
             app:layout_constraintStart_toStartOf="@+id/guideline27"
@@ -143,7 +143,7 @@
             android:ems="10"
             android:hint="@string/password_hint"
             android:inputType="textPassword"
-            android:textSize="20sp"
+            android:textSize="18sp"
             app:layout_constraintBottom_toTopOf="@+id/guideline35"
             app:layout_constraintEnd_toStartOf="@+id/guideline28"
             app:layout_constraintStart_toStartOf="@+id/guideline27"
@@ -158,7 +158,7 @@
             android:ems="10"
             android:hint="@string/confirmpassword_hint"
             android:inputType="textPassword"
-            android:textSize="20sp"
+            android:textSize="18sp"
             app:layout_constraintBottom_toTopOf="@+id/guideline36"
             app:layout_constraintEnd_toStartOf="@+id/guideline28"
             app:layout_constraintStart_toStartOf="@+id/guideline27"
@@ -186,11 +186,11 @@
             android:gravity="center_horizontal|center_vertical"
             android:text="@string/button_next"
             android:textColor="#FFFFFF"
-            android:textSize="20sp"
-            app:layout_constraintBottom_toTopOf="@+id/guideline37"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toTopOf="@+id/guideline40"
             app:layout_constraintEnd_toStartOf="@+id/guideline28"
             app:layout_constraintStart_toStartOf="@+id/guideline27"
-            app:layout_constraintTop_toTopOf="@+id/guideline36" />
+            app:layout_constraintTop_toTopOf="@+id/guideline37" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline38"
@@ -211,90 +211,91 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.78" />
+            app:layout_constraintGuide_percent="0.82" />
+        <!--
+                <View
+                    android:id="@+id/divider1"
+                    android:layout_width="0dp"
+                    android:layout_height="1dp"
+                    android:background="#D0D0D0"
+                    app:layout_constraintBottom_toTopOf="@+id/guideline40"
+                    app:layout_constraintEnd_toStartOf="@+id/guideline38"
+                    app:layout_constraintStart_toStartOf="@+id/guideline27"
+                    app:layout_constraintTop_toTopOf="@+id/guideline37" />
 
-        <View
-            android:id="@+id/divider1"
-            android:layout_width="0dp"
-            android:layout_height="1dp"
-            android:background="#D0D0D0"
-            app:layout_constraintBottom_toTopOf="@+id/guideline40"
-            app:layout_constraintEnd_toStartOf="@+id/guideline38"
-            app:layout_constraintStart_toStartOf="@+id/guideline27"
-            app:layout_constraintTop_toTopOf="@+id/guideline37" />
+                <View
+                    android:id="@+id/divider2"
+                    android:layout_width="0dp"
+                    android:layout_height="1dp"
+                    android:background="#D0D0D0"
+                    app:layout_constraintBottom_toTopOf="@+id/guideline40"
+                    app:layout_constraintEnd_toStartOf="@+id/guideline28"
+                    app:layout_constraintStart_toStartOf="@+id/guideline39"
+                    app:layout_constraintTop_toTopOf="@+id/guideline37" />
 
-        <View
-            android:id="@+id/divider2"
-            android:layout_width="0dp"
-            android:layout_height="1dp"
-            android:background="#D0D0D0"
-            app:layout_constraintBottom_toTopOf="@+id/guideline40"
-            app:layout_constraintEnd_toStartOf="@+id/guideline28"
-            app:layout_constraintStart_toStartOf="@+id/guideline39"
-            app:layout_constraintTop_toTopOf="@+id/guideline37" />
+                <TextView
+                    android:id="@+id/textView_or"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/TextView_or"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toTopOf="@+id/guideline40"
+                    app:layout_constraintEnd_toStartOf="@+id/guideline39"
+                    app:layout_constraintStart_toStartOf="@+id/guideline38"
+                    app:layout_constraintTop_toTopOf="@+id/guideline37" />
 
-        <TextView
-            android:id="@+id/textView_or"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/TextView_or"
-            android:textSize="18sp"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toTopOf="@+id/guideline40"
-            app:layout_constraintEnd_toStartOf="@+id/guideline39"
-            app:layout_constraintStart_toStartOf="@+id/guideline38"
-            app:layout_constraintTop_toTopOf="@+id/guideline37" />
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/guideline42"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    app:layout_constraintGuide_percent="0.85" />
 
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guideline42"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.86" />
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/guideline43"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    app:layout_constraintGuide_percent="0.93" />
 
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guideline43"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.94" />
+                <Button
+                    android:id="@+id/btnFacebook"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:backgroundTint="#3f5a91"
+                    android:drawableStart="@drawable/logo_fb"
+                    android:gravity="center_horizontal|center_vertical"
+                    android:text="@string/button_fb"
+                    android:textColor="#FFFFFF"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toTopOf="@+id/guideline42"
+                    app:layout_constraintEnd_toStartOf="@+id/guideline28"
+                    app:layout_constraintStart_toStartOf="@+id/guideline27"
+                    app:layout_constraintTop_toTopOf="@+id/guideline40" />
 
-        <Button
-            android:id="@+id/btnFacebook"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:backgroundTint="#3f5a91"
-            android:drawableStart="@drawable/logo_fb"
-            android:gravity="center_horizontal|center_vertical"
-            android:text="@string/button_fb"
-            android:textColor="#FFFFFF"
-            android:textSize="18sp"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toTopOf="@+id/guideline42"
-            app:layout_constraintEnd_toStartOf="@+id/guideline28"
-            app:layout_constraintStart_toStartOf="@+id/guideline27"
-            app:layout_constraintTop_toTopOf="@+id/guideline40" />
+                <Button
+                    android:id="@+id/btnGoogle"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:backgroundTint="#FFFFFF"
+                    android:drawableStart="@drawable/googleg_standard_color_18"
+                    android:gravity="center_horizontal|center_vertical"
+                    android:text="@string/button_google"
+                    android:textSize="18sp"
+                    app:layout_constraintBottom_toTopOf="@+id/guideline43"
+                    app:layout_constraintEnd_toStartOf="@+id/guideline28"
+                    app:layout_constraintStart_toStartOf="@+id/guideline27"
+                    app:layout_constraintTop_toTopOf="@+id/guideline41" />
 
-        <Button
-            android:id="@+id/btnGoogle"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:backgroundTint="#FFFFFF"
-            android:drawableStart="@drawable/googleg_standard_color_18"
-            android:gravity="center_horizontal|center_vertical"
-            android:text="@string/button_google"
-            android:textSize="18sp"
-            app:layout_constraintBottom_toTopOf="@+id/guideline43"
-            app:layout_constraintEnd_toStartOf="@+id/guideline28"
-            app:layout_constraintStart_toStartOf="@+id/guideline27"
-            app:layout_constraintTop_toTopOf="@+id/guideline41" />
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/guideline41"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    app:layout_constraintGuide_percent="0.87" />
+                    -->
 
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guideline41"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.87" />
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-</FrameLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </FrameLayout>

@@ -26,7 +26,7 @@
         android:ems="10"
         android:hint="@string/oldPWD_hint"
         android:inputType="textPassword"
-        android:textSize="20sp"
+        android:textSize="18sp"
         android:autofillHints="" />
 
     <EditText
@@ -41,7 +41,7 @@
         android:ems="10"
         android:hint="@string/newPWD_hint"
         android:inputType="textPassword"
-        android:textSize="20sp" />
+        android:textSize="18sp" />
 
     <EditText
         android:id="@+id/checkPWD"
@@ -55,7 +55,7 @@
         android:ems="10"
         android:hint="@string/checkPWD"
         android:inputType="textPassword"
-        android:textSize="20sp" />
+        android:textSize="18sp" />
 
 
 </LinearLayout>

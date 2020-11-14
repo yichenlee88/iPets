@@ -1,13 +1,10 @@
 package com.example.ipets;
 
 
+import android.app.AlarmManager;
 import android.app.DatePickerDialog;
-import android.app.Notification;
-import android.app.NotificationChannel;
-import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Intent;
-import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -103,7 +100,7 @@ public class homeFragment extends Fragment {
         final Spinner petnamespinner = getView().findViewById(R.id.nameSpinner);
         final FirebaseFirestore db = FirebaseFirestore.getInstance();
         final List<String> petname = new ArrayList<>();
-        db.collection("pets").whereEqualTo("uid", userUID).get()
+        db.collection("users").document(userUID).collection("pets").whereEqualTo("uid", userUID).get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
@@ -117,8 +114,8 @@ public class homeFragment extends Fragment {
                                 petname.add("尚未擁有寵物");
                             }
                             petname.add("新增寵物");
-                            ArrayAdapter adapter = new ArrayAdapter<>(getContext(),android.R.layout.simple_spinner_item , petname);
-                            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                            ArrayAdapter adapter = new ArrayAdapter<>(getContext(),R.layout.myspinner_layout , petname);
+                            adapter.setDropDownViewResource(R.layout.myspinner_dropdown_layout);
                             petnamespinner.setAdapter(adapter);
                             petnamespinner.setSelection(0, true);
                             String query = petname.get(0);
@@ -222,7 +219,7 @@ public class homeFragment extends Fragment {
     }
     public void getDocumentName(){
         final FirebaseFirestore db = FirebaseFirestore.getInstance();
-        db.collection("pets").whereEqualTo("petName", pet_query)
+        db.collection("users").document(userUID).collection("pets").whereEqualTo("petName", pet_query)
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
@@ -235,31 +232,57 @@ public class homeFragment extends Fragment {
 
                         }
                         setCountdownColor();
+                        setNotification();
                     }
                 });
     }
-    public void notification(){
-        String id ="channel_1";//channel的id
-        int importance = NotificationManager.IMPORTANCE_LOW;//channel的重要性
-        NotificationChannel channel = new NotificationChannel(id, "123", importance);//生成channel
-        //为channel添加属性
-        channel.enableVibration(true);
-        channel.enableLights(true);
-        NotificationManager manager = (NotificationManager)getActivity().getSystemService(getActivity().NOTIFICATION_SERVICE);
-        manager.createNotificationChannel(channel);//添加channel
-        Intent it = new Intent(getActivity(), homeActivity.class);
-        it.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-        PendingIntent pit = PendingIntent.getActivity(getActivity(), 0, it,PendingIntent.FLAG_ONE_SHOT);
-        Notification notification = new Notification.Builder(getActivity(),id)
-                .setCategory(Notification.CATEGORY_MESSAGE)
-                .setSmallIcon(R.drawable.app_logo1)
-                .setLargeIcon(BitmapFactory.decodeResource(getResources(), R.drawable.app_logo1))
-                .setContentTitle("倒數計時器")
-                .setContentText("某項行程該做囉!點擊確認")
-                .setContentIntent(pit)
-                .setAutoCancel(true)
-                .build();
-        manager.notify(1,notification);
+
+    private void setNotification() {
+        if(!pet_query.equals("尚未擁有寵物")) {
+            final FirebaseFirestore db = FirebaseFirestore.getInstance();
+            db.collection("users").document(userUID).collection("pets").document(documentname).collection("countdown")
+                    .get()
+                    .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                        @Override
+                        public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                            if (task.isSuccessful()) {
+                                for (QueryDocumentSnapshot document : task.getResult()) {
+                                    DocumentSnapshot doc = document;
+                                    StringBuilder field1 = new StringBuilder("");
+                                    String endDay = field1.append(doc.get("endDay")).toString();
+                                    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+                                    if(!endDay.equals("")) {
+                                        Date date = null;
+                                        try {
+                                            date = sdf.parse(endDay);
+                                        } catch (ParseException e) {
+                                            e.printStackTrace();
+                                        }
+                                        Calendar calendar = Calendar.getInstance();
+                                        calendar.setTime(date);
+                                        calendar.set(Calendar.HOUR_OF_DAY, 00);
+                                        calendar.set(Calendar.MINUTE, 00);
+                                        calendar.set(Calendar.SECOND, 00);
+                                        calendar.set(Calendar.MILLISECOND, 00);
+                                        long settime = calendar.getTimeInMillis();
+                                        int id = calendar.get(Calendar.MONTH)+calendar.get(Calendar.DAY_OF_MONTH);
+                                        Log.i("LOVE", String.valueOf(settime));
+                                        Intent intent = new Intent(getActivity(), alarmReceiver.class);
+                                        //        PendingIntent.getBroadcast調用廣播
+                                        PendingIntent pendingIntent = PendingIntent.getBroadcast(getActivity(), id, intent, 0);
+                                        //        獲得AlarmManager物件
+                                        AlarmManager alarmManager = (AlarmManager) getActivity().getSystemService(getContext().ALARM_SERVICE);
+                                        //        設定單次提醒
+                                        alarmManager.set(AlarmManager.RTC_WAKEUP, settime, pendingIntent);
+                                    }
+                                }
+                            } else {
+
+                            }
+
+                        }
+                    });
+        }
 
     }
 
@@ -292,7 +315,7 @@ public class homeFragment extends Fragment {
         final TextView text_petsBirth = getView().findViewById(R.id.text_petsBirth);
         final TextView text_petsAge = getView().findViewById(R.id.text_petsAge);
         final TextView text_route = getView().findViewById(R.id.text_route);
-        db.collection("pets").whereEqualTo("petName", query)
+        db.collection("users").document(userUID).collection("pets").whereEqualTo("petName", query)
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
@@ -320,14 +343,7 @@ public class homeFragment extends Fragment {
                                     ca2.setTime(nowdate);
                                     int year = ca2.get(Calendar.YEAR) - ca1.get(Calendar.YEAR);
                                     int month = ca2.get(Calendar.MONTH) - ca1.get(Calendar.MONTH);
-                                    int day = ca2.get(Calendar.DATE) - ca1.get(Calendar.DATE);
-                                    if (month <= 0) {
-                                        year--;
-                                        month = month + 12;
-                                    }
-                                    if (day <= 0) {
-                                        month--;
-                                    }
+
                                     text_petsAge.setText(year + "歲" + month + "月");
                                 } catch (ParseException e) {
                                     e.printStackTrace();
@@ -379,7 +395,7 @@ public class homeFragment extends Fragment {
                 countdowndate.put("startDay", showercountdownday);
                 countdowndate.put("endDay", showerday);
                 countdowndate.put("countdownEvent",countdownEvent);
-                db.collection("pets").document(documentname).collection("countdown").document(countdownEvent).set(countdowndate);
+                db.collection("users").document(userUID).collection("pets").document(documentname).collection("countdown").document(countdownEvent).set(countdowndate);
                 setCountdownColor();
             }
         }, c.get(Calendar.YEAR), c.get(Calendar.MONTH), c.get(Calendar.DAY_OF_MONTH));
@@ -387,6 +403,7 @@ public class homeFragment extends Fragment {
         datePicker.setMinDate(System.currentTimeMillis());
         datePickerDialog.show();
     }
+
     public void setCountdownColor(){
         if(!pet_query.equals("尚未擁有寵物")) {
             final FirebaseFirestore db = FirebaseFirestore.getInstance();
@@ -397,7 +414,7 @@ public class homeFragment extends Fragment {
             ProgressBar injectionBar = getView().findViewById(R.id.injectionBar);
             ProgressBar teethBar = getView().findViewById(R.id.teethBar);
             ProgressBar bloodBar = getView().findViewById(R.id.bloodBar);
-            db.collection("pets").document(documentname).collection("countdown")
+            db.collection("users").document(userUID).collection("pets").document(documentname).collection("countdown")
                     .get()
                     .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                         @Override
@@ -421,7 +438,6 @@ public class homeFragment extends Fragment {
                                             progressDrawable1.setColorFilter(0xFF0071BC, android.graphics.PorterDuff.Mode.SRC_IN);
                                             showerBar.setProgressDrawable(progressDrawable1);
                                             if (calculationCountdownDate(endDay) <= 0) {
-                                                notification();
                                                 Drawable progressDrawable = showerBar.getProgressDrawable().mutate();
                                                 progressDrawable.setColorFilter(0xFFFF0000, android.graphics.PorterDuff.Mode.SRC_IN);
                                                 showerBar.setProgressDrawable(progressDrawable);
@@ -444,7 +460,6 @@ public class homeFragment extends Fragment {
                                             progressDrawable1.setColorFilter(0xFF0071BC, android.graphics.PorterDuff.Mode.SRC_IN);
                                             hairCutBar.setProgressDrawable(progressDrawable1);
                                             if (calculationCountdownDate(endDay) <= 0) {
-                                                notification();
                                                 Drawable progressDrawable = hairCutBar.getProgressDrawable().mutate();
                                                 progressDrawable.setColorFilter(Color.RED, android.graphics.PorterDuff.Mode.SRC_IN);
                                                 hairCutBar.setProgressDrawable(progressDrawable);
@@ -467,7 +482,6 @@ public class homeFragment extends Fragment {
                                             progressDrawable1.setColorFilter(0xFF0071BC, android.graphics.PorterDuff.Mode.SRC_IN);
                                             fleaInBar.setProgressDrawable(progressDrawable1);
                                             if (calculationCountdownDate(endDay) <= 0) {
-                                                notification();
                                                 Drawable progressDrawable = fleaInBar.getProgressDrawable().mutate();
                                                 progressDrawable.setColorFilter(Color.RED, android.graphics.PorterDuff.Mode.SRC_IN);
                                                 fleaInBar.setProgressDrawable(progressDrawable);
@@ -490,7 +504,6 @@ public class homeFragment extends Fragment {
                                             progressDrawable1.setColorFilter(0xFF0071BC, android.graphics.PorterDuff.Mode.SRC_IN);
                                             fleaOutBar.setProgressDrawable(progressDrawable1);
                                             if (calculationCountdownDate(endDay) <= 0) {
-                                                notification();
                                                 Drawable progressDrawable = fleaOutBar.getProgressDrawable().mutate();
                                                 progressDrawable.setColorFilter(Color.RED, android.graphics.PorterDuff.Mode.SRC_IN);
                                                 fleaOutBar.setProgressDrawable(progressDrawable);
@@ -513,7 +526,6 @@ public class homeFragment extends Fragment {
                                             progressDrawable1.setColorFilter(0xFF0071BC, android.graphics.PorterDuff.Mode.SRC_IN);
                                             injectionBar.setProgressDrawable(progressDrawable1);
                                             if (calculationCountdownDate(endDay) <= 0) {
-                                                notification();
                                                 Drawable progressDrawable = injectionBar.getProgressDrawable().mutate();
                                                 progressDrawable.setColorFilter(Color.RED, android.graphics.PorterDuff.Mode.SRC_IN);
                                                 injectionBar.setProgressDrawable(progressDrawable);
@@ -536,7 +548,6 @@ public class homeFragment extends Fragment {
                                             progressDrawable1.setColorFilter(0xFF0071BC, android.graphics.PorterDuff.Mode.SRC_IN);
                                             teethBar.setProgressDrawable(progressDrawable1);
                                             if (calculationCountdownDate(endDay) <= 0) {
-                                                notification();
                                                 Drawable progressDrawable = teethBar.getProgressDrawable().mutate();
                                                 progressDrawable.setColorFilter(Color.RED, android.graphics.PorterDuff.Mode.SRC_IN);
                                                 teethBar.setProgressDrawable(progressDrawable);
@@ -559,7 +570,6 @@ public class homeFragment extends Fragment {
                                             progressDrawable1.setColorFilter(0xFF0071BC, android.graphics.PorterDuff.Mode.SRC_IN);
                                             bloodBar.setProgressDrawable(progressDrawable1);
                                             if (calculationCountdownDate(endDay) <= 0) {
-                                                notification();
                                                 Drawable progressDrawable = bloodBar.getProgressDrawable().mutate();
                                                 progressDrawable.setColorFilter(Color.RED, android.graphics.PorterDuff.Mode.SRC_IN);
                                                 bloodBar.setProgressDrawable(progressDrawable);

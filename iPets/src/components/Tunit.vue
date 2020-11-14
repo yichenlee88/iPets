@@ -1,15 +1,17 @@
 <template>
   <b-container id="tunit-app" class="p-4">
     <div>
-      <b-jumbotron class="cat_jumbotron" lead="The cat is so awesome!">
+      <!-- <b-jumbotron class="cat_jumbotron" lead="The cat is so awesome!">
         <template v-slot:header>Cats Bang Bang Bang</template>
         <b-button variant="primary" href="#">Love</b-button>
-      </b-jumbotron>
+      </b-jumbotron> -->
+      <img src="../assets/風格轉換圖.png" style="width:80%">
     </div>
     <b-form-file
       @change="handleFileUpload"
       accept="image/jpeg, image/png"
       placeholder="Choose..."
+      style="margin-top: 20px"
       multiple
     ></b-form-file>
     <div v-if="processing" class="d-flex justify-content-center m-5">
@@ -39,7 +41,7 @@
 <script>
 import axios from "axios";
 export default {
-  name: "Tunit",
+  name: "tunit",
   data() {
     return {
       processing: false,
