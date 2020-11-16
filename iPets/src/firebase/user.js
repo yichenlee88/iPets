@@ -14,12 +14,13 @@ async function updateUserProfile(store, uid) {
         email: doc.data().email,
         photoURL: doc.data().photoURL
       });
+      console.log("[Vuex] Finish GET User Profile");
     });
 }
 
 async function getUserPetsList(store, uid) {
   const petsList = [];
-  await fStore
+  var status = await fStore
     .collection("users")
     .doc(uid)
     .collection("pets")
@@ -31,7 +32,18 @@ async function getUserPetsList(store, uid) {
       store.commit("getUserPetsList", {
         pets_list: petsList
       });
+      store.commit("UpdateCurrentPet", {
+        current_pet_id: petsList[0].id,
+        current_pet_name: petsList[0].name
+      });
+      console.log("[Vuex] Finish GET Pets List");
+      return 1;
+    })
+    .catch(() => {
+      console.log("[Vuex] No pet yet");
+      return 0;
     });
+  return status;
 }
 
 async function updateMonthCalendar(store, uid) {
@@ -65,7 +77,8 @@ async function updateMonthCalendar(store, uid) {
             });
           } else {
             // 連續性活動
-            console.log(name);
+            return null;
+            // console.log(name);
           }
         }
         // Sort events by start
@@ -73,6 +86,7 @@ async function updateMonthCalendar(store, uid) {
       store.commit("updateMonthCalendar", {
         month_calendar: events
       });
+      console.log("[Vuex] Finish Month Calendar");
     });
 }
 
