@@ -169,7 +169,7 @@ public class photoGalleryActivity extends AppCompatActivity {
                 filepath = data.getData();
                 try {
                     Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), filepath);
-                    imageView.setImageBitmap(bitmap); //選取照片後所呈現的本端照片
+                    imageView2.setImageBitmap(bitmap); //選取照片後所呈現的本端照片
                     Log.i(TAG, "Uri: " + filepath.toString());
                 } catch (IOException e) {
                     e.printStackTrace();
