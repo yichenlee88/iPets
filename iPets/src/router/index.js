@@ -12,6 +12,7 @@ import manageArticle from "@/components/manageArticle";
 import manageAdoption from "@/components/manageAdoption";
 import manageContact from "@/components/manageContact";
 import manage from "@/components/manage";
+import newPet from "@/components/newPet";
 import { db } from "../db";
 import dogScience from "@/components/dogScience";
 import post from "@/components/post";
@@ -162,6 +163,13 @@ let router = new Router({
       path: "/album",
       name: "album",
       component: album,
+      meta: {
+        requiresAuth: true
+      }
+    },
+    {
+      path: "/newPet",
+      component: newPet,
       meta: {
         requiresAuth: true
       }
