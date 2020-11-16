@@ -15,7 +15,7 @@ import {
   getUserPetsList,
   updateMonthCalendar
 } from "./firebase/user";
-import { updatePetInfo } from "./firebase/pet";
+import { updateSinglePetInfo } from "./firebase/pet";
 
 const fAuth = db.auth();
 
@@ -31,13 +31,21 @@ export default {
       Height: 0
     };
   },
-  created() {
+  async created() {
     if (fAuth.currentUser) {
       var uid = fAuth.currentUser.uid;
-      updateUserProfile(this.$store, uid);
-      getUserPetsList(this.$store, uid);
-      updatePetInfo(this.$store, uid);
-      updateMonthCalendar(this.$store, uid);
+      await updateUserProfile(this.$store, uid);
+      var status = await getUserPetsList(this.$store, uid);
+      if (status === 0) {
+        this.$router.push("/newPet");
+      }
+      console.log(status);
+      await updateSinglePetInfo(
+        this.$store,
+        uid,
+        this.$store.state.current_pet_id
+      );
+      await updateMonthCalendar(this.$store, uid);
       this.isLogIn = true;
     }
   }
