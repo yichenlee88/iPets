@@ -78,7 +78,7 @@ public class editAccountActivity extends AppCompatActivity {
                     }
                 });
         Map<String, Object> userInfo = new HashMap<>();
-        userInfo.put("Email",email);
+        userInfo.put("email",email);
         db.collection("users").document(userUID).update(userInfo);
         AlertDialog.Builder finishsignup = new AlertDialog.Builder(editAccountActivity.this);
         finishsignup.setMessage("修改成功");

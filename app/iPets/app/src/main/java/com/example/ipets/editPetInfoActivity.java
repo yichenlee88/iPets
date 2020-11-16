@@ -48,7 +48,10 @@ import com.google.firebase.storage.UploadTask;
 
 import java.io.ByteArrayOutputStream;
 import java.io.FileNotFoundException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -64,6 +67,7 @@ public class editPetInfoActivity extends AppCompatActivity implements AdapterVie
     int petBirth_year;
     int petBirth_month;
     int petBirth_date;
+    String oldpet;
     String documentname;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -143,6 +147,8 @@ public class editPetInfoActivity extends AppCompatActivity implements AdapterVie
         EditText edmypetName = findViewById(R.id.mypetName);
         final EditText edpetsbirth = findViewById(R.id.mypetBirth);
         Spinner petSexSpinner = findViewById(R.id.petSexSpinner);
+        EditText edhobbyText = findViewById(R.id.hobbyText);
+        final EditText edremarkText = findViewById(R.id.remarkText);
         Intent intent = this.getIntent();
         //取得傳遞過來的資料
         String pet = intent.getStringExtra("date");
@@ -160,12 +166,18 @@ public class editPetInfoActivity extends AppCompatActivity implements AdapterVie
                                 StringBuilder fields = new StringBuilder("");
                                 StringBuilder fields2 = new StringBuilder("");
                                 StringBuilder fields3 = new StringBuilder("");
-                                fields.append(doc.get("petName")).toString();
+                                StringBuilder fields4 = new StringBuilder("");
+                                StringBuilder fields5 = new StringBuilder("");
+                                oldpet = fields.append(doc.get("petName")).toString();
                                 String Petsgender = fields2.append(doc.get("petGender")).toString();
                                 fields3.append(doc.get("petBirth")).toString();
+                                fields4.append(doc.get("petHobby")).toString();
+                                fields5.append(doc.get("petNote")).toString();
                                 edmypetName.setText(fields);
                                 edpetsbirth.setText(fields3);
-                                if(Petsgender.equals("母的")) {
+                                edhobbyText.setText(fields4);
+                                edremarkText.setText(fields5);
+                                if(Petsgender.equals("女孩")) {
                                     petSexSpinner.setSelection(1);
                                 }
                             }
@@ -190,12 +202,30 @@ public class editPetInfoActivity extends AppCompatActivity implements AdapterVie
         UploadTask uploadTask = mountainsRef.putBytes(data);
         //取得照片網址
         String petsimage = String.valueOf(mountainsRef.getDownloadUrl());
-        addPetInfo(petsimage,mypetName);
+        setPetInfo(petsimage,mypetName);
     }
 
-    private void addPetInfo(String petsimage, String mypetName) {
+    private void setPetInfo(String petsimage, String mypetName) {
         final EditText edpetsbirth = findViewById(R.id.mypetBirth);
         String petsbirth = edpetsbirth.getText().toString();
+        SimpleDateFormat sdf= new SimpleDateFormat("yyyy-MM-dd");
+        Date date = null;
+        try {
+            date = sdf.parse(petsbirth);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(date);
+        if(petBirth_year == 0){
+        petBirth_year = calendar.get(Calendar.YEAR);
+        petBirth_month = calendar.get(Calendar.MONTH)+1;
+        petBirth_date = calendar.get(Calendar.DAY_OF_MONTH);
+        }
+        EditText edhobbyText = findViewById(R.id.hobbyText);
+        String hobbyText = edhobbyText.getText().toString();
+        final EditText edremarkText = findViewById(R.id.remarkText);
+        String remarkText = edremarkText.getText().toString();
         String[] petSex =getResources().getStringArray(R.array.Spinner_petSex);
         Spinner petSexSpinner = findViewById(R.id.petSexSpinner);
         int idsex=petSexSpinner.getSelectedItemPosition();
@@ -207,10 +237,60 @@ public class editPetInfoActivity extends AppCompatActivity implements AdapterVie
         userInfo.put("petName", mypetName);
         userInfo.put("petBirth", petsbirth);
         userInfo.put("petGender", sex);
+        userInfo.put("petHobby",  hobbyText);
+        userInfo.put("petNote", remarkText);
         userInfo.put("petBirth_year", petBirth_year);
         userInfo.put("petBirth_month", petBirth_month);
         userInfo.put("petBirth_date",petBirth_date);
         db.collection("users").document(userUID).collection("pets").document(documentname).update(userInfo);
+        db.collection("users").document(userUID).collection("pets").document(documentname).collection("countdown")
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                String countdownid = document.getId();
+                                db.collection("users").document(userUID).collection("pets").document(documentname).collection("countdown").document(countdownid)
+                                        .get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                                        if (task.isSuccessful()) {
+                                            DocumentSnapshot doc = document;
+                                            StringBuilder fields = new StringBuilder("");
+                                            String countdownEvent = fields.append(doc.get("countdownEvent")).toString();
+                                            if (countdownEvent.equals(oldpet+"洗澡")){
+                                                countdownEvent = mypetName+"洗澡";
+                                            }
+                                            if (countdownEvent.equals(oldpet+"修剪毛髮")){
+                                                countdownEvent = mypetName+"修剪毛髮";
+                                            }
+                                            if (countdownEvent.equals(oldpet+"體內除蟲")){
+                                                countdownEvent = mypetName+"體內除蟲";
+                                            }
+                                            if (countdownEvent.equals(oldpet+"體外除蟲")){
+                                                countdownEvent = mypetName+"體外除蟲";
+                                            }
+                                            if (countdownEvent.equals(oldpet+"注射")){
+                                                countdownEvent = mypetName+"注射";
+                                            }
+                                            if (countdownEvent.equals(oldpet+"看牙醫")){
+                                                countdownEvent = mypetName+"看牙醫";
+                                            }
+                                            if (countdownEvent.equals(oldpet+"經期")){
+                                                countdownEvent = mypetName+"經期";
+                                            }
+                                            Map<String, Object> countdownInfo = new HashMap<>();
+                                            countdownInfo.put("countdownEvent", countdownEvent);
+                                            db.collection("users").document(userUID).collection("pets").document(documentname).collection("countdown").document(countdownid).update(countdownInfo);
+                                        }
+                                    }
+                                });
+                            }
+                        }
+
+                    }
+                });
         AlertDialog.Builder finishsignup = new AlertDialog.Builder(editPetInfoActivity.this);
         finishsignup.setMessage("修改成功");
         finishsignup.setNegativeButton("確認", new DialogInterface.OnClickListener() {
