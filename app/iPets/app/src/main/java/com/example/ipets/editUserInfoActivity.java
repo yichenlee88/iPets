@@ -197,7 +197,7 @@ public class editUserInfoActivity extends AppCompatActivity{
                     fields4.append(doc.get("phone")).toString();
                     fields5.append(doc.get("address")).toString();
                     String gender = fields6.append(doc.get("userGender")).toString();
-                    email = fields7.append(doc.get("Email")).toString();
+                    email = fields7.append(doc.get("email")).toString();
                     password = fields8.append(doc.get("password")).toString();
                     edmasterName.setText(fields);
                     eduserName.setText(fields2);
