@@ -220,8 +220,8 @@ export default {
     pet() {
       return this.$store.state.pet;
     },
-    pet_doc_id() {
-      return this.$store.state.pet_doc_id;
+    current_pet_id() {
+      return this.$store.state.current_pet_id;
     },
     pet_info() {
       return this.$store.state.pet_info;

@@ -2,19 +2,19 @@ import { db } from "../db";
 
 const fStore = db.firestore();
 
-async function updatePetInfo(store, uid) {
-  var petsRef = fStore
+async function updateSinglePetInfo(store, uid, petID) {
+  await fStore
     .collection("users")
     .doc(uid)
-    .collection("pets");
-  await petsRef.get().then(function(querySnapshot) {
-    querySnapshot.forEach(function(doc) {
-      store.commit("updatePetInfo", {
-        pet: doc.data(),
-        pet_doc_id: doc.id
+    .collection("pets")
+    .doc(petID)
+    .get()
+    .then(function(doc) {
+      store.commit("updateSinglePetInfo", {
+        pet: doc.data()
       });
+      console.log("[Vuex] Finish GET Single Pet Information");
     });
-  });
 }
 
-export { updatePetInfo };
+export { updateSinglePetInfo };

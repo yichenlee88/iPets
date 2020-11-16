@@ -21,34 +21,38 @@
 
         <!-- Right aligned nav items -->
         <b-navbar-nav class="ml-auto">
-          <div>
-            <b-dropdown
-              id="dropdown-divider"
-              variant="white"
-              text="asdasd"
-              right
-              class="m-2"
-            >
-              <b-dropdown-item-button v-for="item in pets_list" :key="item.id"
-                >{{ item.name }}
-              </b-dropdown-item-button>
-              <b-dropdown-divider></b-dropdown-divider>
-              <b-dropdown-item-button>新增寵物</b-dropdown-item-button>
-            </b-dropdown>
-          </div>
-          <b-nav-form>
-            <b-nav-item href="#/login" v-if="!isSignedIn"
+          <b-nav-form v-if="!isSignedIn">
+            <b-nav-item href="#/login"
               ><i class="fas fa-sign-in-alt" style="size:12px"></i
               >登入</b-nav-item
             >
-            <b-nav-item href="#/register" v-if="!isSignedIn"
+            <b-nav-item href="#/register"
               ><i class="far fa-user" style="size:12px"></i>註冊</b-nav-item
             >
+            <b-nav-item href="#/">網站導覽</b-nav-item>
           </b-nav-form>
-          <b-nav-item href="#/" v-if="!isSignedIn">網站導覽</b-nav-item>
-          <b-nav-form>
-            <b-nav-item @click="logout" v-if="isSignedIn"
-              ><i class="fas fa-sign-in-alt" style="size:12px"></i
+          <b-nav-form v-if="isSignedIn">
+            <b-nav-item>
+              <b-dropdown
+                variant="white"
+                :text="current_pet_name"
+                right
+                class="m-2"
+              >
+                <b-dropdown-item
+                  v-for="item in pets_list"
+                  :key="item.id"
+                  :value="item.id"
+                  :disabled="item.name === current_pet_name"
+                  @click="changeCurrentPet(item.id, item.name)"
+                  >{{ item.name }}
+                </b-dropdown-item>
+                <b-dropdown-divider></b-dropdown-divider>
+                <b-dropdown-item to="/newPet">新增寵物</b-dropdown-item>
+              </b-dropdown>
+            </b-nav-item>
+            <b-nav-item @click="logout">
+              <i class="fas fa-sign-in-alt" style="size:12px"></i
               >登出</b-nav-item
             >
           </b-nav-form>
@@ -60,19 +64,19 @@
 
 <script>
 import firebase from "firebase/app";
+import { updateSinglePetInfo } from "../firebase/pet";
 export default {
   name: "navbar",
   data() {
     return {
       isSignedIn: false,
-      selectedPet: ""
+      selectedPet: "3qvZxKgG4Gmzyx1ZEKG1"
     };
   },
-  created() {
+  created(event) {
     if (firebase.auth().currentUser) {
       this.isSignedIn = true;
     }
-    this.selectedPet = this.$store.state.name;
   },
   methods: {
     logout: function(e) {
@@ -83,13 +87,24 @@ export default {
           this.$router.go({ path: this.$router.path });
         });
     },
-    changePet() {
-      console.log(this.selectedPet);
+    async changeCurrentPet(id, name) {
+      await this.$store.commit("UpdateCurrentPet", {
+        current_pet_id: id,
+        current_pet_name: name
+      });
+      await updateSinglePetInfo(
+        this.$store,
+        this.$store.state.uid,
+        this.$store.state.current_pet_id
+      );
     }
   },
   computed: {
-    pet() {
-      return this.$store.state.pet;
+    current_pet_id() {
+      return this.$store.state.current_pet_id;
+    },
+    current_pet_name() {
+      return this.$store.state.current_pet_name;
     },
     pets_list() {
       return this.$store.state.pets_list;
