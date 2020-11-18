@@ -105,7 +105,7 @@ public class signUpFragment extends Fragment {
                                     db = FirebaseFirestore.getInstance();
                                     Map<String, Object> userInfo = new HashMap<>();
                                     userInfo.put("userName", username);
-                                    userInfo.put("Email", email);
+                                    userInfo.put("email", email);
                                     userInfo.put("password", password);
                                     db.collection("users").document(userUID).set(userInfo);
                                     NavController controller = Navigation.findNavController(getView());

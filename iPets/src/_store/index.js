@@ -5,13 +5,18 @@ Vue.use(Vuex);
 
 const store = new Vuex.Store({
   state: {
+    // user
     uid: null,
     name: null,
     email: null,
     photoURL: null,
+    // pet
+    current_pet_id: null,
+    current_pet_name: null,
     pet: null,
-    pet_doc_id: null,
-    pet_info: null
+    month_calendar: null,
+    // global pets
+    pets_list: null
   },
   mutations: {
     updateUserProfile(state, payload) {
@@ -20,12 +25,18 @@ const store = new Vuex.Store({
       state.email = payload.email;
       state.photoURL = payload.photoURL;
     },
-    updatePetInfo(state, payload) {
-      state.pet = payload.pet;
-      state.pet_doc_id = payload.pet_doc_id;
+    getUserPetsList(state, payload) {
+      state.pets_list = payload.pets_list;
     },
-    updateInfo(state, payload) {
-      state.pet_info = payload.pet_info;
+    UpdateCurrentPet(state, payload) {
+      state.current_pet_id = payload.current_pet_id;
+      state.current_pet_name = payload.current_pet_name;
+    },
+    updateSinglePetInfo(state, payload) {
+      state.pet = payload.pet;
+    },
+    updateMonthCalendar(state, payload) {
+      state.month_calendar = payload.month_calendar;
     }
   }
 });

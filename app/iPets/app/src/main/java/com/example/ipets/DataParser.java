@@ -17,7 +17,7 @@ public class DataParser {
         JSONObject jsonObject;
 
         try {
-            Log.d("Places", "parse");
+            Log.d("Places", "parse " + jsonData);
             jsonObject = new JSONObject((String) jsonData);
             jsonArray = jsonObject.getJSONArray("results");
         } catch (JSONException e) {
@@ -80,3 +80,4 @@ public class DataParser {
         return googlePlaceMap;
     }
 }
+

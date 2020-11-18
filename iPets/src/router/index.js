@@ -12,6 +12,7 @@ import manageArticle from "@/components/manageArticle";
 import manageAdoption from "@/components/manageAdoption";
 import manageContact from "@/components/manageContact";
 import manage from "@/components/manage";
+import newPet from "@/components/newPet";
 import { db } from "../db";
 import dogScience from "@/components/dogScience";
 import post from "@/components/post";
@@ -21,7 +22,7 @@ import album from "@/components/album";
 import albumView from "@/components/albumView";
 import setting from "@/components/setting";
 import editProfile from "@/components/editProfile";
-import editPetProfile from "@/components/editPetProfile";
+import addPetProfile from "@/components/addPetProfile";
 import password from "@/components/password";
 import mail from "@/components/mail";
 import loginActivity from "@/components/loginActivity";
@@ -50,7 +51,8 @@ let router = new Router({
       name: "about",
       component: about,
       meta: {
-        requiresGuest: true
+        requiresGuest: true,
+        requiresAuth: true
       }
     },
     {
@@ -58,7 +60,8 @@ let router = new Router({
       name: "dogInfo",
       component: dogInfo,
       meta: {
-        requiresGuest: true
+        requiresGuest: true,
+        requiresAuth: true
       }
     },
     {
@@ -122,7 +125,8 @@ let router = new Router({
       name: "dogScience",
       component: dogScience,
       meta: {
-        requiresGuest: true
+        requiresGuest: true,
+        requiresAuth: true
       }
     },
     {
@@ -164,6 +168,13 @@ let router = new Router({
       }
     },
     {
+      path: "/newPet",
+      component: newPet,
+      meta: {
+        requiresAuth: true
+      }
+    },
+    {
       path: "/setting",
       name: "setting",
       component: setting,
@@ -176,8 +187,8 @@ let router = new Router({
           component: editProfile
         },
         {
-          path: "editPetProfile",
-          component: editPetProfile
+          path: "addPetProfile",
+          component: addPetProfile
         },
         {
           path: "password",

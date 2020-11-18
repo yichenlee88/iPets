@@ -24,6 +24,7 @@ import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -69,7 +70,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private Button mSearch_button;
     EditText etSource;
     TextView etDestination;
-    Button btTrack;
+    ImageButton btTrack;
 
     //宣告標記
     Marker marker;
@@ -107,17 +108,17 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             public void onClick(View v) {
                 //Get value from edit text
                 String sSource = mSearchText.getText().toString().trim();
-                String sDestination =etDestination.getText().toString().trim();
+                String sDestination = etDestination.getText().toString().trim();
 
                 //Check condition
-                if(sSource.equals("") && sDestination.equals("")){
+                if (sSource.equals("") && sDestination.equals("")) {
                     //When both value blank
                     Toast.makeText(getApplicationContext()
-                            ,"Enter both location",Toast.LENGTH_SHORT).show();
-                }else {
+                            , "Enter both location", Toast.LENGTH_SHORT).show();
+                } else {
                     //When both value fill
                     //Display track
-                    DisplayTrack(sSource,sDestination);
+                    DisplayTrack(sSource, sDestination);
                 }
             }
         });
@@ -218,6 +219,14 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                         if (task.isSuccessful()) {
                             //找到位置
                             Location mLocation = (Location) task.getResult();
+                            Log.d("MapActivity", "onComplete:  location: " + location);
+                            try{
+                                double latitude = mLocation.getLatitude();
+                                double longtitude = mLocation.getLongitude();
+                                Log.d("MapActivity", "onComplete:  latitude:" + latitude + ", longtitude:" +longtitude);
+                            }catch (Exception e){
+                                e.printStackTrace();
+                            }
                             LatLng nowlatLng = new LatLng(mLocation.getLatitude(), mLocation.getLongitude());
                             mMap.animateCamera(CameraUpdateFactory.newLatLng(nowlatLng));
                             mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(nowlatLng, 17));
@@ -322,7 +331,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                         return (googlePlacesUrl.toString());
                     }
                 }
-                return "";
+                return "https://maps.googleapis.com/maps/api/place/nearbysearch/json?key=AIzaSyBiU7Qs7b5GjLBZ8kxHrJU-2VOmRXR6XpY&radius=1000&type=pet_store&sensor=true&location=25.042035, 121.525406";
             }
 
         });
@@ -362,7 +371,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                         return (googlePlacesUrl.toString());
                     }
                 }
-                return "";
+                return "https://maps.googleapis.com/maps/api/place/nearbysearch/json?key=AIzaSyBiU7Qs7b5GjLBZ8kxHrJU-2VOmRXR6XpY&radius=1000&type=pet_store&sensor=true&location=25.042035, 121.525406";
             }
         });
 
@@ -401,7 +410,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                         return (googlePlacesUrl.toString());
                     }
                 }
-                return "";
+                return "https://maps.googleapis.com/maps/api/place/nearbysearch/json?key=AIzaSyBiU7Qs7b5GjLBZ8kxHrJU-2VOmRXR6XpY&radius=1000&type=veterinary_care&sensor=true&location=25.042035, 121.525406";
             }
         });
 
@@ -440,9 +449,11 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                         return (googlePlacesUrl.toString());
                     }
                 }
-                return "";
+                return "https://maps.googleapis.com/maps/api/place/nearbysearch/json?key=AIzaSyBiU7Qs7b5GjLBZ8kxHrJU-2VOmRXR6XpY&radius=1000&type=park&sensor=true&location=25.042035, 121.525406";
             }
         });
     }
 }
+
+
 

@@ -90,9 +90,11 @@ public class userInfoFragment extends Fragment {
         EditText edmyname = getView().findViewById(R.id.myname);
         final EditText edmybirth = getView().findViewById(R.id.mybirth);
         final EditText edmyaddress = getView().findViewById(R.id.myaddress);
+        final EditText edmyNum = getView().findViewById(R.id.myNum);
         String myname = edmyname.getText().toString();
         String mybirth = edmybirth.getText().toString();
         String myaddress = edmyaddress.getText().toString();
+        String myNum = edmyNum.getText().toString();
         String mygender = null;
         RadioGroup genderselect = getView().findViewById(R.id.genderselect);
         switch(genderselect.getCheckedRadioButtonId()){
@@ -117,6 +119,7 @@ public class userInfoFragment extends Fragment {
         userInfo.put("userGender", mygender);
         //phone 電話
         userInfo.put("address", myaddress);
+        userInfo.put("phone",myNum);
         userInfo.put("userBirth_year", userBirth_year);
         userInfo.put("userBirth_month", userBirth_month);
         userInfo.put("userBirth_date",userBirth_date);

@@ -24,9 +24,10 @@ public class GetNearbyPlacesData extends AsyncTask<Object, String, String> {
             Log.d("GetNearbyPlacesData", "doInBackground entered");
             mMap = (GoogleMap) params[0];
             url = (String) params[1];
+            Log.d("GooglePlacesReadTask", "doInBackground url: " + url);
             DownloadUrl downloadUrl = new DownloadUrl();
             googlePlacesData = downloadUrl.readUrl(url);
-            Log.d("GooglePlacesReadTask", "doInBackground Exit");
+            Log.d("GooglePlacesReadTask", "doInBackground Exit: googlePlacesData: " + googlePlacesData);
         } catch (Exception e) {
             Log.d("GooglePlacesReadTask", e.toString());
         }
@@ -66,3 +67,4 @@ public class GetNearbyPlacesData extends AsyncTask<Object, String, String> {
 
     }
 }
+
