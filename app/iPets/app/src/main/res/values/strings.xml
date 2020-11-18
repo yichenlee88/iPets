@@ -45,8 +45,8 @@
     <string name="TextView_petsname">寵物名稱</string>
     <string name="petsname_hint">名字</string>
     <string name="TextView_petssex">寵物性別</string>
-    <string name="RadioButton_sex1">公的</string>
-    <string name="RadioButton_sex2">母的</string>
+    <string name="RadioButton_sex1">男孩</string>
+    <string name="RadioButton_sex2">女孩</string>
     <string name="TextView_petsbirth">生日</string>
     <string name="petsbirth_hint">出生年月日</string>
     <string name="TextView_species">寵物品種：</string>
@@ -144,8 +144,8 @@
         <item>不願透露</item>
     </string-array>
     <string-array name="Spinner_petSex">
-        <item>公的</item>
-        <item>母的</item>
+        <item>男孩</item>
+        <item>女孩</item>
     </string-array>
     <string-array name="Spinner_problem">
         <item>帳號安全</item>
@@ -259,4 +259,8 @@
         <item>日本柴犬</item>
     </string-array>
     <string name="Button_delete">刪除</string>
+    <string name="img_photoGallery1" />
+    <string name="img_photoGallery2" />
+    <string name="Button_upload">上傳圖片</string>
+    <string name="Button_track" />
 </resources>

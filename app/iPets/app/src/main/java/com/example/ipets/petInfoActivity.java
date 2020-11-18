@@ -172,10 +172,10 @@ public class petInfoActivity extends AppCompatActivity {
         RadioGroup sexselect = findViewById(R.id.sexselect);
         switch(sexselect.getCheckedRadioButtonId()){
             case R.id.malepet: //case mRadioButton0.getId():
-                petsgender = "公的";
+                petsgender = "男孩";
                 break;
             case R.id.femalepet: //case mRadioButton1.getId():
-                petsgender = "母的";
+                petsgender = "女孩";
                 break;
         }
         Calendar now = Calendar.getInstance();
@@ -201,8 +201,9 @@ public class petInfoActivity extends AppCompatActivity {
         Map<String, Object> countdowndate = new HashMap<>();
         countdowndate.put("startDay", "");
         countdowndate.put("endDay", "");
-        countdowndate.put("countdownEvent","");
-        db.collection("users").document(userUID).collection("pets").document(id).collection("countdown").document(petsname+"洗澡").set(countdowndate);
+        countdowndate.put("countdownEvent",petsname+"洗澡");
+        String countdownid = db.collection("users").document(userUID).collection("pets").document(id).collection("countdown").document().getId();
+        db.collection("users").document(userUID).collection("pets").document(id).collection("countdown").document(countdownid).set(countdowndate);
         AlertDialog.Builder finishsignup = new AlertDialog.Builder(petInfoActivity.this);
         finishsignup.setMessage("新增成功");
         finishsignup.setNegativeButton("確認", new DialogInterface.OnClickListener() {
