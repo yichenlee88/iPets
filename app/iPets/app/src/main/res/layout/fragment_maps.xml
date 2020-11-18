@@ -42,13 +42,13 @@
             app:layout_constraintTop_toTopOf="@+id/guideline5" />
 
         <Button
-            android:id="@+id/PetSalon"
+            android:id="@+id/PetHospital"
             android:layout_width="wrap_content"
             android:layout_height="40dp"
             android:background="@drawable/button_oval"
             android:backgroundTint="#0071BC"
-            android:onClick="PetSalon"
-            android:text="@string/button_PetGroomingShop"
+            android:onClick="PetHospital"
+            android:text="@string/button_PetHospital"
             android:textColor="#FFFFFF"
             app:layout_constraintBottom_toTopOf="@+id/guideline6"
             app:layout_constraintEnd_toStartOf="@+id/guideline11"
@@ -70,13 +70,13 @@
             app:layout_constraintTop_toTopOf="@+id/guideline5" />
 
         <Button
-            android:id="@+id/PetHospital"
+            android:id="@+id/PetSalon"
             android:layout_width="wrap_content"
             android:layout_height="40dp"
             android:background="@drawable/button_oval"
             android:backgroundTint="#0071BC"
-            android:onClick="PetHospital"
-            android:text="@string/button_PetHospital"
+            android:onClick="PetSalon"
+            android:text="@string/button_PetGroomingShop"
             android:textColor="#FFFFFF"
             app:layout_constraintBottom_toTopOf="@+id/guideline6"
             app:layout_constraintEnd_toStartOf="@+id/guideline84"
