@@ -259,4 +259,8 @@
         <item>日本柴犬</item>
     </string-array>
     <string name="Button_delete">刪除</string>
+    <string name="img_photoGallery1" />
+    <string name="img_photoGallery2" />
+    <string name="Button_upload">上傳圖片</string>
+    <string name="Button_track" />
 </resources>
