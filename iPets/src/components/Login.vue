@@ -139,7 +139,7 @@ export default {
   height: 24px;
   width: 24px;
   top: 46%;
-  margin-top: -6px;
+  margin-top: -14px;
   right: 70px;
   z-index: 1;
   cursor: pointer;
