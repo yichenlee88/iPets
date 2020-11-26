@@ -288,7 +288,7 @@ public class homeFragment extends Fragment {
                                         calendar.set(Calendar.SECOND, 00);
                                         calendar.set(Calendar.MILLISECOND, 00);
                                         long settime = calendar.getTimeInMillis();
-                                        int id = calendar.get(Calendar.MONTH)+calendar.get(Calendar.DAY_OF_MONTH);
+                                        int id = calendar.get(Calendar.MONTH)+calendar.get(Calendar.DAY_OF_MONTH)+calendar.get(Calendar.DAY_OF_MONTH);
                                         Log.i("LOVE", String.valueOf(settime));
                                         Intent intent = new Intent(getActivity(), alarmReceiver.class);
                                         //        PendingIntent.getBroadcast調用廣播

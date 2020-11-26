@@ -1,5 +1,8 @@
 package com.example.ipets;
 
+import android.app.AlarmManager;
+import android.app.PendingIntent;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
@@ -27,6 +30,7 @@ import com.google.firebase.firestore.QuerySnapshot;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.Year;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -280,6 +284,20 @@ public class calendarActivity extends AppCompatActivity {
                                                 Date endday = sdf.parse(enddate);
                                                 Calendar endcal = Calendar.getInstance();
                                                 endcal.setTime(endday);
+                                                for(;startcal.compareTo(endcal) <= 0;startcal.add(Calendar.DATE, 1)){
+                                                    Calendar c_temp = Calendar.getInstance();
+                                                    c_temp.setTime(startcal.getTime());
+                                                    c_temp.set(Calendar.HOUR_OF_DAY, 00);
+                                                    c_temp.set(Calendar.MINUTE, 00);
+                                                    c_temp.set(Calendar.SECOND, 00);
+                                                    c_temp.set(Calendar.MILLISECOND, 00);
+                                                    long settime = c_temp.getTimeInMillis();
+                                                    int id = c_temp.get(Calendar.MONTH)+c_temp.get(Calendar.DAY_OF_MONTH)+c_temp.get(Calendar.DAY_OF_MONTH)+c_temp.get(Calendar.YEAR);
+                                                    Intent intent = new Intent(calendarActivity.this, alarmReceiver.class);
+                                                    PendingIntent pendingIntent = PendingIntent.getBroadcast(calendarActivity.this, id, intent, 0);
+                                                    AlarmManager alarmManager = (AlarmManager) calendarActivity.this.getSystemService(Context.ALARM_SERVICE);
+                                                    alarmManager.set(AlarmManager.RTC_WAKEUP, settime, pendingIntent);
+                                                }
                                                 if (color.equals("red")) {
                                                     for(;startcal.compareTo(endcal) <= 0;startcal.add(Calendar.DATE, 1)){
                                                         Calendar c_temp = Calendar.getInstance();
