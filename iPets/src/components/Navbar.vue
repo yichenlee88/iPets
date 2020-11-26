@@ -14,47 +14,40 @@
           <b-nav-item href="#/album" v-if="isSignedIn">相簿</b-nav-item>
           <b-nav-item href="#/identify" v-if="isSignedIn">寵物辨識</b-nav-item>
           <b-nav-item href="#/tunit" v-if="isSignedIn">風格轉換</b-nav-item>
-          <b-nav-item href="#/setting/editProfile" v-if="isSignedIn"
-            >設定</b-nav-item
-          >
+          <b-nav-item href="#/setting/editProfile" v-if="isSignedIn">設定</b-nav-item>
         </b-navbar-nav>
 
         <!-- Right aligned nav items -->
         <b-navbar-nav class="ml-auto">
           <b-nav-form v-if="!isSignedIn">
-            <b-nav-item href="#/login"
-              ><i class="fas fa-sign-in-alt" style="size:12px"></i
-              >登入</b-nav-item
-            >
-            <b-nav-item href="#/register"
-              ><i class="far fa-user" style="size:12px"></i>註冊</b-nav-item
-            >
-            <b-nav-item href="#/">網站導覽</b-nav-item>
+            <b-nav-item href="#/login">
+              <i class="fas fa-sign-in-alt" style="size:12px"></i>登入
+            </b-nav-item>
+            <b-nav-item href="#/register">
+              <i class="far fa-user" style="size:12px"></i>註冊
+            </b-nav-item>
+            <b-nav-item v-b-modal.prompt>網站導覽</b-nav-item>
           </b-nav-form>
+          <b-modal id="prompt" title="網站導覽" hide-footer>
+              <img src="../assets/網頁導覽.png" style="width: 100%"/>
+          </b-modal>
           <b-nav-form v-if="isSignedIn">
             <b-nav-item>
-              <b-dropdown
-                variant="white"
-                :text="current_pet_name"
-                right
-                class="m-2"
-              >
+              <b-dropdown variant="white" :text="current_pet_name" right class="m-2">
                 <b-dropdown-item
                   v-for="item in pets_list"
                   :key="item.id"
                   :value="item.id"
                   :disabled="item.name === current_pet_name"
                   @click="changeCurrentPet(item.id, item.name)"
-                  >{{ item.name }}
-                </b-dropdown-item>
+                >{{ item.name }}</b-dropdown-item>
                 <b-dropdown-divider></b-dropdown-divider>
                 <b-dropdown-item to="/newPet">新增寵物</b-dropdown-item>
               </b-dropdown>
             </b-nav-item>
             <b-nav-item @click="logout">
-              <i class="fas fa-sign-in-alt" style="size:12px"></i
-              >登出</b-nav-item
-            >
+              <i class="fas fa-sign-in-alt" style="size:12px"></i>登出
+            </b-nav-item>
           </b-nav-form>
         </b-navbar-nav>
       </b-collapse>
