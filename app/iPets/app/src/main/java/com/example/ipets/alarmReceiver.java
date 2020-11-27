@@ -93,7 +93,6 @@ public class alarmReceiver extends BroadcastReceiver {
                                                                 channel.enableVibration(true);
                                                                 channel.enableLights(true);
                                                                 notificationManager.createNotificationChannel(channel);//添加channel
-                                                                notifyIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                                                                 notification = new Notification.Builder(context,id)
                                                                         .setCategory(Notification.CATEGORY_MESSAGE)
                                                                         .setSmallIcon(R.drawable.app_logo1)
@@ -169,7 +168,6 @@ public class alarmReceiver extends BroadcastReceiver {
                                                         }
                                                         int pendingIntentid = calendar.get(Calendar.MONTH)+calendar.get(Calendar.DAY_OF_MONTH)+calendar.get(Calendar.DAY_OF_MONTH)+calendar.get(Calendar.YEAR);
                                                         Intent notifyIntent = new Intent(context, calendarActivity.class);
-                                                        notifyIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                                                         PendingIntent pendingIntent=PendingIntent.getActivity(context,pendingIntentid,notifyIntent,PendingIntent.FLAG_ONE_SHOT);
                                                         notificationManager=
                                                                 (NotificationManager)context.getSystemService(Context.NOTIFICATION_SERVICE);
