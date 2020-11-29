@@ -23,10 +23,7 @@
               <label for="imageUpload"></label>
             </div>
             <div class="avatar-preview container2">
-              <div
-                id="imagePreview"
-                style="background-image: url(https://i.epochtimes.com/assets/uploads/2020/11/shutterstock_241831750.jpg);"
-              ></div>
+              <div id="imagePreview"></div>
             </div>
           </div>
           <!-- petName -->
@@ -92,6 +89,7 @@
 
 <script>
 import "bootstrap/dist/css/bootstrap.css";
+import $ from "jquery";
 
 // Import date picker css
 import "pc-bootstrap4-datetimepicker/build/css/bootstrap-datetimepicker.css";
@@ -176,6 +174,17 @@ export default {
   methods: {
     handleFileUpload(e) {
       this.petImage = e.target.files[0];
+      var file = e.target.files[0];
+      var reader = new FileReader();
+      reader.onload = e => {
+        $("#imagePreview").css(
+          "background-image",
+          "url(" + e.target.result + ")"
+        );
+        $("#imagePreview").hide();
+        $("#imagePreview").fadeIn(650);
+      };
+      reader.readAsDataURL(file);
     },
 
     async save_pet_profile(file) {
@@ -187,7 +196,7 @@ export default {
         .add({
           petName: this.petName,
           petGender: this.petGender,
-          petBirth: this.petBirth,
+          petBirth: this.petBirth.toISOString().slice(0, 10),
           breed: this.breed,
           petHobby: this.petHobby,
           petNote: this.petNote,
@@ -214,6 +223,7 @@ export default {
         })
         .then(() => {
           alert("新增成功!");
+          this.$router.push("/");
         })
         .catch(function(error) {
           console.error(
@@ -375,5 +385,9 @@ export default {
   cursor: pointer;
   border-radius: 5px;
   text-align: center;
+}
+
+#imagePreview {
+  background-image: url("../assets/logo_.png");
 }
 </style>
