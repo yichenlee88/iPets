@@ -156,7 +156,7 @@
                         <b-button
                           class="right"
                           v-on:click="updateAdoption(index); $bvModal.hide(`${item.name}`)"
-                        >確認儲存文章</b-button>
+                        >確認儲存</b-button>
                       </b-card>
                     </b-col>
                   </b-row>
@@ -274,7 +274,7 @@
                 <b-button
                   class="right"
                   v-on:click="$bvModal.hide(`createAdoption`); createAdoption()"
-                >確認新增文章</b-button>
+                >確認新增</b-button>
               </b-card>
             </b-col>
           </b-row>

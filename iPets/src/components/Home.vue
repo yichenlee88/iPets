@@ -102,6 +102,7 @@ export default {
   name: "home",
   data() {
     return {
+      slide: 0,
       center: { lat: 25.0325917, lng: 121.5624999 },
       comments: [],
       currentPlace: null
@@ -133,6 +134,12 @@ export default {
         console.log(res);
         this.comments = res.data;
       });
+    },
+    onSlideStart(slide) {
+      this.sliding = true;
+    },
+    onSlideEnd(slide) {
+      this.sliding = false;
     }
   }
 };

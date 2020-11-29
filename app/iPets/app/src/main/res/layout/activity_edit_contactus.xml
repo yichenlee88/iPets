@@ -108,9 +108,9 @@
         android:id="@+id/buttongo"
         android:layout_width="149dp"
         android:layout_height="wrap_content"
+        android:layout_gravity="center"
         android:layout_marginTop="10dp"
-        android:layout_marginStart="130dp"
-        android:text="@string/button_sent"
         android:backgroundTint="#0071BC"
+        android:text="@string/button_sent"
         android:textColor="#FFFFFF" />
 </LinearLayout>

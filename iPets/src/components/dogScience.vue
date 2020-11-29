@@ -46,9 +46,6 @@ export default {
     this.getAricle();
   },
   methods: {
-    reverse() {
-      this.comments.reverse();
-    },
     getAricle() {
       axios.get("http://localhost:3000/comments").then(res => {
         console.log(res);
