@@ -31,7 +31,10 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -111,6 +114,21 @@ public class editUserInfoActivity extends AppCompatActivity{
         Spinner sexSpinner = findViewById(R.id.sexSpinner);
         int idsex=sexSpinner.getSelectedItemPosition();
         String sex = Spinner_sex[idsex];
+        String edBirth = edmasterBirth.getText().toString();
+        SimpleDateFormat sdf= new SimpleDateFormat("yyyy-MM-dd");
+        Date date = null;
+        try {
+            date = sdf.parse(edBirth);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(date);
+        if(userBirth_year == 0){
+            userBirth_year = calendar.get(Calendar.YEAR);
+            userBirth_month = calendar.get(Calendar.MONTH)+1;
+            userBirth_date = calendar.get(Calendar.DAY_OF_MONTH);
+        }
         Map<String, Object> userInfo = new HashMap<>();
         userInfo.put("name",masterName);
         userInfo.put("userName",userName);
