@@ -53,7 +53,7 @@
             class="change"
             overlay
             v-if="album"
-            style="margin:20px"
+            style="margin:20px; heigt: auto;"
             text-variant="white"
             :img-src="url[index]"
             :title="item.name"
