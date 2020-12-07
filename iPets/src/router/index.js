@@ -50,19 +50,13 @@ let router = new Router({
       path: "/about",
       name: "about",
       component: about,
-      meta: {
-        requiresGuest: true,
-        requiresAuth: true
-      }
+      meta: {}
     },
     {
       path: "/dogInfo",
       name: "dogInfo",
       component: dogInfo,
-      meta: {
-        requiresGuest: true,
-        requiresAuth: true
-      }
+      meta: {}
     },
     {
       path: "/contact",
@@ -124,10 +118,7 @@ let router = new Router({
       path: "/dogScience",
       name: "dogScience",
       component: dogScience,
-      meta: {
-        requiresGuest: true,
-        requiresAuth: true
-      }
+      meta: {}
     },
     {
       path: "/manage",
