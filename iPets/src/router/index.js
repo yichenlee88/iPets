@@ -146,9 +146,7 @@ let router = new Router({
       path: "/post/:id",
       name: "post",
       component: post,
-      meta: {
-        requiresGuest: true
-      }
+      meta: {}
     },
     {
       path: "/album",
