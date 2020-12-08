@@ -9,19 +9,18 @@
           :key="index"
           style="margin-top: 20px"
         >
-          <div class="img-thumbnail" style="margin-left: 15px; height: 520px;">
-            <img class="rounded" :src="item.image" style="max-width: 100%">
+          <div class="img-thumbnail" style="margin-left: 15px; min-height: 540px;">
+            <img class="rounded" :src="item.image" style="max-width: 100%;">
             <H5>
               <br>
               {{item.title}}
             </H5>
             <p>{{ item.introduction }}</p>
             <a :href="'#/post/' + item.id" target="_blank">
-              <button
+              <b-button
                 type="button"
-                class="btn btn-info"
-                style="position: absolute; right: 20px; bottom: 5px; background-color: #5F9EA0; border:0;"
-              >了解更多</button>
+                class="btn learnMoreButton"
+              >了解更多</b-button>
             </a>
           </div>
         </div>
@@ -68,5 +67,12 @@ export default {
   margin-left: auto;
   margin-right: auto;
   width: 100%;
+}
+
+.learnMoreButton {
+  position: absolute;
+  color: white;
+  right: 20px;
+  bottom: 20px;
 }
 </style>
