@@ -32,6 +32,8 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.core.content.FileProvider;
 
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -50,7 +52,7 @@ import java.util.List;
 import java.util.Map;
 
 public class petInfoActivity extends AppCompatActivity {
-
+    String petid;
     private ImageView img;
     private DisplayMetrics mPhone;
     private final static int CAMERA = 1;
@@ -137,24 +139,39 @@ public class petInfoActivity extends AppCompatActivity {
     }
 
     private void addImage() {
-        EditText edpetsname = findViewById(R.id.petsname);
-        final String petsname = edpetsname.getText().toString();
-        FirebaseStorage storage = FirebaseStorage.getInstance("gs://ipets-app.appspot.com");
+        FirebaseStorage storage = FirebaseStorage.getInstance("gs://ipets-5fd4f.appspot.com");
         StorageReference mStorageRef = storage.getReference();
-        StorageReference mountainsRef = mStorageRef.child(userUID +'/'+ petsname+".jpg");
-
+        FirebaseFirestore db;
+        db = FirebaseFirestore.getInstance();
+        petid = db.collection("users").document(userUID).collection("pets").document().getId();
+        StorageReference mountainsRef = mStorageRef.child(userUID +'/'+ petid);
         Bitmap bitmap = ((BitmapDrawable) img.getDrawable()).getBitmap();
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
         byte[] data = baos.toByteArray();
         UploadTask uploadTask = mountainsRef.putBytes(data);
         //取得照片網址
-        String petsimage = String.valueOf(mountainsRef.getDownloadUrl());
-        addPetInfo(petsimage);
+        uploadTask.addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+            @Override
+            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                if (taskSnapshot.getMetadata() != null) {
+                    if (taskSnapshot.getMetadata().getReference() != null) {
+                        Task<Uri> result = taskSnapshot.getStorage().getDownloadUrl();
+                        result.addOnSuccessListener(new OnSuccessListener<Uri>() {
+                            @Override
+                            public void onSuccess(Uri uri) {
+                                String imageUrl = uri.toString();
+                                addPetInfo(imageUrl);
+                            }
+                        });
+                    }
+                }
+            }});
+
 
     }
 
-    private void addPetInfo(String petsimage) {
+    private void addPetInfo(String uri) {
         EditText edpetsname = findViewById(R.id.petsname);
         final EditText edpetsbirth = findViewById(R.id.petsbirth);
         Spinner variety = findViewById(R.id.variety);
@@ -189,21 +206,20 @@ public class petInfoActivity extends AppCompatActivity {
         userInfo.put("breed", breed);
         userInfo.put("petHobby", petslikes);
         userInfo.put("petNote", petsnotes);
-        userInfo.put("petImage", petsimage);
+        userInfo.put("petImage", uri);
         userInfo.put("uid", userUID);
         userInfo.put("timestamp", nowdate);
         userInfo.put("petBirth_year", petBirth_year);
         userInfo.put("petBirth_month", petBirth_month);
         userInfo.put("petBirth_date",petBirth_date);
-        String id = db.collection("users").document(userUID).collection("pets").document().getId();
-        db.collection("users").document(userUID).collection("pets").document(id).set(userInfo);
+        db.collection("users").document(userUID).collection("pets").document(petid).set(userInfo);
 
         Map<String, Object> countdowndate = new HashMap<>();
         countdowndate.put("startDay", "");
         countdowndate.put("endDay", "");
         countdowndate.put("countdownEvent",petsname+"洗澡");
-        String countdownid = db.collection("users").document(userUID).collection("pets").document(id).collection("countdown").document().getId();
-        db.collection("users").document(userUID).collection("pets").document(id).collection("countdown").document(countdownid).set(countdowndate);
+        String countdownid = db.collection("users").document(userUID).collection("pets").document(petid).collection("countdown").document().getId();
+        db.collection("users").document(userUID).collection("pets").document(petid).collection("countdown").document(countdownid).set(countdowndate);
         AlertDialog.Builder finishsignup = new AlertDialog.Builder(petInfoActivity.this);
         finishsignup.setMessage("新增成功");
         finishsignup.setNegativeButton("確認", new DialogInterface.OnClickListener() {

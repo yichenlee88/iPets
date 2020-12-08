@@ -1,10 +1,5 @@
 package com.example.ipets;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -15,10 +10,13 @@ import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.GridView;
 import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -65,7 +63,7 @@ public class photoGalleryActivity extends AppCompatActivity {
         getSupportActionBar().setTitle("我的寵物");
         toolbar9.setTitleTextColor(Color.WHITE);
 
-        storage = FirebaseStorage.getInstance("gs://ipets-app.appspot.com");
+        storage = FirebaseStorage.getInstance("gs://ipets-5fd4f.appspot.com");
         storageReference = storage.getReference();
 
         btnChoose = findViewById(R.id.addPhoto);

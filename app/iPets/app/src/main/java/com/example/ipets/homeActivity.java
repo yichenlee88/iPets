@@ -1,5 +1,9 @@
 package com.example.ipets;
 
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.MenuItem;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
@@ -7,10 +11,6 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
-
-import android.content.Intent;
-import android.os.Bundle;
-import android.view.MenuItem;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -40,8 +40,9 @@ public class homeActivity extends AppCompatActivity {
                 switch (menuItem.getItemId()){
                     case R.id.home:
                         //toolbar.setTitle("Home");
-                        fragment = new homeFragment();
-                        loadFragment(fragment);
+                        Intent intentHome = new Intent(homeActivity.this, homeActivity.class);
+                        intentHome.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                        startActivity(intentHome);
                         return true;
 
                     case R.id.calendar:
