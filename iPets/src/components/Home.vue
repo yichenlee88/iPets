@@ -15,29 +15,17 @@
     >
       <b-carousel-slide>
         <template v-slot:img>
-          <img
-            class="d-block img-fluid"
-            src="../assets/carousel-01.jpg"
-            alt="image slot"
-          />
+          <img class="d-block img-fluid" src="../assets/carousel-01.jpg" alt="image slot">
         </template>
       </b-carousel-slide>
       <b-carousel-slide>
         <template v-slot:img>
-          <img
-            class="d-block img-fluid"
-            src="../assets/carousel-02.jpg"
-            alt="image slot"
-          />
+          <img class="d-block img-fluid" src="../assets/carousel-02.jpg" alt="image slot">
         </template>
       </b-carousel-slide>
       <b-carousel-slide>
         <template v-slot:img>
-          <img
-            class="d-block img-fluid"
-            src="../assets/carousel-03.jpg"
-            alt="image slot"
-          />
+          <img class="d-block img-fluid" src="../assets/carousel-03.jpg" alt="image slot">
         </template>
       </b-carousel-slide>
     </b-carousel>
@@ -60,27 +48,32 @@
                 <b-card-text>{{ item.introduction }}</b-card-text>
                 <b-button
                   class="btn learnMore"
+                  @click="$bvModal.show(`${i}`);convertCenter();"
+                  style="color:#0066FF"
+                  onmouseover="this.style.color='#FFFFFF'"
+                  onmouseout="this.style.color='#0066FF'"
                   variant="outline-primary"
-                  @click="
-                    $bvModal.show(`${i}`);
-                    convertCenter();
-                  "
-                  >了解更多</b-button
-                >
+                >了解更多</b-button>
                 <b-modal :id="`${i}`" v-bind:title="item.name">
                   <b-container>
                     <b-card v-bind:img-src="item.src" img-alt="Image" img-top>
                       <b-card-text>
                         <b-row>
-                          <b-col cols="4"> <strong>地址</strong>： </b-col>
+                          <b-col cols="4">
+                            <strong>地址</strong>：
+                          </b-col>
                           <b-col>{{ item.address }}</b-col>
                         </b-row>
                         <b-row>
-                          <b-col cols="4"> <strong>連絡電話</strong>： </b-col>
+                          <b-col cols="4">
+                            <strong>連絡電話</strong>：
+                          </b-col>
                           <b-col>{{ item.phone }}</b-col>
                         </b-row>
                         <b-row>
-                          <b-col cols="4"> <strong>簡介</strong>: </b-col>
+                          <b-col cols="4">
+                            <strong>簡介</strong>:
+                          </b-col>
                           <b-col>{{ item.content }}</b-col>
                         </b-row>
                       </b-card-text>
