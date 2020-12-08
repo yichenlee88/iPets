@@ -47,12 +47,13 @@ export default {
         console.log(now);
         this.comments = res.data;
       });
-    },
+    }
+  },
+  methods: {
     getArticleData() {
       let id = this.$route.params.id;
       this.id = id;
       axios.get("http://localhost:3000/comments/" + this.id).then(res => {
-        console.log(res.data);
         this.comments = res.data;
       });
     }
