@@ -1,6 +1,7 @@
 <template>
   <b-container>
-    <img src="../assets/狗狗科普.png" class="banner" style="margin-top:20px">
+    <h1 class="title top">狗狗科普</h1>
+    <img src="../assets/狗狗科普.png" class="banner" style="margin-top:20px" />
     <div class="container marketing">
       <div class="row">
         <div
@@ -9,23 +10,30 @@
           :key="index"
           style="margin-top: 20px"
         >
-          <div class="img-thumbnail" style="margin-left: 15px; min-height: 540px;">
-            <img class="rounded" :src="item.image" style="max-width: 100%;">
+          <div
+            class="img-thumbnail"
+            style="margin-left: 15px; min-height: 540px;"
+          >
+            <img class="rounded" :src="item.image" style="max-width: 100%;" />
             <H5>
-              <br>
-              {{item.title}}
+              <br />
+              {{ item.title }}
             </H5>
             <p>{{ item.introduction }}</p>
             <a :href="'#/post/' + item.id" target="_blank">
-              <b-button
-                type="button"
-                class="btn learnMoreButton"
-              >了解更多</b-button>
+              <b-button class="btn learnMoreButton" variant="outline-primary"
+                >了解更多</b-button
+              >
             </a>
           </div>
         </div>
       </div>
     </div>
+    <p style="margin-left: 20px; font-size: 20px">
+      本文來自《毛小孩》網站：<b-link href="https://maoup.com.tw/"
+        >https://maoup.com.tw/</b-link
+      >
+    </p>
   </b-container>
 </template>
 
@@ -56,6 +64,17 @@ export default {
 </script>
 
 <style scoped>
+.top {
+  margin-top: 20px;
+}
+
+.title {
+  padding: 10px;
+  text-align: center;
+  margin: auto;
+  max-width: 300px;
+}
+
 .columnberight {
   display: flex;
   justify-content: center;
@@ -71,7 +90,6 @@ export default {
 
 .learnMoreButton {
   position: absolute;
-  color: white;
   right: 20px;
   bottom: 20px;
 }

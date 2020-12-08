@@ -44,7 +44,7 @@
     <b-row lg="6" style="margin:20px 20px">
       <b-col cols="6" md="4" v-for="(item, index) in url" :key="index">
         <span @click="$bvModal.show(`${index}`);">
-          <b-card overlay :img-src="item"></b-card>
+          <b-card overlay :img-src="item" style="heigt:auto"></b-card>
         </span>
         <b-modal size="lg" hide-footer :id="`${index}`">
           <template #modal-title>
