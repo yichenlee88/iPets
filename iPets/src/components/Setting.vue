@@ -15,6 +15,11 @@
               ></b-list-group-item
             >
             <b-list-group-item
+              ><router-link to="/setting/account"
+                >更改帳號</router-link
+              ></b-list-group-item
+            >
+            <b-list-group-item
               ><router-link to="/setting/password"
                 >更改密碼</router-link
               ></b-list-group-item

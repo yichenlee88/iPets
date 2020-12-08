@@ -172,16 +172,21 @@ export default {
         .add({
           petName: this.petName,
           petGender: this.petGender,
-          petBirth: this.petBirth,
+          petBirth:
+            this.petBirth.getUTCFullYear() +
+            "-" +
+            (this.petBirth.getMonth() + 1) +
+            "-" +
+            this.petBirth.getDate(),
           breed: this.breed,
           petHobby: this.petHobby,
           petNote: this.petNote,
           timestamp: new Date(),
           profile_picture: "",
           // useless
-          petBirth_year: 999999,
-          petBirth_month: 999999,
-          petBirth_date: 999999,
+          petBirth_year: this.petBirth.getUTCFullYear(),
+          petBirth_month: this.petBirth.getMonth() + 1,
+          petBirth_date: this.petBirth.getDate(),
           uid: this.uid
         })
         .then(function(ref) {
