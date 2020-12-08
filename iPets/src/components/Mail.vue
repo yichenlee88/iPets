@@ -1,8 +1,9 @@
 <template>
   <b-container>
     <b-row>
-      <b-col col="2" sm="2" md="2"><h3>提醒：</h3></b-col>
-      <b-col col="10" sm="10" md="10"> </b-col>
+      <b-col cols="12" sm="12" md="12">
+        <h3>提醒：</h3>
+      </b-col>
       <b-col col="1" sm="1" md="1"></b-col>
       <b-col col="11" sm="11" md="11">
         <b-form-checkbox

@@ -1,80 +1,67 @@
 <template>
   <b-container>
     <b-row>
-      <b-col>
-        <h3>聯絡我們：</h3>
+      <b-col cols="12" sm="12" md="12">
+        <h3>更改帳號：</h3>
+      </b-col>
+      <b-col class="coltitle" cols="4" sm="4" md="4">
+        <p>更改帳號：</p>
+      </b-col>
+      <b-col cols="8" sm="8" md="8">
+        <div>
+          <b-form-input
+            id="updateEmail"
+            class="InputClass"
+            name="updateEmail"
+            v-model="updateEmail"
+            placeholder="Email"
+          ></b-form-input>
+        </div>
+      </b-col>
+      <b-col cols="4" sm="4" md="4"></b-col>
+      <b-col cols="8" sm="8" md="8">
+        <b-button class="ButtonClass" @click="update_Email(updateEmail)"
+          >送出</b-button
+        >
       </b-col>
     </b-row>
-    <div>
-      <b-form @submit="addContact">
-        <b-form-input
-          class="InputClass center"
-          name="userName"
-          v-model="userName"
-          placeholder="使用者名稱"
-        ></b-form-input>
-        <b-form-select
-          class="InputClass center"
-          name="problemType"
-          v-model="problemType"
-          :options="options"
-        ></b-form-select
-        ><b-form-input
-          class="InputClass center"
-          name="email"
-          v-model="email"
-          placeholder="電子郵件"
-        ></b-form-input>
-        <b-form-textarea
-          class="TextareaClass center"
-          name="description"
-          id="description"
-          v-model="description"
-          placeholder="您遇到的問題是..."
-          maxlength
-        ></b-form-textarea
-        ><b-button type="submit" class="ButtonClass center"
-          >送出</b-button
-        ></b-form
-      >
-    </div>
   </b-container>
 </template>
 
 <script>
-import { db } from "../db";
-const fStore = db.firestore();
+import firebase from "firebase";
+var user = firebase.auth().currentUser;
 
 export default {
-  name: "account"
+  data() {
+    return {
+      updateEmail: ""
+    };
+  },
+  methods: {
+    update_Email: function(e) {
+      user.updateEmail(this.updateEmail).then(function() {
+        alert("變更成功");
+      });
+    }
+  }
 };
 </script>
 
 <style scoped>
-.center {
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
+.coltitle {
+  padding: 16px 0;
+  text-align: right;
 }
 
 .InputClass {
-  height: 48px;
-  max-width: 75%;
+  max-width: 70%;
   border-radius: 40px;
-  margin-bottom: 20px;
-  margin-top: 10px;
-}
-
-.TextareaClass {
-  height: 120px;
-  max-width: 75%;
-  border-radius: 16px;
-  margin-bottom: 20px;
 }
 
 .ButtonClass {
   height: 48px;
-  width: 75%;
+  width: 70%;
   border-radius: 40px;
   margin-bottom: 20px;
   background: -webkit-linear-gradient(

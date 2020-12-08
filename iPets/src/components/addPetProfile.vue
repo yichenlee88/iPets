@@ -1,5 +1,10 @@
 <template>
   <b-container>
+    <b-row>
+      <b-col cols="12" sm="12" md="12">
+        <h3>新增毛小孩：</h3>
+      </b-col>
+    </b-row>
     <b-form @submit="onSubmit">
       <!-- petImage -->
       <v-row no-gutters justify="center" align="center">
