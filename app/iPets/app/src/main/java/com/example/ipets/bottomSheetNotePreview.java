@@ -45,7 +45,7 @@ public class bottomSheetNotePreview extends BottomSheetDialogFragment {
     }
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        RadioGroup eventColor2 = getView().findViewById(R.id.eventColor2);
+        RadioGroup eventColor2 = getView().findViewById(R.id.eventColor3);
         eventColor2.check(R.id.redCircle2);
         Button editButton = getView().findViewById(R.id.editButton);
         editButton.setOnClickListener(new View.OnClickListener() {
@@ -100,8 +100,8 @@ public class bottomSheetNotePreview extends BottomSheetDialogFragment {
         db = FirebaseFirestore.getInstance();
         String Note = editNoteText.getText().toString();
         String Content = noteContentText.getText().toString();
-        RadioGroup eventColor2 = getView().findViewById(R.id.eventColor2);
-        switch (eventColor2.getCheckedRadioButtonId()) {
+        RadioGroup eventColor3 = getView().findViewById(R.id.eventColor3);
+        switch (eventColor3.getCheckedRadioButtonId()) {
             case R.id.redCircle2:
                 colorselect = "red";
                 break;

@@ -75,7 +75,7 @@
         android:textSize="20sp" />
 
     <RadioGroup
-        android:id="@+id/eventColor"
+        android:id="@+id/eventColor1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="15dp"
@@ -90,29 +90,63 @@
             android:drawableEnd="@drawable/ic_red" />
 
         <RadioButton
-            android:id="@+id/orangeCircle1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:buttonTint="#0071BC"
-            android:drawableEnd="@drawable/ic_orange" />
-
-        <RadioButton
-            android:id="@+id/yellowCircle1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:buttonTint="#0071BC"
-            android:drawableEnd="@drawable/ic_yellow" />
-
-        <RadioButton
             android:id="@+id/greenCircle1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:buttonTint="#0071BC"
+            android:drawableEnd="@drawable/ic_green" />
+
+        <RadioButton
+            android:id="@+id/blueCircle1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:buttonTint="#0071BC"
+            android:drawableEnd="@drawable/ic_blue" />
+
+        <RadioButton
+            android:id="@+id/purpleCircle1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
             android:layout_marginEnd="17dp"
             android:buttonTint="#0071BC"
-            android:drawableEnd="@drawable/ic_green" />
+            android:drawableEnd="@drawable/ic_purple" />
+
+    </RadioGroup>
+
+    <RadioGroup
+        android:id="@+id/eventColor2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:orientation="horizontal" >
+
+        <RadioButton
+            android:id="@+id/orangeCircle1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="53dp"
+            android:buttonTint="#0071BC"
+            android:drawableEnd="@drawable/ic_orange" />
+
+        <RadioButton
+            android:id="@+id/pinkCircle1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:buttonTint="#0071BC"
+            android:drawableEnd="@drawable/ic_pink" />
+
+        <RadioButton
+            android:id="@+id/brownCircle1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:buttonTint="#0071BC"
+            android:drawableEnd="@drawable/ic_brown" />
+
     </RadioGroup>
 
             <Spinner
