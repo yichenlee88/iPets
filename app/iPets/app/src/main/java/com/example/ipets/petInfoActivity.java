@@ -32,6 +32,8 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.core.content.FileProvider;
 
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -149,12 +151,27 @@ public class petInfoActivity extends AppCompatActivity {
         byte[] data = baos.toByteArray();
         UploadTask uploadTask = mountainsRef.putBytes(data);
         //取得照片網址
-        String petsimage = String.valueOf(mountainsRef.getDownloadUrl());
-        addPetInfo(petsimage);
+        uploadTask.addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+            @Override
+            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                if (taskSnapshot.getMetadata() != null) {
+                    if (taskSnapshot.getMetadata().getReference() != null) {
+                        Task<Uri> result = taskSnapshot.getStorage().getDownloadUrl();
+                        result.addOnSuccessListener(new OnSuccessListener<Uri>() {
+                            @Override
+                            public void onSuccess(Uri uri) {
+                                String imageUrl = uri.toString();
+                                addPetInfo(imageUrl);
+                            }
+                        });
+                    }
+                }
+            }});
+
 
     }
 
-    private void addPetInfo(String petsimage) {
+    private void addPetInfo(String uri) {
         EditText edpetsname = findViewById(R.id.petsname);
         final EditText edpetsbirth = findViewById(R.id.petsbirth);
         Spinner variety = findViewById(R.id.variety);
@@ -189,7 +206,7 @@ public class petInfoActivity extends AppCompatActivity {
         userInfo.put("breed", breed);
         userInfo.put("petHobby", petslikes);
         userInfo.put("petNote", petsnotes);
-        userInfo.put("petImage", petsimage);
+        userInfo.put("petImage", uri);
         userInfo.put("uid", userUID);
         userInfo.put("timestamp", nowdate);
         userInfo.put("petBirth_year", petBirth_year);

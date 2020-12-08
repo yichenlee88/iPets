@@ -205,9 +205,23 @@ public class editPetInfoActivity extends AppCompatActivity implements AdapterVie
         bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
         byte[] data = baos.toByteArray();
         UploadTask uploadTask = mountainsRef.putBytes(data);
-        //取得照片網址
-        String petsimage = String.valueOf(mountainsRef.getDownloadUrl());
-        setPetInfo(petsimage,mypetName);
+        uploadTask.addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+            @Override
+            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                if (taskSnapshot.getMetadata() != null) {
+                    if (taskSnapshot.getMetadata().getReference() != null) {
+                        Task<Uri> result = taskSnapshot.getStorage().getDownloadUrl();
+                        result.addOnSuccessListener(new OnSuccessListener<Uri>() {
+                            @Override
+                            public void onSuccess(Uri uri) {
+                                String imageUrl = uri.toString();
+                                setPetInfo(imageUrl,mypetName);
+                            }
+                        });
+                    }
+                }
+            }});
+
     }
 
     private void setPetInfo(String petsimage, String mypetName) {
