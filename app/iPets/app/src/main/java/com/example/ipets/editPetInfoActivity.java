@@ -119,30 +119,6 @@ public class editPetInfoActivity extends AppCompatActivity implements AdapterVie
         getPetInfo();
         getPetImage();
     }
-    public void getPetImage(){
-        Intent intent = this.getIntent();
-        String pet = intent.getStringExtra("date");
-        FirebaseStorage storage = FirebaseStorage.getInstance("gs://ipets-app.appspot.com");
-        StorageReference mStorageRef = storage.getReference();
-        StorageReference islandRef = mStorageRef.child(userUID +'/'+ pet+".jpg");
-        img = findViewById(R.id.petsHead);
-        final long ONE_MEGABYTE = 3000 * 3000;
-
-        islandRef.getBytes(ONE_MEGABYTE).addOnSuccessListener(new OnSuccessListener<byte[]>() {
-            @Override
-            public void onSuccess(byte[] bytes) {
-                Glide.with(getApplicationContext())
-                        .load(bytes)
-                        .into(img);
-            }
-        }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception exception) {
-                // Handle any errors'
-            }
-        });
-    }
-
     private void getPetInfo() {
         EditText edmypetName = findViewById(R.id.mypetName);
         final EditText edpetsbirth = findViewById(R.id.mypetBirth);
@@ -187,22 +163,65 @@ public class editPetInfoActivity extends AppCompatActivity implements AdapterVie
                     }
                 });
     }
+    public void getPetImage(){
+        Intent intent = this.getIntent();
+        //取得傳遞過來的資料
+        String petid = intent.getStringExtra("petid");
+        FirebaseStorage storage = FirebaseStorage.getInstance("gs://ipets-5fd4f.appspot.com");
+        StorageReference mStorageRef = storage.getReference();
+        StorageReference islandRef = mStorageRef.child(userUID +'/'+ petid);
+        img = findViewById(R.id.petsHead);
+        final long ONE_MEGABYTE = 3000 * 3000;
+
+        islandRef.getBytes(ONE_MEGABYTE).addOnSuccessListener(new OnSuccessListener<byte[]>() {
+            @Override
+            public void onSuccess(byte[] bytes) {
+                Glide.with(getApplicationContext())
+                        .load(bytes)
+                        .into(img);
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception exception) {
+                // Handle any errors'
+            }
+        });
+    }
+
+
 
     private void addImage() {
+        Intent intent = this.getIntent();
+        //取得傳遞過來的資料
+        String petid = intent.getStringExtra("petid");
         EditText edmypetName = findViewById(R.id.mypetName);
         final String mypetName = edmypetName.getText().toString();
-        FirebaseStorage storage = FirebaseStorage.getInstance("gs://ipets-app.appspot.com");
+        FirebaseStorage storage = FirebaseStorage.getInstance("gs://ipets-5fd4f.appspot.com");
         StorageReference mStorageRef = storage.getReference();
-        StorageReference mountainsRef = mStorageRef.child(userUID +'/'+ mypetName+".jpg");
+        StorageReference mountainsRef = mStorageRef.child(userUID +'/'+ petid);
 
         Bitmap bitmap = ((BitmapDrawable) img.getDrawable()).getBitmap();
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
         byte[] data = baos.toByteArray();
         UploadTask uploadTask = mountainsRef.putBytes(data);
-        //取得照片網址
-        String petsimage = String.valueOf(mountainsRef.getDownloadUrl());
-        setPetInfo(petsimage,mypetName);
+        uploadTask.addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+            @Override
+            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                if (taskSnapshot.getMetadata() != null) {
+                    if (taskSnapshot.getMetadata().getReference() != null) {
+                        Task<Uri> result = taskSnapshot.getStorage().getDownloadUrl();
+                        result.addOnSuccessListener(new OnSuccessListener<Uri>() {
+                            @Override
+                            public void onSuccess(Uri uri) {
+                                String imageUrl = uri.toString();
+                                setPetInfo(imageUrl,mypetName);
+                            }
+                        });
+                    }
+                }
+            }});
+
     }
 
     private void setPetInfo(String petsimage, String mypetName) {

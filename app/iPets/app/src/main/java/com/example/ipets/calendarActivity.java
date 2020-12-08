@@ -111,10 +111,10 @@ public class calendarActivity extends AppCompatActivity {
                                                     StringBuilder fields2 = new StringBuilder("");
                                                     StringBuilder fields4 = new StringBuilder("");
                                                     StringBuilder fields5= new StringBuilder("");
-                                                    String start = fields.append(doc.get("startDate")).toString();
-                                                    String end = fields1.append(doc.get("endDate")).toString();
+                                                    String start = fields.append(doc.get("start")).toString();
+                                                    String end = fields1.append(doc.get("end")).toString();
                                                     String detail = fields2.append(doc.get("details")).toString();
-                                                    String eventname = fields4.append(doc.get("eventName")).toString();
+                                                    String eventname = fields4.append(doc.get("name")).toString();
                                                     try {
                                                         Date eventday = sdf.parse(dateStr);
                                                         Date strday = sdf.parse(start);
@@ -273,8 +273,8 @@ public class calendarActivity extends AppCompatActivity {
                                             StringBuilder fields3 = new StringBuilder("");
                                             StringBuilder fields5 = new StringBuilder("");
                                             String color = fields.append(doc.get("color")).toString();
-                                            String enddate = fields3.append(doc.get("endDate")).toString();
-                                            String startdate = fields5.append(doc.get("startDate")).toString();
+                                            String enddate = fields3.append(doc.get("end")).toString();
+                                            String startdate = fields5.append(doc.get("start")).toString();
                                             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
                                             try {
                                                 Date strday = sdf.parse(startdate);

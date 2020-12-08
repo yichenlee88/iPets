@@ -122,7 +122,6 @@ public class homeFragment extends Fragment {
                             pet_query = query;
                             getPetInfo(query);
                             getDocumentName();
-                            getPetImage(query);
                             petnamespinner.setPrompt("請選擇");
                             petnamespinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                                 @Override
@@ -136,7 +135,6 @@ public class homeFragment extends Fragment {
                                         startActivity(intent);
                                     }else{
                                         getPetInfo(query);
-                                        getPetImage(query);
                                         getDocumentName();
                                     }
                                 }
@@ -208,15 +206,7 @@ public class homeFragment extends Fragment {
 
             }
         });
-        Button btn_editPets =getView().findViewById(R.id.petInfoEdit);
-        btn_editPets.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intentPets = new Intent(getActivity(), editPetInfoActivity.class);
-                intentPets.putExtra("date",pet_query);
-                startActivity(intentPets);
-            }
-        });
+
     }
     public void getDocumentName(){
         final FirebaseFirestore db = FirebaseFirestore.getInstance();
@@ -256,6 +246,17 @@ public class homeFragment extends Fragment {
                         bloodBar.setProgress(0);
                         setCountdownColor();
                         setNotification();
+                        getPetImage();
+                        Button btn_editPets =getView().findViewById(R.id.petInfoEdit);
+                        btn_editPets.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                Intent intentPets = new Intent(getActivity(), editPetInfoActivity.class);
+                                intentPets.putExtra("date",pet_query);
+                                intentPets.putExtra("petid",petdocumentname);
+                                startActivity(intentPets);
+                            }
+                        });
                     }
                 });
     }
@@ -377,13 +378,12 @@ public class homeFragment extends Fragment {
                         }
                     }
                 });    }
-    public void getPetImage(String query){
-        FirebaseStorage storage = FirebaseStorage.getInstance("gs://ipets-app.appspot.com");
+    public void getPetImage(){
+        FirebaseStorage storage = FirebaseStorage.getInstance("gs://ipets-5fd4f.appspot.com");
         StorageReference mStorageRef = storage.getReference();
-        StorageReference islandRef = mStorageRef.child(userUID +'/'+ query+".jpg");
+        StorageReference islandRef = mStorageRef.child(userUID +'/'+ petdocumentname);
         final ImageView head = getView().findViewById(R.id.head);
-        final long ONE_MEGABYTE = 3000 * 3000;
-
+        final long ONE_MEGABYTE = 5000 * 5000;
         islandRef.getBytes(ONE_MEGABYTE).addOnSuccessListener(new OnSuccessListener<byte[]>() {
             @Override
             public void onSuccess(byte[] bytes) {
