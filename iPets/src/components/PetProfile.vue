@@ -148,7 +148,7 @@
     <!-- End -- 寵物簡介 -->
 
     <!-- Start -- 當月事件 -->
-    <b-list-group>
+    <b-list-group class="mt-3">
       <b-list-group-item
         v-for="(event, idx) in month_calendar"
         :key="idx"

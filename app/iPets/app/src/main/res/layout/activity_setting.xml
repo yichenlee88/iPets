@@ -90,7 +90,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:background="#00FFFFFF"
+        android:background="@drawable/btn_click"
         android:gravity="start|center_horizontal|center_vertical"
         android:paddingHorizontal="17dp"
         android:stateListAnimator="@null"
