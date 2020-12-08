@@ -116,7 +116,7 @@ public class bottomSheetNotePreview extends BottomSheetDialogFragment {
                 break;
         }
         Map<String, Object> userInfo = new HashMap<>();
-        userInfo.put("eventName",Note);
+        userInfo.put("name",Note);
         userInfo.put("details",Content);
         userInfo.put("color", colorselect);
         db.collection("users").document(userUID).collection("calEvent").document(id).update(userInfo);
