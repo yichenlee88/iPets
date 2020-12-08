@@ -1,58 +1,94 @@
 <template>
-  <b-row>
-    <b-col class="coltitle" cols="4" sm="4" md="4">
-      <p>姓名：</p>
-    </b-col>
-    <b-col cols="8" sm="8" md="8">
-      <b-form-input class="InputClass" name="name" v-model="name" placeholder="Name"></b-form-input>
-    </b-col>
-    <b-col class="coltitle" cols="4" sm="4" md="4">
-      <p>使用者名稱：</p>
-    </b-col>
-    <b-col cols="8" sm="8" md="8">
-      <b-form-input class="InputClass" name="userName" v-model="userName" placeholder="userName"></b-form-input>
-    </b-col>
-    <b-col class="coltitle" cols="4" sm="4" md="4">
-      <p>生日：</p>
-    </b-col>
-    <b-col cols="8" sm="8" md="8">
-      <b-form-input class="InputClass" type="date" name="birth" v-model="birth" placeholder="Birth"></b-form-input>
-    </b-col>
-    <b-col class="coltitle" cols="4" sm="4" md="4">
-      <p>電子郵件：</p>
-    </b-col>
-    <b-col cols="8" sm="8" md="8">
-      <b-form-input class="InputClass" name="email" v-model="email" placeholder="Email"></b-form-input>
-    </b-col>
-    <b-col class="coltitle" cols="4" sm="4" md="4">
-      <p>地址：</p>
-    </b-col>
-    <b-col cols="8" sm="8" md="8">
-      <b-form-input class="InputClass" name="address" v-model="address" placeholder="Address"></b-form-input>
-    </b-col>
-    <b-col class="coltitle" cols="4" sm="4" md="4">
-      <p>電話：</p>
-    </b-col>
-    <b-col cols="8" sm="8" md="8">
-      <b-form-input class="InputClass" name="phone" v-model="phone" placeholder="Phone"></b-form-input>
-    </b-col>
-    <b-col class="coltitle" cols="4" sm="4" md="4">
-      <p>性別：</p>
-    </b-col>
-    <b-col cols="8" sm="8" md="8">
-      <b-form-select
-        class="InputClass"
-        name="gender"
-        v-model="gender"
-        placeholder="Gender"
-        :options="options"
-      ></b-form-select>
-    </b-col>
-    <b-col cols="4" sm="4" md="4"></b-col>
-    <b-col cols="8" sm="8" md="8">
-      <b-button class="ButtonClass" @click="updateProfile">送出</b-button>
-    </b-col>
-  </b-row>
+  <b-container>
+    <b-row>
+      <b-col cols="12" sm="12" md="12">
+        <h3>編輯個人資訊：</h3>
+      </b-col>
+      <b-col class="coltitle" cols="4" sm="4" md="4">
+        <p>姓名：</p>
+      </b-col>
+      <b-col cols="8" sm="8" md="8">
+        <b-form-input
+          class="InputClass"
+          name="name"
+          v-model="name"
+          placeholder="Name"
+        ></b-form-input>
+      </b-col>
+      <b-col class="coltitle" cols="4" sm="4" md="4">
+        <p>使用者名稱：</p>
+      </b-col>
+      <b-col cols="8" sm="8" md="8">
+        <b-form-input
+          class="InputClass"
+          name="userName"
+          v-model="userName"
+          placeholder="userName"
+        ></b-form-input>
+      </b-col>
+      <b-col class="coltitle" cols="4" sm="4" md="4">
+        <p>生日：</p>
+      </b-col>
+      <b-col cols="8" sm="8" md="8">
+        <b-form-input
+          class="InputClass"
+          type="date"
+          name="birth"
+          v-model="birth"
+          placeholder="Birth"
+        ></b-form-input>
+      </b-col>
+      <b-col class="coltitle" cols="4" sm="4" md="4">
+        <p>電子郵件：</p>
+      </b-col>
+      <b-col cols="8" sm="8" md="8">
+        <b-form-input
+          class="InputClass"
+          name="email"
+          v-model="email"
+          placeholder="Email"
+        ></b-form-input>
+      </b-col>
+      <b-col class="coltitle" cols="4" sm="4" md="4">
+        <p>地址：</p>
+      </b-col>
+      <b-col cols="8" sm="8" md="8">
+        <b-form-input
+          class="InputClass"
+          name="address"
+          v-model="address"
+          placeholder="Address"
+        ></b-form-input>
+      </b-col>
+      <b-col class="coltitle" cols="4" sm="4" md="4">
+        <p>電話：</p>
+      </b-col>
+      <b-col cols="8" sm="8" md="8">
+        <b-form-input
+          class="InputClass"
+          name="phone"
+          v-model="phone"
+          placeholder="Phone"
+        ></b-form-input>
+      </b-col>
+      <b-col class="coltitle" cols="4" sm="4" md="4">
+        <p>性別：</p>
+      </b-col>
+      <b-col cols="8" sm="8" md="8">
+        <b-form-select
+          class="InputClass"
+          name="gender"
+          v-model="gender"
+          placeholder="Gender"
+          :options="options"
+        ></b-form-select>
+      </b-col>
+      <b-col cols="4" sm="4" md="4"></b-col>
+      <b-col cols="8" sm="8" md="8">
+        <b-button class="ButtonClass" @click="updateProfile">送出</b-button>
+      </b-col>
+    </b-row>
+  </b-container>
 </template>
 
 <script>
