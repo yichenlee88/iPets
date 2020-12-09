@@ -308,11 +308,35 @@ public class calendarActivity extends AppCompatActivity {
                                                     }
                                                     mCalendarView.setEvents(events);
                                                 }
-                                                if (color.equals("yellow")) {
+                                                if (color.equals("blue")) {
                                                     for(;startcal.compareTo(endcal) <= 0;startcal.add(Calendar.DATE, 1)){
                                                         Calendar c_temp = Calendar.getInstance();
                                                         c_temp.setTime(startcal.getTime());
-                                                        events.add(new EventDay(c_temp, R.drawable.ic_yellow));
+                                                        events.add(new EventDay(c_temp, R.drawable.ic_blue));
+                                                    }
+                                                    mCalendarView.setEvents(events);
+                                                }
+                                                if (color.equals("purple")) {
+                                                    for(;startcal.compareTo(endcal) <= 0;startcal.add(Calendar.DATE, 1)){
+                                                        Calendar c_temp = Calendar.getInstance();
+                                                        c_temp.setTime(startcal.getTime());
+                                                        events.add(new EventDay(c_temp, R.drawable.ic_purple));
+                                                    }
+                                                    mCalendarView.setEvents(events);
+                                                }
+                                                if (color.equals("pink")) {
+                                                    for(;startcal.compareTo(endcal) <= 0;startcal.add(Calendar.DATE, 1)){
+                                                        Calendar c_temp = Calendar.getInstance();
+                                                        c_temp.setTime(startcal.getTime());
+                                                        events.add(new EventDay(c_temp, R.drawable.ic_pink));
+                                                    }
+                                                    mCalendarView.setEvents(events);
+                                                }
+                                                if (color.equals("brown")) {
+                                                    for(;startcal.compareTo(endcal) <= 0;startcal.add(Calendar.DATE, 1)){
+                                                        Calendar c_temp = Calendar.getInstance();
+                                                        c_temp.setTime(startcal.getTime());
+                                                        events.add(new EventDay(c_temp, R.drawable.ic_brown));
                                                     }
                                                     mCalendarView.setEvents(events);
                                                 }

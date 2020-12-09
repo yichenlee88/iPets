@@ -108,11 +108,20 @@ public class bottomSheetNotePreview extends BottomSheetDialogFragment {
             case R.id.orangeCircle2:
                 colorselect = "orange";
                 break;
-            case R.id.yellowCircle2:
-                colorselect = "yellow";
+            case R.id.blueCircle2:
+                colorselect = "blue";
                 break;
             case R.id.greenCircle2:
                 colorselect = "green";
+                break;
+            case R.id.purpleCircle2:
+                colorselect = "purple";
+                break;
+            case R.id.pinkCircle2:
+                colorselect = "pink";
+                break;
+            case R.id.brownCircle2:
+                colorselect = "brown";
                 break;
         }
         Map<String, Object> userInfo = new HashMap<>();
@@ -126,7 +135,6 @@ public class bottomSheetNotePreview extends BottomSheetDialogFragment {
             @Override
             public void onClick(DialogInterface arg0, int arg1) {
                 Intent intent=new Intent();
-                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
                 intent.setClass(getActivity(),calendarActivity.class);
                 startActivity(intent);
             }

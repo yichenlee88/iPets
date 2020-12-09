@@ -129,6 +129,15 @@ public class editUserInfoActivity extends AppCompatActivity{
             userBirth_month = calendar.get(Calendar.MONTH)+1;
             userBirth_date = calendar.get(Calendar.DAY_OF_MONTH);
         }
+        if(sex.equals("女")){
+            sex = "female";
+        }
+        if(sex.equals("男")){
+            sex = "male";
+        }
+        if(sex.equals("不願透漏")){
+            sex = "I prefer not to say";
+        }
         Map<String, Object> userInfo = new HashMap<>();
         userInfo.put("name",masterName);
         userInfo.put("userName",userName);
@@ -222,10 +231,10 @@ public class editUserInfoActivity extends AppCompatActivity{
                     edmasterBirth.setText(fields3);
                     edphoneNum.setText(fields4);
                     edmasterAddress.setText(fields5);
-                    if(gender.equals("女")) {
+                    if(gender.equals("female")) {
                         sexSpinner.setSelection(1);
                     }
-                    if(gender.equals("不願透露")) {
+                    if(gender.equals("I prefer not to say")) {
                         sexSpinner.setSelection(2);
                     }
                 }
