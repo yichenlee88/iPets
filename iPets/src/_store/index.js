@@ -9,6 +9,7 @@ const store = new Vuex.Store({
     uid: null,
     name: null,
     email: null,
+    password: null,
     photoURL: null,
     // pet
     current_pet_id: null,
@@ -23,6 +24,7 @@ const store = new Vuex.Store({
       state.uid = payload.uid;
       state.name = payload.name;
       state.email = payload.email;
+      state.password = payload.password;
       state.photoURL = payload.photoURL;
     },
     getUserPetsList(state, payload) {
