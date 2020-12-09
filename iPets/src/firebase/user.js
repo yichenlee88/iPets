@@ -12,6 +12,7 @@ async function updateUserProfile(store, uid) {
         uid: uid,
         name: doc.data().name,
         email: doc.data().email,
+        password: doc.data().password,
         photoURL: doc.data().photoURL
       });
       console.log("[Vuex] Finish GET User Profile");

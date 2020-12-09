@@ -10,17 +10,20 @@
       <b-col cols="8" sm="8" md="8">
         <div>
           <b-form-input
-            id="updateEmail"
+            type="email"
+            id="newEmail"
             class="InputClass"
-            name="updateEmail"
-            v-model="updateEmail"
+            name="newEmail"
+            v-model="newEmail"
             placeholder="Email"
           ></b-form-input>
         </div>
       </b-col>
       <b-col cols="4" sm="4" md="4"></b-col>
       <b-col cols="8" sm="8" md="8">
-        <b-button class="ButtonClass" @click="update_Email(updateEmail)"
+        <b-button
+          class="ButtonClass"
+          @click="update_email(newEmail), updateProfile_mail(newEmail)"
           >送出</b-button
         >
       </b-col>
@@ -29,20 +32,54 @@
 </template>
 
 <script>
+import { db } from "../db";
 import firebase from "firebase";
-var user = firebase.auth().currentUser;
+const fStore = db.firestore();
 
 export default {
   data() {
     return {
-      updateEmail: ""
+      user: "",
+      newEmail: ""
     };
   },
   methods: {
-    update_Email: function(e) {
-      user.updateEmail(this.updateEmail).then(function() {
-        alert("變更成功");
+    update_email(newEmail) {
+      var password = this.password;
+      firebase.auth().onAuthStateChanged(function(user) {
+        if (user) {
+          user
+            .updateEmail(newEmail)
+            .then(() => {
+              alert("變更成功");
+            })
+            .catch(function() {
+              var credential = firebase.auth.EmailAuthProvider.credential(
+                user.email,
+                password
+              );
+              user.reauthenticateWithCredential(credential).then(function() {
+                user.updateEmail(newEmail).then(() => {
+                  alert("變更成功");
+                });
+              });
+            });
+        }
       });
+    },
+    updateProfile_mail() {
+      let uid = firebase.auth().currentUser.uid;
+      fStore
+        .collection("users")
+        .doc(uid)
+        .update({
+          email: this.newEmail
+        });
+    }
+  },
+  computed: {
+    password() {
+      return this.$store.state.password;
     }
   }
 };

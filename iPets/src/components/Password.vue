@@ -114,8 +114,9 @@
         <b-button
           class="ButtonClass"
           @click="
-            checkPassword(confirmNewPassword, newPassword);
-            updatePassword(currentPassword, newPassword);
+            checkPassword(confirmNewPassword, newPassword),
+              updatePassword(currentPassword, newPassword),
+              updateProfile_password(currentPassword)
           "
           >送出</b-button
         >
@@ -125,7 +126,9 @@
 </template>
 
 <script>
+import { db } from "../db";
 import firebase from "firebase";
+const fStore = db.firestore();
 
 export default {
   data() {
@@ -138,7 +141,8 @@ export default {
       check: false,
       passwordCurrentPasswordHidden: true,
       passwordNewPasswordHidden: true,
-      passwordConfirmNewPasswordHidden: true
+      passwordConfirmNewPasswordHidden: true,
+      password: ""
     };
   },
   methods: {
@@ -167,9 +171,9 @@ export default {
             console.log(error);
             alert("密碼輸入錯誤");
           });
-        this.currentPassword = "";
-        this.newPassword = "";
-        this.confirmNewPassword = "";
+        // this.currentPassword = "";
+        // this.newPassword = "";
+        // this.confirmNewPassword = "";
       }
     },
     checkPassword(confirmNewPassword, newPassword) {
@@ -186,6 +190,15 @@ export default {
         this.passwordCurrentPasswordFieldType === "password"
           ? "text"
           : "password";
+    },
+    updateProfile_password() {
+      let uid = firebase.auth().currentUser.uid;
+      fStore
+        .collection("users")
+        .doc(uid)
+        .update({
+          password: this.confirmNewPassword
+        });
     },
     showCurrentPassword() {
       this.passwordCurrentPasswordHidden = true;
