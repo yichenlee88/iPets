@@ -252,7 +252,7 @@ public class editPetInfoActivity extends AppCompatActivity implements AdapterVie
         FirebaseFirestore db;
         db = FirebaseFirestore.getInstance();
         Map<String, Object> userInfo = new HashMap<>();
-        userInfo.put("petImage", petsimage);
+        userInfo.put("profile_picture", petsimage);
         userInfo.put("petName", mypetName);
         userInfo.put("petBirth", petsbirth);
         userInfo.put("petGender", sex);

@@ -206,7 +206,7 @@ public class petInfoActivity extends AppCompatActivity {
         userInfo.put("breed", breed);
         userInfo.put("petHobby", petslikes);
         userInfo.put("petNote", petsnotes);
-        userInfo.put("petImage", uri);
+        userInfo.put("profile_picture", uri);
         userInfo.put("uid", userUID);
         userInfo.put("timestamp", nowdate);
         userInfo.put("petBirth_year", petBirth_year);
