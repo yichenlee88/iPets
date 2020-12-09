@@ -27,6 +27,7 @@ import password from "@/components/password.vue";
 import mail from "@/components/mail.vue";
 import loginActivity from "@/components/loginActivity.vue";
 import FAQ from "@/components/FAQ.vue";
+import account from "@/components/account.vue";
 import feedback from "@/components/feedback.vue";
 import pageNotFound from "@/components/pageNotFound.vue";
 
@@ -178,6 +179,10 @@ let router = new Router({
         {
           path: "addPetProfile",
           component: addPetProfile
+        },
+        {
+          path: "account",
+          component: account
         },
         {
           path: "password",
