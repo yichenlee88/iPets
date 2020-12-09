@@ -268,7 +268,10 @@ export default {
           petBirth: this.pet.petBirth,
           petHobby: this.pet.petHobby,
           petNote: this.pet.petNote,
-          timestamp: new Date()
+          timestamp: new Date(),
+          petBirth_year: new Date(this.pet.petBirth).getUTCFullYear(),
+          petBirth_month: new Date(this.pet.petBirth).getMonth() + 1,
+          petBirth_date: new Date(this.pet.petBirth).getDate()
         });
       this.$nextTick(() => {
         this.$bvModal.hide("modal-prevent-closing");

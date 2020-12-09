@@ -9,11 +9,11 @@
                 >編輯個人資訊</router-link
               ></b-list-group-item
             >
-            <b-list-group-item
+            <!-- <b-list-group-item
               ><router-link to="/setting/addPetProfile"
                 >新增毛小孩</router-link
               ></b-list-group-item
-            >
+            > -->
             <b-list-group-item
               ><router-link to="/setting/account"
                 >更改帳號</router-link
