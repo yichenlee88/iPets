@@ -180,7 +180,8 @@ export default {
           petBirth:
             this.petBirth.getUTCFullYear() +
             "-" +
-            (this.petBirth.getMonth() + 1) +
+            this.petBirth.getMonth() +
+            1 +
             "-" +
             this.petBirth.getDate(),
           breed: this.breed,
@@ -189,9 +190,9 @@ export default {
           timestamp: new Date(),
           profile_picture: "",
           // useless
-          petBirth_year: this.petBirth.getUTCFullYear(),
-          petBirth_month: this.petBirth.getMonth() + 1,
-          petBirth_date: this.petBirth.getDate(),
+          petBirth_year: new Date(this.petBirth).getUTCFullYear(),
+          petBirth_month: new Date(this.petBirth).getMonth() + 1,
+          petBirth_date: new Date(this.petBirth).getDate(),
           uid: this.uid
         })
         .then(function(ref) {

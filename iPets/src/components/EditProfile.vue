@@ -47,6 +47,7 @@
           name="email"
           v-model="email"
           placeholder="Email"
+          disabled
         ></b-form-input>
       </b-col>
       <b-col class="coltitle" cols="4" sm="4" md="4">
@@ -148,7 +149,10 @@ export default {
           userName: this.userName,
           userGender: this.gender,
           phone: this.phone,
-          userBirth: this.birth
+          userBirth: this.birth,
+          userBirth_year: new Date(this.birth).getUTCFullYear(),
+          userBirth_month: new Date(this.birth).getMonth() + 1,
+          userBirth_date: new Date(this.birth).getDate()
         });
       alert("更新成功！");
     }
