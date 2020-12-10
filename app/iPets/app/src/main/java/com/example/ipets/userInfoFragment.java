@@ -72,7 +72,16 @@ public class userInfoFragment extends Fragment {
                         @Override
                         public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
                             // TODO Auto-generated method stub
-                            mybirth.setText(year+"-"+(monthOfYear+1)+"-"+dayOfMonth);
+                            if(monthOfYear<9&&dayOfMonth<10){
+                                mybirth.setText(year+"-"+"0"+(monthOfYear+1)+"-"+"0"+dayOfMonth);
+                            }
+                            else if(monthOfYear<9){
+                            mybirth.setText(year+"-"+"0"+(monthOfYear+1)+"-"+dayOfMonth);}
+                            else if(dayOfMonth<10){
+                                mybirth.setText(year+"-"+(monthOfYear+1)+"-"+"0"+dayOfMonth);}
+                            else{
+                                mybirth.setText(year+"-"+(monthOfYear+1)+"-"+dayOfMonth);
+                            }
                             userBirth_year = year;
                             userBirth_month = monthOfYear+1;
                             userBirth_date = dayOfMonth;
@@ -99,10 +108,10 @@ public class userInfoFragment extends Fragment {
         RadioGroup genderselect = getView().findViewById(R.id.genderselect);
         switch(genderselect.getCheckedRadioButtonId()){
             case R.id.male: //case mRadioButton0.getId():
-                mygender = "female";
+                mygender = "male";
                 break;
             case R.id.female: //case mRadioButton1.getId():
-                mygender = "male";
+                mygender = "female";
                 break;
             case R.id.unwilling: //case mRadioButton2.getId():
                 mygender = "I prefer not to say";
