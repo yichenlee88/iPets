@@ -1,126 +1,134 @@
 <template>
-  <b-row>
-    <b-col class="coltitle" cols="4" sm="4" md="4">
-      <p>舊密碼：</p>
-    </b-col>
-    <b-col cols="8" sm="8" md="8">
-      <div v-if="passwordCurrentPasswordHidden">
-        <b-form-input
-          type="password"
-          class="InputClass"
-          id="currentPassword"
-          v-model="currentPassword"
-          placeholder="舊密碼"
-        ></b-form-input>
-        <b-input-group-prepend class="mr-n2">
-          <span
-            class="Password display-eye fa fa-eye-slash"
-            @click="hideCurrentPassword"
-          ></span>
-        </b-input-group-prepend>
-      </div>
-      <div v-if="!passwordCurrentPasswordHidden">
-        <b-form-input
-          type="text"
-          class="InputClass"
-          id="currentPassword"
-          v-model="currentPassword"
-          placeholder="舊密碼"
-        ></b-form-input>
-        <b-input-group-prepend class="mr-n2">
-          <span
-            class="Password display-eye fa fa-eye"
-            @click="showCurrentPassword"
-          ></span>
-        </b-input-group-prepend>
-      </div>
-    </b-col>
-    <b-col class="coltitle" cols="4" sm="4" md="4">
-      <p>新密碼：</p>
-    </b-col>
-    <b-col cols="8" sm="8" md="8">
-      <div v-if="passwordNewPasswordHidden">
-        <b-form-input
-          type="password"
-          class="InputClass"
-          id="newPassword"
-          v-model="newPassword"
-          placeholder="新密碼"
-        ></b-form-input>
-        <b-input-group-prepend class="mr-n2">
-          <span
-            class="Password display-eye fa fa-eye-slash"
-            @click="hideNewPassword"
-          ></span>
-        </b-input-group-prepend>
-      </div>
-      <div v-if="!passwordNewPasswordHidden">
-        <b-form-input
-          type="text"
-          class="InputClass"
-          id="newPassword"
-          v-model="newPassword"
-          placeholder="新密碼"
-        ></b-form-input>
-        <b-input-group-prepend class="mr-n2">
-          <span
-            class="Password display-eye fa fa-eye"
-            @click="showNewPassword"
-          ></span>
-        </b-input-group-prepend>
-      </div>
-    </b-col>
-    <b-col class="coltitle" cols="4" sm="4" md="4">
-      <p>確認新密碼：</p>
-    </b-col>
-    <b-col cols="8" sm="8" md="8">
-      <div v-if="passwordConfirmNewPasswordHidden">
-        <b-form-input
-          type="password"
-          class="InputClass"
-          id="confirmNewPassword"
-          v-model="confirmNewPassword"
-          placeholder="確認新密碼"
-        ></b-form-input>
-        <b-input-group-prepend class="mr-n2">
-          <span
-            class="Password display-eye fa fa-eye-slash"
-            @click="hideConfirmNewPassword"
-          ></span>
-        </b-input-group-prepend>
-      </div>
-      <div v-if="!passwordConfirmNewPasswordHidden">
-        <b-form-input
-          type="text"
-          class="InputClass"
-          id="confirmNewPassword"
-          v-model="confirmNewPassword"
-          placeholder="確認新密碼"
-        ></b-form-input>
-        <b-input-group-prepend class="mr-n2">
-          <span
-            class="Password display-eye fa fa-eye"
-            @click="showConfirmNewPassword"
-          ></span>
-        </b-input-group-prepend>
-      </div>
-    </b-col>
-    <b-col cols="4" sm="4" md="4"></b-col>
-    <b-col cols="8" sm="8" md="8">
-      <b-button
-        class="ButtonClass"
-        @click="
-          checkPassword(confirmNewPassword, newPassword);
-          updatePassword(currentPassword, newPassword);
-        "
-        >送出</b-button
-      >
-    </b-col>
-  </b-row>
+  <b-container>
+    <b-row>
+      <b-col cols="12" sm="12" md="12">
+        <h3>更改密碼：</h3>
+      </b-col>
+      <b-col class="coltitle" cols="4" sm="4" md="4">
+        <p>舊密碼：</p>
+      </b-col>
+      <b-col cols="8" sm="8" md="8">
+        <div v-if="passwordCurrentPasswordHidden">
+          <b-form-input
+            type="password"
+            class="InputClass"
+            id="currentPassword"
+            v-model="currentPassword"
+            placeholder="舊密碼"
+          ></b-form-input>
+          <b-input-group-prepend class="mr-n2">
+            <span
+              class="Password display-eye fa fa-eye-slash"
+              @click="hideCurrentPassword"
+            ></span>
+          </b-input-group-prepend>
+        </div>
+        <div v-if="!passwordCurrentPasswordHidden">
+          <b-form-input
+            type="text"
+            class="InputClass"
+            id="currentPassword"
+            v-model="currentPassword"
+            placeholder="舊密碼"
+          ></b-form-input>
+          <b-input-group-prepend class="mr-n2">
+            <span
+              class="Password display-eye fa fa-eye"
+              @click="showCurrentPassword"
+            ></span>
+          </b-input-group-prepend>
+        </div>
+      </b-col>
+      <b-col class="coltitle" cols="4" sm="4" md="4">
+        <p>新密碼：</p>
+      </b-col>
+      <b-col cols="8" sm="8" md="8">
+        <div v-if="passwordNewPasswordHidden">
+          <b-form-input
+            type="password"
+            class="InputClass"
+            id="newPassword"
+            v-model="newPassword"
+            placeholder="新密碼"
+          ></b-form-input>
+          <b-input-group-prepend class="mr-n2">
+            <span
+              class="Password display-eye fa fa-eye-slash"
+              @click="hideNewPassword"
+            ></span>
+          </b-input-group-prepend>
+        </div>
+        <div v-if="!passwordNewPasswordHidden">
+          <b-form-input
+            type="text"
+            class="InputClass"
+            id="newPassword"
+            v-model="newPassword"
+            placeholder="新密碼"
+          ></b-form-input>
+          <b-input-group-prepend class="mr-n2">
+            <span
+              class="Password display-eye fa fa-eye"
+              @click="showNewPassword"
+            ></span>
+          </b-input-group-prepend>
+        </div>
+      </b-col>
+      <b-col class="coltitle" cols="4" sm="4" md="4">
+        <p>確認新密碼：</p>
+      </b-col>
+      <b-col cols="8" sm="8" md="8">
+        <div v-if="passwordConfirmNewPasswordHidden">
+          <b-form-input
+            type="password"
+            class="InputClass"
+            id="confirmNewPassword"
+            v-model="confirmNewPassword"
+            placeholder="確認新密碼"
+          ></b-form-input>
+          <b-input-group-prepend class="mr-n2">
+            <span
+              class="Password display-eye fa fa-eye-slash"
+              @click="hideConfirmNewPassword"
+            ></span>
+          </b-input-group-prepend>
+        </div>
+        <div v-if="!passwordConfirmNewPasswordHidden">
+          <b-form-input
+            type="text"
+            class="InputClass"
+            id="confirmNewPassword"
+            v-model="confirmNewPassword"
+            placeholder="確認新密碼"
+          ></b-form-input>
+          <b-input-group-prepend class="mr-n2">
+            <span
+              class="Password display-eye fa fa-eye"
+              @click="showConfirmNewPassword"
+            ></span>
+          </b-input-group-prepend>
+        </div>
+      </b-col>
+      <b-col cols="4" sm="4" md="4"></b-col>
+      <b-col cols="8" sm="8" md="8">
+        <b-button
+          class="ButtonClass"
+          @click="
+            checkPassword(confirmNewPassword, newPassword),
+              updatePassword(currentPassword, newPassword),
+              updateProfile_password(currentPassword)
+          "
+          >送出</b-button
+        >
+      </b-col>
+    </b-row>
+  </b-container>
 </template>
 
 <script>
+import { db } from "../db";
 import firebase from "firebase";
+const fStore = db.firestore();
 
 export default {
   data() {
@@ -133,7 +141,8 @@ export default {
       check: false,
       passwordCurrentPasswordHidden: true,
       passwordNewPasswordHidden: true,
-      passwordConfirmNewPasswordHidden: true
+      passwordConfirmNewPasswordHidden: true,
+      password: ""
     };
   },
   methods: {
@@ -162,9 +171,9 @@ export default {
             console.log(error);
             alert("密碼輸入錯誤");
           });
-        this.currentPassword = "";
-        this.newPassword = "";
-        this.confirmNewPassword = "";
+        // this.currentPassword = "";
+        // this.newPassword = "";
+        // this.confirmNewPassword = "";
       }
     },
     checkPassword(confirmNewPassword, newPassword) {
@@ -181,6 +190,15 @@ export default {
         this.passwordCurrentPasswordFieldType === "password"
           ? "text"
           : "password";
+    },
+    updateProfile_password() {
+      let uid = firebase.auth().currentUser.uid;
+      fStore
+        .collection("users")
+        .doc(uid)
+        .update({
+          password: this.confirmNewPassword
+        });
     },
     showCurrentPassword() {
       this.passwordCurrentPasswordHidden = true;

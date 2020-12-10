@@ -135,11 +135,20 @@ Calendar endCalendar,startCalendar;
             case R.id.orangeCircle1:
                 colorselect = "orange";
                 break;
-            case R.id.yellowCircle1:
-                colorselect = "yellow";
+            case R.id.blueCircle1:
+                colorselect = "blue";
                 break;
             case R.id.greenCircle1:
                 colorselect = "green";
+                break;
+            case R.id.purpleCircle1:
+                colorselect = "purple";
+                break;
+            case R.id.pinkCircle1:
+                colorselect = "pink";
+                break;
+            case R.id.brownCircle1:
+                colorselect = "brown";
                 break;
         }
         Spinner repeatSpinner = findViewById(R.id.repeatSpinner);
@@ -166,7 +175,6 @@ Calendar endCalendar,startCalendar;
                 @Override
                 public void onClick(DialogInterface arg0, int arg1) {
                     Intent intent = new Intent();
-                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                     intent.setClass(addNoteActivity.this, calendarActivity.class);
                     startActivity(intent);
                 }

@@ -10,10 +10,7 @@
           :key="index"
           style="margin-top: 20px"
         >
-          <div
-            class="img-thumbnail"
-            style="margin-left: 15px; min-height: 540px;"
-          >
+          <div class="img-thumbnail" style=" min-height: 540px;">
             <img class="rounded" :src="item.image" style="max-width: 100%;" />
             <H5>
               <br />

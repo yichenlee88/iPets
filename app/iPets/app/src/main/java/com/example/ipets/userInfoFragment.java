@@ -99,13 +99,13 @@ public class userInfoFragment extends Fragment {
         RadioGroup genderselect = getView().findViewById(R.id.genderselect);
         switch(genderselect.getCheckedRadioButtonId()){
             case R.id.male: //case mRadioButton0.getId():
-                mygender = "男";
+                mygender = "female";
                 break;
             case R.id.female: //case mRadioButton1.getId():
-                mygender = "女";
+                mygender = "male";
                 break;
             case R.id.unwilling: //case mRadioButton2.getId():
-                mygender = "不願透漏";
+                mygender = "I prefer not to say";
                 break;
         }
         FirebaseAuth auth = FirebaseAuth.getInstance();

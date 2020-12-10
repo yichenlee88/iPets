@@ -3,14 +3,20 @@
     <!-- Start -- 寵物簡介 -->
     <b-card-group class="PetProfile" deck>
       <!-- Start -- 修改寵物資訊 -->
-      <b-card :img-src="pet.profile_picture" class="mb-3" style="max-width:300px;border:0" img-top>
+      <b-card
+        :img-src="pet.profile_picture"
+        class="mb-3"
+        style="max-width:300px;border:0"
+        img-top
+      >
         <b-card-text>
           <b-button
             class="btn btn-block mb-3"
             href="#"
             variant="primary"
             v-b-modal.modal-prevent-closing
-          >編輯寵物資訊</b-button>
+            >編輯寵物資訊</b-button
+          >
           <b-modal
             title="編輯寵物資訊"
             size="xl"
@@ -22,9 +28,18 @@
               <b-row>
                 <b-col>
                   <!-- 寵物照片 -->
-                  <b-img :src="pet.profile_picture" style="max-height:300px" class="center"></b-img>
+                  <b-img
+                    :src="pet.profile_picture"
+                    style="max-height:300px"
+                    class="center"
+                  ></b-img>
                   <!-- 開啟寵物照片-->
-                  <input class="hidden" id="file1" @change="handleFileUpload" type="file">
+                  <input
+                    class="hidden"
+                    id="file1"
+                    @change="handleFileUpload"
+                    type="file"
+                  />
                   <label
                     name="petImage"
                     class="center btn btn-block mb-3"
@@ -39,7 +54,11 @@
                 </b-col>
                 <b-col>
                   <!-- 修改寵物姓名 -->
-                  <b-form-group label-cols-sm="2" label="姓名：" label-for="petName">
+                  <b-form-group
+                    label-cols-sm="2"
+                    label="姓名："
+                    label-for="petName"
+                  >
                     <b-form-input
                       class="modifyInputClass"
                       v-model.trim="pet.petName"
@@ -48,7 +67,11 @@
                     ></b-form-input>
                   </b-form-group>
                   <!-- 修改寵物性別 -->
-                  <b-form-group label-cols-sm="2" label="性別：" label-for="petGender">
+                  <b-form-group
+                    label-cols-sm="2"
+                    label="性別："
+                    label-for="petGender"
+                  >
                     <b-form-select
                       class="modifyInputClass"
                       v-model="pet.petGender"
@@ -58,7 +81,11 @@
                     ></b-form-select>
                   </b-form-group>
                   <!-- 修改寵物生日 -->
-                  <b-form-group label-cols-sm="2" label="生日：" label-for="petBirth">
+                  <b-form-group
+                    label-cols-sm="2"
+                    label="生日："
+                    label-for="petBirth"
+                  >
                     <date-picker
                       v-model="edit_profile_birth"
                       name="petBirth"
@@ -67,7 +94,11 @@
                     ></date-picker>
                   </b-form-group>
                   <!-- 修改寵物喜好 -->
-                  <b-form-group label-cols-sm="2" label="喜好：" label-for="petHobby">
+                  <b-form-group
+                    label-cols-sm="2"
+                    label="喜好："
+                    label-for="petHobby"
+                  >
                     <b-form-textarea
                       class="modifyInputClass"
                       v-model.trim="pet.petHobby"
@@ -76,7 +107,11 @@
                     ></b-form-textarea>
                   </b-form-group>
                   <!-- 修改寵物備註 -->
-                  <b-form-group label-cols-sm="2" label="備註：" label-for="petNote">
+                  <b-form-group
+                    label-cols-sm="2"
+                    label="備註："
+                    label-for="petNote"
+                  >
                     <b-form-textarea
                       class="modifyInputClass"
                       v-model.trim="pet.petNote"
@@ -101,7 +136,9 @@
           <b-card-text>品種：{{ pet.breed }}</b-card-text>
           <b-card-text>喜好：{{ pet.petHobby }}</b-card-text>
           <b-card-text>備註：{{ pet.petNote }}</b-card-text>
-          <b-card-text class="small text-muted">最後更新 {{ convert_timestamp(pet.timestamp) }}</b-card-text>
+          <b-card-text class="small text-muted"
+            >最後更新 {{ convert_timestamp(pet.timestamp) }}</b-card-text
+          >
         </b-card-body>
       </b-card>
       <!-- End -- 寵物資訊 -->
@@ -231,7 +268,10 @@ export default {
           petBirth: this.pet.petBirth,
           petHobby: this.pet.petHobby,
           petNote: this.pet.petNote,
-          timestamp: new Date()
+          timestamp: new Date(),
+          petBirth_year: new Date(this.pet.petBirth).getUTCFullYear(),
+          petBirth_month: new Date(this.pet.petBirth).getMonth() + 1,
+          petBirth_date: new Date(this.pet.petBirth).getDate()
         });
       this.$nextTick(() => {
         this.$bvModal.hide("modal-prevent-closing");

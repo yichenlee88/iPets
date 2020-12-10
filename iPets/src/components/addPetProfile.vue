@@ -1,5 +1,10 @@
 <template>
   <b-container>
+    <b-row>
+      <b-col cols="12" sm="12" md="12">
+        <h3>新增毛小孩：</h3>
+      </b-col>
+    </b-row>
     <b-form @submit="onSubmit">
       <!-- petImage -->
       <v-row no-gutters justify="center" align="center">
@@ -172,16 +177,22 @@ export default {
         .add({
           petName: this.petName,
           petGender: this.petGender,
-          petBirth: this.petBirth,
+          petBirth:
+            this.petBirth.getUTCFullYear() +
+            "-" +
+            this.petBirth.getMonth() +
+            1 +
+            "-" +
+            this.petBirth.getDate(),
           breed: this.breed,
           petHobby: this.petHobby,
           petNote: this.petNote,
           timestamp: new Date(),
           profile_picture: "",
           // useless
-          petBirth_year: 999999,
-          petBirth_month: 999999,
-          petBirth_date: 999999,
+          petBirth_year: new Date(this.petBirth).getUTCFullYear(),
+          petBirth_month: new Date(this.petBirth).getMonth() + 1,
+          petBirth_date: new Date(this.petBirth).getDate(),
           uid: this.uid
         })
         .then(function(ref) {

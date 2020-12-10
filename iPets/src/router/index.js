@@ -22,11 +22,12 @@ import album from "@/components/album.vue";
 import albumView from "@/components/albumView.vue";
 import setting from "@/components/setting.vue";
 import editProfile from "@/components/editProfile.vue";
-import addPetProfile from "@/components/addPetProfile.vue";
+// import addPetProfile from "@/components/addPetProfile.vue";
 import password from "@/components/password.vue";
 import mail from "@/components/mail.vue";
 import loginActivity from "@/components/loginActivity.vue";
 import FAQ from "@/components/FAQ.vue";
+import account from "@/components/account.vue";
 import feedback from "@/components/feedback.vue";
 import pageNotFound from "@/components/pageNotFound.vue";
 
@@ -175,9 +176,13 @@ let router = new Router({
           path: "editProfile",
           component: editProfile
         },
+        // {
+        //   path: "addPetProfile",
+        //   component: addPetProfile
+        // },
         {
-          path: "addPetProfile",
-          component: addPetProfile
+          path: "account",
+          component: account
         },
         {
           path: "password",
