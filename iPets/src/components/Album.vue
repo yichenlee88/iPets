@@ -52,7 +52,7 @@
           <b-card
             class="change"
             overlay
-            v-if="album"
+            v-if="haveAlbum"
             style="margin:20px; heigt: auto;"
             text-variant="white"
             :img-src="url[index]"
@@ -62,7 +62,7 @@
       </b-col>
     </b-row>
     <!-- if there is no any album -->
-    <div v-if="!album">
+    <div v-if="currentAlbum">
       <b-img class="banner_png center" src="../static/img/gray.png" style="width:468px;"></b-img>
     </div>
   </b-container>
@@ -82,7 +82,9 @@ export default {
       imageData: null,
       file: [],
       album: [],
-      url: []
+      url: [],
+      currentAlbum: true,
+      haveAlbum: false
     };
   },
   mounted() {
@@ -128,6 +130,12 @@ export default {
         .catch(function(error) {
           console.log(error);
         });
+      if (album !== "") {
+        this.haveAlbum = true;
+        this.currentAlbum = false;
+      } else {
+        this.currentAlbum = true;
+      }
     }
   }
 };
