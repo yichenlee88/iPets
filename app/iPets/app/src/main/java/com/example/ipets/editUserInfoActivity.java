@@ -178,7 +178,17 @@ public class editUserInfoActivity extends AppCompatActivity{
                         @Override
                         public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
                             // TODO Auto-generated method stub
-                            edmasterBirth.setText(year+"-"+(monthOfYear+1)+"-"+dayOfMonth);
+                            if(monthOfYear<9&&dayOfMonth<10){
+                                edmasterBirth.setText(year+"-"+"0"+(monthOfYear+1)+"-"+"0"+dayOfMonth);
+                            }
+                            else if(monthOfYear<9){
+                                edmasterBirth.setText(year+"-"+"0"+(monthOfYear+1)+"-"+dayOfMonth);}
+                            else if(dayOfMonth<10){
+                                edmasterBirth.setText(year+"-"+(monthOfYear+1)+"-"+"0"+dayOfMonth);}
+
+                            else{
+                                edmasterBirth.setText(year+"-"+(monthOfYear+1)+"-"+dayOfMonth);
+                            }
                             userBirth_year = year;
                             userBirth_month = monthOfYear+1;
                             userBirth_date = dayOfMonth;
