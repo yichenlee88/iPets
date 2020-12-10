@@ -58,7 +58,17 @@ Calendar endCalendar,startCalendar;
                         @Override
                         public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
                             // TODO Auto-generated method stub
-                            startDate.setText(year + "-" + (monthOfYear + 1) + "-" + dayOfMonth);
+                            if(monthOfYear<9&&dayOfMonth<10){
+                                startDate.setText(year+"-"+"0"+(monthOfYear+1)+"-"+"0"+dayOfMonth);
+                            }
+                            else if(monthOfYear<9){
+                                startDate.setText(year+"-"+"0"+(monthOfYear+1)+"-"+dayOfMonth);}
+                            else if(dayOfMonth<10){
+                                startDate.setText(year+"-"+(monthOfYear+1)+"-"+"0"+dayOfMonth);}
+
+                            else{
+                                startDate.setText(year+"-"+(monthOfYear+1)+"-"+dayOfMonth);
+                            }
                             String startstr = year + "-" + (monthOfYear + 1) + "-" + dayOfMonth;
                             SimpleDateFormat sdf= new SimpleDateFormat("yyyy-MM-dd");
                             Date date = null;
@@ -88,7 +98,16 @@ Calendar endCalendar,startCalendar;
                         @Override
                         public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
                             // TODO Auto-generated method stub
-                            endDate.setText(year + "-" + (monthOfYear + 1) + "-" + dayOfMonth);
+                            if(monthOfYear<9){
+                                endDate.setText(year+"-"+"0"+(monthOfYear+1)+"-"+dayOfMonth);}
+                            else if(dayOfMonth<10){
+                                endDate.setText(year+"-"+(monthOfYear+1)+"-"+"0"+dayOfMonth);}
+                            else if(monthOfYear<9&&dayOfMonth<10){
+                                endDate.setText(year+"-"+"0"+(monthOfYear+1)+"-"+"0"+dayOfMonth);
+                            }
+                            else{
+                                endDate.setText(year+"-"+(monthOfYear+1)+"-"+dayOfMonth);
+                            }
                             String endstr = year + "-" + (monthOfYear + 1) + "-" + dayOfMonth;
                             SimpleDateFormat sdf= new SimpleDateFormat("yyyy-MM-dd");
                             Date date = null;
