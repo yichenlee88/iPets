@@ -96,6 +96,19 @@ public class editPwdActivity extends AppCompatActivity {
             });
             finishsignup.setCancelable(false);
             finishsignup.show();
+        }else{
+            AlertDialog.Builder finishsignup = new AlertDialog.Builder(editPwdActivity.this);
+            finishsignup.setMessage("修改失敗，點擊確認重新修改");
+            finishsignup.setNegativeButton("確認", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface arg0, int arg1) {
+                    Intent intent = new Intent();
+                    intent.setClass(editPwdActivity.this, editPwdActivity.class);
+                    startActivity(intent);
+                }
+            });
+            finishsignup.setCancelable(false);
+            finishsignup.show();
         }
     }
 }

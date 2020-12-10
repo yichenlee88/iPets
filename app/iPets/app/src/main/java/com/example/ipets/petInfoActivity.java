@@ -124,7 +124,16 @@ public class petInfoActivity extends AppCompatActivity {
                         @Override
                         public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
                             // TODO Auto-generated method stub
-                            edpetsbirth.setText(year+"-"+(monthOfYear+1)+"-"+dayOfMonth);
+                            if(monthOfYear<9&&dayOfMonth<10){
+                                edpetsbirth.setText(year+"-"+"0"+(monthOfYear+1)+"-"+"0"+dayOfMonth);
+                            }
+                            else if(monthOfYear<9){
+                                edpetsbirth.setText(year+"-"+"0"+(monthOfYear+1)+"-"+dayOfMonth);}
+                            else if(dayOfMonth<10){
+                                edpetsbirth.setText(year+"-"+(monthOfYear+1)+"-"+"0"+dayOfMonth);}
+                            else{
+                                edpetsbirth.setText(year+"-"+(monthOfYear+1)+"-"+dayOfMonth);
+                            }
                             petBirth_year = year;
                             petBirth_month = monthOfYear+1;
                             petBirth_date = dayOfMonth;
