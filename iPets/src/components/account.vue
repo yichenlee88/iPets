@@ -23,9 +23,8 @@
       <b-col cols="8" sm="8" md="8">
         <b-button
           class="ButtonClass"
-          @click="update_email(newEmail), updateProfile_mail(newEmail)"
-          >送出</b-button
-        >
+          @click="update_email(newEmail), updateProfile_mail(newEmail), clearData()"
+        >送出</b-button>
       </b-col>
     </b-row>
   </b-container>
@@ -75,6 +74,9 @@ export default {
         .update({
           email: this.newEmail
         });
+    },
+    clearData() {
+      this.newEmail = "";
     }
   },
   computed: {
