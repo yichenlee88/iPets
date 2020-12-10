@@ -1,10 +1,6 @@
 <template>
   <b-container>
-    <b-img
-      class="banner_png center"
-      src="../static/img/login-01.jpg"
-      style="width:512px;"
-    ></b-img>
+    <b-img class="banner_png center" src="../static/img/login-01.jpg" style="width:512px;"></b-img>
     <b-card tag="article" class="text-center center" style="width:768px;">
       <b-card-text>
         <!-- username -->
@@ -42,10 +38,7 @@
             required
           ></b-form-input>
           <b-input-group-prepend class="mr-n2">
-            <span
-              class="display-eye fa fa-eye-slash"
-              @click="hidePassword"
-            ></span>
+            <span class="display-eye fa fa-eye-slash" @click="hidePassword"></span>
           </b-input-group-prepend>
         </div>
         <!-- password預設輸入 -->
@@ -72,10 +65,7 @@
             required
           ></b-form-input>
           <b-input-group-prepend class="mr-n2">
-            <span
-              class="display-eye-2 fa fa-eye-slash"
-              @click="hideCheckPassword"
-            ></span>
+            <span class="display-eye-2 fa fa-eye-slash" @click="hideCheckPassword"></span>
           </b-input-group-prepend>
         </div>
         <!-- Confirm Password 預設確認 -->
@@ -92,12 +82,7 @@
           </b-input-group-prepend>
         </div>
         <!-- userBirth -->
-        <date-picker
-          v-model="userBirth"
-          name="userBirth"
-          type="date"
-          placeholder="用戶生日"
-        ></date-picker>
+        <date-picker v-model="userBirth" name="userBirth" type="date" placeholder="用戶生日"></date-picker>
         <!-- userGender -->
         <b-form-select
           class="InputClass center"
@@ -122,8 +107,8 @@
           required
         ></b-form-input>
         <b-button class="ButtonClass center" @click="auth_email">註冊</b-button>
-        <b-row
-          ><b-col>
+        <b-row>
+          <b-col>
             <a class="btn btn-social-icon btn-facebook">
               <span class="fa fa-facebook fa-2x"></span>
             </a>
@@ -131,8 +116,10 @@
               <span class="fa fa-instagram fa-2x"></span>
             </a>
             <a class="btn btn-social-icon btn-google">
-              <span class="fa fa-google fa-2x"></span> </a></b-col
-        ></b-row>
+              <span class="fa fa-google fa-2x"></span>
+            </a>
+          </b-col>
+        </b-row>
       </b-card-text>
     </b-card>
   </b-container>
@@ -157,7 +144,7 @@ export default {
       passwordFieldType: "password",
       passwordHidden: true,
       passwordHidden2: true,
-      userBirth: "",
+      userBirth: new Date(),
       userGender: "null",
       options: [
         { value: "null", text: "用戶性別" },
@@ -166,11 +153,18 @@ export default {
         { value: "female", text: "女" }
       ],
       phone: "",
-      userAddress: ""
+      address: ""
     };
   },
   methods: {
     auth_email: function(e) {
+      var year = this.userBirth.getFullYear();
+      if (year < 1900) year = year + 1900;
+      var month = this.userBirth.getMonth() + 1;
+      if (month < 10) month = "0" + month;
+      var day = this.userBirth.getDate();
+      if (day < 10) day = "0" + day;
+      var birth = year + "-" + month + "-" + day;
       fAuth
         .createUserWithEmailAndPassword(this.Email, this.password)
         .then(userCredential => {
@@ -181,15 +175,10 @@ export default {
             .set({
               userName: this.userName,
               name: this.name,
-              Email: this.Email,
+              email: this.Email,
               password: this.password,
               userGender: this.userGender,
-              userBirth:
-                this.userBirth.getUTCFullYear() +
-                "-" +
-                (this.userBirth.getMonth() + 1) +
-                "-" +
-                this.userBirth.getDate(),
+              userBirth: birth,
               userBirth_year: this.userBirth.getUTCFullYear(),
               userBirth_month: this.userBirth.getMonth() + 1,
               userBirth_date: this.userBirth.getDate(),

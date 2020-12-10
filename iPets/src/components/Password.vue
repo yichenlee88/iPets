@@ -17,10 +17,7 @@
             placeholder="舊密碼"
           ></b-form-input>
           <b-input-group-prepend class="mr-n2">
-            <span
-              class="Password display-eye fa fa-eye-slash"
-              @click="hideCurrentPassword"
-            ></span>
+            <span class="Password display-eye fa fa-eye-slash" @click="hideCurrentPassword"></span>
           </b-input-group-prepend>
         </div>
         <div v-if="!passwordCurrentPasswordHidden">
@@ -32,10 +29,7 @@
             placeholder="舊密碼"
           ></b-form-input>
           <b-input-group-prepend class="mr-n2">
-            <span
-              class="Password display-eye fa fa-eye"
-              @click="showCurrentPassword"
-            ></span>
+            <span class="Password display-eye fa fa-eye" @click="showCurrentPassword"></span>
           </b-input-group-prepend>
         </div>
       </b-col>
@@ -52,10 +46,7 @@
             placeholder="新密碼"
           ></b-form-input>
           <b-input-group-prepend class="mr-n2">
-            <span
-              class="Password display-eye fa fa-eye-slash"
-              @click="hideNewPassword"
-            ></span>
+            <span class="Password display-eye fa fa-eye-slash" @click="hideNewPassword"></span>
           </b-input-group-prepend>
         </div>
         <div v-if="!passwordNewPasswordHidden">
@@ -67,10 +58,7 @@
             placeholder="新密碼"
           ></b-form-input>
           <b-input-group-prepend class="mr-n2">
-            <span
-              class="Password display-eye fa fa-eye"
-              @click="showNewPassword"
-            ></span>
+            <span class="Password display-eye fa fa-eye" @click="showNewPassword"></span>
           </b-input-group-prepend>
         </div>
       </b-col>
@@ -87,10 +75,7 @@
             placeholder="確認新密碼"
           ></b-form-input>
           <b-input-group-prepend class="mr-n2">
-            <span
-              class="Password display-eye fa fa-eye-slash"
-              @click="hideConfirmNewPassword"
-            ></span>
+            <span class="Password display-eye fa fa-eye-slash" @click="hideConfirmNewPassword"></span>
           </b-input-group-prepend>
         </div>
         <div v-if="!passwordConfirmNewPasswordHidden">
@@ -102,10 +87,7 @@
             placeholder="確認新密碼"
           ></b-form-input>
           <b-input-group-prepend class="mr-n2">
-            <span
-              class="Password display-eye fa fa-eye"
-              @click="showConfirmNewPassword"
-            ></span>
+            <span class="Password display-eye fa fa-eye" @click="showConfirmNewPassword"></span>
           </b-input-group-prepend>
         </div>
       </b-col>
@@ -116,10 +98,10 @@
           @click="
             checkPassword(confirmNewPassword, newPassword),
               updatePassword(currentPassword, newPassword),
-              updateProfile_password(currentPassword)
+              updateProfile_password(currentPassword),
+              clearData()
           "
-          >送出</b-button
-        >
+        >送出</b-button>
       </b-col>
     </b-row>
   </b-container>
@@ -171,10 +153,12 @@ export default {
             console.log(error);
             alert("密碼輸入錯誤");
           });
-        // this.currentPassword = "";
-        // this.newPassword = "";
-        // this.confirmNewPassword = "";
       }
+    },
+    clearData() {
+      this.currentPassword = "";
+      this.newPassword = "";
+      this.confirmNewPassword = "";
     },
     checkPassword(confirmNewPassword, newPassword) {
       if (confirmNewPassword === newPassword) {
