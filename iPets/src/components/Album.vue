@@ -45,25 +45,27 @@
       </div>
     </div>
 
-    <!-- if there have albums -->
-    <b-row lg="4" style="margin:20px 20px">
-      <b-col cols="6" md="4" v-for="(item, index) in album" :key="index">
-        <a :href="'#/albumView/' + item.name">
-          <b-card
-            class="change"
-            overlay
-            v-if="haveAlbum"
-            style="margin:20px; heigt: auto;"
-            text-variant="white"
-            :img-src="url[index]"
-            :title="item.name"
-          ></b-card>
-        </a>
-      </b-col>
-    </b-row>
-    <!-- if there is no any album -->
-    <div v-if="currentAlbum">
-      <b-img class="banner_png center" src="../static/img/gray.png" style="width:468px;"></b-img>
+    <div>
+      <!-- if there have albums -->
+      <b-row lg="4" style="margin:20px 20px">
+        <b-col cols="6" md="4" v-for="(item, index) in album" :key="index">
+          <a :href="'#/albumView/' + item.name">
+            <b-card
+              class="change"
+              overlay
+              v-if="album.length !== 0"
+              style="margin:20px; heigt: auto;"
+              text-variant="white"
+              :img-src="url[index]"
+              :title="item.name"
+            ></b-card>
+          </a>
+        </b-col>
+      </b-row>
+      <!-- if there is no any album -->
+      <div v-if="album.length === 0">
+        <b-img class="banner_png center" src="../static/img/gray.png" style="width:468px;"></b-img>
+      </div>
     </div>
   </b-container>
 </template>
@@ -82,9 +84,7 @@ export default {
       imageData: null,
       file: [],
       album: [],
-      url: [],
-      currentAlbum: true,
-      haveAlbum: false
+      url: []
     };
   },
   mounted() {
@@ -130,12 +130,6 @@ export default {
         .catch(function(error) {
           console.log(error);
         });
-      if (album !== "") {
-        this.haveAlbum = true;
-        this.currentAlbum = false;
-      } else {
-        this.currentAlbum = true;
-      }
     }
   }
 };
