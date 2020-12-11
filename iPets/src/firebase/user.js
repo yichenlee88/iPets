@@ -61,6 +61,7 @@ async function updateMonthCalendar(store, uid) {
         var end = doc.data().end;
         var dateSplit = start.split("-");
         var now = new Date();
+        var overdue = "";
         // 過濾出當月事件
         if (
           Number(dateSplit[0]) === now.getFullYear() &&
@@ -75,7 +76,8 @@ async function updateMonthCalendar(store, uid) {
               events.push({
                 name: name,
                 start: start,
-                end: end
+                end: end,
+                overdue: new Date(end).getDate() - now.getDate()
               });
             }
           } else {
