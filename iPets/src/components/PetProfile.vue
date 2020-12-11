@@ -156,7 +156,7 @@
       >
         <div class="d-flex w-100 justify-content-between">
           <h5 class="mb-1">{{ event.name }}</h5>
-          <small>3 days ago</small>
+          <small>{{ event.overdue }} days ago</small>
         </div>
         <small>{{ event.start }} ~ {{ event.end }}</small>
       </b-list-group-item>
