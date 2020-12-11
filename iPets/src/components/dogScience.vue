@@ -51,7 +51,7 @@ export default {
   },
   methods: {
     getAricle() {
-      axios.get("http://localhost:3000/comments").then(res => {
+      axios.get("http://localhost:4040/comments").then(res => {
         console.log(res);
         this.comments = res.data;
       });
