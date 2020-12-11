@@ -71,11 +71,13 @@ async function updateMonthCalendar(store, uid) {
             new Date(start).setHours(0, 0, 0, 0) ===
             new Date(end).setHours(0, 0, 0, 0)
           ) {
-            events.push({
-              name: name,
-              start: start,
-              end: end
-            });
+            if (now.getDate() <= new Date(start).getDate()) {
+              events.push({
+                name: name,
+                start: start,
+                end: end
+              });
+            }
           } else {
             // 連續性活動
             return null;
