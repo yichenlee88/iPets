@@ -61,7 +61,7 @@ async function updateMonthCalendar(store, uid) {
         var end = doc.data().end;
         var dateSplit = start.split("-");
         var now = new Date();
-        var overdue = "";
+        // var overdue = "";
         // 過濾出當月事件
         if (
           Number(dateSplit[0]) === now.getFullYear() &&
@@ -86,8 +86,12 @@ async function updateMonthCalendar(store, uid) {
             // console.log(name);
           }
         }
-        // Sort events by start
       });
+      // Sort events by start
+      events.sort(function(first, second) {
+        return first.overdue - second.overdue;
+      });
+      console.log(events);
       store.commit("updateMonthCalendar", {
         month_calendar: events
       });
