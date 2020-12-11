@@ -291,14 +291,14 @@ export default {
     createAlbum() {
       var storageRef = firebase
         .storage()
-        .ref(this.uid + "/" + this.pet.petName);
+        .ref(this.uid + "/" + this.current_pet_id);
       storageRef.put(this.petImage).then(function(snapshot) {
         console.log("Uploaded files!");
       });
     },
     getProfilePicture() {
       let uid = firebase.auth().currentUser.uid;
-      var storageRef = firebase.storage().ref(uid + "/" + this.pet.petName);
+      var storageRef = firebase.storage().ref(uid + "/" + this.current_pet_id);
       console.log(storageRef);
       storageRef
         .listAll()
